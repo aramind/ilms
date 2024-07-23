@@ -56,7 +56,11 @@ const SignUp = () => {
           }}
         />
       </Stack>
-      <Stack flex="1" sx={{ bgcolor: theme.palette.white.light }}>
+      <Stack
+        flex="1"
+        sx={{ bgcolor: theme.palette.white.light }}
+        className="centered-content"
+      >
         <SignUpContent />
       </Stack>
     </Stack>
