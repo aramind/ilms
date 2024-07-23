@@ -1,5 +1,11 @@
+import SignUp from "./pages/sign-in-up/SignUp";
+
 function App() {
-  return <div>iLMS</div>;
+  return (
+    <>
+      <SignUp />
+    </>
+  );
 }
 
 export default App;
