@@ -1,7 +1,8 @@
 import React from "react";
+import { Stack, Typography } from "@mui/material";
 
 const SignUp = () => {
-  return <div>SignUp</div>;
+  return <Stack>Test for theme</Stack>;
 };
 
 export default SignUp;
