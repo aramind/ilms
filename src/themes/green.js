@@ -17,8 +17,8 @@ const COLORS = {
   },
   black: {
     darkest: "#0D0D15",
-    dark: "1E1C29",
-    main: "##D4655",
+    dark: "#1E1C29",
+    main: "#3D4655",
     light: "#717F98",
     lightest: "#A9B2C0",
   },
@@ -38,7 +38,7 @@ const greenTheme = createTheme({
     white: COLORS.white,
   },
   typography: {
-    fontFamily: `"Nunito Sans", "Roboto", sans-serif`,
+    fontFamily: `"Nunito Sans", "Roboto", "Barlow Condensed", sans-serif`,
     barlow: `"Barlow Condensed", sans-serif`,
     nunito: `"Nunito Sans", sans-serif`,
     poppins: `"Poppins", sans-serif`,

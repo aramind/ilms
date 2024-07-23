@@ -31,6 +31,24 @@ a {
   text-transform: uppercase;
 }
 
+/* transitions */
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-in-out; /* Adjust duration and easing as needed */
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-in-out; /* Adjust duration and easing as needed */
+}
+
+/* mui */
+
+/* specific */
+.MuiButtonBase-root.MuiCheckbox-root {
+  padding: 0;
+}
 /* for testing */
 .outlined {
   border: 1px solid red;
@@ -42,4 +60,8 @@ a {
 
 .outlined3 {
   border: 1px solid green;
+}
+
+.colored {
+  background-color: rgb(217, 215, 178);
 }
