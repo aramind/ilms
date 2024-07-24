@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import SignUpContent from "./SignUpContent";
+import constants from "../../configs/constants";
 
-const images = [
-  "boy_studying_2.jpeg",
-  "boy_studying_3.jpeg",
-  "boy_studying_4.jpeg",
-  "boy_studying_5.jpeg",
-  "boy_studying_6.jpeg",
-  "boy_studying_7.jpeg",
-  "girl_studying_1.jpeg",
-  "girl_studying_2.jpeg",
-  "girl_studying_3.jpeg",
-  "girl_studying_4.jpeg",
-  "girl_studying_5.jpeg",
-  "girl_studying_6.jpeg",
-];
-
+const images = constants?.signUpInImages;
 const SignUp = () => {
   const theme = useTheme();
   const [currentImage, setCurrentImage] = useState(images[0]);

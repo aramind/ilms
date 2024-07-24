@@ -29,7 +29,7 @@ const SignUpForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isDirty, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onTouched",
     resolver: yupResolver(signUpSchema),
