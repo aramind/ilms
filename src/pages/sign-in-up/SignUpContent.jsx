@@ -1,28 +1,8 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  IconButton,
-  InputAdornment,
-  Link,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-
-import React, { useState } from "react";
-import { useTheme } from "@emotion/react";
+import React from "react";
+import { Box, Link, Stack, Typography } from "@mui/material";
+import SignUpForm from "./SignUpForm";
 
 const SignUpContent = () => {
-  const theme = useTheme();
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleClickShowPassword = () => {
-    setShowPassword((show) => !show);
-  };
-
   return (
     <Stack
       px={6}
@@ -52,7 +32,7 @@ const SignUpContent = () => {
       >
         Welcome To iLMS
       </Typography>
-      <form>
+      {/* <form>
         <Stack>
           <Stack spacing={2}>
             <Stack direction="row" justifyContent="space-between" spacing={2}>
@@ -125,7 +105,8 @@ const SignUpContent = () => {
             Sign Up
           </Button>
         </Stack>
-      </form>
+      </form> */}
+      <SignUpForm />
       <Box flex={1}></Box>
       <Stack justifyContent="center" width={1}>
         <Typography
