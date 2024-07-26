@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import SignUpInMain from "./pages/sign-in-up/SignUpInMain";
 import Dashboard from "./pages/dashboard/Dashboard";
+import Courses from "./pages/courses/Courses";
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
       },
       {
         path: "/signup",
@@ -24,10 +29,10 @@ const router = createBrowserRouter([
         path: "",
         element: <Navigate to="/signin" />,
       },
-      {
-        path: "*",
-        element: <Navigate to="/signin" />,
-      },
+      // {
+      //   path: "*",
+      //   element: <Navigate to="/signin" />,
+      // },
     ],
   },
 ]);
