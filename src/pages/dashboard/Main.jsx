@@ -18,7 +18,7 @@ const Main = () => {
           sx={{
             borderRadius: "0.5rem",
             p: 2,
-            bgcolor: (theme) => theme.palette.black.dark,
+            // bgcolor: (theme) => theme.palette.black.main,
           }}
         >
           <CourseCard

@@ -11,31 +11,38 @@ import {
 } from "@mui/material";
 import React from "react";
 import ProgressIndicator from "./ProgressIndicator";
+import WhiteTypography from "../WhiteTypography";
 
-const CourseCard = ({ title, description, progress }) => {
+const CourseCard = ({
+  title,
+  description,
+  progress,
+  isPurchased = "true",
+  price,
+}) => {
   return (
     <Stack
       justifyContent="flex-start"
       alignItems="flex-start"
       px={2}
       py={1}
-      width={200}
+      width={220}
       height={250}
       borderRadius="1rem"
-      bgcolor={(theme) => theme.palette.white.light}
+      bgcolor={(theme) => theme.palette.black.dark}
       //   onClick={() => alert("Clicked")}
       sx={{
         cursor: "pointer", // Set cursor to pointer
         "&:hover": {
           //   backgroundColor: "#ffffff", // Optional: change background color on hover
-          outline: "4px solid",
-          outlineColor: (theme) => theme.palette.white.light,
+          outline: "2px solid",
+          outlineColor: (theme) => theme.palette.primary.darkest,
         },
       }}
     >
-      <Typography fontSize="1.2rem" fontWeight="bold" color="primary">
+      <WhiteTypography fontSize="1.2rem" fontWeight="bold" color="primary">
         {title}
-      </Typography>
+      </WhiteTypography>
 
       <Divider
         sx={{
@@ -45,29 +52,63 @@ const CourseCard = ({ title, description, progress }) => {
         }}
       />
       <Box flex={1} sx={{ overflowY: "auto" }}>
-        <Typography fontSize="0.8rem">{description}</Typography>
+        <WhiteTypography fontSize="0.8rem">{description}</WhiteTypography>
       </Box>
-
-      <Box width={1} mt={2}>
-        <ProgressIndicator value={progress} />
-      </Box>
-      <Stack
-        mt={0.2}
-        direction="row"
-        justifyContent="space-between"
-        alignContent="flex-end"
-        width={1}
-      >
-        <Typography fontSize="0.7rem">Course Completed</Typography>
-        <Typography
-          fontSize="0.8rem"
-          fontWeight="bold"
-          mb={2}
-          sx={{ color: (theme) => theme.palette.primary.main }}
+      {isPurchased ? (
+        <>
+          <Box width={1} mt={2}>
+            <ProgressIndicator value={progress} />
+          </Box>
+          <Stack
+            mt={0.2}
+            direction="row"
+            justifyContent="space-between"
+            alignContent="flex-end"
+            width={1}
+          >
+            <WhiteTypography fontSize="0.7rem">
+              Course Completed
+            </WhiteTypography>
+            <WhiteTypography
+              fontSize="0.8rem"
+              fontWeight="bold"
+              mb={2}
+              sx={{ color: (theme) => theme.palette.primary.main }}
+            >
+              {progress}%
+            </WhiteTypography>
+          </Stack>
+        </>
+      ) : (
+        <Stack
+          mt={0.2}
+          direction="row"
+          justifyContent="space-between"
+          alignContent="flex-end"
+          width={1}
         >
-          {progress}%
-        </Typography>
-      </Stack>
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              height: "1.8rem",
+              paddingY: 0, // Smaller padding in the y-direction
+              paddingX: 3, // Larger padding in the x-direction
+              minWidth: 80, // Minimum width of the button
+            }}
+          >
+            Buy
+          </Button>
+          <WhiteTypography
+            fontSize="1rem"
+            fontWeight="bold"
+            mb={2}
+            sx={{ color: (theme) => theme.palette.primary.main }}
+          >
+            P{price}.00
+          </WhiteTypography>
+        </Stack>
+      )}
     </Stack>
   );
 };
