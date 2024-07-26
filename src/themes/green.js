@@ -43,6 +43,9 @@ const greenTheme = createTheme({
     nunito: `"Nunito Sans", sans-serif`,
     poppins: `"Poppins", sans-serif`,
     roboto: `"Roboto", sans-serif`,
+    white: {
+      color: COLORS.white.main,
+    },
   },
 });
 
