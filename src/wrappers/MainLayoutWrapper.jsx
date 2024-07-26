@@ -17,7 +17,7 @@ import TopBar from "../pages/dashboard/TopBar";
 import Main from "../pages/dashboard/Main";
 import { Stack, Typography } from "@mui/material";
 import sideNavLinks from "../configs/sideNavLinks";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -89,6 +89,7 @@ const Drawer = styled(MuiDrawer, {
 const MainLayoutWrapper = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -98,6 +99,7 @@ const MainLayoutWrapper = ({ children }) => {
     setOpen(false);
   };
 
+  console.log(pathname.substring(1));
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open} elevation={0}>
@@ -156,10 +158,12 @@ const MainLayoutWrapper = ({ children }) => {
           {sideNavLinks?.map((navLink, index) => (
             <ListItem
               key={navLink?.text}
-              disablePadding
+              padding="0px"
               sx={{
                 display: "block",
                 color: (theme) => theme.palette.white.main,
+
+                // px: pathname?.substring(1) === navLink?.text ? "8px" : 0,
               }}
             >
               <ListItemButton
@@ -168,6 +172,17 @@ const MainLayoutWrapper = ({ children }) => {
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
                   px: 2.5,
+                  bgcolor:
+                    pathname?.substring(1) === navLink?.text
+                      ? (theme) => theme.palette.black.dark
+                      : "none",
+                  borderRadius: "20px",
+                  "&:hover": {
+                    bgcolor:
+                      pathname?.substring(1) === navLink?.text
+                        ? (theme) => theme.palette.black.dark
+                        : (theme) => theme.palette.black.light, // Change background color on hover
+                  },
                 }}
               >
                 <ListItemIcon
@@ -175,7 +190,10 @@ const MainLayoutWrapper = ({ children }) => {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
-                    color: (theme) => theme.palette.white.main,
+                    color:
+                      pathname?.substring(1) === navLink?.text
+                        ? (theme) => theme.palette.primary.main
+                        : (theme) => theme.palette.white.main,
                   }}
                 >
                   {navLink?.icon}
