@@ -1,9 +1,13 @@
-import SignUpInMain from "./pages/sign-in-up/SignUpInMain";
+import { RouterProvider } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
+import routes from "./routes";
 
 function App() {
   return (
     <>
-      <SignUpInMain />
+      <CssBaseline />
+      <RouterProvider router={routes.router} />
+      {/* <SignUpInMain /> */}
     </>
   );
 }
