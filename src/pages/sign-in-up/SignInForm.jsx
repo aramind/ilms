@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import FormWrapper from "../../wrappers/FormWrapper";
 import {
-  Box,
   Button,
-  Checkbox,
-  FormControlLabel,
   IconButton,
   InputAdornment,
   Stack,
@@ -19,7 +16,6 @@ import TextFieldError from "../../components/TextFieldError";
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [agree, setAgree] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
