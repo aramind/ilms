@@ -87,7 +87,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const MainLayoutWrapper = ({ children }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
