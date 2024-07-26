@@ -23,7 +23,8 @@ const COLORS = {
     lightest: "#A9B2C0",
   },
   white: {
-    dark: "#D6DD6",
+    darkest: "#C2C2C2",
+    dark: "#D6D6D6",
     main: "#E0E0E0",
     light: "#F5F5F5",
   },

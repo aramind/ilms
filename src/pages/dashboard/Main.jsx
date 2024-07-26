@@ -2,6 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React from "react";
 import WhiteTypography from "../../components/WhiteTypography";
+import CourseCard from "../../components/card/CourseCard";
 
 const Main = () => {
   return (
@@ -20,12 +21,26 @@ const Main = () => {
             bgcolor: (theme) => theme.palette.black.dark,
           }}
         >
-          <Box height="200px" width="120px" sx={{ backgroundColor: grey[500] }}>
-            Electronics
-          </Box>
-          <Box height="200px" width="120px" sx={{ backgroundColor: grey[500] }}>
-            Mathematics
-          </Box>
+          <CourseCard
+            title="Mathematics"
+            description=" Review course for Electronics in the ECE Licensure Examination."
+            progress="30"
+          />
+          <CourseCard
+            title="Electronics"
+            description=" Review course for Electronics in the ECE Licensure Examination."
+            progress="30"
+          />
+          <CourseCard
+            title="GEAS"
+            description=" Review course for Electronics in the ECE Licensure Examination."
+            progress="30"
+          />
+          <CourseCard
+            title="Electronic Systems and Technologies"
+            description=" Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination."
+            progress="30"
+          />
         </Stack>
       </Stack>
     </Stack>
