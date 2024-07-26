@@ -8,12 +8,13 @@ import { NavLink } from "react-router-dom";
 const SignInUpContent = ({ isSignUp }) => {
   return (
     <Stack
+      width="100%"
       px={6}
       pt={4}
       pb={2}
       height="100%"
       justifyContent="flex-start"
-      alignItems="flex-start"
+      alignItems="stretch"
     >
       <Stack width="100%" direction="row" spacing={1} justifyContent="flex-end">
         <>
