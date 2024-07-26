@@ -30,7 +30,7 @@ const SignUpContent = () => {
         variant="h4"
         sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
       >
-        Welcome To iLMS
+        Welcome To IntegLMS
       </Typography>
       <SignUpForm />
       <Box flex={1}></Box>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Stack } from "@mui/material";
-import { useTheme } from "@emotion/react";
-import SignUpContent from "./SignUpContent";
 import constants from "../../configs/constants";
+import { Box, Stack } from "@mui/material";
+import SignUpContent from "./SignUpContent";
+import { useTheme } from "@emotion/react";
 
 const images = constants?.signUpInImages;
-const SignUp = () => {
+
+const SignUpInMain = () => {
   const theme = useTheme();
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [fadeClass, setFadeClass] = useState("fade-in");
@@ -54,4 +55,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpInMain;

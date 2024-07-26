@@ -118,7 +118,7 @@ const SignUpForm = () => {
           </Stack>
         </form>
       </FormWrapper>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </>
   );
 };
