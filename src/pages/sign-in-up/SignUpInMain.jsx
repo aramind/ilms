@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import constants from "../../configs/constants";
 import { Box, Stack } from "@mui/material";
-import SignUpContent from "./SignUpContent";
 import { useTheme } from "@emotion/react";
+import { useLocation } from "react-router-dom";
+import SignInUpContent from "./SignInUpContent";
 
 const images = constants?.signUpInImages;
 
@@ -10,6 +11,8 @@ const SignUpInMain = () => {
   const theme = useTheme();
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [fadeClass, setFadeClass] = useState("fade-in");
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const changeImage = () => {
@@ -49,7 +52,8 @@ const SignUpInMain = () => {
         sx={{ bgcolor: theme.palette.white.light }}
         className="centered-content"
       >
-        <SignUpContent />
+        {/* <SignUpContent /> */}
+        <SignInUpContent isSignUp={pathname.substring(1) === "signup"} />
       </Stack>
     </Stack>
   );

@@ -9,7 +9,15 @@
 
 a {
   text-decoration: none;
-  color: #eee;
+}
+
+.link {
+  color: #058572;
+}
+
+.link:hover {
+  color: #046254;
+  text-decoration: underline;
 }
 
 .fullWandH {

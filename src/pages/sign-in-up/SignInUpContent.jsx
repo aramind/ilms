@@ -1,9 +1,11 @@
-import { Box, Link, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import SignUpForm from "./SignUpForm";
 import RMSolutions from "../../components/RMSolutions";
+import SignInForm from "./SignInForm";
+import { NavLink } from "react-router-dom";
 
-const SignInUpContent = () => {
+const SignInUpContent = ({ isSignUp }) => {
   return (
     <Stack
       px={6}
@@ -15,8 +17,10 @@ const SignInUpContent = () => {
     >
       <Stack width="100%" direction="row" spacing={1} justifyContent="flex-end">
         <>
-          <Typography>Do have an account?</Typography>
-          <Link>Sign in</Link>
+          <Typography>{isSignUp ? "Do" : "Don't"} have an account?</Typography>
+          <NavLink to={isSignUp ? "/signin" : "/signup"} className="link">
+            <Typography>{isSignUp ? "Sign In" : "Register"}</Typography>
+          </NavLink>
         </>
       </Stack>
       <Typography
@@ -25,16 +29,17 @@ const SignInUpContent = () => {
         variant="body"
         sx={{ fontFamily: "Poppins" }}
       >
-        register now
+        {isSignUp ? "register now" : "start your journey"}
       </Typography>
       <Typography
         mb={4}
         variant="h4"
         sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
       >
-        Welcome To IntegLMS
+        {isSignUp ? "Welcome To IntegLMS" : "Hi, Welcome Back!"}
       </Typography>
-      <SignUpForm />
+      {isSignUp ? <SignUpForm /> : <SignInForm />}
+      {/* <SignUpForm /> */}
       <Box flex={1}></Box>
       <RMSolutions />
     </Stack>
