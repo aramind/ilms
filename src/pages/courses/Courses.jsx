@@ -1,12 +1,12 @@
 import React from "react";
 import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
-import WhiteTypography from "../../components/WhiteTypography";
+import Main from "./Main";
 
 const Courses = () => {
   return (
     <>
       <MainLayoutWrapper>
-        <WhiteTypography>Courses</WhiteTypography>
+        <Main />
       </MainLayoutWrapper>
     </>
   );

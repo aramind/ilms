@@ -3,6 +3,7 @@ import MainLayout from "./layout/MainLayout";
 import SignUpInMain from "./pages/sign-in-up/SignUpInMain";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Courses from "./pages/courses/Courses";
+import UnavailablePage from "./pages/unavailable/UnavailablePage";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,32 @@ const router = createBrowserRouter([
         element: <Courses />,
       },
       {
-        path: "/signup",
-        element: <SignUpInMain />,
+        path: "/courses",
+        element: <Courses />,
+      },
+      {
+        path: "/messages",
+        element: <UnavailablePage />,
+      },
+      {
+        path: "/calendar",
+        element: <UnavailablePage />,
+      },
+      {
+        path: "/tools",
+        element: <UnavailablePage />,
+      },
+      {
+        path: "/files",
+        element: <UnavailablePage />,
+      },
+      {
+        path: "/profile",
+        element: <UnavailablePage />,
+      },
+      {
+        path: "/store",
+        element: <UnavailablePage />,
       },
       {
         path: "signin",
@@ -29,6 +54,7 @@ const router = createBrowserRouter([
         path: "",
         element: <Navigate to="/signin" />,
       },
+
       // {
       //   path: "*",
       //   element: <Navigate to="/signin" />,
