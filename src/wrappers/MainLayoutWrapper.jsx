@@ -18,6 +18,7 @@ import { Stack, Typography } from "@mui/material";
 import sideNavLinks from "../configs/sideNavLinks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
+import BottomNav from "../components/BottomNav";
 
 const drawerWidth = 240;
 
@@ -119,139 +120,142 @@ const MainLayoutWrapper = ({ children }) => {
 
   console.log(pathname.substring(1));
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar
-        position="fixed"
-        open={open}
-        elevation={0}
-        sx={{
-          display: { xs: "none", sm: "block" },
-        }}
-      >
-        <Toolbar
-          //   variant="dense"
-          sx={{ bgcolor: (theme) => theme?.palette?.black?.darkest }}
+    <>
+      <Box sx={{ display: "flex" }}>
+        <AppBar
+          position="fixed"
+          open={open}
+          elevation={0}
+          sx={{
+            display: { xs: "none", sm: "block" },
+          }}
         >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: "none" }),
-            }}
+          <Toolbar
+            //   variant="dense"
+            sx={{ bgcolor: (theme) => theme?.palette?.black?.darkest }}
           >
-            <MenuIcon />
-          </IconButton>
-
-          <TopBar />
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        display={{ xs: "none", md: "block" }}
-        variant="permanent"
-        open={open}
-        sx={{
-          display: { xs: "none", sm: "block" },
-          "& .MuiDrawer-paper": {
-            backgroundColor: (theme) => theme?.palette?.black?.main, // Set your desired color here
-          },
-        }}
-      >
-        <DrawerHeader>
-          <Stack direction="row" width={1} alignItems="center">
-            <Box flex={1} alignItems="center">
-              <Typography
-                variant="h5"
-                textAlign="center"
-                color={(theme) => theme.palette.white.main}
-              >
-                iLMS
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton
-                onClick={handleDrawerClose}
-                sx={{ color: (theme) => theme.palette.white.main }}
-              >
-                <ChevronLeftIcon />
-              </IconButton>
-            </Box>
-          </Stack>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {sideNavLinks?.map((navLink, index) => (
-            <ListItem
-              key={navLink?.text}
-              padding="0px"
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
               sx={{
-                display: "block",
-                color: (theme) => theme.palette.white.main,
-
-                // px: pathname?.substring(1) === navLink?.text ? "8px" : 0,
+                marginRight: 5,
+                ...(open && { display: "none" }),
               }}
             >
-              <ListItemButton
-                onClick={() => navigate(`/${navLink?.text}`)}
+              <MenuIcon />
+            </IconButton>
+
+            <TopBar />
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          display={{ xs: "none", md: "block" }}
+          variant="permanent"
+          open={open}
+          sx={{
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              backgroundColor: (theme) => theme?.palette?.black?.main, // Set your desired color here
+            },
+          }}
+        >
+          <DrawerHeader>
+            <Stack direction="row" width={1} alignItems="center">
+              <Box flex={1} alignItems="center">
+                <Typography
+                  variant="h5"
+                  textAlign="center"
+                  color={(theme) => theme.palette.white.main}
+                >
+                  iLMS
+                </Typography>
+              </Box>
+              <Box>
+                <IconButton
+                  onClick={handleDrawerClose}
+                  sx={{ color: (theme) => theme.palette.white.main }}
+                >
+                  <ChevronLeftIcon />
+                </IconButton>
+              </Box>
+            </Stack>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {sideNavLinks?.map((navLink, index) => (
+              <ListItem
+                key={navLink?.text}
+                padding="0px"
                 sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                  bgcolor:
-                    pathname?.substring(1) === navLink?.text
-                      ? (theme) => theme.palette.black.dark
-                      : "none",
-                  borderRadius: "20px",
-                  "&:hover": {
+                  display: "block",
+                  color: (theme) => theme.palette.white.main,
+
+                  // px: pathname?.substring(1) === navLink?.text ? "8px" : 0,
+                }}
+              >
+                <ListItemButton
+                  onClick={() => navigate(`/${navLink?.text}`)}
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                     bgcolor:
                       pathname?.substring(1) === navLink?.text
                         ? (theme) => theme.palette.black.dark
-                        : (theme) => theme.palette.black.light, // Change background color on hover
-                  },
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                    color:
-                      pathname?.substring(1) === navLink?.text
-                        ? (theme) => theme.palette.primary.main
-                        : (theme) => theme.palette.white.main,
+                        : "none",
+                    borderRadius: "20px",
+                    "&:hover": {
+                      bgcolor:
+                        pathname?.substring(1) === navLink?.text
+                          ? (theme) => theme.palette.black.dark
+                          : (theme) => theme.palette.black.light, // Change background color on hover
+                    },
                   }}
                 >
-                  {navLink?.icon}
-                </ListItemIcon>
-                <ListItemText
-                  primary={navLink?.text}
-                  sx={{
-                    opacity: open ? 1 : 0,
-                    textTransform: "capitalize",
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          bgcolor: (theme) => theme?.palette?.black?.darkest,
-        }}
-        minHeight="100vh"
-      >
-        <Box display={{ xs: "none", md: "block" }}>
-          <DrawerHeader />
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                      color:
+                        pathname?.substring(1) === navLink?.text
+                          ? (theme) => theme.palette.primary.main
+                          : (theme) => theme.palette.white.main,
+                    }}
+                  >
+                    {navLink?.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={navLink?.text}
+                    sx={{
+                      opacity: open ? 1 : 0,
+                      textTransform: "capitalize",
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            bgcolor: (theme) => theme?.palette?.black?.darkest,
+          }}
+          minHeight="100vh"
+        >
+          <Box display={{ xs: "none", md: "block" }}>
+            <DrawerHeader />
+          </Box>
+          {children}
         </Box>
-        {children}
       </Box>
-    </Box>
+      <BottomNav />
+    </>
   );
 };
 
