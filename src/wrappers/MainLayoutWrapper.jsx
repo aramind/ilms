@@ -14,10 +14,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import TopBar from "../pages/dashboard/TopBar";
-import Main from "../pages/dashboard/Main";
 import { Stack, Typography } from "@mui/material";
 import sideNavLinks from "../configs/sideNavLinks";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "@emotion/react";
 
 const drawerWidth = 240;
 
@@ -42,14 +42,32 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
+const DrawerHeader = (props) => {
+  const theme = useTheme();
+  return (
+    <Box
+      // className="outlined"
+      sx={{
+        display: { xs: "none", md: "flex" },
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: (theme) => theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+      }}
+      {...props}
+    />
+  );
+};
+
+// const DrawerHeader = styled("div")(({ theme }) => ({
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "flex-end",
+//   padding: theme.spacing(0, 1),
+//   display: {{xs: "none", md: "block"}}
+//   // necessary for content to be below app bar
+//   ...theme.mixins.toolbar,
+// }));
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -102,7 +120,14 @@ const MainLayoutWrapper = ({ children }) => {
   console.log(pathname.substring(1));
   return (
     <Box sx={{ display: "flex" }}>
-      <AppBar position="fixed" open={open} elevation={0}>
+      <AppBar
+        position="fixed"
+        open={open}
+        elevation={0}
+        sx={{
+          display: { xs: "none", sm: "block" },
+        }}
+      >
         <Toolbar
           //   variant="dense"
           sx={{ bgcolor: (theme) => theme?.palette?.black?.darkest }}
@@ -124,9 +149,11 @@ const MainLayoutWrapper = ({ children }) => {
         </Toolbar>
       </AppBar>
       <Drawer
+        display={{ xs: "none", md: "block" }}
         variant="permanent"
         open={open}
         sx={{
+          display: { xs: "none", sm: "block" },
           "& .MuiDrawer-paper": {
             backgroundColor: (theme) => theme?.palette?.black?.main, // Set your desired color here
           },
@@ -219,7 +246,9 @@ const MainLayoutWrapper = ({ children }) => {
         }}
         minHeight="100vh"
       >
-        <DrawerHeader />
+        <Box display={{ xs: "none", md: "block" }}>
+          <DrawerHeader />
+        </Box>
         {children}
       </Box>
     </Box>
