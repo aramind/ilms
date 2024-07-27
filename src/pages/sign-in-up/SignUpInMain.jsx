@@ -37,7 +37,7 @@ const SignUpInMain = () => {
       sx={{ minHeight: "100vh", width: "100%" }}
     >
       <Stack
-        flex={{ xs: 1, md: "2.5" }}
+        flex={{ md: "2.5" }}
         sx={{ bgcolor: theme.palette.primary.lightest }}
       >
         <Box

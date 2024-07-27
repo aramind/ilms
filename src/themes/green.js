@@ -47,6 +47,24 @@ const greenTheme = createTheme({
     white: {
       color: COLORS.white.main,
     },
+    body1: {
+      fontSize: "0.9rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "0.9rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "1rem",
+      },
+    },
+    h4: {
+      fontSize: "1.5rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.5rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "2rem",
+      },
+    },
   },
 });
 

@@ -9,14 +9,19 @@ const SignInUpContent = ({ isSignUp }) => {
   return (
     <Stack
       width="100%"
-      px={6}
-      pt={4}
-      pb={2}
+      px={{ xs: 2, md: 6 }}
+      pt={{ xs: 2, md: 4 }}
+      pb={{ xs: 1, md: 2 }}
       height="100%"
       justifyContent="flex-start"
       alignItems="stretch"
     >
-      <Stack width="100%" direction="row" spacing={1} justifyContent="flex-end">
+      <Stack
+        width="100%"
+        direction="row"
+        spacing={1}
+        justifyContent={{ xs: "center", md: "flex-end" }}
+      >
         <>
           <Typography>{isSignUp ? "Do" : "Don't"} have an account?</Typography>
           <NavLink to={isSignUp ? "/signin" : "/signup"} className="link">
@@ -25,9 +30,8 @@ const SignInUpContent = ({ isSignUp }) => {
         </>
       </Stack>
       <Typography
-        mt={8}
+        mt={{ xs: 2, md: 8 }}
         className="uppercase"
-        variant="body"
         sx={{ fontFamily: "Poppins" }}
       >
         {isSignUp ? "register now" : "start your journey"}
@@ -41,7 +45,7 @@ const SignInUpContent = ({ isSignUp }) => {
       </Typography>
       {isSignUp ? <SignUpForm /> : <SignInForm />}
       {/* <SignUpForm /> */}
-      <Box flex={1}></Box>
+      <Box flex={1} mt={4}></Box>
       <RMSolutions />
     </Stack>
   );
