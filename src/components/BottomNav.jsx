@@ -7,9 +7,12 @@ import {
 import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
 import StorefrontTwoToneIcon from "@mui/icons-material/StorefrontTwoTone";
 import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
+import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const BottomNav = () => {
+  const navigate = useNavigate();
   return (
     <Paper
       sx={{
@@ -28,13 +31,21 @@ const BottomNav = () => {
           sx={{ bgcolor: (theme) => theme.palette.black.main }}
         >
           <BottomNavigationAction
+            onClick={() => navigate("/store")}
             label="Store"
             icon={<StorefrontTwoToneIcon />}
             sx={{ color: (theme) => theme.palette.white.main }}
           />
           <BottomNavigationAction
+            onClick={() => navigate("/dashboard")}
             label="Dashboard"
             icon={<DashboardTwoToneIcon />}
+            sx={{ color: (theme) => theme.palette.white.main }}
+          />
+          <BottomNavigationAction
+            onClick={() => navigate("/courses")}
+            label="Courses"
+            icon={<MenuBookTwoToneIcon />}
             sx={{ color: (theme) => theme.palette.white.main }}
           />
           <BottomNavigationAction
