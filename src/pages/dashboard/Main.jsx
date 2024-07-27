@@ -3,6 +3,7 @@ import { grey } from "@mui/material/colors";
 import React from "react";
 import WhiteTypography from "../../components/WhiteTypography";
 import CourseCard from "../../components/card/CourseCard";
+import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
 
 const Main = () => {
   return (
@@ -11,15 +12,7 @@ const Main = () => {
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
       <Stack>
         <WhiteTypography variant="h6">My Courses</WhiteTypography>
-
-        <Stack
-          direction="row"
-          justifyContent={{ xs: "center", md: "flex-start" }}
-          // spacing={2}
-          gap={2}
-          width="100%"
-          flexWrap="wrap"
-        >
+        <CardGroupWrapper>
           <CourseCard
             title="Mathematics"
             description=" Review course for Electronics in the ECE Licensure Examination."
@@ -60,7 +53,7 @@ const Main = () => {
             description=" Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination."
             progress="30"
           />
-        </Stack>
+        </CardGroupWrapper>
       </Stack>
     </Stack>
   );
