@@ -52,7 +52,12 @@ const SignUpForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <Stack>
             <Stack>
-              <Stack direction="row" spacing={1} flex="space-between">
+              <Stack
+                direction={{ xs: "column", md: "row" }}
+                spacing={{ xs: 0, md: 1.5 }}
+                flex="space-between"
+                width={1}
+              >
                 <ControlledTextField name="firstName" label="First Name" />
                 <ControlledTextField name="lastName" label="Last Name" />
               </Stack>
