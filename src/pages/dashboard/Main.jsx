@@ -10,7 +10,7 @@ const Main = () => {
       <WhiteTypography variant="h5">Dashboard</WhiteTypography>
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
       <Stack>
-        <WhiteTypography>My Courses</WhiteTypography>
+        <WhiteTypography variant="h6">My Courses</WhiteTypography>
         <Stack
           direction="row"
           justifyContent="flex-start"

@@ -62,6 +62,15 @@ const greenTheme = createTheme({
         fontSize: "0.9rem",
       },
     },
+    h6: {
+      fontSize: "1rem",
+      [`@media (min-width:600px)`]: {
+        fontSize: "1rem",
+      },
+      [`@media (min-width:960px)`]: {
+        fontSize: "1.2rem",
+      },
+    },
     h5: {
       fontSize: "1.3rem",
       [`@media (min-width:600px)`]: {
