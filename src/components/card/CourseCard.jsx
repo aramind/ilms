@@ -16,8 +16,8 @@ const CourseCard = ({
       alignItems="flex-start"
       px={2}
       py={1}
-      width={{ xs: "40vw", md: 220 }}
-      height={{ xs: "40vw", md: 250 }}
+      width={{ xs: "42vw", md: 220 }}
+      height={{ xs: "42vw", md: 250 }}
       borderRadius="1rem"
       bgcolor={(theme) => theme.palette.black.dark}
       //   onClick={() => alert("Clicked")}
