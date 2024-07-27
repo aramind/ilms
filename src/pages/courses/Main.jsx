@@ -3,14 +3,14 @@ import WhiteTypography from "../../components/WhiteTypography";
 import { Stack } from "@mui/material";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
+import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 
 const Main = () => {
   return (
     <Stack spacing={2}>
       <WhiteTypography>Courses</WhiteTypography>
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
-      <Stack>
-        <WhiteTypography>Enrolled Courses</WhiteTypography>
+      <CardGroupWithTitle title="Enrolled Courses">
         <CardGroupWrapper>
           <CourseCard
             title="Mathematics"
@@ -33,9 +33,8 @@ const Main = () => {
             progress="30"
           />
         </CardGroupWrapper>
-      </Stack>
-      <Stack>
-        <WhiteTypography>Recommended</WhiteTypography>
+      </CardGroupWithTitle>
+      <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
           <CourseCard
             title="Math Refresher"
@@ -50,7 +49,7 @@ const Main = () => {
             price="500"
           />
         </CardGroupWrapper>
-      </Stack>
+      </CardGroupWithTitle>
     </Stack>
   );
 };

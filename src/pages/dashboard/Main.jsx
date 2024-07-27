@@ -11,7 +11,7 @@ const Main = () => {
     <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
       <WhiteTypography variant="h5">Dashboard</WhiteTypography>
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
-      <CardGroupWithTitle title={"My Courses"}>
+      <CardGroupWithTitle title="My Courses">
         <CardGroupWrapper>
           <CourseCard
             title="Mathematics"
