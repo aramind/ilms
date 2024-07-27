@@ -233,7 +233,7 @@ const MainLayoutWrapper = ({ children }) => {
           component="main"
           sx={{
             flexGrow: 1,
-            p: 3,
+            p: { xs: 1, md: 3 },
             bgcolor: (theme) => theme?.palette?.black?.darkest,
           }}
           minHeight="100vh"

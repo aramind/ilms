@@ -4,14 +4,14 @@ import React from "react";
 import WhiteTypography from "../../components/WhiteTypography";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
+import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 
 const Main = () => {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
       <WhiteTypography variant="h5">Dashboard</WhiteTypography>
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
-      <Stack>
-        <WhiteTypography variant="h6">My Courses</WhiteTypography>
+      <CardGroupWithTitle title={"My Courses"}>
         <CardGroupWrapper>
           <CourseCard
             title="Mathematics"
@@ -54,7 +54,7 @@ const Main = () => {
             progress="30"
           />
         </CardGroupWrapper>
-      </Stack>
+      </CardGroupWithTitle>
     </Stack>
   );
 };
