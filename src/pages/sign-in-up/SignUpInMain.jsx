@@ -32,8 +32,14 @@ const SignUpInMain = () => {
   }, []);
 
   return (
-    <Stack direction="row" sx={{ minHeight: "100vh", width: "100%" }}>
-      <Stack flex="2.5" sx={{ bgcolor: theme.palette.primary.lightest }}>
+    <Stack
+      direction={{ xs: "column", md: "row" }}
+      sx={{ minHeight: "100vh", width: "100%" }}
+    >
+      <Stack
+        flex={{ xs: 1, md: "2.5" }}
+        sx={{ bgcolor: theme.palette.primary.lightest }}
+      >
         <Box
           component="img"
           src={`/assets/sign-in-up-images/${currentImage}`}
@@ -48,7 +54,7 @@ const SignUpInMain = () => {
         />
       </Stack>
       <Stack
-        flex="1.5"
+        flex={{ xs: 1, md: "1.5" }}
         sx={{ bgcolor: theme.palette.white.light }}
         className="centered-content"
       >

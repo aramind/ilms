@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Divider,
-  LinearProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Stack } from "@mui/material";
 import React from "react";
 import ProgressIndicator from "./ProgressIndicator";
 import WhiteTypography from "../WhiteTypography";
