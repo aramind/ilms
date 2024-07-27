@@ -7,7 +7,7 @@ import CourseCard from "../../components/card/CourseCard";
 const Main = () => {
   return (
     <Stack spacing={2}>
-      <WhiteTypography>Dashboard</WhiteTypography>
+      <WhiteTypography variant="h5">Dashboard</WhiteTypography>
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
       <Stack>
         <WhiteTypography>My Courses</WhiteTypography>
