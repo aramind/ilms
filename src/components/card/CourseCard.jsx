@@ -16,8 +16,8 @@ const CourseCard = ({
       alignItems="flex-start"
       px={2}
       py={1}
-      width={220}
-      height={250}
+      width={{ xs: 150, md: 220 }}
+      height={{ xs: 150, md: 250 }}
       borderRadius="1rem"
       bgcolor={(theme) => theme.palette.black.dark}
       //   onClick={() => alert("Clicked")}
@@ -30,7 +30,7 @@ const CourseCard = ({
         },
       }}
     >
-      <WhiteTypography fontSize="1.2rem" fontWeight="bold" color="primary">
+      <WhiteTypography variant="h6" color="primary">
         {title}
       </WhiteTypography>
 
@@ -39,10 +39,15 @@ const CourseCard = ({
           backgroundColor: (theme) => theme.palette.primary.main,
           width: "100%",
           my: 1,
+          display: { xs: "none", md: "block" },
         }}
       />
-      <Box flex={1} sx={{ overflowY: "auto" }}>
-        <WhiteTypography fontSize="0.8rem">{description}</WhiteTypography>
+      <Box
+        flex={1}
+        sx={{ overflowY: "auto" }}
+        display={{ xs: "none", md: "flex" }}
+      >
+        <WhiteTypography variant="subtitle2">{description}</WhiteTypography>
       </Box>
       {isPurchased ? (
         <>
@@ -56,9 +61,7 @@ const CourseCard = ({
             alignContent="flex-end"
             width={1}
           >
-            <WhiteTypography fontSize="0.7rem">
-              Course Completed
-            </WhiteTypography>
+            <WhiteTypography variant="subtitle2">Progress</WhiteTypography>
             <WhiteTypography
               fontSize="0.8rem"
               fontWeight="bold"
@@ -72,13 +75,16 @@ const CourseCard = ({
       ) : (
         <Stack
           mt={0.2}
-          direction="row"
+          pb={1}
+          direction={{ xs: "column-reverse", md: "row" }}
           justifyContent="space-between"
-          alignContent="flex-end"
+          alignItems={{ xs: "flex-start", md: "flex-end" }}
           width={1}
+          flex={1}
         >
           <Button
             variant="contained"
+            fullWidth
             size="small"
             sx={{
               height: "1.8rem",
@@ -87,16 +93,8 @@ const CourseCard = ({
               minWidth: 80, // Minimum width of the button
             }}
           >
-            Buy
+            INFO
           </Button>
-          <WhiteTypography
-            fontSize="1rem"
-            fontWeight="bold"
-            mb={2}
-            sx={{ color: (theme) => theme.palette.primary.main }}
-          >
-            P{price}.00
-          </WhiteTypography>
         </Stack>
       )}
     </Stack>

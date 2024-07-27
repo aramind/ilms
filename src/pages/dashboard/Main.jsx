@@ -14,10 +14,10 @@ const Main = () => {
 
         <Stack
           direction="row"
-          justifyContent="flex-start"
+          justifyContent={{ xs: "center", md: "flex-start" }}
           // spacing={2}
           gap={2}
-          width={{ xs: "100vw", md: "100%" }}
+          width="100%"
           flexWrap="wrap"
         >
           <CourseCard
