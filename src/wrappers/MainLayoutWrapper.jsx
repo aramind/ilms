@@ -60,16 +60,6 @@ const DrawerHeader = (props) => {
   );
 };
 
-// const DrawerHeader = styled("div")(({ theme }) => ({
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "flex-end",
-//   padding: theme.spacing(0, 1),
-//   display: {{xs: "none", md: "block"}}
-//   // necessary for content to be below app bar
-//   ...theme.mixins.toolbar,
-// }));
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
