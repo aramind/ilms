@@ -8,7 +8,6 @@ import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
 import StorefrontTwoToneIcon from "@mui/icons-material/StorefrontTwoTone";
 import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
 import React from "react";
-import { red } from "@mui/material/colors";
 
 const BottomNav = () => {
   return (
@@ -19,8 +18,7 @@ const BottomNav = () => {
         left: 0,
         right: 0,
         zIndex: 1200,
-
-        // display: { md: "none" },
+        display: { md: "none" },
       }}
       elevation={3}
     >
