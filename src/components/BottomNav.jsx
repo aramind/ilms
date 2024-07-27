@@ -4,8 +4,11 @@ import {
   Box,
   Paper,
 } from "@mui/material";
-import { red } from "@mui/material/colors";
+import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
+import StorefrontTwoToneIcon from "@mui/icons-material/StorefrontTwoTone";
+import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
 import React from "react";
+import { red } from "@mui/material/colors";
 
 const BottomNav = () => {
   return (
@@ -16,15 +19,31 @@ const BottomNav = () => {
         left: 0,
         right: 0,
         zIndex: 1200,
-        display: { md: "none" },
+
+        // display: { md: "none" },
       }}
       elevation={3}
     >
       <Box sx={{ width: "100%" }}>
-        <BottomNavigation showLabels>
-          <BottomNavigationAction label="Recents" color={red[500]} />
-          <BottomNavigationAction label="Favorites" />
-          <BottomNavigationAction label="Nearby" />
+        <BottomNavigation
+          showLabels
+          sx={{ bgcolor: (theme) => theme.palette.black.main }}
+        >
+          <BottomNavigationAction
+            label="Store"
+            icon={<StorefrontTwoToneIcon />}
+            sx={{ color: (theme) => theme.palette.white.main }}
+          />
+          <BottomNavigationAction
+            label="Dashboard"
+            icon={<DashboardTwoToneIcon />}
+            sx={{ color: (theme) => theme.palette.white.main }}
+          />
+          <BottomNavigationAction
+            label="More"
+            icon={<MoreHorizTwoToneIcon />}
+            sx={{ color: (theme) => theme.palette.white.main }}
+          />
         </BottomNavigation>
       </Box>
     </Paper>
