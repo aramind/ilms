@@ -7,7 +7,7 @@ const CardGroupWrapper = ({ children }) => {
       direction="row"
       justifyContent={{ xs: "center", md: "flex-start" }}
       // spacing={2}
-      gap={2}
+      gap={{ xs: 3, md: 3 }}
       width="100%"
       flexWrap="wrap"
     >
