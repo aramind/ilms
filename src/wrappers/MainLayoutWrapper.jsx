@@ -19,6 +19,7 @@ import sideNavLinks from "../configs/sideNavLinks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import BottomNav from "../components/BottomNav";
+import BottomNavSD from "../components/BottomNavSD";
 
 const drawerWidth = 240;
 
@@ -117,7 +118,7 @@ const MainLayoutWrapper = ({ children }) => {
           open={open}
           elevation={0}
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
           }}
         >
           <Toolbar
@@ -141,11 +142,10 @@ const MainLayoutWrapper = ({ children }) => {
           </Toolbar>
         </AppBar>
         <Drawer
-          display={{ xs: "none", md: "block" }}
           variant="permanent"
           open={open}
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               backgroundColor: (theme) => theme?.palette?.black?.main, // Set your desired color here
             },
@@ -245,6 +245,7 @@ const MainLayoutWrapper = ({ children }) => {
         </Box>
       </Box>
       <BottomNav />
+      <BottomNavSD />
     </>
   );
 };
