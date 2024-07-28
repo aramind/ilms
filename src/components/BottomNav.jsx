@@ -7,6 +7,7 @@ import {
   Paper,
   Stack,
   Typography,
+  Zoom,
 } from "@mui/material";
 import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
 import StorefrontTwoToneIcon from "@mui/icons-material/StorefrontTwoTone";
@@ -14,18 +15,16 @@ import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
 import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import sideNavLinks from "../configs/sideNavLinks";
+import BottomNavMenu from "./BottomNavMenu";
 
 const BottomNav = () => {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
   };
 
   return (
@@ -71,36 +70,11 @@ const BottomNav = () => {
             sx={{ color: (theme) => theme.palette.white.main }}
           />
         </BottomNavigation>
-        <Menu
-          id="basic-menu"
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
+        <BottomNavMenu
           anchorEl={anchorEl}
+          setAnchorEl={setAnchorEl}
           open={open}
-          onClose={handleCloseMenu}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          {sideNavLinks?.map((option, index) => (
-            <MenuItem key={index}>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="flex-start"
-                spacing={2}
-                onClick={() => navigate(`/${option?.text}`)}
-              >
-                <Typography color="primary.darkest">{option?.icon}</Typography>
-                <Typography color={(theme) => theme.palette.black.darkest}>
-                  {option?.text?.[0]?.toUpperCase() +
-                    option?.text?.substring(1)}
-                </Typography>
-              </Stack>
-            </MenuItem>
-          ))}
-        </Menu>
+        />
       </Box>
     </Paper>
   );

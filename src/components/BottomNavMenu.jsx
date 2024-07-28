@@ -1,49 +1,55 @@
-import { BottomNavigationAction, Button, Menu, MenuItem } from "@mui/material";
-import React, { useState } from "react";
-import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
+import { Menu, MenuItem, Stack, Typography, Zoom } from "@mui/material";
+import React from "react";
 import sideNavLinks from "../configs/sideNavLinks";
+import { useNavigate } from "react-router-dom";
 
-const BottomNavMenu = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
+const BottomNavMenu = ({ anchorEl, setAnchorEl, open }) => {
+  const navigate = useNavigate();
+
+  const handleCloseMenu = () => {
     setAnchorEl(null);
   };
 
   return (
-    <div>
-      <Button
-        id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button>
-      <BottomNavigationAction
-        onClick={handleClick}
-        label="More"
-        icon={<MoreHorizTwoToneIcon />}
-        sx={{ color: (theme) => theme.palette.white.main }}
-      />
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        {sideNavLinks?.map((option, index) => (
-          <MenuItem key={index}>{option?.text}</MenuItem>
-        ))}
-      </Menu>
-    </div>
+    <Menu
+      id="basic-menu"
+      aria-controls={open ? "basic-menu" : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? "true" : undefined}
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleCloseMenu}
+      TransitionComponent={Zoom}
+      TransitionProps={{ unmountOnExit: true, timeout: 300 }}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+      transformOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      MenuListProps={{
+        "aria-labelledby": "basic-button",
+      }}
+    >
+      {sideNavLinks?.map((option, index) => (
+        <MenuItem key={index}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-start"
+            spacing={2}
+            onClick={() => navigate(`/${option?.text}`)}
+          >
+            <Typography color="primary.darkest">{option?.icon}</Typography>
+            <Typography color={(theme) => theme.palette.black.darkest}>
+              {option?.text?.[0]?.toUpperCase() + option?.text?.substring(1)}
+            </Typography>
+          </Stack>
+        </MenuItem>
+      ))}
+    </Menu>
   );
 };
 
