@@ -39,6 +39,7 @@ const BottomNavSD = () => {
         // color="primary"
         aria-label="add to shopping cart"
         sx={{
+          display: { md: "none" },
           opacity: "0.5",
           position: "fixed",
           bottom: 16,
