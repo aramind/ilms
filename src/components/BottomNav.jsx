@@ -2,20 +2,15 @@ import {
   BottomNavigation,
   BottomNavigationAction,
   Box,
-  Menu,
-  MenuItem,
   Paper,
-  Stack,
-  Typography,
-  Zoom,
 } from "@mui/material";
-import DashboardTwoToneIcon from "@mui/icons-material/DashboardTwoTone";
-import StorefrontTwoToneIcon from "@mui/icons-material/StorefrontTwoTone";
+
 import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
-import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNavMenu from "./BottomNavMenu";
+import { prefBottomNavOptions } from "../configs/prefBottomNavOptions";
 
 const BottomNav = () => {
   const navigate = useNavigate();
@@ -44,25 +39,16 @@ const BottomNav = () => {
           showLabels
           sx={{ bgcolor: (theme) => theme.palette.black.main }}
         >
-          <BottomNavigationAction
-            onClick={() => navigate("/store")}
-            label="Store"
-            icon={<StorefrontTwoToneIcon />}
-            sx={{ color: (theme) => theme.palette.white.main }}
-          />
-          <BottomNavigationAction
-            onClick={() => navigate("/dashboard")}
-            label="Dashboard"
-            icon={<DashboardTwoToneIcon />}
-            sx={{ color: (theme) => theme.palette.white.main }}
-          />
-          <BottomNavigationAction
-            onClick={() => navigate("/courses")}
-            label="Courses"
-            icon={<MenuBookTwoToneIcon />}
-            sx={{ color: (theme) => theme.palette.white.main }}
-          />
-
+          {prefBottomNavOptions?.map((option, i) => (
+            <BottomNavigationAction
+              onClick={() => navigate(`/${option?.text?.toLowerCase()}`)}
+              label={
+                option?.text?.[0]?.toUpperCase() + option?.text?.substring(1)
+              }
+              icon={option?.icon}
+              sx={{ color: (theme) => theme.palette.white.main }}
+            />
+          ))}
           <BottomNavigationAction
             onClick={handleOpenMenu}
             label="More"
