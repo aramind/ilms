@@ -1,5 +1,4 @@
-import { Box, Stack } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Stack } from "@mui/material";
 import React from "react";
 import WhiteTypography from "../../components/WhiteTypography";
 import CourseCard from "../../components/card/CourseCard";

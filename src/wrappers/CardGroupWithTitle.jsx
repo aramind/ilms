@@ -4,10 +4,11 @@ import WhiteTypography from "../components/WhiteTypography";
 
 const CardGroupWithTitle = ({ title, children }) => {
   return (
-    <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-      <WhiteTypography variant="h6" sx={{ mb: { xs: 1, md: 0.5 } }}>
+    <Stack alignItems={{ xs: "center", md: "flex-start" }} width="100%" mb={4}>
+      <WhiteTypography variant="h6" sx={{ mb: 1 }}>
         {title}
       </WhiteTypography>
+
       {children}
     </Stack>
   );

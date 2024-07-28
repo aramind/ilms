@@ -7,9 +7,14 @@ import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 
 const Main = () => {
   return (
-    <Stack spacing={2}>
-      <WhiteTypography>Courses</WhiteTypography>
-      <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
+    <Stack alignItems={{ xs: "center", md: "flex-start" }}>
+      <WhiteTypography variant="h5" mb={1}>
+        Courses
+      </WhiteTypography>
+      <WhiteTypography mb={2}>
+        Hi Robin! Good Luck with your studies!
+      </WhiteTypography>
+
       <CardGroupWithTitle title="Enrolled Courses">
         <CardGroupWrapper>
           <CourseCard
