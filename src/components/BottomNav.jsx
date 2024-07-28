@@ -7,33 +7,20 @@ import {
 
 import MoreHorizTwoToneIcon from "@mui/icons-material/MoreHorizTwoTone";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BottomNavMenu from "./BottomNavMenu";
 import { prefBottomNavOptions } from "../configs/prefBottomNavOptions";
-import { useTheme } from "@emotion/react";
+import useIsLandsCape from "../hooks/useIsLandsCape";
 
 const BottomNav = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
+  const isLandscape = useIsLandsCape();
 
-  const [isVisible, setIsVisible] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  useEffect(() => {
-    const handleResize = () => {
-      const isPortrait = window.innerWidth < window.innerHeight;
-      const isSmallWidth = window.innerWidth < theme.breakpoints.values.md;
-      setIsVisible(isPortrait && isSmallWidth);
-    };
-
-    handleResize(); // Check initially
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [theme.breakpoints.values.md]);
-
-  if (!isVisible) {
+  if (isLandscape) {
     return null;
   }
 
