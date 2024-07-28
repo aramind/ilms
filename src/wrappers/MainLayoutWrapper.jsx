@@ -14,7 +14,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import TopBar from "../pages/dashboard/TopBar";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Tooltip, Typography } from "@mui/material";
 import sideNavLinks from "../configs/sideNavLinks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
@@ -219,7 +219,44 @@ const MainLayoutWrapper = ({ children }) => {
                     },
                   }}
                 >
-                  <ListItemIcon
+                  {open ? (
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                        color:
+                          pathname?.substring(1) === navLink?.text
+                            ? (theme) => theme.palette.primary.main
+                            : (theme) => theme.palette.white.main,
+                      }}
+                    >
+                      {navLink?.icon}
+                    </ListItemIcon>
+                  ) : (
+                    <Tooltip
+                      title={
+                        navLink?.text?.[0]?.toUpperCase() +
+                        navLink?.text?.substring(1)
+                      }
+                      placement="right"
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : "auto",
+                          justifyContent: "center",
+                          color:
+                            pathname?.substring(1) === navLink?.text
+                              ? (theme) => theme.palette.primary.main
+                              : (theme) => theme.palette.white.main,
+                        }}
+                      >
+                        {navLink?.icon}
+                      </ListItemIcon>
+                    </Tooltip>
+                  )}
+                  {/* <ListItemIcon
                     sx={{
                       minWidth: 0,
                       mr: open ? 3 : "auto",
@@ -230,8 +267,20 @@ const MainLayoutWrapper = ({ children }) => {
                           : (theme) => theme.palette.white.main,
                     }}
                   >
-                    {navLink?.icon}
-                  </ListItemIcon>
+                    {open ? (
+                      navLink?.icon
+                    ) : (
+                      <Tooltip
+                        title={
+                          navLink?.text?.[0]?.toUpperCase() +
+                          navLink?.text?.substring(1)
+                        }
+                        placement="right"
+                      >
+                        {navLink?.icon}
+                      </Tooltip>
+                    )}
+                  </ListItemIcon> */}
                   <ListItemText
                     primary={navLink?.text}
                     sx={{
