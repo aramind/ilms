@@ -35,6 +35,7 @@ const SignUpInMain = () => {
     <Stack
       direction={{ xs: "column", md: "row" }}
       sx={{ minHeight: "100vh", width: "100%" }}
+      justifyContent={{ xs: "space-between" }}
     >
       <Stack
         flex={{ md: "2.5" }}
@@ -53,14 +54,17 @@ const SignUpInMain = () => {
           }}
         />
       </Stack>
-      <Stack
-        flex={{ xs: 1, md: "1.5" }}
-        sx={{ bgcolor: theme.palette.white.light }}
-        className="centered-content"
+      <Box
+        flex={{ xs: "1", md: "1.5" }}
+        sx={{
+          bgcolor: theme.palette.white.light,
+          display: "flex",
+          alignItems: "stretch",
+        }}
       >
         {/* <SignUpContent /> */}
         <SignInUpContent isSignUp={pathname.substring(1) === "signup"} />
-      </Stack>
+      </Box>
     </Stack>
   );
 };

@@ -12,7 +12,7 @@ const SignInUpContent = ({ isSignUp }) => {
       px={{ xs: 2, md: 6 }}
       pt={{ xs: 2, md: 4 }}
       pb={{ xs: 1, md: 2 }}
-      height="100%"
+      // height="100%"
       justifyContent="flex-start"
       alignItems="stretch"
     >
@@ -45,7 +45,8 @@ const SignInUpContent = ({ isSignUp }) => {
       </Typography>
       {isSignUp ? <SignUpForm /> : <SignInForm />}
       {/* <SignUpForm /> */}
-      <Box flex={1} mt={4}></Box>
+      <Box sx={{ flexGrow: 1 }}></Box>
+
       <RMSolutions />
     </Stack>
   );
