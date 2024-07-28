@@ -33,12 +33,12 @@ const openedMixin = (theme) => ({
   }),
   overflowX: "hidden",
   // Hide scrollbar
-  overflow: "hidden",
+  overflowY: "auto", // Enable vertical scrolling
   "&::-webkit-scrollbar": {
-    display: "none",
+    width: 0, // Hide scrollbar for WebKit-based browsers
   },
-  "-ms-overflow-style": "none" /* IE and Edge */,
-  "scrollbar-width": "none" /* Firefox */,
+  "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
+  "scrollbar-width": "none", // Hide scrollbar for Firefox
 });
 
 const closedMixin = (theme) => ({
@@ -52,12 +52,11 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
   // Hide scrollbar
-  overflow: "hidden",
   "&::-webkit-scrollbar": {
-    display: "none",
+    width: 0, // Hide scrollbar for WebKit-based browsers
   },
-  "-ms-overflow-style": "none" /* IE and Edge */,
-  "scrollbar-width": "none" /* Firefox */,
+  "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
+  "scrollbar-width": "none", // Hide scrollbar for Firefox
 });
 
 const DrawerHeader = (props) => {
