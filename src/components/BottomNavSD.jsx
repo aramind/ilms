@@ -1,32 +1,20 @@
 import { Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import BottomNavMenu from "./BottomNavMenu";
-import { useTheme } from "@emotion/react";
+import useIsLandsCape from "../hooks/useIsLandsCape";
 
 const BottomNavSD = () => {
+  const isLandscape = useIsLandsCape();
+
   const [anchorEl, setAnchorEl] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const theme = useTheme();
   const open = Boolean(anchorEl);
 
   const handleOpenMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      const isLandscape = window.innerWidth > window.innerHeight;
-      const isSmallHeight = window.innerHeight < theme.breakpoints.values.md;
-      setIsVisible(isLandscape && isSmallHeight);
-    };
-
-    handleResize(); // Check initially
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [theme.breakpoints.values.md]);
-
-  if (!isVisible) {
+  if (!isLandscape) {
     return null;
   }
 
