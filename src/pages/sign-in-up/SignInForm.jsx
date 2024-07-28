@@ -13,9 +13,11 @@ import { Controller, useForm } from "react-hook-form";
 import signInSchema from "../../schemas/singIn";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextFieldError from "../../components/TextFieldError";
+import { useNavigate } from "react-router-dom";
 
 const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
@@ -24,7 +26,7 @@ const SignInForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onTouched",
     resolver: yupResolver(signInSchema),
@@ -39,6 +41,10 @@ const SignInForm = () => {
   const onSubmit = (data) => {
     console.log("Form submitted with data:", data);
     // Add your submission logic here
+
+    if (isValid) {
+      navigate("/dashboard");
+    }
   };
 
   return (
