@@ -2,6 +2,7 @@ import { Box, Button, Divider, Stack } from "@mui/material";
 import React from "react";
 import ProgressIndicator from "./ProgressIndicator";
 import WhiteTypography from "../WhiteTypography";
+import useIsLandsCape from "../../hooks/useIsLandsCape";
 
 const CourseCard = ({
   title,
@@ -10,14 +11,16 @@ const CourseCard = ({
   isPurchased = "true",
   price,
 }) => {
+  const isLandscape = useIsLandsCape();
+
   return (
     <Stack
       justifyContent="flex-start"
       alignItems="flex-start"
       px={2}
       py={1}
-      width={{ xs: "42vw", md: 220 }}
-      height={{ xs: "42vw", md: 250 }}
+      width={isLandscape ? { xs: "28vw", md: 220 } : { xs: "42vw", md: 220 }}
+      height={isLandscape ? { xs: "30vw", md: 250 } : { xs: "42vw", md: 250 }}
       borderRadius="1rem"
       bgcolor={(theme) => theme.palette.black.dark}
       //   onClick={() => alert("Clicked")}
@@ -39,13 +42,13 @@ const CourseCard = ({
           backgroundColor: (theme) => theme.palette.primary.main,
           width: "100%",
           my: 1,
-          display: { xs: "none", md: "block" },
+          display: isLandscape ? "flex" : { xs: "none", md: "flex" },
         }}
       />
       <Box
         flex={1}
         sx={{ overflowY: "auto" }}
-        display={{ xs: "none", md: "flex" }}
+        display={isLandscape ? "flex" : { xs: "none", md: "flex" }}
       >
         <WhiteTypography variant="subtitle2">{description}</WhiteTypography>
       </Box>
