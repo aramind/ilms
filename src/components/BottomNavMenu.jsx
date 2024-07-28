@@ -1,6 +1,14 @@
-import { Menu, MenuItem, Stack, Typography, Zoom } from "@mui/material";
+import {
+  Divider,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+  Zoom,
+} from "@mui/material";
 import React from "react";
 import sideNavLinks from "../configs/sideNavLinks";
+import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
 import { useNavigate } from "react-router-dom";
 
 const BottomNavMenu = ({ anchorEl, setAnchorEl, open }) => {
@@ -49,6 +57,31 @@ const BottomNavMenu = ({ anchorEl, setAnchorEl, open }) => {
           </Stack>
         </MenuItem>
       ))}
+      <Divider
+        sx={{
+          opacity: "0.4",
+          backgroundColor: (theme) => theme.palette.black.light,
+          width: "100%",
+          my: 1,
+          height: 1,
+        }}
+      />
+      <MenuItem>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="flex-start"
+          spacing={2}
+          onClick={() => navigate(`/signin`)}
+        >
+          <Typography color="primary.darkest">
+            <ExitToAppTwoToneIcon />
+          </Typography>
+          <Typography color={(theme) => theme.palette.black.darkest}>
+            Sign out
+          </Typography>
+        </Stack>
+      </MenuItem>
     </Menu>
   );
 };

@@ -17,8 +17,11 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ControlledTextField from "../../components/controlled/ControlledTextField";
 import TextFieldError from "../../components/TextFieldError";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
 
@@ -44,6 +47,7 @@ const SignUpForm = () => {
   const onSubmit = (data) => {
     console.log("Form submitted with data:", data);
     // Add your submission logic here
+    navigate("/signin");
   };
 
   return (

@@ -20,6 +20,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import BottomNav from "../components/BottomNav";
 import BottomNavSD from "../components/BottomNavSD";
+import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
+import { red } from "@mui/material/colors";
 
 const drawerWidth = 240;
 
@@ -30,6 +32,13 @@ const openedMixin = (theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
+  // Hide scrollbar
+  overflow: "hidden",
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+  "-ms-overflow-style": "none" /* IE and Edge */,
+  "scrollbar-width": "none" /* Firefox */,
 });
 
 const closedMixin = (theme) => ({
@@ -42,6 +51,13 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
+  // Hide scrollbar
+  overflow: "hidden",
+  "&::-webkit-scrollbar": {
+    display: "none",
+  },
+  "-ms-overflow-style": "none" /* IE and Edge */,
+  "scrollbar-width": "none" /* Firefox */,
 });
 
 const DrawerHeader = (props) => {
@@ -227,6 +243,55 @@ const MainLayoutWrapper = ({ children }) => {
                 </ListItemButton>
               </ListItem>
             ))}
+            <Divider
+              sx={{
+                opacity: "0.4",
+                backgroundColor: (theme) => theme.palette.black.light,
+                width: "100%",
+                my: 1,
+              }}
+            />
+            <ListItem
+              padding="0px"
+              sx={{
+                display: "block",
+                color: (theme) => theme.palette.white.main,
+
+                // px: pathname?.substring(1) === navLink?.text ? "8px" : 0,
+              }}
+            >
+              <ListItemButton
+                onClick={() => navigate(`/signin`)}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+
+                  borderRadius: "20px",
+                  "&:hover": {
+                    bgcolor: red[900], // Change background color on hover
+                  },
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                    color: (theme) => theme.palette.white.main,
+                  }}
+                >
+                  <ExitToAppTwoToneIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Sign out"
+                  sx={{
+                    opacity: open ? 1 : 0,
+                    textTransform: "capitalize",
+                  }}
+                />
+              </ListItemButton>
+            </ListItem>
           </List>
         </Drawer>
         <Box
