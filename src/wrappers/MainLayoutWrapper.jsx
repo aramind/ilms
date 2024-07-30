@@ -116,6 +116,8 @@ const MainLayoutWrapper = ({ children }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  const basePath = pathname.split("/")?.[1];
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -124,7 +126,6 @@ const MainLayoutWrapper = ({ children }) => {
     setOpen(false);
   };
 
-  console.log(pathname.substring(1));
   return (
     <>
       <Box sx={{ display: "flex" }}>
@@ -197,7 +198,7 @@ const MainLayoutWrapper = ({ children }) => {
                   display: "block",
                   color: (theme) => theme.palette.white.main,
 
-                  // px: pathname?.substring(1) === navLink?.text ? "8px" : 0,
+                  // px: basePath === navLink?.text ? "8px" : 0,
                 }}
               >
                 <ListItemButton
@@ -207,13 +208,13 @@ const MainLayoutWrapper = ({ children }) => {
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
                     bgcolor:
-                      pathname?.substring(1) === navLink?.text
+                      basePath === navLink?.text
                         ? (theme) => theme.palette.black.dark
                         : "none",
                     borderRadius: "20px",
                     "&:hover": {
                       bgcolor:
-                        pathname?.substring(1) === navLink?.text
+                        basePath === navLink?.text
                           ? (theme) => theme.palette.black.dark
                           : (theme) => theme.palette.black.light, // Change background color on hover
                     },
@@ -226,7 +227,7 @@ const MainLayoutWrapper = ({ children }) => {
                         mr: open ? 3 : "auto",
                         justifyContent: "center",
                         color:
-                          pathname?.substring(1) === navLink?.text
+                          basePath === navLink?.text
                             ? (theme) => theme.palette.primary.main
                             : (theme) => theme.palette.white.main,
                       }}
@@ -247,7 +248,7 @@ const MainLayoutWrapper = ({ children }) => {
                           mr: open ? 3 : "auto",
                           justifyContent: "center",
                           color:
-                            pathname?.substring(1) === navLink?.text
+                            basePath === navLink?.text
                               ? (theme) => theme.palette.primary.main
                               : (theme) => theme.palette.white.main,
                         }}
@@ -262,7 +263,7 @@ const MainLayoutWrapper = ({ children }) => {
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
                       color:
-                        pathname?.substring(1) === navLink?.text
+                        basePath === navLink?.text
                           ? (theme) => theme.palette.primary.main
                           : (theme) => theme.palette.white.main,
                     }}
@@ -305,7 +306,7 @@ const MainLayoutWrapper = ({ children }) => {
                 display: "block",
                 color: (theme) => theme.palette.white.main,
 
-                // px: pathname?.substring(1) === navLink?.text ? "8px" : 0,
+                // px: basePath === navLink?.text ? "8px" : 0,
               }}
             >
               <ListItemButton
