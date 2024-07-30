@@ -1,3 +1,78 @@
+export const mockCourses = [
+  {
+    id: 1,
+    title: "Mathematics",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 90,
+    isPurchased: true,
+    price: "P500",
+  },
+  {
+    id: 2,
+    title: "Electronics",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 30,
+    isPurchased: true,
+    price: "P500",
+  },
+  {
+    id: 3,
+    title: "GEAS",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 30,
+    isPurchased: true,
+    price: "P500",
+  },
+  {
+    id: 4,
+    title: "Electronic Systems and Technologies",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 20,
+    isPurchased: true,
+    price: "P500",
+  },
+  {
+    id: 5,
+    title: "Calculator Techniques",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 10,
+    isPurchased: true,
+    price: "P500",
+  },
+  {
+    id: 6,
+    title: "Adv Calculator Techniques",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 10,
+    isPurchased: false,
+    price: "P750",
+  },
+  {
+    id: 7,
+    title: "Adv Electronics",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 10,
+    isPurchased: false,
+    price: "P500",
+  },
+  {
+    id: 8,
+    title: "Math Refresher",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
+    progress: 10,
+    isPurchased: false,
+    price: "P1,500",
+  },
+];
+
 export const mockTopics = [
   {
     id: "1",
