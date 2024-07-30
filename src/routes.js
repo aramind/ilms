@@ -4,6 +4,7 @@ import SignUpInMain from "./pages/sign-in-up/SignUpInMain";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Courses from "./pages/courses/Courses";
 import UnavailablePage from "./pages/unavailable/UnavailablePage";
+import Course from "./pages/course/Course";
 
 const router = createBrowserRouter([
   {
@@ -14,14 +15,20 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard />,
       },
+      { path: "/courses/:courseId", element: <Course /> },
       {
         path: "/courses",
         element: <Courses />,
       },
-      {
-        path: "/courses",
-        element: <Courses />,
-      },
+      // {
+      //   path: "/courses/:courseId",
+      //   element: <Course />,
+      // },
+      // {
+      //   path: "/courses",
+      //   element: <Courses />,
+      //   children: [{ path: ":courseId", element: <Course /> }],
+      // },
       {
         path: "/messages",
         element: <UnavailablePage />,
