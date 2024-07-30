@@ -95,7 +95,7 @@ const Course = () => {
               width: "100%",
               borderRadius: "1rem",
               bgcolor: (theme) => theme.palette.black.dark,
-              mb: 2,
+              mb: 5,
               "&:before": {
                 display: "none",
               },
@@ -107,6 +107,7 @@ const Course = () => {
                   sx={{
                     color: (theme) => theme.palette.primary.main,
                     fontSize: "2rem",
+                    margin: 0,
                   }}
                 />
               }
@@ -122,12 +123,6 @@ const Course = () => {
                     {topic?.progress}%
                   </Typography>
                 </Stack>
-                <Box width={1}>
-                  <ProgressIndicator
-                    value={topic?.progress || 0}
-                    height="8px"
-                  />
-                </Box>
               </Stack>
             </AccordionSummary>
             <AccordionDetails
@@ -135,8 +130,12 @@ const Course = () => {
                 display: "flex",
                 flexDirection: "column",
                 gap: 1,
+                pt: 0,
               }}
             >
+              <Box width={1} mt={1}>
+                <ProgressIndicator value={topic?.progress || 0} height="4px" />
+              </Box>
               <Stack width={1}>
                 {topic?.topicTasks?.map((task, j) => (
                   <WhiteTypography key={j}>

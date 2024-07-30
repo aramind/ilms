@@ -73,3 +73,19 @@ a {
 .colored {
   background-color: rgb(217, 215, 178);
 }
+
+/* MUI */
+.MuiAccordionSummary-content.Mui-expanded.MuiAccordionSummary-contentGutters {
+  margin-bottom: 0;
+  /* background-color: #c849c6; */
+}
+
+.MuiAccordionSummary-content.Mui-expanded.MuiAccordionSummary-contentGutters {
+  /* margin-bottom: 0; */
+  /* background-color: #21c326; */
+}
+
+.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded.MuiAccordionSummary-gutters {
+  /* background-color: #046254; */
+  min-height: 32px !important;
+}
