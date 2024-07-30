@@ -25,7 +25,7 @@ const CourseCard = ({
 
   const handleClick = () => {
     if (isPurchased) {
-      navigate(`${courseId}`);
+      navigate(`/courses/${courseId}`, { replace: true });
     }
   };
 
