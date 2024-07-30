@@ -2,6 +2,8 @@ export const mockTopics = [
   {
     id: "1",
     title: "Introduction",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 1 of Gibilisco" },
       { instruction: "Read chapter 2 of Gibilisco" },
@@ -14,6 +16,8 @@ export const mockTopics = [
   {
     id: "2",
     title: "DC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 3 of Gibilisco" },
       { instruction: "Read chapter 4 of Gibilisco" },
@@ -27,6 +31,8 @@ export const mockTopics = [
   {
     id: "3",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Read chapter 7 of Gibilisco" },
@@ -40,6 +46,8 @@ export const mockTopics = [
   {
     id: "4",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Read chapter 7 of Gibilisco" },
@@ -53,6 +61,8 @@ export const mockTopics = [
   {
     id: "5",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Read chapter 7 of Gibilisco" },
@@ -66,6 +76,8 @@ export const mockTopics = [
   {
     id: "6",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Read chapter 7 of Gibilisco" },
@@ -79,6 +91,8 @@ export const mockTopics = [
   {
     id: "7",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Read chapter 7 of Gibilisco" },
@@ -92,6 +106,8 @@ export const mockTopics = [
   {
     id: "8",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -101,6 +117,8 @@ export const mockTopics = [
   {
     id: "9",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -110,6 +128,8 @@ export const mockTopics = [
   {
     id: "10",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -119,6 +139,8 @@ export const mockTopics = [
   {
     id: "11",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -128,6 +150,8 @@ export const mockTopics = [
   {
     id: "12",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -137,6 +161,8 @@ export const mockTopics = [
   {
     id: "13",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -146,6 +172,8 @@ export const mockTopics = [
   {
     id: "14",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -155,6 +183,8 @@ export const mockTopics = [
   {
     id: "15",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
@@ -164,10 +194,21 @@ export const mockTopics = [
   {
     id: "16",
     title: "AC Circuits",
+    description:
+      " Review course for Electronics in the ECE Licensure Examination.",
     tasks: [
       { instruction: "Read chapter 6 of Gibilisco" },
       { instruction: "Watch Video 3.1" },
     ],
     downloadables: ["Extra Reading", "Simulations", "Homework"],
   },
+];
+
+export const mockProgress = [
+  { id: "1", progress: 100 },
+  { id: "2", progress: 100 },
+  { id: "3", progress: 30 },
+  { id: "4", progress: 70 },
+  { id: "5", progress: 100 },
+  { id: "6", progress: 10 },
 ];
