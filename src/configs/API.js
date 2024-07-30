@@ -9,16 +9,12 @@ export const getEnrolledCourses = () => {
   return enrolledCoursesDetails;
 };
 
-export const getProgress = (courseId, userId) => {
+export const getCourseProgress = (courseId, userId) => {
   const user = db.users?.find((user) => user?.id === userId);
   const allTopics = db.topics?.filter((topic) => topic?.courseId === courseId);
 
   const totalTasks = allTopics?.reduce((total, topic) => {
-    const tasksCount = topic.topicTasks.reduce(
-      (sum, taskObject) => sum + Object.keys(taskObject).length,
-      0
-    );
-    return total + tasksCount;
+    return total + topic.topicTasks?.length;
   }, 0);
 
   const courseProgress =
@@ -33,12 +29,35 @@ export const getProgress = (courseId, userId) => {
     Math.floor((totalCompletedTasks / totalTasks) * 100)
   );
 
-  console.log("START");
-  console.log(courseId);
-  console.log(totalTasks);
-  console.log(courseProgress);
-  console.log(totalCompletedTasks);
-  console.log(progress);
-  console.log("END");
+  //   console.log("START");
+  //   console.log(courseId);
+  //   console.log(allTopics);
+  //   console.log(totalTasks);
+
+  //   console.log(courseProgress);
+  //   console.log(totalCompletedTasks);
+  //   console.log(progress);
+  //   console.log("END");
   return progress;
+};
+
+export const getTopicProgress = (courseId, topicId, userId) => {
+  const user = db.users?.find((user) => user?.id === userId);
+  const totalTasks =
+    db.topics?.find((topic) => topic.id === topicId)?.topicTasks?.length || 0;
+
+  const courseProgress =
+    user?.enrolledCourses?.find((ec) => ec.courseId === courseId)?.progress ||
+    [];
+
+  const totalCompletedTasks =
+    courseProgress?.find((progress) => progress.topicId === topicId)
+      ?.completedTasks?.length || 0;
+
+  const topicProgress = Math.floor((totalCompletedTasks / totalTasks) * 100);
+  return topicProgress;
+};
+
+export const getTopicsInCourse = (courseId) => {
+  return db.topics?.filter((topic) => topic.courseId === courseId);
 };

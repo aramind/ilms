@@ -3,31 +3,28 @@ import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
 import { useParams } from "react-router-dom";
 import { Box, Stack } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
-import { mockCourses, mockProgress, mockTopics } from "../../configs/mockDB";
 import ProgressIndicator from "../../components/card/ProgressIndicator";
-
-const topics = mockTopics;
+import { db } from "../../configs/db";
+import { getTopicProgress, getTopicsInCourse } from "../../configs/API";
 
 const Course = () => {
   const { courseId } = useParams();
 
   const course = useMemo(
     () =>
-      mockCourses.find((item) => item.id.toString() === courseId.toString()),
+      db?.courses.find((item) => item.id.toString() === courseId.toString()),
     [courseId]
   );
 
-  console.log(course);
-
   const updatedTopics = useMemo(() => {
-    return topics.map((topic) => {
-      const progress = mockProgress.find((p) => p.id === topic.id);
-      const progressPercent = progress ? progress.progress : 0;
-      return { ...topic, progress: progressPercent };
-    });
-  }, []);
+    const topics = getTopicsInCourse(Number(courseId));
 
-  console.log(updatedTopics);
+    return topics?.map((topic) => {
+      const progress = getTopicProgress(+courseId, topic.id.toString(), 1);
+      return { ...topic, progress };
+    });
+  }, [courseId]);
+
   return (
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>

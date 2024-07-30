@@ -5,7 +5,7 @@ import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
 import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 import { mockCourses } from "../../configs/mockDB";
-import { getEnrolledCourses, getProgress } from "../../configs/API";
+import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
 import { db } from "../../configs/db";
 
 const Main = () => {
@@ -27,7 +27,7 @@ const Main = () => {
               key={course.id}
               {...course}
               courseId={course.id}
-              progress={getProgress(course?.id, db?.users?.[0]?.id)}
+              progress={getCourseProgress(course?.id, db?.users?.[0]?.id)}
             />
           ))}
         </CardGroupWrapper>
