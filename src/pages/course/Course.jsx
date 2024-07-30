@@ -3,27 +3,8 @@ import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
 import { useParams } from "react-router-dom";
 import { Box, Stack } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
-import { mockProgress, mockTopics } from "../../configs/mockDB";
+import { mockCourses, mockProgress, mockTopics } from "../../configs/mockDB";
 import ProgressIndicator from "../../components/card/ProgressIndicator";
-
-const mockCourseList = [
-  {
-    courseId: "1",
-    title: "Electronics Review",
-  },
-  {
-    courseId: "2",
-    title: "Math Review",
-  },
-  {
-    courseId: "3",
-    title: "GEAS Review",
-  },
-  {
-    courseId: "4",
-    title: "ESAT Review",
-  },
-];
 
 const topics = mockTopics;
 
@@ -31,9 +12,12 @@ const Course = () => {
   const { courseId } = useParams();
 
   const course = useMemo(
-    () => mockCourseList.find((item) => item.courseId === courseId),
+    () =>
+      mockCourses.find((item) => item.id.toString() === courseId.toString()),
     [courseId]
   );
+
+  console.log(course);
 
   const updatedTopics = useMemo(() => {
     return topics.map((topic) => {
