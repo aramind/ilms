@@ -53,18 +53,6 @@ const Course = () => {
         </WhiteTypography>
         <Stack direction="row" spacing={1} width={1}>
           {updatedTopics?.map((topic) => (
-            // <Box
-            //   key={topic?.id}
-            //   sx={{
-            //     width: "100%",
-            //     height: "24px",
-            //     bgcolor:
-            //       topic.progress === "100%"
-            //         ? (theme) => theme.palette.primary.main
-            //         : (theme) => theme.palette.black.light,
-            //     borderRadius: "4px",
-            //   }}
-            // >{}</Box>
             <Box width={1}>
               <ProgressIndicator value={topic?.progress || 0} height="24px" />
             </Box>

@@ -4,6 +4,7 @@ import WhiteTypography from "../../components/WhiteTypography";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
 import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
+import { mockCourses } from "../../configs/mockDB";
 
 const Main = () => {
   return (
@@ -12,46 +13,11 @@ const Main = () => {
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
       <CardGroupWithTitle title="My Courses">
         <CardGroupWrapper>
-          <CourseCard
-            title="Mathematics"
-            description=" Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="Electronics"
-            description=" Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="GEAS"
-            description=" Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="Electronic Systems and Technologies"
-            description=" Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="Mathematics"
-            description=" Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="Electronics"
-            description=" Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="GEAS"
-            description=" Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
-          <CourseCard
-            title="Electronic Systems and Technologies"
-            description=" Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination.Review course for Electronics in the ECE Licensure Examination."
-            progress="30"
-          />
+          {mockCourses
+            .filter((course) => course.isPurchased)
+            .map((course) => (
+              <CourseCard key={course.id} {...course} courseId={course.id} />
+            ))}
         </CardGroupWrapper>
       </CardGroupWithTitle>
     </Stack>

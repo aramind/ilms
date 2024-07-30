@@ -1,4 +1,11 @@
-import { Box, Button, ButtonBase, Divider, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonBase,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import ProgressIndicator from "./ProgressIndicator";
 import WhiteTypography from "../WhiteTypography";
@@ -16,10 +23,20 @@ const CourseCard = ({
   const isLandscape = useIsLandsCape();
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    if (isPurchased) {
+      navigate(`${courseId}`);
+    }
+  };
+
   return (
     <ButtonBase
-      onClick={() => navigate(`${courseId}`)}
-      sx={{ textAlign: "start" }}
+      onClick={handleClick}
+      disableRipple={!isPurchased}
+      sx={{
+        textAlign: "start",
+        cursor: isPurchased ? "pointer" : "default",
+      }}
     >
       <Stack
         justifyContent="flex-start"
@@ -32,7 +49,7 @@ const CourseCard = ({
         bgcolor={(theme) => theme.palette.black.dark}
         //   onClick={() => alert("Clicked")}
         sx={{
-          cursor: "pointer", // Set cursor to pointer
+          // Set cursor to pointer
           "&:hover": {
             //   backgroundColor: "#ffffff", // Optional: change background color on hover
             outline: "2px solid",
@@ -86,9 +103,10 @@ const CourseCard = ({
           <Stack
             mt={0.2}
             pb={1}
-            direction={{ xs: "column-reverse", md: "row" }}
-            justifyContent="space-between"
-            alignItems={{ xs: "flex-start", md: "flex-end" }}
+            // direction={{ xs: "column-reverse", md: "row" }}
+            // justifyContent="space-between"
+            justifyContent="flex-end"
+            // alignItems={{ xs: "flex-start", md: "flex-end" }}
             width={1}
             flex={1}
           >
@@ -103,8 +121,32 @@ const CourseCard = ({
                 minWidth: 80, // Minimum width of the button
               }}
             >
-              INFO
+              BUY
             </Button>
+            <Stack direction="row" justifyContent="space-between" p="2px">
+              <Typography color="primary" fontWeight="bold">
+                {price || "N/A"}{" "}
+              </Typography>
+              <ButtonBase
+                onClick={(e) => {
+                  e.stopPropagation();
+                  alert("Additional Info");
+                }}
+                variant="text"
+                disableRipple
+                sx={{
+                  fontSize: "0.7rem",
+                  padding: 0,
+                  color: (theme) => theme.palette.white.dark,
+                  textTransform: "none",
+                  "&:hover": {
+                    color: "primary.light",
+                  },
+                }}
+              >
+                More Info...
+              </ButtonBase>
+            </Stack>
           </Stack>
         )}
       </Stack>
