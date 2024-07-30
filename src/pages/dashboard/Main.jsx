@@ -4,20 +4,26 @@ import WhiteTypography from "../../components/WhiteTypography";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
 import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
-import { mockCourses } from "../../configs/mockDB";
+import { getEnrolledCourses, getProgress } from "../../configs/API";
+import { db } from "../../configs/db";
 
 const Main = () => {
+  const enrolledCourses = getEnrolledCourses();
+
   return (
     <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
       <WhiteTypography variant="h5">Dashboard</WhiteTypography>
       <WhiteTypography>Hi Robin! Good Luck with your studies!</WhiteTypography>
       <CardGroupWithTitle title="My Courses">
         <CardGroupWrapper>
-          {mockCourses
-            .filter((course) => course.isPurchased)
-            .map((course) => (
-              <CourseCard key={course.id} {...course} courseId={course.id} />
-            ))}
+          {enrolledCourses?.map((course) => (
+            <CourseCard
+              key={course.id}
+              {...course}
+              courseId={course.id}
+              progress={getProgress(course?.id, db?.users?.[0]?.id)}
+            />
+          ))}
         </CardGroupWrapper>
       </CardGroupWithTitle>
     </Stack>

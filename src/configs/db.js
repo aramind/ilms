@@ -1,5 +1,5 @@
 export const db = {
-  course: [
+  courses: [
     {
       id: 1,
       code: "ECE-MATH",
@@ -46,7 +46,7 @@ export const db = {
       topics: [{ 1: "f1", 2: "f2", 3: "f3", 4: "f4" }],
     },
   ],
-  topic: [
+  topics: [
     {
       id: "m1",
       code: "ECE-m1",
@@ -132,9 +132,245 @@ export const db = {
       ],
       files: ["Course Outline", "Homework"],
     },
+    // elex
+    {
+      id: "e1",
+      code: "ECE-m1",
+      title: "Introduction",
+      description: "Introduction description",
+      courseId: 2,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "e2",
+      code: "ECE-m2",
+      title: "Calculus",
+      description: "Calculus description",
+      courseId: 2,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Formula List", "Homework"],
+    },
+    {
+      id: "e3",
+      code: "ECE-m3",
+      title: "Adv Math",
+      description: "Introduction description",
+      courseId: 2,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "e4",
+      code: "ECE-m4",
+      title: "DE",
+      description: "Introduction description",
+      courseId: 2,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    // geas
+    {
+      id: "g1",
+      code: "ECE-g1",
+      title: "Introduction",
+      description: "Introduction description",
+      courseId: 1,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+          6: "Answer Practice Exam 2",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "g2",
+      code: "ECE-g2",
+      title: "Physics",
+      description: "Physics description",
+      courseId: 3,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Watch Video 3",
+          6: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Formula List", "Homework"],
+    },
+    {
+      id: "g3",
+      code: "ECE-g3",
+      title: "Chemistry",
+      description: "Introduction description",
+      courseId: 3,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Read Chapter 3",
+          4: "Read Chapter 4",
+          5: "Watch Video 1",
+          6: "Watch Video 2",
+          7: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "g4",
+      code: "ECE-g4",
+      title: "DE",
+      description: "Thermodynamics",
+      courseId: 3,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Watch Video 3",
+          6: "Watch Video 4",
+          7: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "g5",
+      code: "ECE-g5",
+      title: "Eng Management",
+      description: "Introduction description",
+      courseId: 3,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    // fcs
+    {
+      id: "f1",
+      code: "ECE-f1",
+      title: "Introduction",
+      description: "Introduction description",
+      courseId: 5,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "f2",
+      code: "ECE-f2",
+      title: "Topic 1",
+      description: "Physics description",
+      courseId: 5,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Watch Video 3",
+          6: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Formula List", "Homework"],
+    },
+    {
+      id: "f3",
+      code: "ECE-f3",
+      title: "Topic 2",
+      description: "Introduction description",
+      courseId: 5,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Read Chapter 3",
+          4: "Read Chapter 4",
+          5: "Watch Video 1",
+          6: "Watch Video 2",
+          7: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
+    {
+      id: "f4",
+      code: "ECE-f4",
+      title: "Topic 4",
+      description: "Thermodynamics",
+      courseId: 5,
+      topicTasks: [
+        {
+          1: "Read Chapter 1",
+          2: "Read Chapter 2",
+          3: "Watch Video 1",
+          4: "Watch Video 2",
+          5: "Watch Video 3",
+          6: "Watch Video 4",
+          7: "Answer Practice Exam 1",
+        },
+      ],
+      files: ["Course Outline", "Homework"],
+    },
   ],
   users: [
     {
+      id: 1,
       firstName: "Robin",
       lastName: "Miranda",
       password: "1234",
@@ -188,11 +424,15 @@ export const db = {
             },
             {
               topicId: "g2",
-              completedTasks: [1, 2],
+              completedTasks: [1, 2, 3, 4, 5],
             },
             {
               topicId: "g3",
               completedTasks: [1, 2, 3],
+            },
+            {
+              topicId: "g5",
+              completedTasks: [1, 2, 3, 4, 5],
             },
           ],
         },
