@@ -63,12 +63,12 @@ const greenTheme = createTheme({
       },
     },
     h6: {
-      fontSize: "1rem",
+      fontSize: "1.1rem",
       [`@media (min-width:600px)`]: {
-        fontSize: "1rem",
+        fontSize: "1.1rem",
       },
       [`@media (min-width:960px)`]: {
-        fontSize: "1.2rem",
+        fontSize: "1.3rem",
       },
     },
     h5: {

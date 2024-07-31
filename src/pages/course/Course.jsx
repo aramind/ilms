@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Checkbox,
   Stack,
   Typography,
 } from "@mui/material";
@@ -14,7 +15,10 @@ import ProgressIndicator from "../../components/card/ProgressIndicator";
 import { db } from "../../configs/db";
 import { getTopicProgress, getTopicsInCourse } from "../../configs/API";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
+import CheckCircleOutlineTwoToneIcon from "@mui/icons-material/CheckCircleOutlineTwoTone";
 const Course = () => {
   const { courseId } = useParams();
 
@@ -37,10 +41,17 @@ const Course = () => {
   return (
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
-        <WhiteTypography variant="h5">
-          COURSES/
-          {course?.title}
-        </WhiteTypography>
+        <Stack direction="row" flexWrap="wrap">
+          <WhiteTypography fontSize={{ xs: "1.3rem", md: "1.5rem" }}>
+            Courses/
+          </WhiteTypography>
+          <Typography
+            fontSize={{ xs: "1.3rem", md: "1.5rem" }}
+            color="secondary.light"
+          >
+            {course?.title}
+          </Typography>
+        </Stack>
         <Stack direction="row" spacing={1} width={1}>
           {updatedTopics?.map((topic) => (
             <Box width={1}>
@@ -116,10 +127,17 @@ const Course = () => {
             >
               <Stack width={1} pr={2}>
                 <Stack width={1} direction="row" justifyContent="space-between">
-                  <WhiteTypography variant="h5">
+                  <Typography variant="h6" color="secondary.light">
                     Lecture {index + 1} : {topic.title}
-                  </WhiteTypography>
-                  <Typography variant="h5" color="primary" fontWeight="bold">
+                  </Typography>
+
+                  <Typography
+                    variant="h5"
+                    fontWeight="bold"
+                    sx={{
+                      color: (theme) => theme.palette.primary.main,
+                    }}
+                  >
                     {topic?.progress}%
                   </Typography>
                 </Stack>
@@ -138,9 +156,48 @@ const Course = () => {
               </Box>
               <Stack width={1}>
                 {topic?.topicTasks?.map((task, j) => (
-                  <WhiteTypography key={j}>
-                    {index + 1}.{j + 1}. {task.instruction}
-                  </WhiteTypography>
+                  <Stack
+                    width={1}
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Stack direction="row" flex={1} spacing={1}>
+                      <WhiteTypography key={j}>
+                        {index + 1}.{j + 1}.
+                      </WhiteTypography>
+                      <WhiteTypography key={j}>
+                        {task.instruction}{" "}
+                      </WhiteTypography>
+                    </Stack>
+
+                    <Checkbox
+                      checked={j <= 2}
+                      icon={
+                        <CheckCircleOutlineIcon
+                          sx={{
+                            color: (theme) => theme.palette.black.light,
+                          }}
+                        />
+                      }
+                      checkedIcon={
+                        <CheckCircleIcon
+                          sx={{
+                            color: (theme) => theme.palette.secondary.main,
+                          }}
+                        />
+                      }
+                    />
+                    {/* <Typography
+                      sx={{
+                        color: (theme) => theme.palette.primary.main,
+                      }}
+                    >
+                      <CheckCircleOutlineIcon /> <CheckCircleIcon />
+                      <CheckCircleTwoToneIcon />
+                      <CheckCircleOutlineTwoToneIcon />
+                    </Typography> */}
+                  </Stack>
                 ))}
               </Stack>
             </AccordionDetails>

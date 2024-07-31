@@ -8,13 +8,10 @@ const useIsLandsCape = () => {
       setIsLandscape(window.innerWidth > window.innerHeight);
     };
 
-    // Initial check
     handleResize();
 
-    // Add event listener for resize
     window.addEventListener("resize", handleResize);
 
-    // Clean up the event listener on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
