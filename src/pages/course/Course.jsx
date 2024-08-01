@@ -49,28 +49,9 @@ const Course = () => {
           ))}
         </Stack>
         {updatedTopics?.map((topic, index) => (
-          <Accordion
-            key={index}
-            sx={{
-              width: "100%",
-              borderRadius: "1rem",
-              bgcolor: (theme) => theme.palette.black.dark,
-              mb: 5,
-              "&:before": {
-                display: "none",
-              },
-            }}
-          >
+          <Accordion key={index} sx={localStyles.accordion}>
             <AccordionSummary
-              expandIcon={
-                <ExpandMoreIcon
-                  sx={{
-                    color: (theme) => theme.palette.primary.main,
-                    fontSize: "2rem",
-                    margin: 0,
-                  }}
-                />
-              }
+              expandIcon={<ExpandMoreIcon sx={localStyles.expandIcon} />}
               aria-controls={`panel${index}-content`}
               id={`panel${index}-header`}
             >
@@ -124,28 +105,13 @@ const Course = () => {
                       checked={j <= 2}
                       icon={
                         <CheckCircleOutlineIcon
-                          sx={{
-                            color: (theme) => theme.palette.black.light,
-                          }}
+                          sx={localStyles.colorLightBlack}
                         />
                       }
                       checkedIcon={
-                        <CheckCircleIcon
-                          sx={{
-                            color: (theme) => theme.palette.secondary.main,
-                          }}
-                        />
+                        <CheckCircleIcon sx={localStyles.colorMain} />
                       }
                     />
-                    {/* <Typography
-                      sx={{
-                        color: (theme) => theme.palette.primary.main,
-                      }}
-                    >
-                      <CheckCircleOutlineIcon /> <CheckCircleIcon />
-                      <CheckCircleTwoToneIcon />
-                      <CheckCircleOutlineTwoToneIcon />
-                    </Typography> */}
                   </Stack>
                 ))}
               </Stack>
@@ -158,3 +124,26 @@ const Course = () => {
 };
 
 export default Course;
+
+const localStyles = {
+  accordion: {
+    width: "100%",
+    borderRadius: "1rem",
+    bgcolor: (theme) => theme.palette.black.dark,
+    mb: 5,
+    "&:before": {
+      display: "none",
+    },
+  },
+  expandIcon: {
+    color: (theme) => theme.palette.primary.main,
+    fontSize: "2rem",
+    margin: 0,
+  },
+  colorMain: {
+    color: (theme) => theme.palette.secondary.main,
+  },
+  colorLightBlack: {
+    color: (theme) => theme.palette.black.light,
+  },
+};
