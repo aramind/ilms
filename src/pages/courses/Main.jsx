@@ -1,5 +1,4 @@
 import React from "react";
-import WhiteTypography from "../../components/WhiteTypography";
 import { Stack } from "@mui/material";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
@@ -7,18 +6,17 @@ import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 import { mockCourses } from "../../configs/mockDB";
 import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
 import { db } from "../../configs/db";
+import PageHeader from "../../components/PageHeader";
 
 const Main = () => {
   const enrolledCourses = getEnrolledCourses();
 
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
-      <WhiteTypography variant="h5" mb={1}>
-        Courses
-      </WhiteTypography>
-      <WhiteTypography mb={2}>
-        Hi Robin! Good Luck with your studies!
-      </WhiteTypography>
+      <PageHeader
+        title="Courses"
+        subtitle="Hi Robin! Good Luck with your studies!"
+      />
 
       <CardGroupWithTitle title="Enrolled Courses">
         <CardGroupWrapper>

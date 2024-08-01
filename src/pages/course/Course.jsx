@@ -17,6 +17,7 @@ import { getTopicProgress, getTopicsInCourse } from "../../configs/API";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import PageHeader from "../../components/PageHeader";
 const Course = () => {
   const { courseId } = useParams();
 
@@ -39,14 +40,7 @@ const Course = () => {
   return (
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
-        <Stack direction="row" flexWrap="wrap">
-          <WhiteTypography fontSize={{ xs: "1.3rem", md: "1.5rem" }}>
-            Courses/
-          </WhiteTypography>
-          <WhiteTypography fontSize={{ xs: "1.3rem", md: "1.5rem" }}>
-            {course?.title}
-          </WhiteTypography>
-        </Stack>
+        <PageHeader title={`Courses/${course?.title}`} />
         <Stack direction="row" spacing={1} width={1}>
           {updatedTopics?.map((topic) => (
             <Box width={1}>
@@ -54,46 +48,6 @@ const Course = () => {
             </Box>
           ))}
         </Stack>
-        {/* {updatedTopics?.map((topic, index) => (
-          <Stack
-            key={index}
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            px={2}
-            py={1}
-            width={1}
-            borderRadius="1rem"
-            bgcolor={(theme) => theme.palette.black.dark}
-            //   onClick={() => alert("Clicked")}
-            sx={{
-              // Set cursor to pointer
-              "&:hover": {
-                //   backgroundColor: "#ffffff", // Optional: change background color on hover
-                outline: "2px solid",
-                outlineColor: (theme) => theme.palette.primary.darkest,
-              },
-            }}
-          >
-            <Stack width={1} direction="row" justifyContent="space-between">
-              <WhiteTypography variant="h5">
-                Lecture {index + 1} : {topic.title}
-              </WhiteTypography>
-              <Typography variant="h5" color="primary" fontWeight="bold">
-                {topic?.progress}%
-              </Typography>
-            </Stack>
-            <Box width={1}>
-              <ProgressIndicator value={topic?.progress || 0} height="8px" />
-            </Box>
-            <Stack width={1}>
-              {topic?.topicTasks?.map((task, j) => (
-                <WhiteTypography key={index}>
-                  {index + 1}.{j + 1}. {task.instruction}
-                </WhiteTypography>
-              ))}
-            </Stack>
-          </Stack>
-        ))} */}
         {updatedTopics?.map((topic, index) => (
           <Accordion
             key={index}
