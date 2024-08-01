@@ -17,8 +17,6 @@ import { getTopicProgress, getTopicsInCourse } from "../../configs/API";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import CheckCircleTwoToneIcon from "@mui/icons-material/CheckCircleTwoTone";
-import CheckCircleOutlineTwoToneIcon from "@mui/icons-material/CheckCircleOutlineTwoTone";
 const Course = () => {
   const { courseId } = useParams();
 
@@ -45,12 +43,9 @@ const Course = () => {
           <WhiteTypography fontSize={{ xs: "1.3rem", md: "1.5rem" }}>
             Courses/
           </WhiteTypography>
-          <Typography
-            fontSize={{ xs: "1.3rem", md: "1.5rem" }}
-            color="secondary.light"
-          >
+          <WhiteTypography fontSize={{ xs: "1.3rem", md: "1.5rem" }}>
             {course?.title}
-          </Typography>
+          </WhiteTypography>
         </Stack>
         <Stack direction="row" spacing={1} width={1}>
           {updatedTopics?.map((topic) => (
@@ -127,11 +122,11 @@ const Course = () => {
             >
               <Stack width={1} pr={2}>
                 <Stack width={1} direction="row" justifyContent="space-between">
-                  <Typography variant="h6" color="secondary.light">
+                  <WhiteTypography variant="h6">
                     Lecture {index + 1} : {topic.title}
-                  </Typography>
+                  </WhiteTypography>
 
-                  <Typography
+                  <WhiteTypography
                     variant="h5"
                     fontWeight="bold"
                     sx={{
@@ -139,7 +134,7 @@ const Course = () => {
                     }}
                   >
                     {topic?.progress}%
-                  </Typography>
+                  </WhiteTypography>
                 </Stack>
               </Stack>
             </AccordionSummary>

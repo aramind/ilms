@@ -13,7 +13,7 @@ const COLORS = {
     dark: "#CCA114",
     main: "#E9BB1D",
     light: "#F2D77D",
-    lightest: "#F8E8B5",
+    lightest: "#F2E7BF",
   },
   black: {
     darkest: "#0D0D15",
