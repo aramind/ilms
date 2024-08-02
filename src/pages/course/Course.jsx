@@ -152,7 +152,7 @@ const Course = () => {
               <WhiteTypography variant="subtitle2" sx={{ fontStyle: "italic" }}>
                 Downloadables:
               </WhiteTypography>
-              <Stack direction="row" flexWrap="wrap" spacing={3}>
+              <Stack direction="row" flexWrap="wrap" spacing={3} ml={2} my="0">
                 {topic?.files?.map((file) => (
                   <Link
                     to="https://www.linkedin.com/in/robin-mon-miranda/"
