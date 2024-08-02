@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -6,8 +6,10 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   Checkbox,
   Divider,
+  IconButton,
   Stack,
 } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
@@ -24,6 +26,7 @@ import QuizTwoToneIcon from "@mui/icons-material/QuizTwoTone";
 import InsertDriveFileTwoToneIcon from "@mui/icons-material/InsertDriveFileTwoTone";
 import AttachmentTwoToneIcon from "@mui/icons-material/AttachmentTwoTone";
 import { red } from "@mui/material/colors";
+import VideoEmbed from "../../components/VideoEmbed";
 
 const getIcon = (action) => {
   switch (action) {
@@ -41,7 +44,17 @@ const getIcon = (action) => {
 };
 const Course = () => {
   const { courseId } = useParams();
+  const [videoId, setVideoId] = useState("");
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
+  const handleAccordionChange = (event, isExpanded) => {
+    setIsAccordionOpen(isExpanded);
+    if (!isAccordionOpen) {
+      setVideoId(null);
+    }
+  };
+
+  console.log(videoId);
   const course = useMemo(
     () =>
       db?.courses.find((item) => item.id.toString() === courseId.toString()),
@@ -60,6 +73,10 @@ const Course = () => {
   console.log(updatedTopics);
   return (
     <MainLayoutWrapper>
+      {/* <Box className="centered-content">
+        {videoId && <VideoEmbed videoId={videoId} />}
+      </Box> */}
+
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
         <PageHeader title={`Courses/${course?.title}`} />
         <Stack direction="row" spacing={1} width={1}>
@@ -73,7 +90,11 @@ const Course = () => {
           ))}
         </Stack>
         {updatedTopics?.map((topic, index) => (
-          <Accordion key={index} sx={localStyles.accordion}>
+          <Accordion
+            key={index}
+            sx={localStyles.accordion}
+            onChange={handleAccordionChange}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon sx={localStyles.expandIcon} />}
               aria-controls={`panel${index}-content`}
@@ -104,6 +125,9 @@ const Course = () => {
                   height="4px"
                 />
               </Box>
+              <Box className="centered-content">
+                {videoId && <VideoEmbed videoId={videoId} />}
+              </Box>
               <Stack width={1}>
                 {topic?.topicTasks?.map((task, j) => (
                   <Stack
@@ -112,34 +136,40 @@ const Course = () => {
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    <Link
-                      to="https://www.linkedin.com/in/robin-mon-miranda/"
+                    {/* <Link
+                      to="https://drive.google.com/file/d/1Pl_VgZoUmQvNNXQtrflOjE392NUsP9W3/view?usp=drive_link"
                       target="_blank"
                       rel="noreferrer"
+                    > */}
+                    <Stack
+                      direction="row"
+                      flex={1}
+                      // spacing={1}
+                      color={(theme) => theme.palette.white.main}
+                      sx={{ ...localStyles.linkHover }}
                     >
-                      <Stack
-                        direction="row"
-                        flex={1}
-                        // spacing={1}
-                        color={(theme) => theme.palette.white.main}
-                        sx={{ ...localStyles.linkHover }}
-                      >
-                        <Box key={j} ml={1}>
-                          {index + 1}.{j + 1}.
-                        </Box>
-                        <Box key={j} ml={1}>
-                          {task.instruction}{" "}
-                        </Box>
-                        {/* <Box ml={{ xs: 1, md: 2 }}>{getIcon(task?.action)}</Box> */}
-                        <Box ml={{ xs: 1, md: 2 }}>
-                          {task?.action === "watch" ? (
+                      <Box key={j} ml={1}>
+                        {index + 1}.{j + 1}.
+                      </Box>
+                      <Box key={j} ml={1}>
+                        {task.instruction}{" "}
+                      </Box>
+                      {/* <Box ml={{ xs: 1, md: 2 }}>{getIcon(task?.action)}</Box> */}
+                      <Box ml={{ xs: 1, md: 2 }}>
+                        {task?.action === "watch" ? (
+                          <IconButton
+                            onClick={() => setVideoId(task?.link)}
+                            variant="text"
+                            color="primary"
+                          >
                             <SmartDisplayTwoToneIcon />
-                          ) : (
-                            ""
-                          )}
-                        </Box>
-                      </Stack>
-                    </Link>
+                          </IconButton>
+                        ) : (
+                          ""
+                        )}
+                      </Box>
+                    </Stack>
+                    {/* </Link> */}
 
                     <Checkbox
                       checked={j <= 2}
@@ -184,6 +214,12 @@ const Course = () => {
                   </Link>
                 ))}
               </Stack>
+              <Button
+                onClick={() => setVideoId("1Pl_VgZoUmQvNNXQtrflOjE392NUsP9W3")}
+                variant="text"
+              >
+                Play
+              </Button>
             </AccordionDetails>
           </Accordion>
         ))}
