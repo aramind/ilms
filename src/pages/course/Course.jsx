@@ -124,7 +124,14 @@ const Course = () => {
                         <Box key={j} ml={1}>
                           {task.instruction}{" "}
                         </Box>
-                        <Box ml={{ xs: 1, md: 2 }}>{getIcon(task?.action)}</Box>
+                        {/* <Box ml={{ xs: 1, md: 2 }}>{getIcon(task?.action)}</Box> */}
+                        <Box ml={{ xs: 1, md: 2 }}>
+                          {task?.action === "watch" ? (
+                            <SmartDisplayTwoToneIcon />
+                          ) : (
+                            ""
+                          )}
+                        </Box>
                       </Stack>
                     </Link>
 
