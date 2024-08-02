@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
 import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   Checkbox,
+  Divider,
   Stack,
-  Typography,
 } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
 import ProgressIndicator from "../../components/card/ProgressIndicator";
@@ -73,14 +73,7 @@ const Course = () => {
                 </Stack>
               </Stack>
             </AccordionSummary>
-            <AccordionDetails
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 1,
-                pt: 0,
-              }}
-            >
+            <AccordionDetails sx={localStyles.accordionDetails}>
               <Box width={1} mt={1}>
                 <ProgressIndicator value={topic?.progress || 0} height="4px" />
               </Box>
@@ -92,14 +85,24 @@ const Course = () => {
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    <Stack direction="row" flex={1} spacing={1}>
-                      <WhiteTypography key={j}>
-                        {index + 1}.{j + 1}.
-                      </WhiteTypography>
-                      <WhiteTypography key={j}>
-                        {task.instruction}{" "}
-                      </WhiteTypography>
-                    </Stack>
+                    <Link
+                      to="https://www.linkedin.com/in/robin-mon-miranda/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Stack
+                        direction="row"
+                        flex={1}
+                        spacing={1}
+                        color={(theme) => theme.palette.white.main}
+                        sx={{ ...localStyles.linkHover }}
+                      >
+                        <Box key={j}>
+                          {index + 1}.{j + 1}.
+                        </Box>
+                        <Box key={j}>{task.instruction} </Box>
+                      </Stack>
+                    </Link>
 
                     <Checkbox
                       checked={j <= 2}
@@ -113,6 +116,35 @@ const Course = () => {
                       }
                     />
                   </Stack>
+                ))}
+              </Stack>
+              <Divider
+                sx={{
+                  backgroundColor: (theme) => theme.palette.black.main,
+                  width: "100%",
+                  height: 1,
+                }}
+              />
+              <WhiteTypography variant="subtitle2" sx={{ fontStyle: "italic" }}>
+                Downloadables:
+              </WhiteTypography>
+              <Stack direction="row" flexWrap="wrap" spacing={3}>
+                {topic?.files?.map((file) => (
+                  <Link
+                    to="https://www.linkedin.com/in/robin-mon-miranda/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <WhiteTypography
+                      variant="subtitle2"
+                      sx={{
+                        fontStyle: "italic",
+                        ...localStyles.linkHover,
+                      }}
+                    >
+                      {file}
+                    </WhiteTypography>
+                  </Link>
                 ))}
               </Stack>
             </AccordionDetails>
@@ -135,6 +167,12 @@ const localStyles = {
       display: "none",
     },
   },
+  accordionDetails: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 1,
+    pt: 0,
+  },
   expandIcon: {
     color: (theme) => theme.palette.primary.main,
     fontSize: "2rem",
@@ -145,5 +183,10 @@ const localStyles = {
   },
   colorLightBlack: {
     color: (theme) => theme.palette.black.light,
+  },
+  linkHover: {
+    "&:hover": {
+      color: "primary.special",
+    },
   },
 };
