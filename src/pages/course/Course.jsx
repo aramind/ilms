@@ -18,6 +18,27 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import PageHeader from "../../components/PageHeader";
+import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
+import SmartDisplayTwoToneIcon from "@mui/icons-material/SmartDisplayTwoTone";
+import QuizTwoToneIcon from "@mui/icons-material/QuizTwoTone";
+import InsertDriveFileTwoToneIcon from "@mui/icons-material/InsertDriveFileTwoTone";
+import AttachmentTwoToneIcon from "@mui/icons-material/AttachmentTwoTone";
+import { red } from "@mui/material/colors";
+
+const getIcon = (action) => {
+  switch (action) {
+    case "read":
+      return <MenuBookTwoToneIcon />;
+
+    case "watch":
+      return <SmartDisplayTwoToneIcon />;
+
+    case "quiz":
+      return <QuizTwoToneIcon />;
+    default:
+      return <InsertDriveFileTwoToneIcon />;
+  }
+};
 const Course = () => {
   const { courseId } = useParams();
 
@@ -93,14 +114,17 @@ const Course = () => {
                       <Stack
                         direction="row"
                         flex={1}
-                        spacing={1}
+                        // spacing={1}
                         color={(theme) => theme.palette.white.main}
                         sx={{ ...localStyles.linkHover }}
                       >
-                        <Box key={j}>
+                        <Box key={j} ml={1}>
                           {index + 1}.{j + 1}.
                         </Box>
-                        <Box key={j}>{task.instruction} </Box>
+                        <Box key={j} ml={1}>
+                          {task.instruction}{" "}
+                        </Box>
+                        <Box ml={{ xs: 1, md: 2 }}>{getIcon(task?.action)}</Box>
                       </Stack>
                     </Link>
 
