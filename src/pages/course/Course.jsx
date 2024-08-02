@@ -65,7 +65,10 @@ const Course = () => {
         <Stack direction="row" spacing={1} width={1}>
           {updatedTopics?.map((topic) => (
             <Box width={1}>
-              <ProgressIndicator value={topic?.progress || 0} height="24px" />
+              <ProgressIndicator
+                value={topic?.progress?.percentage || 0}
+                height="24px"
+              />
             </Box>
           ))}
         </Stack>
@@ -89,14 +92,17 @@ const Course = () => {
                       color: (theme) => theme.palette.primary.main,
                     }}
                   >
-                    {topic?.progress}%
+                    {topic?.progress?.inSteps}
                   </WhiteTypography>
                 </Stack>
               </Stack>
             </AccordionSummary>
             <AccordionDetails sx={localStyles.accordionDetails}>
               <Box width={1} mt={1}>
-                <ProgressIndicator value={topic?.progress || 0} height="4px" />
+                <ProgressIndicator
+                  value={topic?.progress?.percentage || 0}
+                  height="4px"
+                />
               </Box>
               <Stack width={1}>
                 {topic?.topicTasks?.map((task, j) => (

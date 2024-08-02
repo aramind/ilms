@@ -54,7 +54,11 @@ export const getTopicProgress = (courseId, topicId, userId) => {
     courseProgress?.find((progress) => progress.topicId === topicId)
       ?.completedTasks?.length || 0;
 
-  const topicProgress = Math.floor((totalCompletedTasks / totalTasks) * 100);
+  const topicProgress = {
+    percentage: Math.floor((totalCompletedTasks / totalTasks) * 100),
+    inSteps: `${totalCompletedTasks}/${totalTasks}`,
+  };
+
   return topicProgress;
 };
 
