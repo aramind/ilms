@@ -24,8 +24,6 @@ import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
 import SmartDisplayTwoToneIcon from "@mui/icons-material/SmartDisplayTwoTone";
 import QuizTwoToneIcon from "@mui/icons-material/QuizTwoTone";
 import InsertDriveFileTwoToneIcon from "@mui/icons-material/InsertDriveFileTwoTone";
-import AttachmentTwoToneIcon from "@mui/icons-material/AttachmentTwoTone";
-import { red } from "@mui/material/colors";
 import VideoEmbed from "../../components/VideoEmbed";
 
 const getIcon = (action) => {
@@ -54,6 +52,15 @@ const Course = () => {
     }
   };
 
+  const handleClick = (link) => {
+    // Scroll to the top of the page
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    setVideoId(link);
+  };
+
   console.log(videoId);
   const course = useMemo(
     () =>
@@ -73,12 +80,13 @@ const Course = () => {
   console.log(updatedTopics);
   return (
     <MainLayoutWrapper>
-      {/* <Box className="centered-content">
-        {videoId && <VideoEmbed videoId={videoId} />}
-      </Box> */}
-
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
         <PageHeader title={`Courses/${course?.title}`} />
+
+        <Box className="centered-content" width={1}>
+          {videoId && <VideoEmbed videoId={videoId} setVideoId={setVideoId} />}
+        </Box>
+
         <Stack direction="row" spacing={1} width={1}>
           {updatedTopics?.map((topic) => (
             <Box width={1}>
@@ -125,9 +133,6 @@ const Course = () => {
                   height="4px"
                 />
               </Box>
-              <Box className="centered-content">
-                {videoId && <VideoEmbed videoId={videoId} />}
-              </Box>
               <Stack width={1}>
                 {topic?.topicTasks?.map((task, j) => (
                   <Stack
@@ -136,15 +141,11 @@ const Course = () => {
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    {/* <Link
-                      to="https://drive.google.com/file/d/1Pl_VgZoUmQvNNXQtrflOjE392NUsP9W3/view?usp=drive_link"
-                      target="_blank"
-                      rel="noreferrer"
-                    > */}
                     <Stack
                       direction="row"
                       flex={1}
                       // spacing={1}
+                      alignItems="center"
                       color={(theme) => theme.palette.white.main}
                       sx={{ ...localStyles.linkHover }}
                     >
@@ -154,22 +155,19 @@ const Course = () => {
                       <Box key={j} ml={1}>
                         {task.instruction}{" "}
                       </Box>
-                      {/* <Box ml={{ xs: 1, md: 2 }}>{getIcon(task?.action)}</Box> */}
-                      <Box ml={{ xs: 1, md: 2 }}>
-                        {task?.action === "watch" ? (
-                          <IconButton
-                            onClick={() => setVideoId(task?.link)}
-                            variant="text"
-                            color="primary"
-                          >
-                            <SmartDisplayTwoToneIcon />
-                          </IconButton>
-                        ) : (
-                          ""
-                        )}
-                      </Box>
+
+                      {task?.action === "watch" ? (
+                        <IconButton
+                          onClick={() => handleClick(task?.link)}
+                          variant="text"
+                          color="primary"
+                        >
+                          <SmartDisplayTwoToneIcon />
+                        </IconButton>
+                      ) : (
+                        ""
+                      )}
                     </Stack>
-                    {/* </Link> */}
 
                     <Checkbox
                       checked={j <= 2}
@@ -214,12 +212,6 @@ const Course = () => {
                   </Link>
                 ))}
               </Stack>
-              <Button
-                onClick={() => setVideoId("1Pl_VgZoUmQvNNXQtrflOjE392NUsP9W3")}
-                variant="text"
-              >
-                Play
-              </Button>
             </AccordionDetails>
           </Accordion>
         ))}
