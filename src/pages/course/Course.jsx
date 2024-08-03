@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Accordion,
   AccordionDetails,
@@ -11,6 +11,7 @@ import {
   Divider,
   IconButton,
   Stack,
+  Link,
 } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
 import ProgressIndicator from "../../components/card/ProgressIndicator";
@@ -164,6 +165,14 @@ const Course = () => {
                         >
                           <SmartDisplayTwoToneIcon />
                         </IconButton>
+                      ) : task?.action === "quiz" ? (
+                        <Link
+                          href="https://www.indiabix.com/digital-electronics/integrated-circuit-logic-families/discussion-1225"
+                          target="_blank"
+                          className="centered-content"
+                        >
+                          <QuizTwoToneIcon color="primary" sx={{ ml: 1 }} />
+                        </Link>
                       ) : (
                         ""
                       )}
