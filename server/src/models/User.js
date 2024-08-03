@@ -31,6 +31,22 @@ const UserSchema = new Schema({
     required: true,
     trim: true,
   },
+  profilePicture: { type: String },
+  enRolledCourses: [
+    {
+      courseId: { type: Schema.Types.ObjectId, ref: "Course" },
+
+      progress: [
+        {
+          topicId: { type: Schema.Types.ObjectId, ref: "Topic" },
+          completedTopics: [{ type: Schema.Types.ObjectId, ref: "Topic" }],
+          completedTopicTasks: [
+            { type: Schema.Types.ObjectId, ref: "TopicTask" },
+          ],
+        },
+      ],
+    },
+  ],
   role: {
     type: String,
     required: true,
