@@ -1,16 +1,7 @@
 const mongoose = require("mongoose");
+const constants = require("../config/constants");
 const Schema = mongoose.Schema;
 
-const dotenv = require("dotenv");
-const getRoles = require("../utils/getRoles");
-const getStatuses = require("../utils/getStatuses");
-dotenv.config();
-
-const validRoles = getRoles.keys;
-const validStatuses = getStatuses.keys;
-const defaultValues = JSON.parse(process.env.DEFAULT_VALUES || "{}");
-
-console.log(defaultValues);
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -52,8 +43,8 @@ const UserSchema = new Schema({
   role: {
     type: String,
     required: true,
-    enum: { values: validRoles },
-    default: defaultValues?.role,
+    enum: { values: constants?.ROLES },
+    default: constants?.DEFAULT_VALUES?.role,
   },
   accessLevel: {
     type: Number,
@@ -63,11 +54,17 @@ const UserSchema = new Schema({
   status: {
     type: String,
     required: true,
-    enum: { values: validStatuses },
-    default: defaultValues?.status,
+    enum: { values: constants?.STATUSES },
+    default: constants?.DEFAULT_VALUES?.status,
   },
   tokens: {
     refresh: { type: String },
+  },
+  version: {
+    type: String,
+    required: true,
+    default: constants?.DEFAULT_VALUES?.version,
+    enum: { values: constants?.VERSIONS },
   },
   createdAt: {
     type: Date,

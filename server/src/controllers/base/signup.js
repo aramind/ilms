@@ -16,8 +16,6 @@ const signup = async (req, res) => {
       password,
       firstName,
       lastName,
-      role: "student",
-      accessLevel: 1,
     });
   } catch (error) {}
 };
