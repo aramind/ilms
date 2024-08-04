@@ -1,8 +1,9 @@
 const User = require("../../models/User");
+const _ = require("lodash");
 const sendResponse = require("../../utils/sendResponse");
 const comparePassword = require("../../utils/comparePassword");
 
-const login = async (req, res) => {
+const signin = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -22,11 +23,25 @@ const login = async (req, res) => {
       return sendResponse.failed(res, "Invalid Credentials!", null, 404);
     }
 
-    return sendResponse.success(res, "Log in successful", existingUser, 200);
+    return sendResponse.success(
+      res,
+      "Log in successful",
+      _.pick(existingUser.toObject(), [
+        "_id",
+        "email",
+        "firstName",
+        "lastName",
+        "role",
+        "accessLevel",
+        "status",
+        "enrolledCourses",
+      ]),
+      200
+    );
   } catch (error) {
     console.error(error);
     return sendResponse.failed(res, "Request Error", error, 500);
   }
 };
 
-module.exports = login;
+module.exports = signin;

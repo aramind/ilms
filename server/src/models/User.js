@@ -25,7 +25,7 @@ const UserSchema = new Schema({
     trim: true,
   },
   profilePicture: { type: String },
-  enRolledCourses: [
+  enrolledCourses: [
     {
       courseId: { type: Schema.Types.ObjectId, ref: "Course" },
 
