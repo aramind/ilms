@@ -26,7 +26,7 @@ const signup = async (req, res) => {
     return createdUser;
   } catch (error) {
     console.error(error);
-    sendResponse.failed(res, "Server Error", null, 500);
+    sendResponse.failed(res, "Server Error", error, 500);
   }
 };
 
