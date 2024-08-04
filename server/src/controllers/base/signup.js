@@ -9,8 +9,7 @@ const signup = async (req, res) => {
     const existing = await User.findOne({ email });
 
     if (existing) {
-      sendResponse.failed(res, "User already existed!");
-      return;
+      return sendResponse.failed(res, "Email already taken!");
     }
 
     const newUser = new User({
@@ -22,7 +21,12 @@ const signup = async (req, res) => {
 
     const createdUser = await newUser.save();
 
-    sendResponse.success(res, "User added successfully", createdUser, 201);
+    sendResponse.success(
+      res,
+      `Hello ${firstName}, ${lastName}! Thank you for signing up. \nYou will be notified via email for the result of your approval.`,
+      createdUser,
+      201
+    );
     return createdUser;
   } catch (error) {
     console.error(error);
