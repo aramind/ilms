@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormWrapper from "../../wrappers/FormWrapper";
 import {
   Button,
@@ -14,10 +14,21 @@ import signInSchema from "../../schemas/singIn";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextFieldError from "../../components/TextFieldError";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import constants from "../../configs/constants";
+import { AuthContext } from "../../context/AuthProvider";
+import { showAckNotification } from "../../utils/showAckNotification";
+import { useGlobalState } from "../../context/GlobalStatesContextProvider";
 
 const SignInForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { setAuth, persist, setPersist } = useContext(AuthContext);
+  const {
+    globalState: { ackAlert },
+    dispatch,
+  } = useGlobalState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
@@ -26,7 +37,7 @@ const SignInForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm({
     mode: "onTouched",
     resolver: yupResolver(signInSchema),
@@ -38,12 +49,47 @@ const SignInForm = () => {
     errors,
   };
 
-  const onSubmit = (data) => {
-    console.log("Form submitted with data:", data);
-    // Add your submission logic here
+  const onSubmit = async (data) => {
+    setIsLoading(true);
 
-    if (isValid) {
-      navigate("/dashboard");
+    try {
+      const response = await axios.post(
+        `${constants?.API_URL?.ROOT}/signin`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      const responseData = response?.data;
+      if (responseData?.success) {
+        showAckNotification({
+          dispatch,
+          success: true,
+          data: { success: true, message: responseData?.message },
+          ackAlert,
+        });
+
+        setAuth(response?.data);
+        // navigate(from, { replace: true });
+        navigate("/dashboard");
+      } else {
+        showAckNotification({
+          dispatch,
+          success: false,
+          data: { success: false, message: responseData?.message },
+          ackAlert,
+        });
+      }
+    } catch (error) {
+      showAckNotification({
+        dispatch,
+        success: false,
+        data: { success: false, message: error?.response?.data?.message },
+        ackAlert,
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 

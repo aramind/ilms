@@ -27,7 +27,6 @@ import { useGlobalState } from "../../context/GlobalStatesContextProvider";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-  const { setAuth, persist, setPersist } = useContext(AuthContext);
 
   const {
     globalState: { ackAlert },
@@ -72,9 +71,6 @@ const SignUpForm = () => {
 
       console.log(responseData);
       if (responseData?.success) {
-        const { firstName, role, accessLevel, status } = responseData?.data;
-        setAuth({ firstName, role, accessLevel, status });
-
         showAckNotification({
           dispatch,
           success: true,
@@ -82,16 +78,15 @@ const SignUpForm = () => {
           ackAlert,
         });
 
-        if (!responseData?.success) {
-          showAckNotification({
-            dispatch,
-            success: false,
-            data: { success: false, message: responseData?.message },
-            ackAlert,
-          });
-        }
         // navigate(from, { replace: true });
         navigate("/signin");
+      } else {
+        showAckNotification({
+          dispatch,
+          success: false,
+          data: { success: false, message: responseData?.message },
+          ackAlert,
+        });
       }
     } catch (error) {
       showAckNotification({
