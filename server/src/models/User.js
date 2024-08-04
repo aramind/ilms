@@ -80,4 +80,4 @@ UserSchema.pre("findOneAndUpdate", async function (next) {
   this._update.updatedAt = new Date();
 });
 
-module.export = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

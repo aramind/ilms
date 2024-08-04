@@ -1,4 +1,5 @@
 const User = require("../../models/User");
+const hashPassword = require("../../utils/hashPassword");
 const sendResponse = require("../../utils/sendResponse");
 
 const signup = async (req, res) => {
@@ -9,13 +10,24 @@ const signup = async (req, res) => {
 
     if (existing) {
       sendResponse.failed(res, "User already existed!");
+      return;
     }
 
     const newUser = new User({
       email,
-      password,
+      password: await hashPassword(password),
       firstName,
       lastName,
     });
-  } catch (error) {}
+
+    const createdUser = await newUser.save();
+
+    sendResponse.success(res, "User added successfully", createdUser, 201);
+    return createdUser;
+  } catch (error) {
+    console.error(error);
+    sendResponse.failed(res, "Server Error", null, 500);
+  }
 };
+
+module.exports = signup;
