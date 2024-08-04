@@ -13,6 +13,10 @@ const constants = {
     "girl_studying_5.jpeg",
     "girl_studying_6.jpeg",
   ],
+
+  API_URL: {
+    ROOT: `${process.env.REACT_APP_API_URL}/v1`,
+  },
 };
 
 export default constants;

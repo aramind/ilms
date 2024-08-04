@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FormWrapper from "../../wrappers/FormWrapper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,10 +18,21 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ControlledTextField from "../../components/controlled/ControlledTextField";
 import TextFieldError from "../../components/TextFieldError";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import useApiSend from "../../hooks/api/useApiSend";
+import constants from "../../configs/constants";
+import { AuthContext } from "../../context/AuthProvider";
+import { showAckNotification } from "../../utils/showAckNotification";
+import { useGlobalState } from "../../context/GlobalStatesContextProvider";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const { setAuth, persist, setPersist } = useContext(AuthContext);
 
+  const {
+    globalState: { ackAlert },
+    dispatch,
+  } = useGlobalState();
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
 
@@ -32,6 +43,7 @@ const SignUpForm = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
@@ -44,10 +56,48 @@ const SignUpForm = () => {
     errors,
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form submitted with data:", data);
     // Add your submission logic here
-    navigate("/signin");
+    console.log(data);
+    // sendSignUp(data);
+    // navigate("/signin");
+    try {
+      const response = await axios.post(
+        `${constants?.API_URL?.ROOT}/signup`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      const responseData = response?.data;
+
+      if (responseData?.success) {
+        const { firstName, role, accessLevel, status } = responseData?.data;
+        setAuth({ firstName, role, accessLevel, status });
+
+        showAckNotification({
+          dispatch,
+          success: true,
+          data: { success: true, message: responseData?.message },
+          ackAlert,
+        });
+
+        // navigate(from, { replace: true });
+      }
+    } catch (error) {
+      showAckNotification({
+        dispatch,
+        success: false,
+        data: { success: false, message: error?.response?.data?.message },
+        ackAlert,
+      });
+      // console.log();
+    } finally {
+      // setIsLoading(false);
+      console.log("FINISHED SIGN UP");
+    }
   };
 
   return (
