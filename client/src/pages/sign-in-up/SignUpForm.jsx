@@ -35,6 +35,7 @@ const SignUpForm = () => {
   } = useGlobalState();
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
+  const [loading, setIsLoading] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
@@ -43,7 +44,6 @@ const SignUpForm = () => {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
@@ -57,11 +57,8 @@ const SignUpForm = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log("Form submitted with data:", data);
-    // Add your submission logic here
-    console.log(data);
     // sendSignUp(data);
-    // navigate("/signin");
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${constants?.API_URL?.ROOT}/signup`,
@@ -73,6 +70,7 @@ const SignUpForm = () => {
 
       const responseData = response?.data;
 
+      console.log(responseData);
       if (responseData?.success) {
         const { firstName, role, accessLevel, status } = responseData?.data;
         setAuth({ firstName, role, accessLevel, status });
@@ -84,7 +82,16 @@ const SignUpForm = () => {
           ackAlert,
         });
 
+        if (!responseData?.success) {
+          showAckNotification({
+            dispatch,
+            success: false,
+            data: { success: false, message: responseData?.message },
+            ackAlert,
+          });
+        }
         // navigate(from, { replace: true });
+        navigate("/signin");
       }
     } catch (error) {
       showAckNotification({
@@ -95,8 +102,7 @@ const SignUpForm = () => {
       });
       // console.log();
     } finally {
-      // setIsLoading(false);
-      console.log("FINISHED SIGN UP");
+      setIsLoading(false);
     }
   };
 
