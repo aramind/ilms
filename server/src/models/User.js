@@ -8,7 +8,9 @@ dotenv.config();
 
 const validRoles = getRoles.keys;
 const validStatuses = getStatuses.keys;
+const defaultValues = JSON.parse(process.env.DEFAULT_VALUES || "{}");
 
+console.log(defaultValues);
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -51,15 +53,18 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     enum: { values: validRoles },
+    default: defaultValues?.role,
   },
   accessLevel: {
-    type: String,
+    type: Number,
     required: true,
+    default: 1,
   },
   status: {
     type: String,
     required: true,
     enum: { values: validStatuses },
+    default: defaultValues?.status,
   },
   tokens: {
     refresh: { type: String },
