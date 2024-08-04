@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./src/routes/userRouter");
 const baseRouter = require("./src/routes/baseRouter");
+const credentials = require("./src/middlewares/auth/credentials");
+const corsOptions = require("./src/config/corsOptions");
+const morgan = require("morgan");
 // env
 dotenv.config();
 // const PORT = process.env.PORT || 500;
@@ -14,16 +17,21 @@ const DB = process.env.MONGO_CONNECT;
 
 const app = express();
 
-// Middleware for JSON body parsing
-app.use(express.json()); // This line is crucial for parsing JSON bodies
+// // CORS options
 app.use(cookieParser());
+app.use(credentials);
+app.use(cors(corsOptions));
+// app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("combined"));
 
 // routes
 app.use("/v1/users", userRouter);
 app.use("/v1/", baseRouter);
 
-// // CORS options
-app.use(cookieParser());
+// app.use(cors(corsOptions));
 // if not found
 app.use((req, res) =>
   res.status(404).json({ success: false, message: "Not found" })
