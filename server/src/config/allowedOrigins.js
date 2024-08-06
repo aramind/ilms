@@ -1,5 +1,6 @@
 const allowedOrigins = [
   "http://localhost:3000",
+  "https://ilms-djk6.onrender.com",
   //   "https://quebee-admin.onrender.com",
 ];
 module.exports = allowedOrigins;

@@ -14,21 +14,18 @@ import signInSchema from "../../schemas/singIn";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextFieldError from "../../components/TextFieldError";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import constants from "../../configs/constants";
-import { AuthContext } from "../../context/AuthProvider";
-import { showAckNotification } from "../../utils/showAckNotification";
-import { useGlobalState } from "../../context/GlobalStatesContextProvider";
+import useRootReq from "../../hooks/api/public/useRootReq";
+import useApiSend from "../../hooks/api/useApiSend";
 
 const SignInForm = () => {
+  const { signin } = useRootReq({ isPublic: true, showAck: true });
   const navigate = useNavigate();
-  const { setAuth, persist, setPersist } = useContext(AuthContext);
-  const {
-    globalState: { ackAlert },
-    dispatch,
-  } = useGlobalState();
-  const [isLoading, setIsLoading] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
+
+  const { mutate: sendSignin } = useApiSend(signin, ["user"], (data) => {
+    data?.success && navigate("/dashboard");
+  });
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
@@ -49,48 +46,8 @@ const SignInForm = () => {
     errors,
   };
 
-  const onSubmit = async (data) => {
-    setIsLoading(true);
-
-    try {
-      const response = await axios.post(
-        `${constants?.API_URL?.ROOT}/signin`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
-
-      const responseData = response?.data;
-      if (responseData?.success) {
-        showAckNotification({
-          dispatch,
-          success: true,
-          data: { success: true, message: responseData?.message },
-          ackAlert,
-        });
-
-        setAuth(response?.data);
-        // navigate(from, { replace: true });
-        navigate("/dashboard");
-      } else {
-        showAckNotification({
-          dispatch,
-          success: false,
-          data: { success: false, message: responseData?.message },
-          ackAlert,
-        });
-      }
-    } catch (error) {
-      showAckNotification({
-        dispatch,
-        success: false,
-        data: { success: false, message: error?.response?.data?.message },
-        ackAlert,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+  const onSubmit = (data) => {
+    sendSignin({ data });
   };
 
   return (

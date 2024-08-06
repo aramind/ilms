@@ -5,12 +5,15 @@ const useApiSend = (fn, invalidateKey, successFn, errorFn, options) => {
 
   return useMutation({
     mutationFn: fn,
-    onSuccess: (data) => {
-      invalidateKey &&
+    onSuccess: async (data) => {
+      if (invalidateKey) {
         invalidateKey.forEach((key) => queryClient.invalidateQueries(key));
+      }
       successFn && successFn(data);
     },
-    onError: (err) => errorFn && errorFn(err),
+    onError: async (err) => {
+      errorFn && errorFn(err);
+    },
     retry: 0,
     ...options,
   });
