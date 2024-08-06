@@ -16,6 +16,7 @@ import TextFieldError from "../../components/TextFieldError";
 import { useNavigate } from "react-router-dom";
 import useRootReq from "../../hooks/api/public/useRootReq";
 import useApiSend from "../../hooks/api/useApiSend";
+import LoadingPage from "../LoadingPage";
 
 const SignInForm = () => {
   const { signin } = useRootReq({ isPublic: true, showAck: true });
@@ -103,6 +104,7 @@ const SignInForm = () => {
         </form>
       </FormWrapper>
       {/* <DevTool control={control} /> */}
+      <LoadingPage open={true} text="Logging in..." />
     </>
   );
 };

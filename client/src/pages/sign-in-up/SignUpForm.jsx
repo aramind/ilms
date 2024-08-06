@@ -27,6 +27,7 @@ import { useGlobalState } from "../../context/GlobalStatesContextProvider";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const [loading, setIsLoading] = useState(false);
 
   const {
     globalState: { ackAlert },
@@ -34,7 +35,6 @@ const SignUpForm = () => {
   } = useGlobalState();
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
-  const [loading, setIsLoading] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
