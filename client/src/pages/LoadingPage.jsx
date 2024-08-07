@@ -28,7 +28,9 @@ const LoadingPage = ({ open, text }) => {
       >
         <Stack direction="column" className="centered-content" spacing={3}>
           <CircularProgress />
-          <WhiteTypography>{text.toUpperCase()}</WhiteTypography>
+          <WhiteTypography variant="h5">
+            {text?.[0].toUpperCase() + text?.substring(1)}
+          </WhiteTypography>
         </Stack>
       </DialogContent>
     </Dialog>

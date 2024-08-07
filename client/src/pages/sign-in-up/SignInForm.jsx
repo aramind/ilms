@@ -24,9 +24,13 @@ const SignInForm = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { mutate: sendSignin } = useApiSend(signin, ["user"], (data) => {
-    data?.success && navigate("/dashboard");
-  });
+  const { mutate: sendSignin, isLoading } = useApiSend(
+    signin,
+    ["user"],
+    (data) => {
+      data?.success && navigate("/dashboard");
+    }
+  );
 
   const handleClickShowPassword = () => {
     setShowPassword((show) => !show);
@@ -104,7 +108,7 @@ const SignInForm = () => {
         </form>
       </FormWrapper>
       {/* <DevTool control={control} /> */}
-      <LoadingPage open={true} text="Logging in..." />
+      <LoadingPage open={isLoading} text="Logging in..." />
     </>
   );
 };
