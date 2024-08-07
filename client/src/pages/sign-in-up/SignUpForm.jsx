@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FormWrapper from "../../wrappers/FormWrapper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,17 +17,21 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import ControlledTextField from "../../components/controlled/ControlledTextField";
 import TextFieldError from "../../components/TextFieldError";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import useApiSend from "../../hooks/api/useApiSend";
-import constants from "../../configs/constants";
-import { AuthContext } from "../../context/AuthProvider";
+
 import { showAckNotification } from "../../utils/showAckNotification";
 import { useGlobalState } from "../../context/GlobalStatesContextProvider";
+import useRootReq from "../../hooks/api/public/useRootReq";
+import LoadingPage from "../LoadingPage";
+import { useNavigate } from "react-router-dom";
 
 const SignUpForm = () => {
   const navigate = useNavigate();
-  const [loading, setIsLoading] = useState(false);
+  const { signup } = useRootReq({ isPublic: true, showAck: true });
+
+  const { mutate: sendSignUp, isLoading } = useApiSend(signup, [], (data) => {
+    data?.success && navigate("/signin");
+  });
 
   const {
     globalState: { ackAlert },
@@ -57,47 +61,18 @@ const SignUpForm = () => {
 
   const onSubmit = async (data) => {
     // sendSignUp(data);
-    setIsLoading(true);
     try {
-      const response = await axios.post(
-        `${constants?.API_URL?.ROOT}/signup`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
-
-      const responseData = response?.data;
-
-      console.log(responseData);
-      if (responseData?.success) {
-        showAckNotification({
-          dispatch,
-          success: true,
-          data: { success: true, message: responseData?.message },
-          ackAlert,
-        });
-
-        // navigate(from, { replace: true });
-        navigate("/signin");
-      } else {
-        showAckNotification({
-          dispatch,
-          success: false,
-          data: { success: false, message: responseData?.message },
-          ackAlert,
-        });
-      }
+      sendSignUp({ data });
     } catch (error) {
       showAckNotification({
         dispatch,
         success: false,
-        data: { success: false, message: error?.response?.data?.message },
+        data: {
+          success: false,
+          message: error?.response?.data?.message || error,
+        },
         ackAlert,
       });
-      // console.log();
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -178,6 +153,7 @@ const SignUpForm = () => {
           </Stack>
         </form>
       </FormWrapper>
+      <LoadingPage open={isLoading} text="Submitting your info..." />
       {/* <DevTool control={control} /> */}
     </>
   );
