@@ -7,6 +7,13 @@ const useRootReq = ({ isPublic, showAck }) => {
   const request = useRequest({ isPublic, showAck });
 
   const req = {
+    signup: async ({ data }) => {
+      return request({
+        url: `${ROOT_URL}/signup`,
+        method: "POST",
+        data,
+      });
+    },
     signin: async ({ data }) => {
       return request({
         url: `${ROOT_URL}/signin`,
