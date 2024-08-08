@@ -1,10 +1,11 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState } from "react";
 import WhiteTypography from "../../components/WhiteTypography";
+import InsideTab from "./InsideTab";
 
 const outsideTabs = [
-  { text: "Courses", component: "Courses" },
-  { text: "Users", component: "Users" },
+  { text: "Courses", subTabs: "courses" },
+  { text: "Users", subTabs: "users" },
 ];
 const OutsideTab = () => {
   const [selected, setSelected] = useState(0);
@@ -13,7 +14,7 @@ const OutsideTab = () => {
     setSelected(newValue);
   };
   return (
-    <Box width="100%" borderRadius="10px">
+    <Box width="100%">
       <Tabs
         value={selected}
         onChange={handleChange}
@@ -32,9 +33,10 @@ const OutsideTab = () => {
             key={index}
             label={
               <Typography
+                variant="h6"
                 color={
                   selected === index
-                    ? (theme) => theme.palette.primary.dark
+                    ? (theme) => theme.palette.primary
                     : (theme) => theme.palette.white.main
                 }
                 fontWeight={selected === index && "bold"}
@@ -50,7 +52,7 @@ const OutsideTab = () => {
         (tab, index) =>
           selected === index && (
             <Box key={index}>
-              <WhiteTypography>{tab?.component}</WhiteTypography>
+              <InsideTab subTabs={tab?.subTabs} />
             </Box>
           )
       )}
