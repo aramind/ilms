@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Courses from "./pages/courses/Courses";
 import UnavailablePage from "./pages/unavailable/UnavailablePage";
 import Course from "./pages/course/Course";
+import Admin from "./pages/admin/Admin";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
       // {
       //   path: "/courses/:courseId",
