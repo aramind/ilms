@@ -1,4 +1,4 @@
-import { IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,32 +13,51 @@ const TopBar = () => {
       alignItems="center"
     >
       <Typography>Search</Typography>
-
-      <Tooltip title="Sign out" placement="left-end">
-        <IconButton
-          onClick={() => navigate("/signin")}
+      <Stack direction="row" justifyContent="flex-end" alignItems="center">
+        <Button
+          onClick={() => navigate("/admin")}
+          variant="text"
+          p={0}
           sx={{
-            opacity: "0.7",
             color: (theme) => theme.palette.black.main,
-            fontSize: "4rem",
-            // "&:hover": {
-            //   color: (theme) => theme.palette.black.lightest,
-            // },
+            marginRight: 2,
+            "&.MuiButtonBase-root": { padding: 1 },
+            "&:hover": {
+              bgcolor: (theme) => theme.palette.black.dark,
+              color: (theme) => theme.palette.primary.main,
+            },
           }}
-          aria-label="add an alarm"
-          // size="large"
         >
-          <ExitToAppTwoToneIcon
+          Admin Page
+        </Button>
+
+        <Tooltip title="Sign out" placement="left-end">
+          <IconButton
+            onClick={() => navigate("/signin")}
             sx={{
-              // color: (theme) => theme.palette.primary.darkest,
-              fontSize: "2rem",
-              "&:hover": {
-                color: (theme) => theme.palette.black.lightest,
-              },
+              opacity: "0.7",
+              color: (theme) => theme.palette.black.main,
+              fontSize: "4rem",
+              // "&:hover": {
+              //   color: (theme) => theme.palette.black.lightest,
+              // },
             }}
-          />
-        </IconButton>
-      </Tooltip>
+            aria-label="add an alarm"
+            // size="large"
+          >
+            <ExitToAppTwoToneIcon
+              sx={{
+                // color: (theme) => theme.palette.primary.darkest,
+                fontSize: "2rem",
+                "&:hover": {
+                  bgcolor: (theme) => theme.palette.black.dark,
+                  color: (theme) => theme.palette.primary.main,
+                },
+              }}
+            />
+          </IconButton>
+        </Tooltip>
+      </Stack>
     </Stack>
   );
 };
