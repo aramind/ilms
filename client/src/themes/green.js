@@ -21,6 +21,7 @@ const COLORS = {
     main: "#3D4655",
     light: "#717F98",
     lightest: "#A9B2C0",
+    gray: "#D0D4DC",
   },
   white: {
     darkest: "#C2C2C2",

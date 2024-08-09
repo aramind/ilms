@@ -34,6 +34,7 @@ const InsideTab = ({ subTabs }) => {
         indicatorColor="primary"
         textColor="primary"
         centered
+        // variant="fullWidth"
       >
         {tabs?.map((tab, index) => (
           <Tab
@@ -50,7 +51,11 @@ const InsideTab = ({ subTabs }) => {
       </Tabs>
       {tabs?.map(
         (tab, index) =>
-          selected === index && <Box key={index}>{tab?.component}</Box>
+          selected === index && (
+            <Box key={index} p={1}>
+              {tab?.component}
+            </Box>
+          )
       )}
     </Box>
   );
