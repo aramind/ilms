@@ -18,6 +18,9 @@ const LabelWrapper = ({ children, id, label, hasError, error }) => {
         htmlFor={id}
         sx={{
           color: hasError && hasErrorStyles,
+          "&.MuiFormLabel-root": {
+            fontSize: "0.8rem",
+          },
         }}
       >
         {label.toUpperCase() + " " + getErrorLabel(hasError, error)}
