@@ -3,7 +3,7 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import TextFieldError from "../TextFieldError";
 
-const ControlledTextField = ({ label = "", name, tfProps }) => {
+const ControlledTextField = ({ label = "", name = "", tfProps }) => {
   const { errors } = useFormContext();
 
   return (

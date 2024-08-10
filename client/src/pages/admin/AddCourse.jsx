@@ -1,10 +1,10 @@
 import React from "react";
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import FormWrapper from "../../wrappers/FormWrapper";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import ControlledTextField from "../../components/controlled/ControlledTextField";
 import ContLabelledTextField from "../../components/controlled/ContLabelledTextField";
-
+import { DevTool } from "@hookform/devtools";
 const AddCourse = () => {
   // form
   const {
@@ -25,6 +25,24 @@ const AddCourse = () => {
     console.log(data);
   };
 
+  const {
+    fields: topics,
+    append: appendTopic,
+    remove: removeTopic,
+  } = useFieldArray({
+    control,
+    name: "topics",
+  });
+
+  const {
+    fields: tasks,
+    append: appendTask,
+    remove: removeTask,
+  } = useFieldArray({
+    control,
+    name: "tasks",
+  });
+
   return (
     <FormWrapper formMethods={formMethods}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -44,8 +62,28 @@ const AddCourse = () => {
             />
           </Stack>
           <Typography>TOPICS</Typography>
+
+          {topics.map((topic, topicIndex) => (
+            <Stack
+              key={topic.id}
+              p={1}
+              mx={1}
+              sx={{
+                outline: "1px solid",
+                outlineColor: (theme) => theme.palette.primary.main,
+              }}
+            >
+              <Typography>Topic {topicIndex + 1}</Typography>
+
+              <Button onClick={() => removeTopic(topicIndex)}>
+                Remove Topic
+              </Button>
+            </Stack>
+          ))}
+          <Button onClick={() => appendTopic({})}>Add Topic</Button>
         </Stack>
       </form>
+      <DevTool control={control} />
     </FormWrapper>
   );
 };
