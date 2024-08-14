@@ -15,15 +15,6 @@ const TopicsSection = ({ control }) => {
     name: "topics",
   });
 
-  const {
-    fields: tasks,
-    append: appendTask,
-    remove: removeTask,
-  } = useFieldArray({
-    control,
-    name: "tasks",
-  });
-
   return (
     <>
       <Typography>TOPICS</Typography>
@@ -45,12 +36,7 @@ const TopicsSection = ({ control }) => {
           >
             <LectureMetaInfo topicIndex={topicIndex} />
             {/* task */}
-            <TaskSection
-              tasks={tasks}
-              topicIndex={topicIndex}
-              removeTask={removeTask}
-              appendTask={appendTask}
-            />
+            <TaskSection topicIndex={topicIndex} />
           </Stack>
 
           <Button onClick={() => removeTopic(topicIndex)}>Remove Topic</Button>

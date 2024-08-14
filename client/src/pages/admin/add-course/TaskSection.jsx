@@ -2,8 +2,20 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import ControlledRGroup from "../../../components/controlled/ControlledRGroup";
 import ContLabelledTextField from "../../../components/controlled/ContLabelledTextField";
+import { useFieldArray, useFormContext } from "react-hook-form";
 
-const TaskSection = ({ tasks, topicIndex, removeTask, appendTask }) => {
+const TaskSection = ({ topicIndex }) => {
+  const { control } = useFormContext();
+
+  const {
+    fields: tasks,
+    append: appendTask,
+    remove: removeTask,
+  } = useFieldArray({
+    control,
+    name: "tasks",
+  });
+
   return (
     <Stack spacing={1} flex={{ xs: 1, md: 1.8 }}>
       {" "}
