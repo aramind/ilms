@@ -12,6 +12,7 @@ import React from "react";
 import ContLabelledTextField from "../../../components/controlled/ContLabelledTextField";
 import { Controller, useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
+import ControlledRGroup from "../../../components/controlled/ControlledRGroup";
 
 const TopicsSection = ({ control }) => {
   const {
@@ -67,32 +68,11 @@ const TopicsSection = ({ control }) => {
                       flex={4}
                       justifyContent="space-between"
                     >
-                      <FormControl>
-                        <Controller
-                          name={`topics[${topicIndex}].tasks[${taskIndex}].action`}
-                          control={control}
-                          // defaultValue={task.action || ""}
-                          render={({ field }) => (
-                            <RadioGroup row {...field}>
-                              <FormControlLabel
-                                value="read"
-                                control={<Radio />}
-                                label="read"
-                              />
-                              <FormControlLabel
-                                value="watch"
-                                control={<Radio />}
-                                label="watch"
-                              />
-                              <FormControlLabel
-                                value="answer"
-                                control={<Radio />}
-                                label="answer"
-                              />
-                            </RadioGroup>
-                          )}
-                        />
-                      </FormControl>
+                      <ControlledRGroup
+                        direction="row"
+                        name={`topics[${topicIndex}].tasks[${taskIndex}].action`}
+                        values={["read", "watch", "answer"]}
+                      />
                       <Button onClick={() => removeTask(taskIndex)}>
                         Remove
                       </Button>
