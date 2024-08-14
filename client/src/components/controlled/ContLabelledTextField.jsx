@@ -12,9 +12,11 @@ const ContLabelledTextField = ({
 
   flex,
 }) => {
-  const { errors } = useFormContext();
+  const { control, errors } = useFormContext();
+
   return (
     <Controller
+      control={control}
       name={name}
       render={({ field }) => (
         <Stack flex={flex || 1}>

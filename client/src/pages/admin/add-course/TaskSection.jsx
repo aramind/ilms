@@ -13,7 +13,7 @@ const TaskSection = ({ topicIndex }) => {
     remove: removeTask,
   } = useFieldArray({
     control,
-    name: "tasks",
+    name: `topics[${topicIndex}].tasks`,
   });
 
   return (
@@ -21,7 +21,7 @@ const TaskSection = ({ topicIndex }) => {
       {" "}
       <Typography>TASKS</Typography>
       {tasks.map((task, taskIndex) => (
-        <Stack spacing={1} p={2} key={taskIndex}>
+        <Stack spacing={1} p={2} key={task.id}>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Typography flex={1}>{`${topicIndex + 1}.${
               taskIndex + 1
@@ -37,7 +37,7 @@ const TaskSection = ({ topicIndex }) => {
                 name={`topics[${topicIndex}].tasks[${taskIndex}].action`}
                 values={["read", "watch", "answer"]}
               />
-              <Button onClick={() => removeTask(taskIndex)}>Remove</Button>
+              <Button onClick={() => removeTask(task.id)}>Remove</Button>
             </Stack>
           </Stack>
           {["instruction", "link"].map((item, index) => (

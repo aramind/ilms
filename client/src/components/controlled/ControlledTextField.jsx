@@ -4,10 +4,11 @@ import { Controller, useFormContext } from "react-hook-form";
 import TextFieldError from "../TextFieldError";
 
 const ControlledTextField = ({ label = "", name = "", tfProps }) => {
-  const { errors } = useFormContext();
+  const { errors, control } = useFormContext();
 
   return (
     <Controller
+      control={control}
       name={name}
       render={({ field }) => (
         <Stack>

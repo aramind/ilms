@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import FormWrapper from "../../wrappers/FormWrapper";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
@@ -14,6 +14,13 @@ const AddCourse = () => {
     formState: { errors },
   } = useForm({
     mode: "onTouched",
+    defaultValues: {
+      code: "123",
+      acronym: "FCS",
+      title: "Feedback and Control Systems",
+      category: "Engineering",
+      description: "FCS Description",
+    },
   });
 
   const formMethods = {
@@ -34,6 +41,7 @@ const AddCourse = () => {
           <TopicsSection control={control} />
         </Stack>
         <DevTool control={control} />
+        <Button type="submit">Submit</Button>
       </form>
       <DevTool control={control} />
     </FormWrapper>
