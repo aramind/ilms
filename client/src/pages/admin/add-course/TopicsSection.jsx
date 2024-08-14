@@ -1,18 +1,9 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
-import ContLabelledTextField from "../../../components/controlled/ContLabelledTextField";
-import { Controller, useFieldArray } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
-import ControlledRGroup from "../../../components/controlled/ControlledRGroup";
+
+import TaskSection from "./TaskSection";
 
 const TopicsSection = ({ control }) => {
   const {
@@ -53,55 +44,13 @@ const TopicsSection = ({ control }) => {
             className="outlined"
           >
             <LectureMetaInfo topicIndex={topicIndex} />
-            <Stack spacing={1} flex={{ xs: 1, md: 1.8 }}>
-              {" "}
-              <Typography>TASKS</Typography>
-              {tasks.map((task, taskIndex) => (
-                <Stack spacing={1} p={2} key={taskIndex}>
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    <Typography flex={1}>{`${topicIndex + 1}.${
-                      taskIndex + 1
-                    }`}</Typography>
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      flex={4}
-                      justifyContent="space-between"
-                    >
-                      <ControlledRGroup
-                        direction="row"
-                        name={`topics[${topicIndex}].tasks[${taskIndex}].action`}
-                        values={["read", "watch", "answer"]}
-                      />
-                      <Button onClick={() => removeTask(taskIndex)}>
-                        Remove
-                      </Button>
-                    </Stack>
-                  </Stack>
-                  {["instruction", "link"].map((item, index) => (
-                    <Stack
-                      direction="row"
-                      alignItems="center"
-                      spacing={2}
-                      key={index}
-                    >
-                      <Typography flex={1} textTransform="uppercase">
-                        {item} :
-                      </Typography>
-                      <Box flex={4}>
-                        <ContLabelledTextField
-                          key={index}
-                          tfProps={{ variant: "standard" }}
-                          name={`topics[${topicIndex}].tasks[${taskIndex}].${item}`}
-                        />
-                      </Box>
-                    </Stack>
-                  ))}
-                </Stack>
-              ))}
-              <Button onClick={() => appendTask({})}>Add Task</Button>
-              <Box flex={1} />
-            </Stack>
+            {/* task */}
+            <TaskSection
+              tasks={tasks}
+              topicIndex={topicIndex}
+              removeTask={removeTask}
+              appendTask={appendTask}
+            />
           </Stack>
 
           <Button onClick={() => removeTopic(topicIndex)}>Remove Topic</Button>
