@@ -37,7 +37,7 @@ const TaskSection = ({ topicIndex }) => {
                 name={`topics[${topicIndex}].tasks[${taskIndex}].action`}
                 values={["read", "watch", "answer"]}
               />
-              <Button onClick={() => removeTask(task.id)}>Remove</Button>
+              <Button onClick={() => removeTask(taskIndex)}>Remove</Button>
             </Stack>
           </Stack>
           {["instruction", "link"].map((item, index) => (
