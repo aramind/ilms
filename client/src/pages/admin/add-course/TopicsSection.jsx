@@ -32,7 +32,7 @@ const TopicsSection = ({ control }) => {
           <Stack
             direction={{ xs: "column", md: "row" }}
             spacing={1}
-            className="outlined"
+            // className="outlined"
           >
             <LectureMetaInfo topicIndex={topicIndex} />
             {/* task */}

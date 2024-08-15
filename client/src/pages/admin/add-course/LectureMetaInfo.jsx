@@ -4,7 +4,7 @@ import ContLabelledTextField from "../../../components/controlled/ContLabelledTe
 
 const LectureMetaInfo = ({ topicIndex }) => {
   return (
-    <Stack spacing={2} flex={1} className="outlined2">
+    <Stack spacing={2} flex={1}>
       <Box>
         <ContLabelledTextField
           name={`topics[${topicIndex}].title`}

@@ -9,7 +9,7 @@ const ControlledRGroup = ({ name, direction, values }) => {
     <Controller
       name={name}
       control={control}
-      // defaultValue={task.action || ""}
+      defaultValue={values?.[0]}
       render={({ field }) => (
         <RadioGroup row={direction === "row"} {...field}>
           {values?.map((value) => (
