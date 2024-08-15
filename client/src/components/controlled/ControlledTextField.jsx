@@ -17,7 +17,7 @@ const ControlledTextField = ({ label = "", name = "", tfProps }) => {
             {...field}
             id={name}
             label={label}
-            value={field.value}
+            // value={field.value}
             size={tfProps?.size || "small"}
             variant={tfProps?.variant || "outlined"}
             fullWidth={tfProps?.fullWidth || true}

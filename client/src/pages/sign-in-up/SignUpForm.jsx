@@ -98,7 +98,7 @@ const SignUpForm = () => {
                   <Stack>
                     <TextField
                       {...field}
-                      value={field.value}
+                      // value={field.value}
                       id="password"
                       label="Password"
                       variant="outlined"

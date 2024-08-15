@@ -29,6 +29,7 @@ const ContLabelledTextField = ({
             <TextField
               {...tfProps}
               {...field}
+              value={field?.value || ""}
               id={name}
               multiline={multiline}
               size={tfProps?.size || "small"}
