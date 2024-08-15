@@ -37,8 +37,8 @@ const openedMixin = (theme) => ({
   "&::-webkit-scrollbar": {
     width: 0, // Hide scrollbar for WebKit-based browsers
   },
-  "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
-  "scrollbar-width": "none", // Hide scrollbar for Firefox
+  msOverFlowStyle: "none", // Hide scrollbar for IE and Edge
+  scrollbarWidth: "none", // Hide scrollbar for Firefox
 });
 
 const closedMixin = (theme) => ({
@@ -55,8 +55,8 @@ const closedMixin = (theme) => ({
   "&::-webkit-scrollbar": {
     width: 0, // Hide scrollbar for WebKit-based browsers
   },
-  "-ms-overflow-style": "none", // Hide scrollbar for IE and Edge
-  "scrollbar-width": "none", // Hide scrollbar for Firefox
+  msOverFlowStyle: "none", // Hide scrollbar for IE and Edge
+  scrollbarWidth: "none", // Hide scrollbar for Firefox
 });
 
 const DrawerHeader = (props) => {

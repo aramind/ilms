@@ -40,7 +40,6 @@ const AddCourse = () => {
           <MetaInfoSection />
           <TopicsSection control={control} />
         </Stack>
-        <DevTool control={control} />
         <Button type="submit">Submit</Button>
       </form>
       <DevTool control={control} />
