@@ -19,7 +19,15 @@ const TaskSection = ({ topicIndex }) => {
   return (
     <Stack spacing={1} flex={{ xs: 1, md: 1.8 }}>
       {" "}
-      <Typography>TASKS</Typography>
+      <Typography
+        width={1}
+        textAlign="center"
+        variant="caption"
+        // fontWeight="bold"
+        color={(theme) => theme.palette.black.main}
+      >
+        TASKS
+      </Typography>
       {tasks.map((task, taskIndex) => (
         <Stack spacing={1} p={2} key={task.id}>
           <Stack direction="row" alignItems="center" spacing={2}>
@@ -56,7 +64,9 @@ const TaskSection = ({ topicIndex }) => {
           ))}
         </Stack>
       ))}
-      <Button onClick={() => appendTask({})}>Add Task</Button>
+      <Button sx={{ mt: 0 }} variant="outlined" onClick={() => appendTask({})}>
+        Add Task
+      </Button>
       <Box flex={1} />
     </Stack>
   );

@@ -20,7 +20,15 @@ const AddCourse = () => {
       title: "Feedback and Control Systems",
       category: "Engineering",
       description: "FCS Description",
-      topics: [],
+      topics: [
+        {
+          title: "",
+
+          description: "",
+
+          tasks: [{ action: "read", instruction: "", link: "" }],
+        },
+      ],
     },
   });
 
