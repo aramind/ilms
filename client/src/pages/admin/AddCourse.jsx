@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Stack } from "@mui/material";
+import { Box, Button, Stack } from "@mui/material";
 import FormWrapper from "../../wrappers/FormWrapper";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
@@ -49,7 +49,15 @@ const AddCourse = () => {
           <MetaInfoSection />
           <TopicsSection control={control} />
         </Stack>
-        <Button type="submit">Submit</Button>
+        <Box height="32px"></Box>
+        <Stack direction="row" justifyContent="flex-end" px={1} spacing={1}>
+          <Button variant="outlined" onClick={() => alert("Clicked Clear")}>
+            Clear
+          </Button>
+          <Button variant="contained" type="submit" sx={{ px: 5 }}>
+            Submit
+          </Button>
+        </Stack>
       </form>
       {/* <DevTool control={control} /> */}
     </FormWrapper>

@@ -95,7 +95,7 @@ const TopicsSection = ({ control }) => {
         ))}
         <Button
           fullWidth
-          variant="contained"
+          variant="outlined"
           onClick={addNewTopic}
           sx={localStyles.addBtn}
         >
@@ -155,9 +155,9 @@ const localStyles = {
   },
   addBtn: {
     marginTop: 1,
-    "&:hover": {
-      color: grey[50],
-      bgcolor: (theme) => theme.palette.primary.dark,
-    },
+    // "&:hover": {
+    //   color: grey[50],
+    //   bgcolor: (theme) => theme.palette.primary.dark,
+    // },
   },
 };
