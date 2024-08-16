@@ -144,7 +144,7 @@ const localStyles = {
     // bgcolor: red[700],
     py: 0.1,
     px: 1,
-    borderColor: red[700],
+    borderColor: red[500],
     color: red[500],
     "&:hover": {
       color: grey[50],
