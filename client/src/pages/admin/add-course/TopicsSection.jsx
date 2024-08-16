@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { nanoid } from "nanoid";
 
 import TaskSection from "./TaskSection";
@@ -93,10 +94,10 @@ const TopicsSection = ({ control }) => {
           </Accordion>
         ))}
         <Button
-          sx={{ marginTop: 1 }}
           fullWidth
           variant="contained"
           onClick={addNewTopic}
+          sx={localStyles.addBtn}
         >
           Add Topic
         </Button>
@@ -140,10 +141,23 @@ const localStyles = {
     margin: 0,
   },
   removeBtn: {
+    // bgcolor: red[700],
+    py: 0.1,
+    px: 1,
+    borderColor: red[700],
+    color: red[500],
     "&:hover": {
       color: grey[50],
-      borderColor: red[700],
-      bgcolor: red[700],
+      borderColor: red[500],
+      bgcolor: red[500],
+      opacity: 0.8,
+    },
+  },
+  addBtn: {
+    marginTop: 1,
+    "&:hover": {
+      color: grey[50],
+      bgcolor: (theme) => theme.palette.primary.dark,
     },
   },
 };
