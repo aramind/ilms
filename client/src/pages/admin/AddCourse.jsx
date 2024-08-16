@@ -20,19 +20,7 @@ const AddCourse = () => {
       title: "Feedback and Control Systems",
       category: "Engineering",
       description: "FCS Description",
-      topics: [
-        {
-          title: "Introduction",
-
-          description: "Intro Description",
-
-          tasks: [
-            { action: "read", instruction: "REad Chatper 1", link: "link 1" },
-
-            { action: "watch", instruction: "watch video 1", link: "link 2" },
-          ],
-        },
-      ],
+      topics: [],
     },
   });
 
@@ -49,7 +37,7 @@ const AddCourse = () => {
   return (
     <FormWrapper formMethods={formMethods}>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Stack gap={2}>
+        <Stack gap={2} px={1}>
           <MetaInfoSection />
           <TopicsSection control={control} />
         </Stack>
