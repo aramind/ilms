@@ -48,6 +48,12 @@ const TopicsSection = ({ control }) => {
     setIsAdding((pv) => true);
   };
 
+  const handleRemoveTopic = (topicId, topicIndex) => {
+    setExpanded((prev) => prev.filter((item) => item !== topicId));
+    removeTopic(topicIndex);
+    setIsAdding((pv) => false);
+  };
+
   return (
     <>
       <Typography>TOPICS</Typography>
@@ -63,9 +69,7 @@ const TopicsSection = ({ control }) => {
               expandIcon={<ExpandMoreIcon sx={localStyles.expandIcon} />}
               aria-controls={`panel${topicIndex}-content`}
               id={`panel${topicIndex}-header`}
-              sx={{
-                bgcolor: (theme) => theme.palette.white.dark,
-              }}
+              sx={localStyles.accordionSummary}
             >
               <Stack direction="row" spacing={2} alignItems="center">
                 <Typography color={(theme) => theme.palette.black.main}>
@@ -73,20 +77,8 @@ const TopicsSection = ({ control }) => {
                 </Typography>
                 <Button
                   variant="outlined"
-                  onClick={() => {
-                    setExpanded((prev) =>
-                      prev.filter((item) => item !== topic?.id)
-                    );
-                    removeTopic(topicIndex);
-                    setIsAdding((pv) => false);
-                  }}
-                  sx={{
-                    "&:hover": {
-                      color: grey[50],
-                      borderColor: red[700],
-                      bgcolor: red[700],
-                    },
-                  }}
+                  onClick={() => handleRemoveTopic(topic?.id, topicIndex)}
+                  sx={localStyles.removeBtn}
                 >
                   Remove
                 </Button>
@@ -95,7 +87,6 @@ const TopicsSection = ({ control }) => {
             <AccordionDetails>
               <Stack direction={{ xs: "column", md: "row" }} spacing={1}>
                 <LectureMetaInfo topicIndex={topicIndex} />
-                {/* task */}
                 <TaskSection topicIndex={topicIndex} />
               </Stack>
             </AccordionDetails>
@@ -140,9 +131,19 @@ const localStyles = {
       my: "12px",
     },
   },
+  accordionSummary: {
+    bgcolor: (theme) => theme.palette.white.dark,
+  },
   expandIcon: {
     color: (theme) => theme.palette.primary.main,
     fontSize: "2rem",
     margin: 0,
+  },
+  removeBtn: {
+    "&:hover": {
+      color: grey[50],
+      borderColor: red[700],
+      bgcolor: red[700],
+    },
   },
 };
