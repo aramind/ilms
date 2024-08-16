@@ -13,7 +13,6 @@ import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import TaskSection from "./TaskSection";
-import WhiteTypography from "../../../components/WhiteTypography";
 
 const TopicsSection = ({ control }) => {
   const [expanded, setExpanded] = useState([0]);
@@ -50,7 +49,6 @@ const TopicsSection = ({ control }) => {
               id={`panel${topicIndex}-header`}
               sx={{
                 bgcolor: (theme) => theme.palette.white.dark,
-                // pb: isAccordionOpen ? "12px" : 0,
               }}
             >
               <Stack direction="row" spacing={2} alignItems="center">
