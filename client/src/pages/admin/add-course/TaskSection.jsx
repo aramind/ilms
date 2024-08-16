@@ -32,13 +32,13 @@ const TaskSection = ({ topicIndex }) => {
       {tasks.map((task, taskIndex) => (
         <Stack spacing={1} pb={2} key={task.id}>
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Typography flex={1}>{`${topicIndex + 1}.${
-              taskIndex + 1
-            }`}</Typography>
+            <Typography fontWeight="bold" color="primary" flex={1}>{`${
+              topicIndex + 1
+            }.${taskIndex + 1}`}</Typography>
             <Stack
               direction="row"
               alignItems="center"
-              flex={4}
+              flex={5}
               justifyContent="space-between"
             >
               <ControlledRGroup
@@ -57,10 +57,16 @@ const TaskSection = ({ topicIndex }) => {
           </Stack>
           {["instruction", "link"].map((item, index) => (
             <Stack direction="row" alignItems="center" spacing={2} key={index}>
-              <Typography flex={1} textTransform="uppercase">
+              <Typography
+                flex={1}
+                textTransform="uppercase"
+                variant="caption"
+                // fontWeight="bold"
+                color={(theme) => theme.palette.black.main}
+              >
                 {item} :
               </Typography>
-              <Box flex={4}>
+              <Box flex={5}>
                 <ContLabelledTextField
                   key={index}
                   tfProps={{ variant: "standard" }}
