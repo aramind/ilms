@@ -7,21 +7,18 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { nanoid } from "nanoid";
 
 import TaskSection from "./TaskSection";
+import { grey, red } from "@mui/material/colors";
 
 const TopicsSection = ({ control }) => {
-  const [expanded, setExpanded] = useState([0]);
-
-  const handleAccordionChange = (index) => {
-    setExpanded((pv) =>
-      pv.includes(index) ? pv.filter((item) => item !== index) : [...pv, index]
-    );
-  };
+  const [expanded, setExpanded] = useState([]);
+  const [isAdding, setIsAdding] = useState(true);
 
   const {
     fields: topics,
@@ -32,16 +29,35 @@ const TopicsSection = ({ control }) => {
     name: "topics",
   });
 
+  useEffect(() => {
+    if (isAdding) {
+      setExpanded((pv) => [...pv, topics[topics.length - 1].id]);
+    }
+  }, [topics, isAdding]);
+
+  const handleAccordionChange = (id) => {
+    setExpanded((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const addNewTopic = () => {
+    const newId = nanoid();
+    appendTopic({ id: newId });
+    setExpanded((prev) => [...prev, newId]);
+    setIsAdding((pv) => true);
+  };
+
   return (
     <>
       <Typography>TOPICS</Typography>
       <Box width={1}>
         {topics.map((topic, topicIndex) => (
           <Accordion
-            key={topicIndex}
-            expanded={expanded.includes(topicIndex)}
+            key={topic.id}
+            expanded={expanded.includes(topic.id)}
             sx={localStyles.accordion}
-            onChange={() => handleAccordionChange(topicIndex)}
+            onChange={() => handleAccordionChange(topic.id)}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon sx={localStyles.expandIcon} />}
@@ -57,7 +73,20 @@ const TopicsSection = ({ control }) => {
                 </Typography>
                 <Button
                   variant="outlined"
-                  onClick={() => removeTopic(topicIndex)}
+                  onClick={() => {
+                    setExpanded((prev) =>
+                      prev.filter((item) => item !== topic?.id)
+                    );
+                    removeTopic(topicIndex);
+                    setIsAdding((pv) => false);
+                  }}
+                  sx={{
+                    "&:hover": {
+                      color: grey[50],
+                      borderColor: red[700],
+                      bgcolor: red[700],
+                    },
+                  }}
                 >
                   Remove
                 </Button>
@@ -76,10 +105,7 @@ const TopicsSection = ({ control }) => {
           sx={{ marginTop: 1 }}
           fullWidth
           variant="contained"
-          onClick={() => {
-            appendTopic({});
-            setExpanded((pv) => [...pv, expanded.length]);
-          }}
+          onClick={addNewTopic}
         >
           Add Topic
         </Button>
