@@ -4,10 +4,8 @@ import { Button } from "@mui/material";
 
 const DialogActionButton = ({
   label,
-  type,
   disabled,
   onClickHandler,
-  onSubmit,
   variant = "outlined",
   otherStyles = {},
 }) => {
