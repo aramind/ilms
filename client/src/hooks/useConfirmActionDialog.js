@@ -1,10 +1,21 @@
 import React, { useCallback, useState } from "react";
 import ConfirmActionDialog from "../components/ConfirmActionDialog";
+import { Box } from "@mui/material";
 
-const useConfirmActionDialog = (title, content, confirmCallback, maxWidth) => {
+const useConfirmActionDialog = (maxWidth) => {
   const [open, setOpen] = useState(false);
+  const [dialogProps, setDialogProps] = useState({
+    title: "",
+    content: "",
+    confirmCallback: null,
+  });
 
-  const handleOpen = useCallback(() => {
+  const handleOpen = useCallback((title, content, confirmCallback) => {
+    setDialogProps({
+      title,
+      content,
+      confirmCallback,
+    });
     setOpen(true);
   }, []);
 
@@ -13,22 +24,22 @@ const useConfirmActionDialog = (title, content, confirmCallback, maxWidth) => {
   }, []);
 
   const handleConfirm = useCallback(() => {
-    confirmCallback();
+    dialogProps.confirmCallback();
     setOpen(false);
-  }, [confirmCallback]);
+  }, [dialogProps]);
 
   const renderConfirmActionDialog = useCallback(() => {
     return (
       <ConfirmActionDialog
         open={open}
         setOpen={setOpen}
-        title={title}
-        content={content}
+        title={dialogProps.title}
+        content={dialogProps.content}
         handleConfirm={handleConfirm}
         maxWidth={maxWidth}
       />
     );
-  }, [content, handleConfirm, maxWidth, open, title]);
+  }, [dialogProps.content, dialogProps.title, handleConfirm, maxWidth, open]);
 
   return { handleOpen, handleClose, renderConfirmActionDialog };
 };

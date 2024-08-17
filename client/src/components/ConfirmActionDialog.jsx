@@ -1,11 +1,9 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Paper,
-  Typography,
 } from "@mui/material";
 import React, { forwardRef, useRef } from "react";
 import Draggable from "react-draggable";

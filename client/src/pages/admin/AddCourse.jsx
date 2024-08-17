@@ -42,26 +42,44 @@ const AddCourse = () => {
   };
 
   const handleClear = () => {
-    console.log("clearing");
     reset();
   };
-  const { handleOpen: handleConfirmClear, renderConfirmActionDialog } =
-    useConfirmActionDialog(
+
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
+
+  const handleFormSubmit = () => {
+    handleSubmit(onSubmit)();
+  };
+
+  const { handleOpen: handleConfirm, renderConfirmActionDialog } =
+    useConfirmActionDialog();
+
+  const handleConfirmClear = () => {
+    handleConfirm(
       "Confirm Reset",
       <WhiteTypography>
         Are you sure you want to reset all fields?
       </WhiteTypography>,
       handleClear
     );
+  };
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const handleConfirmSubmit = () => {
+    handleConfirm(
+      "Confirm Submit",
+      <WhiteTypography>
+        Are you sure you want to submit the form?
+      </WhiteTypography>,
+      handleFormSubmit
+    );
   };
 
   return (
     <>
       <FormWrapper formMethods={formMethods}>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form noValidate>
           <Stack gap={2} px={1}>
             <MetaInfoSection />
             <TopicsSection control={control} />
@@ -71,7 +89,11 @@ const AddCourse = () => {
             <Button variant="outlined" onClick={handleConfirmClear}>
               Clear
             </Button>
-            <Button variant="contained" type="submit" sx={{ px: 5 }}>
+            <Button
+              variant="contained"
+              onClick={handleConfirmSubmit}
+              sx={{ px: 5 }}
+            >
               Submit
             </Button>
           </Stack>
