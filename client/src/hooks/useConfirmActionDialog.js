@@ -18,14 +18,16 @@ const useConfirmActionDialog = (title, content, confirmCallback, maxWidth) => {
   }, [confirmCallback]);
 
   const renderConfirmActionDialog = useCallback(() => {
-    <ConfirmActionDialog
-      open={open}
-      setOpen={setOpen}
-      title={title}
-      content={content}
-      handleConfirm={handleConfirm}
-      maxWidth={maxWidth}
-    />;
+    return (
+      <ConfirmActionDialog
+        open={open}
+        setOpen={setOpen}
+        title={title}
+        content={content}
+        handleConfirm={handleConfirm}
+        maxWidth={maxWidth}
+      />
+    );
   }, [content, handleConfirm, maxWidth, open, title]);
 
   return { handleOpen, handleClose, renderConfirmActionDialog };

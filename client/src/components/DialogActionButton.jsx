@@ -2,15 +2,15 @@ import React from "react";
 import useStyles from "../hooks/useStyles";
 import { Button } from "@mui/material";
 
-const DialogActionButton = (
+const DialogActionButton = ({
   label,
   type,
   disabled,
   onClickHandler,
   onSubmit,
   variant = "text",
-  otherStyles = {}
-) => {
+  otherStyles = {},
+}) => {
   const styles = useStyles();
   return (
     <Button

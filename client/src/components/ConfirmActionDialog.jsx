@@ -1,29 +1,33 @@
 import {
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Paper,
+  Typography,
 } from "@mui/material";
-import React from "react";
+import React, { forwardRef, useRef } from "react";
 import Draggable from "react-draggable";
 import DialogActionsContainer from "../containers/DialogActionsContainer";
 import DialogActionButton from "./DialogActionButton";
 import useStyles from "../hooks/useStyles";
 
-const PaperComponent = (props) => {
+const PaperComponent = forwardRef((props, ref) => {
   return (
     <Draggable
       handle="#draggable-dialog-title"
-      cancel={'[class*="MuiDialogContent-root]'}
+      cancel={'[class*="MuiDialogContent-root"]'}
+      nodeRef={ref}
     >
       <Paper
+        ref={ref}
         {...props}
-        sx={{ bgcolor: (theme) => theme.palette.black.light, width: "100%" }}
+        sx={{ bgcolor: (theme) => theme.palette.black.main, width: "100%" }}
       />
     </Draggable>
   );
-};
+});
 
 const ConfirmActionDialog = ({
   open,
@@ -34,6 +38,7 @@ const ConfirmActionDialog = ({
   maxWidth = "md",
 }) => {
   const styles = useStyles();
+  const dialogRef = useRef(null);
 
   const handleClose = (e) => {
     e.stopPropagation();
@@ -44,24 +49,29 @@ const ConfirmActionDialog = ({
       open={open}
       onClose={handleClose}
       PaperComponent={PaperComponent}
+      PaperProps={{ ref: dialogRef }}
       fullWidth
       maxWidth={maxWidth}
     >
-      <DialogTitle sx={styles.dialog?.title}>{title}</DialogTitle>
+      <DialogTitle id="draggable-dialog-title" sx={styles.dialog?.title}>
+        {title}
+      </DialogTitle>
       <DialogContent>{content}</DialogContent>
       <DialogActions>
         <DialogActionsContainer>
-          <DialogActionButton
-            label="cancel"
-            onClickHandler={() => setOpen(false)}
-          />
-          <DialogActionButton
-            label="confirm"
-            onClickHandler={() => {
+          <Button variant="contained" onClick={() => setOpen(false)}>
+            cancel
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
               handleConfirm();
               setOpen(false);
             }}
-          />
+            color="primary"
+          >
+            confirm
+          </Button>
         </DialogActionsContainer>
       </DialogActions>
     </Dialog>

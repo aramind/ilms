@@ -5,16 +5,17 @@ const useStyles = () => {
     dialog: {
       title: {
         cursor: "move",
-        fontWeight: "bold",
+        // fontWeight: "bold",
         borderBottom: "2px solid",
-        borderColor: "primary.light",
+        borderColor: "primary.main",
         mb: 2,
         py: 1,
+        color: (theme) => theme.palette.white.main,
       },
       actionButton: {
         "&:hover": {
-          backgroundColor: "tertiary.main",
-          color: "font.black",
+          backgroundColor: "primary.light",
+          color: "",
         },
       },
     },
