@@ -1,5 +1,5 @@
 import React from "react";
-import useStyles from "../hooks/useStyles";
+
 import { Button } from "@mui/material";
 
 const DialogActionButton = ({
@@ -8,16 +8,15 @@ const DialogActionButton = ({
   disabled,
   onClickHandler,
   onSubmit,
-  variant = "text",
+  variant = "outlined",
   otherStyles = {},
 }) => {
-  const styles = useStyles();
   return (
     <Button
       disabled={disabled}
       onClick={onClickHandler}
       variant={variant}
-      sx={{ ...styles.dialog.actionButton, ...otherStyles }}
+      disableElevation
     >
       {label}
     </Button>

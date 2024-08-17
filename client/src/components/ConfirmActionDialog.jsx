@@ -59,19 +59,18 @@ const ConfirmActionDialog = ({
       <DialogContent>{content}</DialogContent>
       <DialogActions>
         <DialogActionsContainer>
-          <Button variant="contained" onClick={() => setOpen(false)}>
-            cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => {
+          <DialogActionButton
+            label="cancel"
+            onClickHandler={() => setOpen(false)}
+          />
+          <DialogActionButton
+            label="confirm"
+            onClickHandler={() => {
               handleConfirm();
               setOpen(false);
             }}
-            color="primary"
-          >
-            confirm
-          </Button>
+            variant="contained"
+          />
         </DialogActionsContainer>
       </DialogActions>
     </Dialog>
