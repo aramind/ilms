@@ -10,6 +10,7 @@ const AddCourse = () => {
   // form
   const {
     control,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -51,7 +52,7 @@ const AddCourse = () => {
         </Stack>
         <Box height="32px"></Box>
         <Stack direction="row" justifyContent="flex-end" px={1} spacing={1}>
-          <Button variant="outlined" onClick={() => alert("Clicked Clear")}>
+          <Button variant="outlined" onClick={() => reset()}>
             Clear
           </Button>
           <Button variant="contained" type="submit" sx={{ px: 5 }}>
