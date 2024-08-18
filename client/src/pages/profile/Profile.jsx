@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
 import WhiteTypography from "../../components/WhiteTypography";
-import { AuthContext } from "../../context/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 const Profile = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth } = useAuth();
   return (
     <>
       <MainLayoutWrapper>

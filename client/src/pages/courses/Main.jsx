@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Stack } from "@mui/material";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
@@ -7,10 +7,10 @@ import { mockCourses } from "../../configs/mockDB";
 import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
 import { db } from "../../configs/db";
 import PageHeader from "../../components/PageHeader";
-import { AuthContext } from "../../context/AuthProvider";
+import useAuth from "../../hooks/useAuth.js";
 
 const Main = () => {
-  const { auth } = useContext(AuthContext);
+  const { auth } = useAuth();
   const enrolledCourses = getEnrolledCourses();
 
   return (
