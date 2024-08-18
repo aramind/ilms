@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import FormWrapper from "../../wrappers/FormWrapper";
 import {
   Button,
@@ -17,12 +17,12 @@ import { useNavigate } from "react-router-dom";
 import useRootReq from "../../hooks/api/public/useRootReq";
 import useApiSend from "../../hooks/api/useApiSend";
 import LoadingPage from "../LoadingPage";
-import { AuthContext } from "../../context/AuthProvider";
+import useAuth from "../../hooks/useAuth";
 
 const SignInForm = () => {
   const { signin } = useRootReq({ isPublic: true, showAck: true });
   const navigate = useNavigate();
-  const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
 
