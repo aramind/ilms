@@ -7,8 +7,20 @@ import MetaInfoSection from "./add-course/MetaInfoSection";
 import TopicsSection from "./add-course/TopicsSection";
 import useConfirmActionDialog from "../../hooks/useConfirmActionDialog";
 import WhiteTypography from "../../components/WhiteTypography";
+import useCourseReq from "../../hooks/api/authenticated/useCourseReq";
+import useApiSend from "../../hooks/api/useApiSend";
+import LoadingPage from "../LoadingPage";
 
 const AddCourse = () => {
+  const { addCourse } = useCourseReq({ isPublic: false, showAck: true });
+
+  const { mutate: sendAddCourseReq, isLoading } = useApiSend(
+    addCourse,
+    ["courses"],
+    (data) => {
+      console.log(data?.data);
+    }
+  );
   // form
   const {
     control,
@@ -46,7 +58,7 @@ const AddCourse = () => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    sendAddCourseReq({ data });
   };
 
   const handleFormSubmit = () => {
@@ -100,6 +112,7 @@ const AddCourse = () => {
         </form>
         {/* <DevTool control={control} /> */}
       </FormWrapper>
+      <LoadingPage open={isLoading} text="Loading..." />
       {renderConfirmActionDialog()}
     </>
   );
