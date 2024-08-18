@@ -16,7 +16,7 @@ const TopBar = () => {
     >
       <Typography>Search</Typography>
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
-        {auth?.role === "admin" && (
+        {(auth?.role === "admin" || auth?.role === "super") && (
           <Button
             onClick={() => navigate("/admin")}
             variant="text"
