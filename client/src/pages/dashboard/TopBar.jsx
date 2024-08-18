@@ -2,9 +2,11 @@ import { Button, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const TopBar = () => {
   const navigate = useNavigate();
+  const { auth } = useAuth();
   return (
     <Stack
       justifyContent="space-between"
@@ -14,22 +16,24 @@ const TopBar = () => {
     >
       <Typography>Search</Typography>
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
-        <Button
-          onClick={() => navigate("/admin")}
-          variant="text"
-          p={0}
-          sx={{
-            color: (theme) => theme.palette.black.main,
-            marginRight: 2,
-            "&.MuiButtonBase-root": { padding: 1 },
-            "&:hover": {
-              bgcolor: (theme) => theme.palette.black.dark,
-              color: (theme) => theme.palette.primary.main,
-            },
-          }}
-        >
-          Admin Page
-        </Button>
+        {auth?.role === "admin" && (
+          <Button
+            onClick={() => navigate("/admin")}
+            variant="text"
+            p={0}
+            sx={{
+              color: (theme) => theme.palette.black.main,
+              marginRight: 2,
+              "&.MuiButtonBase-root": { padding: 1 },
+              "&:hover": {
+                bgcolor: (theme) => theme.palette.black.dark,
+                color: (theme) => theme.palette.primary.main,
+              },
+            }}
+          >
+            Admin Page
+          </Button>
+        )}
 
         <Tooltip title="Sign out" placement="left-end">
           <IconButton
