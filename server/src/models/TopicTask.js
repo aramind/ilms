@@ -13,7 +13,7 @@ const TopicTaskSchema = new Schema({
     type: String,
     required: true,
   },
-  link: {
+  linkInfo: {
     text: { type: String, required: true },
     link: { type: String, required: true },
     type: { type: String, required: true },
