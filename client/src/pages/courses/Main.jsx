@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Stack } from "@mui/material";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
@@ -7,15 +7,17 @@ import { mockCourses } from "../../configs/mockDB";
 import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
 import { db } from "../../configs/db";
 import PageHeader from "../../components/PageHeader";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Main = () => {
+  const { auth } = useContext(AuthContext);
   const enrolledCourses = getEnrolledCourses();
 
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
         title="Courses"
-        subtitle="Hi Robin! Good Luck with your studies!"
+        subtitle={`Hi ${auth?.firstName}! Good Luck with your studies!`}
       />
 
       <CardGroupWithTitle title="Enrolled Courses">

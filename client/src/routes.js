@@ -6,6 +6,7 @@ import Courses from "./pages/courses/Courses";
 import UnavailablePage from "./pages/unavailable/UnavailablePage";
 import Course from "./pages/course/Course";
 import Admin from "./pages/admin/Admin";
+import Profile from "./pages/profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <UnavailablePage />,
+        element: <Profile />,
       },
       {
         path: "/store",

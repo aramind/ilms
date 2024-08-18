@@ -6,20 +6,17 @@ import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
 import { db } from "../../configs/db";
 import PageHeader from "../../components/PageHeader";
-import { useGlobalState } from "../../context/GlobalStatesContextProvider";
+import { AuthContext } from "../../context/AuthProvider";
 
 const Main = () => {
+  const { auth } = useContext(AuthContext);
   const enrolledCourses = getEnrolledCourses();
-  const {
-    globalState: { currentUser },
-  } = useGlobalState();
 
-  console.log("CU", currentUser);
   return (
     <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
         title="Dashboard"
-        subtitle={`Hi ${currentUser}! Good Luck with your studies!`}
+        subtitle={`Hi ${auth?.firstName}! Good Luck with your studies!`}
       />
       <CardGroupWithTitle title="My Courses">
         <CardGroupWrapper>

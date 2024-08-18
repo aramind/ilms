@@ -17,10 +17,12 @@ import { useNavigate } from "react-router-dom";
 import useRootReq from "../../hooks/api/public/useRootReq";
 import useApiSend from "../../hooks/api/useApiSend";
 import LoadingPage from "../LoadingPage";
+import { AuthContext } from "../../context/AuthProvider";
 
 const SignInForm = () => {
   const { signin } = useRootReq({ isPublic: true, showAck: true });
   const navigate = useNavigate();
+  const { auth, setAuth } = useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -28,6 +30,8 @@ const SignInForm = () => {
     signin,
     ["user"],
     (data) => {
+      console.log(data?.data);
+      setAuth((pv) => data?.data);
       data?.success && navigate("/dashboard");
     }
   );
@@ -52,7 +56,8 @@ const SignInForm = () => {
   };
 
   const onSubmit = (data) => {
-    sendSignin({ data });
+    const response = sendSignin({ data });
+    console.log("SIGNINFORM", response);
   };
 
   return (
