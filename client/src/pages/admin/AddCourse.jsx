@@ -58,6 +58,7 @@ const AddCourse = () => {
   };
 
   const onSubmit = async (data) => {
+    console.log(data);
     sendAddCourseReq({ data });
   };
 
