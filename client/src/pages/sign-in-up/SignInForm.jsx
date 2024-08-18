@@ -56,8 +56,7 @@ const SignInForm = () => {
   };
 
   const onSubmit = (data) => {
-    const response = sendSignin({ data });
-    console.log("SIGNINFORM", response);
+    sendSignin({ data });
   };
 
   return (
