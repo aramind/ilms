@@ -7,6 +7,7 @@ const constants = {
   VERSIONS: JSON.parse(process.env.VERSIONS),
   ROLES: getRoles.keys,
   STATUSES: getStatuses.keys,
+  ACTIONS: JSON.parse(process.env.ACTIONS),
   DEFAULT_VALUES: JSON.parse(process.env.DEFAULT_VALUES),
 };
 
