@@ -30,11 +30,11 @@ const AddCourse = () => {
   } = useForm({
     mode: "onTouched",
     defaultValues: {
-      code: "123",
-      acronym: "FCS",
-      title: "Feedback and Control Systems",
-      category: "Engineering",
-      description: "FCS Description",
+      code: "",
+      acronym: "",
+      title: "",
+      category: "",
+      description: "",
       topics: [
         {
           title: "",
