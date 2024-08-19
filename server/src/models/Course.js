@@ -1,4 +1,31 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const constants = require("../config/constants");
+
+const TopicTaskSchema = new Schema({
+  action: {
+    type: String,
+    required: true,
+    enum: { values: constants?.ACTIONS },
+    default: constants?.ACTIONS?.[0],
+  },
+  instruction: {
+    type: String,
+  },
+  link: {
+    type: String,
+  },
+});
+
+const TopicSchema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String },
+  image: { type: String },
+  files: [
+    { text: { type: String }, link: { type: String }, type: { type: String } },
+  ],
+  topicTasks: [TopicTaskSchema], // Embedding TopicTaskSchema directly
+});
 
 const CourseSchema = new Schema({
   code: {
@@ -32,7 +59,8 @@ const CourseSchema = new Schema({
   image: {
     type: String,
   },
-  topics: [{ type: Schema.Types.ObjectId, ref: "Topic" }],
+  // topics: [{ type: Schema.Types.ObjectId, ref: "Topic" }],
+  topics: [TopicSchema],
   version: {
     type: String,
     required: true,

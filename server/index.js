@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const userRouter = require("./src/routes/userRouter");
 const baseRouter = require("./src/routes/baseRouter");
+const courseRouter = require("./src/routes/courseRouter");
 const credentials = require("./src/middlewares/auth/credentials");
 const corsOptions = require("./src/config/corsOptions");
 const morgan = require("morgan");
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
 
 // routes
+app.use("/v1/courses", courseRouter);
 app.use("/v1/users", userRouter);
 app.use("/v1/", baseRouter);
 
