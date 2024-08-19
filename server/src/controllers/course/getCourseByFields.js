@@ -1,6 +1,8 @@
+const Course = require("../../models/Course");
 const sendResponse = require("../../utils/sendResponse");
 
 const getCourseByFields = async (req, res) => {
+  console.log("in controller of getcoursesbyfields");
   try {
     const requestedFields = req.query.fields ? req.query.fields.split(",") : [];
 
