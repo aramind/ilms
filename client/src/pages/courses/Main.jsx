@@ -8,11 +8,25 @@ import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
 import { db } from "../../configs/db";
 import PageHeader from "../../components/PageHeader";
 import useAuth from "../../hooks/useAuth.js";
+import useApiGet from "../../hooks/api/useApiGet.js";
+import useCourseReq from "../../hooks/api/authenticated/useCourseReq.js";
 
 const Main = () => {
   const { auth } = useAuth();
   const enrolledCourses = getEnrolledCourses();
+  const { getCourse } = useCourseReq({ isPublic: true, showAck: true });
 
+  const { data: courses } = useApiGet(
+    "courses",
+    () => getCourse({ params: "/trimmed" }),
+    {
+      refetchOnWindowFocus: true,
+      retry: 3,
+    }
+  );
+
+  console.log(courses?.data);
+  // console.log(enrolledCourses);
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
@@ -34,9 +48,8 @@ const Main = () => {
       </CardGroupWithTitle>
       <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
-          {mockCourses
-            .filter((course) => !course.isPurchased)
-            .map((course) => (
+          {courses?.data &&
+            courses?.data?.map((course) => (
               <CourseCard key={course.id} {...course} courseId={course.id} />
             ))}
         </CardGroupWrapper>
