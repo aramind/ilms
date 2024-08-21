@@ -4,6 +4,7 @@ const sendResponse = require("../../utils/sendResponse");
 const comparePassword = require("../../utils/comparePassword");
 const generateAccessToken = require("../../utils/generateAccessToken");
 const generateRefreshToken = require("../../utils/generateRefreshToken");
+const getRoles = require("../../utils/getRoles");
 
 const signin = async (req, res) => {
   try {
@@ -45,7 +46,7 @@ const signin = async (req, res) => {
         {
           ...returnedUserInfo,
           token: accessToken,
-          role: getRoles.list(user.role),
+          role: getRoles.list[user.role],
         },
         200
       );
