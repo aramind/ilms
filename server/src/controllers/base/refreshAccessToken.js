@@ -3,12 +3,15 @@ const generateAccessToken = require("../../utils/generateAccessToken");
 const getRoles = require("../../utils/getRoles");
 const sendResponse = require("../../utils/sendResponse");
 const _ = require("lodash");
+const jwt = require("jsonwebtoken");
 
 const refreshAccessToken = async (req, res) => {
   console.log("IN REFRESH ACC TOKEN CONTROLLER");
 
   try {
     const refreshToken = req.cookies?.jwt;
+
+    console.log("REFRESH TOKEN", refreshAccessToken);
 
     if (!refreshToken) {
       return sendResponse.failed(res, "Unauthorized", null, 401);
@@ -24,6 +27,7 @@ const refreshAccessToken = async (req, res) => {
 
     const returnedUserInfo = _.pick(user, ["firstName", "lastName", "_id"]);
 
+    console.log(returnedUserInfo);
     jwt.verify(
       refreshToken,
       process.env.AUTH_REFRESH_TOKEN_SECRET,
@@ -31,7 +35,7 @@ const refreshAccessToken = async (req, res) => {
         if (err) {
           throw err;
         } else {
-          if (user?._id !== decoded.UserInfo._id) {
+          if (user?._id?.toString() !== decoded.UserInfo._id) {
             return sendResponse.failed(res, "Unauthorized", null, 400);
           }
           return sendResponse.success(
@@ -40,7 +44,7 @@ const refreshAccessToken = async (req, res) => {
             {
               ...returnedUserInfo,
               token: generateAccessToken(user),
-              role: getRoles.list(user.role),
+              role: getRoles.list[user.role],
             },
             200
           );
