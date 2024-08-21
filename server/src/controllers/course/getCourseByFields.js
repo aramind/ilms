@@ -6,9 +6,12 @@ const getCourseByFields = async (req, res) => {
   try {
     const requestedFields = req.query.fields ? req.query.fields.split(",") : [];
 
+    const credentials = req.credentials;
+    console.log("CREDENTIALS", credentials);
+
     const courses = await Course.find({}, requestedFields.join(" "));
 
-    if (!courses) {
+    if (!courses || courses.length === 0) {
       return sendResponse.failed(res, "No courses found", null, 404);
     }
 

@@ -29,11 +29,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
 
-// routes
+// unauthenticated routes
+app.use("/v1/", baseRouter);
+// authenticated routes
 app.use(verifyJWT);
 app.use("/v1/courses", courseRouter);
 app.use("/v1/users", userRouter);
-app.use("/v1/", baseRouter);
 
 // app.use(cors(corsOptions));
 // if not found
