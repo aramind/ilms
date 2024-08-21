@@ -57,9 +57,8 @@ const UserSchema = new Schema({
     enum: { values: constants?.STATUSES },
     default: constants?.DEFAULT_VALUES?.status,
   },
-  tokens: {
-    refresh: { type: String },
-  },
+  tokens: [{ name: { type: String }, value: { type: String } }],
+  refreshToken: { type: String, default: "" },
   version: {
     type: String,
     required: true,
