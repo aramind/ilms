@@ -18,6 +18,7 @@ import useRootReq from "../../hooks/api/public/useRootReq";
 import useApiSend from "../../hooks/api/useApiSend";
 import LoadingPage from "../LoadingPage";
 import useAuth from "../../hooks/useAuth";
+import SimpleCheckBox from "../../components/SimpleCheckBox";
 
 const SignInForm = () => {
   const { signin } = useRootReq({ isPublic: true, showAck: true });
@@ -108,6 +109,7 @@ const SignInForm = () => {
             >
               Sign In
             </Button>
+            <SimpleCheckBox label="Keep me signed in" />
           </Stack>
         </form>
       </FormWrapper>
