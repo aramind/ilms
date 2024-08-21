@@ -10,6 +10,7 @@ const courseRouter = require("./src/routes/courseRouter");
 const credentials = require("./src/middlewares/auth/credentials");
 const corsOptions = require("./src/config/corsOptions");
 const morgan = require("morgan");
+const verifyJWT = require("./src/middlewares/auth/verifyJWT");
 // env
 dotenv.config();
 // const PORT = process.env.PORT || 500;
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
 
 // routes
+app.use(verifyJWT);
 app.use("/v1/courses", courseRouter);
 app.use("/v1/users", userRouter);
 app.use("/v1/", baseRouter);

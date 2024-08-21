@@ -1,6 +1,7 @@
 import { axiosBase } from "../../api/axios";
 import { useGlobalState } from "../../context/GlobalStatesContextProvider";
 import { showAckNotification } from "../../utils/showAckNotification";
+import useAxiosPrivate from "../useAxiosPrivate";
 
 const useRequest = ({ isPublic, showAck }) => {
   const {
@@ -8,7 +9,7 @@ const useRequest = ({ isPublic, showAck }) => {
     dispatch,
   } = useGlobalState();
   const publicClient = axiosBase;
-  //   const privateClient = useAxiosPrivate()
+  const privateClient = useAxiosPrivate();
 
   const request = async (options) => {
     const onSuccess = async (res) => {
@@ -44,7 +45,7 @@ const useRequest = ({ isPublic, showAck }) => {
       }
     } else {
       try {
-        const res = await publicClient(options);
+        const res = await privateClient(options);
         return onSuccess(res);
       } catch (err) {
         return onError(err);
