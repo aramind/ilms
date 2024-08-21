@@ -9,15 +9,12 @@ const signin = async (req, res) => {
 
     const lowercaseEmail = email.toLowerCase();
 
-    const existingUser = await User.findOne({ email: lowercaseEmail });
+    const user = await User.findOne({ email: lowercaseEmail });
 
-    if (!existingUser) {
+    if (!user) {
       return sendResponse.failed(res, "Invalid Credentials!", null, 404);
     }
-    const isPasswordCorrect = await comparePassword(
-      password,
-      existingUser.password
-    );
+    const isPasswordCorrect = await comparePassword(password, user.password);
 
     if (!isPasswordCorrect) {
       return sendResponse.failed(res, "Invalid Credentials!", null, 404);
@@ -26,7 +23,7 @@ const signin = async (req, res) => {
     return sendResponse.success(
       res,
       "Log in successful",
-      _.pick(existingUser.toObject(), [
+      _.pick(user.toObject(), [
         "_id",
         "email",
         "firstName",
