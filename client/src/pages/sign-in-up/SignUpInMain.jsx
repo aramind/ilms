@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import constants from "../../configs/constants";
 import { Box, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SignInUpContent from "./SignInUpContent";
+import useAuth from "../../hooks/useAuth";
 
 const images = constants?.signUpInImages;
 
 const SignUpInMain = () => {
   const theme = useTheme();
+  const { auth, persist } = useAuth();
+  const navigate = useNavigate();
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [fadeClass, setFadeClass] = useState("fade-in");
 
@@ -30,6 +33,14 @@ const SignUpInMain = () => {
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("persist"))) {
+      console.log(persist);
+      console.log(auth);
+      navigate("/profile");
+    }
+  }, [auth, navigate, persist]);
 
   return (
     <Stack

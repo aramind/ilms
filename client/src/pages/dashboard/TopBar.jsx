@@ -57,7 +57,10 @@ const TopBar = () => {
 
         <Tooltip title="Sign out" placement="left-end">
           <IconButton
-            onClick={() => navigate("/signin")}
+            onClick={() => {
+              localStorage.setItem("persist", false);
+              navigate("/signin");
+            }}
             sx={{
               opacity: "0.7",
               color: (theme) => theme.palette.black.main,
