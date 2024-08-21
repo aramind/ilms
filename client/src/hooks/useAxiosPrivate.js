@@ -1,0 +1,42 @@
+import { useEffect } from "react";
+import useAuth from "./useAuth";
+import { axiosBase } from "../api/axios";
+
+const useAxiosPrivate = () => {
+  const { auth } = useAuth();
+
+  useEffect(() => {
+    const requestIntercept = axiosBase.interceptors.request.use(
+      (config) => {
+        if (!config.headers["Authorization"]) {
+          config.headers["Authorization"] = `Bearer ${auth?.token}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    const responseIntercept = axiosBase.interceptors.response.se(
+      (response) => response,
+      async (error) => {
+        const prevRequest = error?.config;
+        if (error?.response?.status === 403 && !prevRequest?.sent) {
+          prevRequest.sent = true;
+          const newAccessToken = "123";
+          prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+          return axiosBase(prevRequest);
+        }
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      axiosBase.interceptors.request.eject(requestIntercept);
+      axiosBase.interceptors.response.eject(responseIntercept);
+    };
+  }, [auth?.token]);
+
+  return axiosBase;
+};
+
+export default useAxiosPrivate;
