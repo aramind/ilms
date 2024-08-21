@@ -24,7 +24,7 @@ const useRootReq = ({ isPublic, showAck }) => {
     refresh: async () => {
       return request({
         url: `${url}/refresh`,
-        method: "POST",
+        method: "GET",
       });
     },
   };

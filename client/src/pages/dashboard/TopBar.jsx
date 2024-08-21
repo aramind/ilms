@@ -3,10 +3,29 @@ import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useRequest from "../../hooks/api/useRequest";
+import useRootReq from "../../hooks/api/public/useRootReq";
+import useApiSend from "../../hooks/api/useApiSend";
 
 const TopBar = () => {
   const navigate = useNavigate();
-  const { auth } = useAuth();
+  const { auth, setAuth } = useAuth();
+
+  const { refresh } = useRootReq({ isPublic: true, showAck: false });
+  const { mutate: sendRefreshRequest } = useApiSend(
+    refresh,
+    ["user"],
+    (data) => {
+      console.log("REFRESHED", data);
+      setAuth(data?.data);
+    },
+    (err) => console.error(err)
+  );
+
+  const handleRefresh = () => {
+    alert("REFRESHING...");
+    sendRefreshRequest();
+  };
   return (
     <Stack
       justifyContent="space-between"
@@ -14,7 +33,8 @@ const TopBar = () => {
       width="100%"
       alignItems="center"
     >
-      <Typography>Search</Typography>
+      {/* <Typography>Search</Typography> */}
+      <Button onClick={handleRefresh}>REFRESH</Button>
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         {(auth?.role === "admin" || auth?.role === "super") && (
           <Button

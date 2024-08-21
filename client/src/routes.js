@@ -7,6 +7,7 @@ import UnavailablePage from "./pages/unavailable/UnavailablePage";
 import Course from "./pages/course/Course";
 import Admin from "./pages/admin/Admin";
 import Profile from "./pages/profile/Profile";
+import PersistLoginComponent from "./components/PersistLoginComponent";
 
 const router = createBrowserRouter([
   {
@@ -14,51 +15,57 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "/dashboard",
-        element: <Dashboard />,
+        element: <PersistLoginComponent />,
+        children: [
+          {
+            path: "/dashboard",
+            element: <Dashboard />,
+          },
+          { path: "/courses/:courseId", element: <Course /> },
+          {
+            path: "/courses",
+            element: <Courses />,
+          },
+          {
+            path: "/admin",
+            element: <Admin />,
+          },
+          // {
+          //   path: "/courses/:courseId",
+          //   element: <Course />,
+          // },
+          // {
+          //   path: "/courses",
+          //   element: <Courses />,
+          //   children: [{ path: ":courseId", element: <Course /> }],
+          // },
+          {
+            path: "/messages",
+            element: <UnavailablePage />,
+          },
+          {
+            path: "/calendar",
+            element: <UnavailablePage />,
+          },
+          {
+            path: "/tools",
+            element: <UnavailablePage />,
+          },
+          {
+            path: "/files",
+            element: <UnavailablePage />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/store",
+            element: <UnavailablePage />,
+          },
+        ],
       },
-      { path: "/courses/:courseId", element: <Course /> },
-      {
-        path: "/courses",
-        element: <Courses />,
-      },
-      {
-        path: "/admin",
-        element: <Admin />,
-      },
-      // {
-      //   path: "/courses/:courseId",
-      //   element: <Course />,
-      // },
-      // {
-      //   path: "/courses",
-      //   element: <Courses />,
-      //   children: [{ path: ":courseId", element: <Course /> }],
-      // },
-      {
-        path: "/messages",
-        element: <UnavailablePage />,
-      },
-      {
-        path: "/calendar",
-        element: <UnavailablePage />,
-      },
-      {
-        path: "/tools",
-        element: <UnavailablePage />,
-      },
-      {
-        path: "/files",
-        element: <UnavailablePage />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/store",
-        element: <UnavailablePage />,
-      },
+
       // sign in up
       {
         path: "signup",

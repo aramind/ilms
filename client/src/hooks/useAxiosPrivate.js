@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import useAuth from "./useAuth";
+import useRefreshToken from "./useRefreshToken";
 import { axiosBase } from "../api/axios";
 
 const useAxiosPrivate = () => {
+  const refresh = useRefreshToken();
+
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -22,7 +25,7 @@ const useAxiosPrivate = () => {
         const prevRequest = error?.config;
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-          const newAccessToken = "123";
+          const newAccessToken = await refresh();
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
           return axiosBase(prevRequest);
         }
