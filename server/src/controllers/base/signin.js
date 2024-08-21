@@ -2,6 +2,8 @@ const User = require("../../models/User");
 const _ = require("lodash");
 const sendResponse = require("../../utils/sendResponse");
 const comparePassword = require("../../utils/comparePassword");
+const generateAccessToken = require("../../utils/generateAccessToken");
+const generateRefreshToken = require("../../utils/generateRefreshToken");
 
 const signin = async (req, res) => {
   try {
@@ -18,26 +20,39 @@ const signin = async (req, res) => {
 
     if (!isPasswordCorrect) {
       return sendResponse.failed(res, "Invalid Credentials!", null, 404);
-    }
+    } else {
+      // create and attach jwts
 
-    return sendResponse.success(
-      res,
-      "Log in successful",
-      _.pick(user.toObject(), [
-        "_id",
-        "email",
-        "firstName",
-        "lastName",
-        "role",
-        "accessLevel",
-        "status",
-        "enrolledCourses",
-      ]),
-      200
-    );
+      const accessToken = generateAccessToken(user);
+      const refreshToken = generateRefreshToken(user);
+
+      user.refreshToken = refreshToken;
+
+      const updatedUser = await user.save();
+
+      res.cookie("jwt", refreshToken, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      });
+
+      const returnedUserInfo = _.pick(user, ["firstName", "lastName", "_id"]);
+
+      return sendResponse.success(
+        res,
+        "Log in successful",
+        {
+          ...returnedUserInfo,
+          token: accessToken,
+          role: getRoles.list(user.role),
+        },
+        200
+      );
+    }
   } catch (error) {
     console.error(error);
-    return sendResponse.failed(res, "Request Error", error, 500);
+    return sendResponse.failed(res, "Error signing in", error, 500);
   }
 };
 
