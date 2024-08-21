@@ -14,7 +14,7 @@ import useCourseReq from "../../hooks/api/authenticated/useCourseReq.js";
 const Main = () => {
   const { auth } = useAuth();
   const enrolledCourses = getEnrolledCourses();
-  const { getCourse } = useCourseReq({ isPublic: true, showAck: true });
+  const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
 
   const { data: courses } = useApiGet(
     "courses",
@@ -50,7 +50,7 @@ const Main = () => {
         <CardGroupWrapper>
           {courses?.data &&
             courses?.data?.map((course) => (
-              <CourseCard key={course.id} {...course} courseId={course.id} />
+              <CourseCard key={course.id} {...course} courseId={course._id} />
             ))}
         </CardGroupWrapper>
       </CardGroupWithTitle>
