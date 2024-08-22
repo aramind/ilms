@@ -36,9 +36,7 @@ const SignUpInMain = () => {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("persist"))) {
-      console.log(persist);
-      console.log(auth);
-      navigate("/profile");
+      navigate("/dashboard");
     }
   }, [auth, navigate, persist]);
 
