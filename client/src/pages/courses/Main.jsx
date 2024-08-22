@@ -54,8 +54,8 @@ const Main = () => {
       </CardGroupWithTitle>
       <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
-          {courses?.data &&
-            courses?.data?.map((course) => (
+          {courses &&
+            courses?.map((course) => (
               <CourseCardTest
                 key={course._id}
                 {...course}

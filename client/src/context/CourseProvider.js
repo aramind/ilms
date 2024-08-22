@@ -37,12 +37,12 @@ const CourseProvider = ({ children }) => {
 
   // Determine the value to pass to the context
   const contextValue = {
-    courses: courses || [],
+    courses: courses?.data || [],
     isLoading,
     isError,
   };
 
-  console.log(courses);
+  console.log(contextValue.courses);
   return (
     <CourseContext.Provider value={contextValue}>
       {children}
