@@ -26,12 +26,18 @@ const CourseCardTest = ({
   const handleClick = () => {
     if (isEnrolled) {
       navigate(`/courses/${courseId}`, { replace: true });
+    } else {
+      alert("enrolling");
     }
+  };
+
+  const handleEnroll = () => {
+    console.log("ENROLLING course:", courseId);
   };
 
   return (
     <ButtonBase
-      onClick={handleClick}
+      onClick={isEnrolled ? handleClick : null}
       disableRipple={!isEnrolled}
       sx={{
         textAlign: "start",
@@ -111,6 +117,7 @@ const CourseCardTest = ({
             flex={1}
           >
             <Button
+              onClick={handleEnroll}
               variant="contained"
               fullWidth
               size="small"
@@ -121,7 +128,7 @@ const CourseCardTest = ({
                 minWidth: 80, // Minimum width of the button
               }}
             >
-              BUY
+              ENROLL
             </Button>
             <Stack direction="row" justifyContent="space-between" p="2px">
               <Typography color="primary" fontWeight="bold">
