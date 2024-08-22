@@ -7,13 +7,12 @@ const useCourseReq = ({ isPublic, showAck }) => {
   const request = useRequest({ isPublic, showAck });
 
   const req = {
-    addCourse: async ({ data }) => {
-      return request({
+    addCourse: async ({ data }) =>
+      request({
         url,
         method: "POST",
         data,
-      });
-    },
+      }),
     getCourse: async ({ params }) =>
       request({
         url: `${url}${params}`,
