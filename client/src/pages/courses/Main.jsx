@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Stack } from "@mui/material";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
@@ -16,22 +16,24 @@ import useCourseProvider from "../../hooks/useCourseProvider.js";
 const Main = () => {
   const { auth } = useAuth();
   const enrolledCourses = getEnrolledCourses();
-  // const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
-
-  // const { data: courses } = useApiGet(
-  //   "courses",
-  //   () => getCourse({ params: "/trimmed" }),
-  //   {
-  //     refetchOnWindowFocus: true,
-  //     retry: 3,
-  //   }
-  // );
-
-  // console.log(courses?.data);
-  // console.log(enrolledCourses);
   const { courses } = useCourseProvider();
 
-  console.log(courses);
+  // Convert arrayA to a Set for efficient lookup
+  const enrolledCourseIds = useMemo(
+    () => new Set(auth?.enrolledCourses || []),
+    [auth?.enrolledCourses]
+  );
+
+  const enrolledCoursesDetails = useMemo(
+    () => courses.filter((course) => enrolledCourseIds.has(course._id)),
+    [courses, enrolledCourseIds]
+  );
+  const unEnrolledCoursesDetails = useMemo(
+    () => courses.filter((course) => !enrolledCourseIds.has(course._id)),
+    [courses, enrolledCourseIds]
+  );
+
+  // console.log(courses);
 
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
@@ -54,12 +56,13 @@ const Main = () => {
       </CardGroupWithTitle>
       <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
-          {courses &&
-            courses?.map((course) => (
+          {unEnrolledCoursesDetails &&
+            unEnrolledCoursesDetails?.map((course) => (
               <CourseCardTest
                 key={course._id}
                 {...course}
                 courseId={course._id}
+                isEnrolled={false}
               />
             ))}
         </CardGroupWrapper>

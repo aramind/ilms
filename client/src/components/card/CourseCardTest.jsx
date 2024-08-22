@@ -6,18 +6,17 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useMemo } from "react";
+import React from "react";
 import ProgressIndicator from "./ProgressIndicator";
 import WhiteTypography from "../WhiteTypography";
 import useIsLandsCape from "../../hooks/useIsLandsCape";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 
 const CourseCardTest = ({
   title,
   description,
   progress,
-  isPurchased = "true",
+  isEnrolled,
   courseId,
   price,
 }) => {
@@ -25,7 +24,7 @@ const CourseCardTest = ({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (isPurchased) {
+    if (isEnrolled) {
       navigate(`/courses/${courseId}`, { replace: true });
     }
   };
@@ -33,10 +32,10 @@ const CourseCardTest = ({
   return (
     <ButtonBase
       onClick={handleClick}
-      disableRipple={!isPurchased}
+      disableRipple={!isEnrolled}
       sx={{
         textAlign: "start",
-        cursor: isPurchased ? "pointer" : "default",
+        cursor: isEnrolled ? "pointer" : "default",
       }}
     >
       <Stack
@@ -77,7 +76,7 @@ const CourseCardTest = ({
         >
           <WhiteTypography variant="subtitle2">{description}</WhiteTypography>
         </Box>
-        {isPurchased ? (
+        {isEnrolled ? (
           <>
             <Box width={1} mt={2}>
               <ProgressIndicator value={progress} />
