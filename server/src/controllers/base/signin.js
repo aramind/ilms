@@ -38,7 +38,12 @@ const signin = async (req, res) => {
         maxAge: 24 * 60 * 60 * 1000,
       });
 
-      const returnedUserInfo = _.pick(user, ["firstName", "lastName", "_id"]);
+      const returnedUserInfo = _.pick(user, [
+        "firstName",
+        "lastName",
+        "_id",
+        "enrolledCourses",
+      ]);
 
       return sendResponse.success(
         res,
