@@ -8,6 +8,7 @@ import Course from "./pages/course/Course";
 import Admin from "./pages/admin/Admin";
 import Profile from "./pages/profile/Profile";
 import PersistLoginComponent from "./components/PersistLoginComponent";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -18,54 +19,54 @@ const router = createBrowserRouter([
         element: <PersistLoginComponent />,
         children: [
           {
-            path: "/dashboard",
-            element: <Dashboard />,
-          },
-          { path: "/courses/:courseId", element: <Course /> },
-          {
-            path: "/courses",
-            element: <Courses />,
-          },
-          {
-            path: "/admin",
-            element: <Admin />,
-          },
-          // {
-          //   path: "/courses/:courseId",
-          //   element: <Course />,
-          // },
-          // {
-          //   path: "/courses",
-          //   element: <Courses />,
-          //   children: [{ path: ":courseId", element: <Course /> }],
-          // },
-          {
-            path: "/messages",
-            element: <UnavailablePage />,
-          },
-          {
-            path: "/calendar",
-            element: <UnavailablePage />,
-          },
-          {
-            path: "/tools",
-            element: <UnavailablePage />,
-          },
-          {
-            path: "/files",
-            element: <UnavailablePage />,
-          },
-          {
-            path: "/profile",
-            element: <Profile />,
+            element: <ProtectedRoute allowedRoles={["1991", "2013", "2025"]} />,
+            children: [
+              {
+                path: "/dashboard",
+                element: <Dashboard />,
+              },
+              { path: "/courses/:courseId", element: <Course /> },
+              {
+                path: "/courses",
+                element: <Courses />,
+              },
+              {
+                path: "/messages",
+                element: <UnavailablePage />,
+              },
+              {
+                path: "/calendar",
+                element: <UnavailablePage />,
+              },
+              {
+                path: "/tools",
+                element: <UnavailablePage />,
+              },
+              {
+                path: "/files",
+                element: <UnavailablePage />,
+              },
+              {
+                path: "/profile",
+                element: <Profile />,
+              },
+              {
+                path: "/store",
+                element: <UnavailablePage />,
+              },
+            ],
           },
           {
-            path: "/store",
-            element: <UnavailablePage />,
+            element: <ProtectedRoute allowedRoles={["1991", "2013"]} />,
+            children: [
+              {
+                path: "/admin",
+                element: <Admin />,
+              },
+            ],
           },
         ],
       },
-
       // sign in up
       {
         path: "signup",
