@@ -34,7 +34,7 @@ const Main = () => {
     [courses, enrolledCourseIds]
   );
 
-  console.log(enrolledCoursesDetails);
+  // console.log(enrolledCoursesDetails);
 
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
