@@ -28,7 +28,12 @@ const UserSchema = new Schema({
   enrolledCourses: [
     {
       courseId: { type: Schema.Types.ObjectId, ref: "Course" },
-
+      status: {
+        type: String,
+        required: true,
+        default: constants?.ENROLLED_COURSE_STATUSES?.[0],
+        enum: { values: constants?.ENROLLED_COURSE_STATUSES },
+      },
       progress: [
         {
           topicId: { type: Schema.Types.ObjectId, ref: "Topic" },
