@@ -12,6 +12,7 @@ import useApiGet from "../../hooks/api/useApiGet.js";
 import useCourseReq from "../../hooks/api/authenticated/useCourseReq.js";
 import CourseCardTest from "../../components/card/CourseCardTest.jsx";
 import useCourseProvider from "../../hooks/useCourseProvider.js";
+import WhiteTypography from "../../components/WhiteTypography.jsx";
 
 const Main = () => {
   const { auth } = useAuth();
@@ -33,7 +34,7 @@ const Main = () => {
     [courses, enrolledCourseIds]
   );
 
-  // console.log(courses);
+  console.log(enrolledCoursesDetails);
 
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
@@ -43,16 +44,31 @@ const Main = () => {
       />
 
       <CardGroupWithTitle title="Enrolled Courses">
-        <CardGroupWrapper>
-          {enrolledCourses?.map((course) => (
+        {enrolledCoursesDetails?.length > 0 ? (
+          <CardGroupWrapper>
+            {/* {enrolledCourses?.map((course) => (
             <CourseCard
               key={course.id}
               {...course}
               courseId={course.id}
               progress={getCourseProgress(course?.id, db?.users?.[0]?.id)}
             />
-          ))}
-        </CardGroupWrapper>
+          ))} */}
+            {enrolledCoursesDetails &&
+              enrolledCoursesDetails.map((course) => (
+                <CourseCardTest
+                  key={course._id}
+                  {...course}
+                  courseId={course._id}
+                  isEnrolled={true}
+                />
+              ))}
+          </CardGroupWrapper>
+        ) : (
+          <WhiteTypography>
+            You are not enrolled yet in any course
+          </WhiteTypography>
+        )}
       </CardGroupWithTitle>
       <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
