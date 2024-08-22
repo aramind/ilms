@@ -11,6 +11,9 @@ import ProgressIndicator from "./ProgressIndicator";
 import WhiteTypography from "../WhiteTypography";
 import useIsLandsCape from "../../hooks/useIsLandsCape";
 import { useNavigate } from "react-router-dom";
+import useUserReq from "../../hooks/api/authenticated/useUserReq";
+import useApiSend from "../../hooks/api/useApiSend";
+import useAuth from "../../hooks/useAuth";
 
 const CourseCardTest = ({
   title,
@@ -22,6 +25,7 @@ const CourseCardTest = ({
 }) => {
   const isLandscape = useIsLandsCape();
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   const handleClick = () => {
     if (isEnrolled) {
@@ -31,8 +35,19 @@ const CourseCardTest = ({
     }
   };
 
+  const { enrollCourse } = useUserReq({ isPublic: false, showAck: true });
+
+  const {
+    mutate: sendEnrollCourse,
+    // isLoading,
+    // isError,
+  } = useApiSend(enrollCourse, ["courses"], (data) => {
+    console.log(data?.data);
+  });
+
   const handleEnroll = () => {
-    console.log("ENROLLING course:", courseId);
+    // console.log("ENROLLING course:", courseId);
+    sendEnrollCourse({ userId: auth?._id, courseId: courseId });
   };
 
   return (
