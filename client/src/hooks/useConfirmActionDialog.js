@@ -31,7 +31,7 @@ const useConfirmActionDialog = (maxWidth) => {
   const renderConfirmActionDialog = useCallback(() => {
     return (
       <ConfirmActionDialog
-        open={open}
+        open={open || false}
         setOpen={setOpen}
         title={dialogProps.title}
         content={dialogProps.content}

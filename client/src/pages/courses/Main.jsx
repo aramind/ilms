@@ -10,23 +10,29 @@ import PageHeader from "../../components/PageHeader";
 import useAuth from "../../hooks/useAuth.js";
 import useApiGet from "../../hooks/api/useApiGet.js";
 import useCourseReq from "../../hooks/api/authenticated/useCourseReq.js";
+import CourseCardTest from "../../components/card/CourseCardTest.jsx";
+import useCourseProvider from "../../hooks/useCourseProvider.js";
 
 const Main = () => {
   const { auth } = useAuth();
   const enrolledCourses = getEnrolledCourses();
-  const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
+  // const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
 
-  const { data: courses } = useApiGet(
-    "courses",
-    () => getCourse({ params: "/trimmed" }),
-    {
-      refetchOnWindowFocus: true,
-      retry: 3,
-    }
-  );
+  // const { data: courses } = useApiGet(
+  //   "courses",
+  //   () => getCourse({ params: "/trimmed" }),
+  //   {
+  //     refetchOnWindowFocus: true,
+  //     retry: 3,
+  //   }
+  // );
 
-  console.log(courses?.data);
+  // console.log(courses?.data);
   // console.log(enrolledCourses);
+  const { courses } = useCourseProvider();
+
+  console.log(courses);
+
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
@@ -50,7 +56,11 @@ const Main = () => {
         <CardGroupWrapper>
           {courses?.data &&
             courses?.data?.map((course) => (
-              <CourseCard key={course.id} {...course} courseId={course._id} />
+              <CourseCardTest
+                key={course._id}
+                {...course}
+                courseId={course._id}
+              />
             ))}
         </CardGroupWrapper>
       </CardGroupWithTitle>

@@ -28,7 +28,7 @@ const PaperComponent = forwardRef((props, ref) => {
 });
 
 const ConfirmActionDialog = ({
-  open,
+  open = false,
   setOpen,
   title = "",
   content = "",
@@ -44,7 +44,7 @@ const ConfirmActionDialog = ({
 
   return (
     <Dialog
-      open={open}
+      open={open || false}
       onClose={handleClose}
       PaperComponent={PaperComponent}
       PaperProps={{ ref: dialogRef }}

@@ -7,6 +7,7 @@ import greenTheme from "./themes/green";
 import { QueryClient, QueryClientProvider } from "react-query";
 import GlobalStatesContextProvider from "./context/GlobalStatesContextProvider";
 import AuthProvider from "./context/AuthProvider";
+import CourseProvider from "./context/CourseProvider";
 
 const queryClient = new QueryClient();
 
@@ -16,9 +17,11 @@ root.render(
     <AuthProvider>
       <GlobalStatesContextProvider>
         <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={greenTheme}>
-            <App />
-          </ThemeProvider>
+          <CourseProvider>
+            <ThemeProvider theme={greenTheme}>
+              <App />
+            </ThemeProvider>
+          </CourseProvider>
         </QueryClientProvider>
       </GlobalStatesContextProvider>
     </AuthProvider>

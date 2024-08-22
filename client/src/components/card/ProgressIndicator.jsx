@@ -1,7 +1,7 @@
 import { LinearProgress, linearProgressClasses } from "@mui/material";
 import React from "react";
 
-const ProgressIndicator = ({ value, height = 10, borderRadius = 5 }) => {
+const ProgressIndicator = ({ value = 0, height = 10, borderRadius = 5 }) => {
   return (
     <LinearProgress
       variant="determinate"
