@@ -36,7 +36,7 @@ const TopBar = () => {
       {/* <Typography>Search</Typography> */}
       <Button onClick={handleRefresh}>REFRESH</Button>
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
-        {(auth?.role === "admin" || auth?.role === "super") && (
+        {(auth?.role === "1991" || auth?.role === "2013") && (
           <Button
             onClick={() => navigate("/admin")}
             variant="text"
