@@ -17,7 +17,7 @@ const constants = {
   API_URL: {
     ROOT: `${process.env.REACT_APP_API_URL}/v1`,
     COURSE: `${process.env.REACT_APP_API_URL}/v1/courses`,
-    USER: `${process.env.REACT_APP_API_URL}/v1/user`,
+    USER: `${process.env.REACT_APP_API_URL}/v1/users`,
   },
 };
 
