@@ -8,5 +8,6 @@ router.patch(
   "/:userId/enrolledCourses/:courseId/enroll",
   userController.enrollCourse
 );
+router.get("/:userId/enrolledCourses");
 
 module.exports = router;
