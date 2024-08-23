@@ -35,7 +35,7 @@ const Main = () => {
   );
 
   // console.log(enrolledCoursesDetails);
-
+  console.log(auth);
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader

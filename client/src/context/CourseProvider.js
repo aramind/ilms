@@ -35,6 +35,12 @@ const CourseProvider = ({ children }) => {
     enabled: !!auth?._id,
   });
 
+  // const {
+  //   data: enrolledCourses,
+  //   isLoadingEnrolledCoursesReq,
+  //   isErrorEnrolledCoursesReq
+  // } = useApiGet("enrolledCourses", () => getEnrolledCourse)
+
   // Determine the value to pass to the context
   const contextValue = {
     courses: courses?.data || [],

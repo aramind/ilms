@@ -9,6 +9,7 @@ import Admin from "./pages/admin/Admin";
 import Profile from "./pages/profile/Profile";
 import PersistLoginComponent from "./components/PersistLoginComponent";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LandingPage from "./pages/landing/LandingPage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
           {
             element: <ProtectedRoute allowedRoles={["1991", "2013", "2025"]} />,
             children: [
+              {
+                path: "",
+                element: <LandingPage />,
+              },
               {
                 path: "/dashboard",
                 element: <Dashboard />,
@@ -76,10 +81,10 @@ const router = createBrowserRouter([
         path: "signin",
         element: <SignUpInMain />,
       },
-      {
-        path: "",
-        element: <Navigate to="/signin" />,
-      },
+      // {
+      //   path: "",
+      //   element: <Navigate to="/signin" />,
+      // },
 
       // {
       //   path: "*",

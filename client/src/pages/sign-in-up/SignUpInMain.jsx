@@ -5,12 +5,14 @@ import { useTheme } from "@emotion/react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SignInUpContent from "./SignInUpContent";
 import useAuth from "../../hooks/useAuth";
+import useRefreshToken from "../../hooks/useRefreshToken";
 
 const images = constants?.signUpInImages;
 
 const SignUpInMain = () => {
   const theme = useTheme();
-  const { auth, persist } = useAuth();
+  const { auth } = useAuth();
+  const refresh = useRefreshToken();
   const navigate = useNavigate();
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [fadeClass, setFadeClass] = useState("fade-in");
@@ -33,13 +35,6 @@ const SignUpInMain = () => {
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem("persist"))) {
-      navigate("/dashboard");
-    }
-  }, [auth, navigate, persist]);
-
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}
