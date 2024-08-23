@@ -42,7 +42,7 @@ const signin = async (req, res) => {
         "firstName",
         "lastName",
         "_id",
-        "enrolledCourses",
+        // "enrolledCourses",
       ]);
 
       return sendResponse.success(
