@@ -2,14 +2,17 @@ const User = require("../../models/User");
 const sendResponse = require("../../utils/sendResponse");
 
 const getEnrolledCourses = async (req, res) => {
+  console.log("IN ENROLLED COURSES CONTROLLER");
   try {
     const credentials = req.credentials;
 
-    const enrolledCourses = await User.findById(credentials?._id).populate({
-      path: "enrolledCourses.course",
-    });
+    const enrolledCourses = await User.findById(credentials?._id)
+      .populate({
+        path: "enrolledCourses.course",
+      })
+      .select("enrolledCourses -_id");
 
-    console.log(enrolledCourses);
+    console.log(enrolledCourses?.data);
 
     if (!enrolledCourses) {
       return sendResponse.failed(

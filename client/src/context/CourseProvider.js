@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useApiGet from "../hooks/api/useApiGet";
 import useCourseReq from "../hooks/api/authenticated/useCourseReq";
+import useUserReq from "../hooks/api/authenticated/useUserReq";
 import useAuth from "../hooks/useAuth";
 
 // Define a type for the context value if using TypeScript
@@ -24,6 +25,7 @@ export const useCourses = () => {
 const CourseProvider = ({ children }) => {
   const { auth } = useAuth();
   const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
+  const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
 
   const {
     data: courses,
@@ -35,20 +37,31 @@ const CourseProvider = ({ children }) => {
     enabled: !!auth?._id,
   });
 
-  // const {
-  //   data: enrolledCourses,
-  //   isLoadingEnrolledCoursesReq,
-  //   isErrorEnrolledCoursesReq
-  // } = useApiGet("enrolledCourses", () => getEnrolledCourse)
+  const {
+    data: enrolledCourses,
+    isLoadingEnrolledCoursesReq,
+    isErrorEnrolledCoursesReq,
+  } = useApiGet("enrolledCourses", getEnrolledCourses, {
+    refetchOnWindowFocus: true,
+    retry: 3,
+    enabled: !!auth?._id,
+  });
 
   // Determine the value to pass to the context
   const contextValue = {
     courses: courses?.data || [],
     isLoading,
     isError,
+    enrolledCourses: enrolledCourses?.data?.enrolledCourses?.filter(
+      (c) => c.status === "enrolled"
+    ),
+    isLoadingEnrolledCoursesReq,
+    isErrorEnrolledCoursesReq,
+    pendingCourses: enrolledCourses?.data?.enrolledCourses?.filter(
+      (c) => c.status === "pending"
+    ),
   };
 
-  console.log(contextValue.courses);
   return (
     <CourseContext.Provider value={contextValue}>
       {children}
