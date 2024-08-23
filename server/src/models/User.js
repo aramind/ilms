@@ -27,7 +27,7 @@ const UserSchema = new Schema({
   profilePicture: { type: String },
   enrolledCourses: [
     {
-      courseId: { type: Schema.Types.ObjectId, ref: "Course" },
+      course: { type: Schema.Types.ObjectId, ref: "Course" },
       status: {
         type: String,
         required: true,
@@ -36,7 +36,7 @@ const UserSchema = new Schema({
       },
       progress: [
         {
-          topicId: { type: Schema.Types.ObjectId, ref: "Topic" },
+          topics: { type: Schema.Types.ObjectId, ref: "Topic" },
           completedTopics: [{ type: Schema.Types.ObjectId, ref: "Topic" }],
           completedTopicTasks: [
             { type: Schema.Types.ObjectId, ref: "TopicTask" },
