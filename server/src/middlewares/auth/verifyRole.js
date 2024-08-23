@@ -10,13 +10,13 @@ const verifyRole = (allowedRoles) => {
     }
 
     const roleName = getKeyByValue(getRoles.list, role);
-    console.log(roleName);
+    // console.log(roleName);
 
     if (!allowedRoles.includes(roleName)) {
       return sendResponse.failed(res, "Unauthorized, null, 403");
     }
 
-    console.log("passed verify role");
+    // console.log("passed verify role");
     next();
   };
 };
