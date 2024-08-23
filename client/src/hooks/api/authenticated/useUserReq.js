@@ -13,6 +13,12 @@ const useUserReq = ({ isPublic, showAck }) => {
         method: "PATCH",
         data,
       }),
+
+    getEnrolledCourses: async () =>
+      request({
+        url: `${url}/enrolledCourses`,
+        method: "GET",
+      }),
   };
 
   return req;
