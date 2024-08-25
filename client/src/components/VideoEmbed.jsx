@@ -50,18 +50,27 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
           <CloseRoundedIcon />
         </IconButton>
       </Box>
-      <iframe
-        style={{
-          border: "none", // Remove any borders
-          outline: "none", // Remove any outlines
-        }}
-        src={videoUrl}
-        width="100%"
-        height="100%"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        title="Video Player"
-      ></iframe>
+      <Stack direction="column" spacing={1} width={1}>
+        <iframe
+          style={{
+            border: "none", // Remove any borders
+            outline: "none", // Remove any outlines
+          }}
+          src={videoUrl}
+          width="100%"
+          height="100%"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          title="Video Player"
+        ></iframe>
+        <a
+          href="https://drive.google.com/file/d/1Pl_VgZoUmQvNNXQtrflOjE392NUsP9W3/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Video
+        </a>
+      </Stack>
     </Stack>
   );
 };
