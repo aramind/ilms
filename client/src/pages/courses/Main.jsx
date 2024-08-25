@@ -17,10 +17,10 @@ import WhiteTypography from "../../components/WhiteTypography.jsx";
 const Main = () => {
   const { auth } = useAuth();
   // const enrolledCourses = getEnrolledCourses();
-  const { courses, enrolledCourses, pendingCourses } = useCourseProvider();
+  const { courses, enrolledCourses } = useCourseProvider();
 
   // console.log(enrolledCoursesDetails);
-  console.log(enrolledCourses);
+  console.log("ENROLLED COURSES", enrolledCourses);
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
@@ -42,9 +42,9 @@ const Main = () => {
             {enrolledCourses &&
               enrolledCourses.map((course) => (
                 <CourseCardTest
-                  key={course.course._id}
+                  key={course._id}
                   {...course.course}
-                  courseId={course.course._id}
+                  courseId={course._id}
                   isEnrolled={true}
                 />
               ))}

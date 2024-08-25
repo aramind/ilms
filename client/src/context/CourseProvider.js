@@ -47,7 +47,7 @@ const CourseProvider = ({ children }) => {
     enabled: !!auth?._id,
   });
 
-  console.log(enrolledCourses);
+  // console.log(enrolledCourses);
   // Determine the value to pass to the context
   const contextValue = {
     courses: courses?.data || [],
@@ -63,6 +63,7 @@ const CourseProvider = ({ children }) => {
     ),
   };
 
+  console.log("COURSE CONTECT", contextValue);
   return (
     <CourseContext.Provider value={contextValue}>
       {children}
