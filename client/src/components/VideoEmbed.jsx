@@ -11,7 +11,9 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
   const mobileHeight = isLandscape ? "80vh" : "63vw";
 
   console.log(videoId);
-  const videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+  // const videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+
+  const videoUrl = `https://www.youtube.com/embed/${videoId}`;
 
   return (
     <Stack
