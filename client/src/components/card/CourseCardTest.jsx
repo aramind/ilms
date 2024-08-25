@@ -50,6 +50,7 @@ const CourseCardTest = ({
     sendEnrollCourse({ userId: auth?._id, courseId: courseId });
   };
 
+  console.log(courseId);
   return (
     <ButtonBase
       onClick={isEnrolled ? handleClick : null}

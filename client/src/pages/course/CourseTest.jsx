@@ -42,7 +42,7 @@ const getIcon = (action) => {
       return <InsertDriveFileTwoToneIcon />;
   }
 };
-const Course = () => {
+const CourseTest = () => {
   const { enrolledCourses } = useCourseProvider();
   const [course, setCourse] = useState();
   const { courseId } = useParams();
@@ -97,8 +97,8 @@ const Course = () => {
         </Box>
 
         <Stack direction="row" spacing={1} width={1}>
-          {updatedTopics?.map((topic) => (
-            <Box width={1}>
+          {course?.course?.topics?.map((topic, index) => (
+            <Box width={1} key={index}>
               <ProgressIndicator
                 value={topic?.progress?.percentage || 0}
                 height="24px"
@@ -106,7 +106,7 @@ const Course = () => {
             </Box>
           ))}
         </Stack>
-        {updatedTopics?.map((topic, index) => (
+        {course?.course?.topics?.map((topic, index) => (
           <Accordion
             key={index}
             sx={localStyles.accordion}
@@ -145,6 +145,7 @@ const Course = () => {
               <Stack width={1}>
                 {topic?.topicTasks?.map((task, j) => (
                   <Stack
+                    key={j}
                     width={1}
                     direction="row"
                     justifyContent="space-between"
@@ -158,12 +159,10 @@ const Course = () => {
                       color={(theme) => theme.palette.white.main}
                       sx={{ ...localStyles.linkHover }}
                     >
-                      <Box key={j} ml={1}>
+                      <Box ml={1}>
                         {index + 1}.{j + 1}.
                       </Box>
-                      <Box key={j} ml={1}>
-                        {task.instruction}{" "}
-                      </Box>
+                      <Box ml={1}>{task.instruction} </Box>
 
                       {task?.action === "watch" ? (
                         <IconButton
@@ -237,7 +236,7 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default CourseTest;
 
 const localStyles = {
   accordion: {

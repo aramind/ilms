@@ -11,6 +11,7 @@ import PersistLoginComponent from "./components/PersistLoginComponent";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/landing/LandingPage";
 import NotFound from "./pages/fallback/NotFound";
+import CourseTest from "./pages/course/CourseTest";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
                 path: "/dashboard",
                 element: <Dashboard />,
               },
-              { path: "/courses/:courseId", element: <Course /> },
+              { path: "/courses/:courseId", element: <CourseTest /> },
               {
                 path: "/courses",
                 element: <Courses />,
