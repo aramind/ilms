@@ -26,6 +26,7 @@ import SmartDisplayTwoToneIcon from "@mui/icons-material/SmartDisplayTwoTone";
 import QuizTwoToneIcon from "@mui/icons-material/QuizTwoTone";
 import InsertDriveFileTwoToneIcon from "@mui/icons-material/InsertDriveFileTwoTone";
 import VideoEmbed from "../../components/VideoEmbed";
+import VideoEmbedRVP from "../../components/VideoEmbedRVP";
 import useCourseProvider from "../../hooks/useCourseProvider";
 
 const getIcon = (action) => {
@@ -94,6 +95,9 @@ const CourseTest = () => {
 
         <Box className="centered-content" width={1}>
           {videoId && <VideoEmbed videoId={videoId} setVideoId={setVideoId} />}
+          {/* {videoId && (
+            <VideoEmbedRVP videoId={videoId} setVideoId={setVideoId} />
+          )} */}
         </Box>
 
         <Stack direction="row" spacing={1} width={1}>

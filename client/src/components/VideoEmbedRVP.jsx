@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, IconButton, Stack } from "@mui/material";
+import ReactPlayer from "react-player";
 import useIsLandsCape from "../hooks/useIsLandsCape";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { red } from "@mui/material/colors";
-import WhiteTypography from "./WhiteTypography";
 
 const VideoEmbed = ({ videoId, setVideoId }) => {
   const { isLandscape } = useIsLandsCape();
@@ -11,8 +11,9 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
   const mobileWidth = isLandscape ? "142vh" : "95vw";
   const mobileHeight = isLandscape ? "80vh" : "63vw";
 
-  console.log(videoId);
-  const videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+  //   console.log(videoId);
+
+  const videoUrl = `https://drive.google.com/file/d/${videoId}/view?usp=drive_link`;
 
   return (
     <Stack
@@ -31,8 +32,6 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
     >
       <Box
         width="auto"
-        // width={{ xs: isLandscape ? "auto" : 1, md: "auto" }}
-
         mb={{ xs: isLandscape ? 0 : 1, md: 0 }}
         ml={{ xs: isLandscape ? 1 : 0, md: 1 }}
         className={isLandscape ? "" : "centered-content"}
@@ -52,29 +51,23 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
         </IconButton>
       </Box>
       <Stack direction="column" spacing={1} width={1}>
-        <iframe
+        <ReactPlayer
+          url={videoUrl}
+          width="100%"
+          height="100%"
+          controls
           style={{
             border: "none", // Remove any borders
             outline: "none", // Remove any outlines
           }}
-          src={videoUrl}
-          width="100%"
-          height="100%"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          title="Video Player"
-        ></iframe>
-        <Box width={1} textAlign="center">
-          <a
-            href={`https://drive.google.com/file/d/${videoId}/view?usp=sharing`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <WhiteTypography>
-              Click here if player failed to load the video.
-            </WhiteTypography>
-          </a>
-        </Box>
+        />
+        <a
+          href={`https://drive.google.com/file/d/${videoId}/view?usp=sharing`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Video
+        </a>
       </Stack>
     </Stack>
   );
