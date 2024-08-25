@@ -11,10 +11,7 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
   const mobileHeight = isLandscape ? "80vh" : "63vw";
 
   console.log(videoId);
-  // const videoUrl = `https://drive.google.com/file/d/${videoId}?controls=1`;
-
-  // const videoUrl = `https://www.youtube.com/embed/${videoId}`;
-  const videoUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479`;
+  const videoUrl = `https://drive.google.com/file/d/${videoId}/preview`;
 
   return (
     <Stack
@@ -61,26 +58,10 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
         src={videoUrl}
         width="100%"
         height="100%"
-        // allow="autoplay; encrypted-media"
-        // allowFullScreen
-        title="Video Player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
+        allow="autoplay; encrypted-media"
         allowFullScreen
-      ></iframe>
-      <video
-        controls
-        style={{
-          border: "none", // Remove any borders
-          outline: "none", // Remove any outlines
-          width: "100%",
-          height: "100%",
-        }}
-        src={videoUrl}
         title="Video Player"
-      >
-        Your browser does not support the video tag.
-      </video>
+      ></iframe>
     </Stack>
   );
 };
