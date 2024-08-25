@@ -3,6 +3,7 @@ require("dotenv").config();
 const sendResponse = require("../../utils/sendResponse");
 
 const verifyJWT = (req, res, next) => {
+  console.log("IN VERIFY JWT");
   const authHeader = req.headers.authorization || req.headers.Authorization;
 
   if (!authHeader?.startsWith("Bearer")) {
@@ -27,6 +28,7 @@ const verifyJWT = (req, res, next) => {
         );
       }
       req.credentials = decoded.UserInfo;
+      console.log("VERIFY JWT", req.credentials);
       next();
     });
   }

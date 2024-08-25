@@ -10,6 +10,7 @@ import Profile from "./pages/profile/Profile";
 import PersistLoginComponent from "./components/PersistLoginComponent";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/landing/LandingPage";
+import NotFound from "./pages/fallback/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -86,10 +87,10 @@ const router = createBrowserRouter([
       //   element: <Navigate to="/signin" />,
       // },
 
-      // {
-      //   path: "*",
-      //   element: <Navigate to="/signin" />,
-      // },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
 ]);

@@ -2,8 +2,24 @@ import { useContext } from "react";
 import { CourseContext } from "../context/CourseProvider";
 
 const useCourseProvider = () => {
-  const { courses, isLoading, isError } = useContext(CourseContext);
-  return { courses, isLoading, isError };
+  const {
+    courses,
+    enrolledCourses,
+    pendingCourses,
+    isLoading,
+    isError,
+    isLoadingEnrolledCoursesReq,
+    isErrorEnrolledCoursesReq,
+  } = useContext(CourseContext);
+  return {
+    courses,
+    enrolledCourses,
+    pendingCourses,
+    isLoading,
+    isError,
+    isLoadingEnrolledCoursesReq,
+    isErrorEnrolledCoursesReq,
+  };
 };
 
 export default useCourseProvider;

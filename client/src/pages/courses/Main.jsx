@@ -16,26 +16,11 @@ import WhiteTypography from "../../components/WhiteTypography.jsx";
 
 const Main = () => {
   const { auth } = useAuth();
-  const enrolledCourses = getEnrolledCourses();
-  const { courses } = useCourseProvider();
-
-  // Convert arrayA to a Set for efficient lookup
-  const enrolledCourseIds = useMemo(
-    () => new Set(auth?.enrolledCourses || []),
-    [auth?.enrolledCourses]
-  );
-
-  const enrolledCoursesDetails = useMemo(
-    () => courses.filter((course) => enrolledCourseIds.has(course._id)),
-    [courses, enrolledCourseIds]
-  );
-  const unEnrolledCoursesDetails = useMemo(
-    () => courses.filter((course) => !enrolledCourseIds.has(course._id)),
-    [courses, enrolledCourseIds]
-  );
+  // const enrolledCourses = getEnrolledCourses();
+  const { courses, enrolledCourses, pendingCourses } = useCourseProvider();
 
   // console.log(enrolledCoursesDetails);
-  console.log(auth);
+  console.log(enrolledCourses);
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
@@ -44,7 +29,7 @@ const Main = () => {
       />
 
       <CardGroupWithTitle title="Enrolled Courses">
-        {enrolledCoursesDetails?.length > 0 ? (
+        {enrolledCourses?.length > 0 ? (
           <CardGroupWrapper>
             {/* {enrolledCourses?.map((course) => (
             <CourseCard
@@ -54,12 +39,12 @@ const Main = () => {
               progress={getCourseProgress(course?.id, db?.users?.[0]?.id)}
             />
           ))} */}
-            {enrolledCoursesDetails &&
-              enrolledCoursesDetails.map((course) => (
+            {enrolledCourses &&
+              enrolledCourses.map((course) => (
                 <CourseCardTest
-                  key={course._id}
-                  {...course}
-                  courseId={course._id}
+                  key={course.course._id}
+                  {...course.course}
+                  courseId={course.course._id}
                   isEnrolled={true}
                 />
               ))}
@@ -72,8 +57,8 @@ const Main = () => {
       </CardGroupWithTitle>
       <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
-          {unEnrolledCoursesDetails &&
-            unEnrolledCoursesDetails?.map((course) => (
+          {courses &&
+            courses?.map((course) => (
               <CourseCardTest
                 key={course._id}
                 {...course}

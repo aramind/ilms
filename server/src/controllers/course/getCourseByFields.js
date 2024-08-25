@@ -2,12 +2,12 @@ const Course = require("../../models/Course");
 const sendResponse = require("../../utils/sendResponse");
 
 const getCourseByFields = async (req, res) => {
-  // console.log("in controller of getcoursesbyfields");
+  console.log("in controller of getcoursesbyfields");
   try {
     const requestedFields = req.query.fields ? req.query.fields.split(",") : [];
 
     const credentials = req.credentials;
-    // console.log("CREDENTIALS", credentials);
+    console.log("CREDENTIALS", credentials);
 
     const courses = await Course.find({}, requestedFields.join(" "));
 

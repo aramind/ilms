@@ -6,6 +6,7 @@ const getEnrolledCourses = async (req, res) => {
   try {
     const credentials = req.credentials;
 
+    console.log("HEHE", credentials);
     const enrolledCourses = await User.findById(credentials?._id)
       .populate({
         path: "enrolledCourses.course",

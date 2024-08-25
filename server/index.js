@@ -11,6 +11,7 @@ const credentials = require("./src/middlewares/auth/credentials");
 const corsOptions = require("./src/config/corsOptions");
 const morgan = require("morgan");
 const verifyJWT = require("./src/middlewares/auth/verifyJWT");
+const path = require("path");
 // env
 dotenv.config();
 // const PORT = process.env.PORT || 500;
@@ -23,20 +24,24 @@ const app = express();
 app.use(cookieParser());
 app.use(credentials);
 app.use(cors(corsOptions));
-// app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
 
+app.use(express.static(path.join(__dirname, "../client/build")));
 // unauthenticated routes
 app.use("/v1/", baseRouter);
+
 // authenticated routes
-app.use(verifyJWT);
 app.use("/v1/courses", courseRouter);
 app.use("/v1/users", userRouter);
 
-// app.use(cors(corsOptions));
+// for the static site
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
 // if not found
 app.use((req, res) =>
   res.status(404).json({ success: false, message: "Not found" })

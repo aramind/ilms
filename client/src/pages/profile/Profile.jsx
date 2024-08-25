@@ -5,17 +5,17 @@ import useAuth from "../../hooks/useAuth";
 
 const Profile = () => {
   const { auth } = useAuth();
-  console.log(auth);
+  console.log("ATUH", auth);
   return (
     <>
-      {/* <MainLayoutWrapper>
+      <MainLayoutWrapper>
         {auth &&
           Object.entries(auth).map(([key, value], index) => (
             <WhiteTypography key={index}>
               {key} : {value}
             </WhiteTypography>
           ))}
-      </MainLayoutWrapper> */}
+      </MainLayoutWrapper>
     </>
   );
 };
