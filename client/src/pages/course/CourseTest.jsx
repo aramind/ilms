@@ -28,6 +28,7 @@ import InsertDriveFileTwoToneIcon from "@mui/icons-material/InsertDriveFileTwoTo
 import VideoEmbed from "../../components/VideoEmbed";
 import VideoEmbedRVP from "../../components/VideoEmbedRVP";
 import useCourseProvider from "../../hooks/useCourseProvider";
+import TaskAction from "./TaskAction";
 
 const getIcon = (action) => {
   switch (action) {
@@ -167,8 +168,14 @@ const CourseTest = () => {
                         {index + 1}.{j + 1}.
                       </Box>
                       <Box ml={1}>{task.instruction} </Box>
-
-                      {task?.action === "watch" ? (
+                      <>
+                        <TaskAction
+                          action={task?.action}
+                          onClickHandler={handleClick}
+                          link={task?.link}
+                        />
+                      </>
+                      {/* {task?.action === "watch" ? (
                         <IconButton
                           onClick={() => handleClick(task?.link)}
                           variant="text"
@@ -176,7 +183,7 @@ const CourseTest = () => {
                         >
                           <SmartDisplayTwoToneIcon />
                         </IconButton>
-                      ) : task?.action === "quiz" ? (
+                      ) : task?.action === "answer" ? (
                         <Link
                           href="https://www.indiabix.com/digital-electronics/integrated-circuit-logic-families/discussion-1225"
                           target="_blank"
@@ -186,7 +193,7 @@ const CourseTest = () => {
                         </Link>
                       ) : (
                         ""
-                      )}
+                      )} */}
                     </Stack>
 
                     <Checkbox
