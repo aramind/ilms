@@ -71,7 +71,7 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
             rel="noopener noreferrer"
           >
             <WhiteTypography>
-              Click here if player failed to load the video.
+              Player failed to play the video? Click here to open in a new tab.
             </WhiteTypography>
           </a>
         </Box>
