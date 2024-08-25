@@ -62,6 +62,19 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
         allowFullScreen
         title="Video Player"
       ></iframe>
+      <video
+        controls
+        style={{
+          border: "none", // Remove any borders
+          outline: "none", // Remove any outlines
+          width: "100%",
+          height: "100%",
+        }}
+        src={videoUrl}
+        title="Video Player"
+      >
+        Your browser does not support the video tag.
+      </video>
     </Stack>
   );
 };
