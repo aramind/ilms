@@ -13,7 +13,8 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
   console.log(videoId);
   // const videoUrl = `https://drive.google.com/file/d/${videoId}?controls=1`;
 
-  const videoUrl = `https://www.youtube.com/embed/${videoId}`;
+  // const videoUrl = `https://www.youtube.com/embed/${videoId}`;
+  const videoUrl = `https://player.vimeo.com/video/${videoId}?badge=0&autopause=0&player_id=0&app_id=58479`;
 
   return (
     <Stack
