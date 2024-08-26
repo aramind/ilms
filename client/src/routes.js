@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import SignUpInMain from "./pages/sign-in-up/SignUpInMain";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -11,8 +11,6 @@ import PersistLoginComponent from "./components/PersistLoginComponent";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/landing/LandingPage";
 import NotFound from "./pages/fallback/NotFound";
-import CourseTest from "./pages/course/CourseTest";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +30,7 @@ const router = createBrowserRouter([
                 path: "/dashboard",
                 element: <Dashboard />,
               },
-              { path: "/courses/:courseId", element: <CourseTest /> },
+              { path: "/courses/:courseId", element: <Course /> },
               {
                 path: "/courses",
                 element: <Courses />,
