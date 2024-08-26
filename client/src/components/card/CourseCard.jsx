@@ -6,7 +6,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProgressIndicator from "./ProgressIndicator";
 import WhiteTypography from "../WhiteTypography";
 import useIsLandsCape from "../../hooks/useIsLandsCape";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import useUserReq from "../../hooks/api/authenticated/useUserReq";
 import useApiSend from "../../hooks/api/useApiSend";
 import useAuth from "../../hooks/useAuth";
+import useCourseProvider from "../../hooks/useCourseProvider";
 
 const CourseCard = ({
   title,
@@ -28,15 +29,20 @@ const CourseCard = ({
   const navigate = useNavigate();
   const { auth } = useAuth();
 
+  const { coursesList } = useCourseProvider();
+  const { enrollCourse } = useUserReq({ isPublic: false, showAck: true });
+
+  const [courseProgress, setCourseProgress] = useState({
+    percentage: 0,
+    steps: "N/A",
+  });
   const handleClick = () => {
     if (isEnrolled) {
       navigate(`/courses/${courseId}`, { replace: true });
     } else {
-      alert("enrolling");
+      return;
     }
   };
-
-  const { enrollCourse } = useUserReq({ isPublic: false, showAck: true });
 
   const {
     mutate: sendEnrollCourse,
@@ -45,7 +51,6 @@ const CourseCard = ({
   } = useApiSend(enrollCourse, ["courses", "enrolledCourses"]);
 
   const handleEnroll = () => {
-    // console.log("ENROLLING course:", courseId);
     let isConfirm = window.confirm(`Proceed enrolling ${title}?`);
     if (isConfirm) {
       sendEnrollCourse({ userId: auth?._id, courseId: courseId });
@@ -54,7 +59,19 @@ const CourseCard = ({
     }
   };
 
-  // console.log(courseId);
+  useEffect(() => {
+    const totalTasks =
+      coursesList
+        ?.filter((c) => c?._id === courseId)?.[0]
+        ?.topics?.flatMap((t) => t.topicTasks)?.length || 1;
+    const completedTasks =
+      progress?.flatMap((t) => t.completedTopicTasks)?.length || 0;
+    setCourseProgress({
+      steps: `${completedTasks}/${totalTasks}`,
+      percentage: Math.floor((completedTasks / totalTasks) * 100),
+    });
+  }, [courseId, coursesList, progress]);
+
   return (
     <ButtonBase
       onClick={isEnrolled ? handleClick : null}
@@ -65,7 +82,6 @@ const CourseCard = ({
       }}
     >
       <Stack
-        //   onClick={() => alert("Clicked")}
         width={isLandscape ? { xs: "28vw", md: 220 } : { xs: "42vw", md: 220 }}
         height={isLandscape ? { xs: "30vw", md: 250 } : { xs: "42vw", md: 250 }}
         sx={localStyles.mainStack}
@@ -89,14 +105,14 @@ const CourseCard = ({
         </Box>
         {status === "enrolled" ? (
           <>
-            {/* <Box width={1} mt={2}>
-              <ProgressIndicator value={progress} />
-            </Box> */}
-            <Stack sx={localStyles.stack2}>
+            <Box width={1} mt={2}>
+              <ProgressIndicator value={courseProgress?.percentage} />
+            </Box>
+            <Stack sx={localStyles.stack2} direction="row">
               <WhiteTypography variant="subtitle2">Progress</WhiteTypography>
-              {/* <WhiteTypography sx={localStyles.typo1}>
-                {progress}%
-              </WhiteTypography> */}
+              <WhiteTypography sx={localStyles.typo1}>
+                {courseProgress.percentage}%
+              </WhiteTypography>
             </Stack>
           </>
         ) : (
@@ -167,7 +183,6 @@ const localStyles = {
   },
   stack2: {
     mt: 0.2,
-    direction: "row",
     justifyContent: "space-between",
     alignContent: "flex-end",
     width: 1,
