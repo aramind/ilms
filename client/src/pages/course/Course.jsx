@@ -28,6 +28,7 @@ const Course = () => {
   const { courseId } = useParams();
   const [videoId, setVideoId] = useState("");
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   useEffect(() => {
     setCourse(enrolledCourses?.filter((c) => c._id === courseId)?.[0]);
@@ -49,6 +50,10 @@ const Course = () => {
     setVideoId(link);
   };
 
+  const handleToggleTaskCompletion = (taskId, topicId, courseId) => {
+    alert(`${taskId} in ${topicId} in ${courseId}`);
+    setSelectedTaskId(taskId);
+  };
   console.log(course);
 
   const getTopicProgress = (topic) => {
@@ -144,7 +149,12 @@ const Course = () => {
                         link={task?.link}
                       />
                     </Stack>
-                    <TaskCheckBox course={course} task={task} />
+                    <TaskCheckBox
+                      course={course}
+                      topicId={topic?._id}
+                      taskId={task?._id}
+                      handleToggleTaskCompletion={handleToggleTaskCompletion}
+                    />
                   </Stack>
                 ))}
               </Stack>

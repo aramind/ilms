@@ -3,13 +3,19 @@ import React from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-const TaskCheckBox = ({ course, task }) => {
+const TaskCheckBox = ({
+  course,
+  topicId,
+  taskId,
+  handleToggleTaskCompletion,
+}) => {
   return (
     <Checkbox
       checked={course?.progress
         ?.flatMap((p) => p.completedTasks)
-        ?.includes(task?._id)}
+        ?.includes(taskId)}
       icon={<CheckCircleOutlineIcon sx={localStyles.colorLightBlack} />}
+      onClick={() => handleToggleTaskCompletion(taskId, topicId, course?._id)}
       checkedIcon={<CheckCircleIcon sx={localStyles.colorMain} />}
     />
   );
