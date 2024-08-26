@@ -63,7 +63,7 @@ const CourseProvider = ({ children }) => {
     ),
   };
 
-  console.log("COURSE CONTECT", contextValue);
+  // console.log("COURSE CONTECT", contextValue);
   return (
     <CourseContext.Provider value={contextValue}>
       {children}

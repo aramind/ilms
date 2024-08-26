@@ -22,8 +22,8 @@ const updateCourseProgress = async (req, res) => {
     }
 
     // check if the course already exists in the enrolledCourses
-    const courseIndex = user.enrolledCourses.findIndex((ec) =>
-      ec.course.equals(courseId)
+    const courseIndex = user.enrolledCourses?.findIndex((ec) =>
+      ec.course?.equals(courseId)
     );
     if (courseIndex === -1) {
       user?.enrolledCourses.push({
@@ -34,7 +34,7 @@ const updateCourseProgress = async (req, res) => {
     } else {
       const progressIndex = user?.enrolledCourses[
         courseIndex
-      ].progress.findIndex((p) => p.topic.equals(topicId));
+      ].progress?.findIndex((p) => p.topic?.equals(topicId));
 
       if (progressIndex === -1) {
         user?.enrolledCourses[courseIndex].progress.push({
@@ -45,7 +45,7 @@ const updateCourseProgress = async (req, res) => {
         const taskIndex =
           user.enrolledCourses[courseIndex].progress[
             progressIndex
-          ].completedTopicTasks.indexOf(taskId);
+          ].completedTopicTasks?.indexOf(taskId);
 
         if (taskIndex === -1) {
           user?.enrolledCourses[courseIndex].progress[

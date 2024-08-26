@@ -21,6 +21,8 @@ import useCourseProvider from "../../hooks/useCourseProvider";
 import TaskAction from "./TaskAction";
 import Downloadables from "./Downloadables";
 import TaskCheckBox from "./TaskCheckBox";
+import useUserReq from "../../hooks/api/authenticated/useUserReq";
+import useApiSend from "../../hooks/api/useApiSend";
 
 const Course = () => {
   const { enrolledCourses } = useCourseProvider();
@@ -28,7 +30,14 @@ const Course = () => {
   const { courseId } = useParams();
   const [videoId, setVideoId] = useState("");
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
+
+  const { updateTopicTasks } = useUserReq({ isPublic: false, showAck: true });
+
+  const { mutate: sendUpdateTopicTasks } = useApiSend(
+    updateTopicTasks,
+    ["enrolledCourses", "courses"],
+    (data) => console.log(data?.data)
+  );
 
   useEffect(() => {
     setCourse(enrolledCourses?.filter((c) => c._id === courseId)?.[0]);
@@ -51,10 +60,10 @@ const Course = () => {
   };
 
   const handleToggleTaskCompletion = (taskId, topicId, courseId) => {
-    alert(`${taskId} in ${topicId} in ${courseId}`);
-    setSelectedTaskId(taskId);
+    alert("sending topic task update");
+    sendUpdateTopicTasks({ courseId, topicId, taskId });
   };
-  console.log(course);
+  // console.log(course);
 
   const getTopicProgress = (topic) => {
     try {

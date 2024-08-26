@@ -6,7 +6,7 @@ import QuizTwoToneIcon from "@mui/icons-material/QuizTwoTone";
 import { IconButton, Link } from "@mui/material";
 
 const TaskAction = ({ action, onClickHandler, link }) => {
-  console.log(link);
+  // console.log(link);
   const renderTaskAction = () => {
     switch (action) {
       case "watch":
