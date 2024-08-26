@@ -40,7 +40,12 @@ const Main = () => {
   });
 
   useEffect(() => {
-    setCoursesList(coursesData?.data);
+    const enrolledCoursesIds = enrolledCoursesData?.data?.enrolledCourses?.map(
+      (ec) => ec?._id
+    );
+    setCoursesList(
+      coursesData?.data?.filter((c) => !enrolledCoursesIds.includes(c._id))
+    );
     setEnrolledCoursesList(
       enrolledCoursesData?.data?.enrolledCourses?.filter(
         (ec) => ec.status === "enrolled"
@@ -70,6 +75,7 @@ const Main = () => {
                   description={ec?.course?.description}
                   progress={ec?.progress}
                   isEnrolled={true}
+                  status={ec?.status}
                   courseId={ec?.course?._id}
                 />
               </Fragment>
@@ -90,7 +96,8 @@ const Main = () => {
                   title={ec?.course?.title}
                   description={ec?.course?.description}
                   progress={ec?.progress}
-                  isEnrolled={true}
+                  status={ec?.status}
+                  isEnrolled={false}
                   courseId={ec?.course?._id}
                 />
               </Fragment>
@@ -110,6 +117,7 @@ const Main = () => {
                 key={course._id}
                 {...course}
                 courseId={course._id}
+                status={course?.status}
                 isEnrolled={false}
               />
             ))}

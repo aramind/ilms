@@ -21,6 +21,7 @@ const CourseCardTest = ({
   progress,
   isEnrolled,
   courseId,
+  status,
   price,
 }) => {
   const isLandscape = useIsLandsCape();
@@ -86,7 +87,7 @@ const CourseCardTest = ({
         >
           <WhiteTypography variant="subtitle2">{description}</WhiteTypography>
         </Box>
-        {isEnrolled ? (
+        {status === "enrolled" ? (
           <>
             {/* <Box width={1} mt={2}>
               <ProgressIndicator value={progress} />
@@ -100,15 +101,26 @@ const CourseCardTest = ({
           </>
         ) : (
           <Stack mt={0.2} pb={1} justifyContent="flex-end" width={1} flex={1}>
-            <Button
-              onClick={handleEnroll}
-              variant="contained"
-              fullWidth
-              size="small"
-              sx={localStyles.button}
-            >
-              ENROLL
-            </Button>
+            {status === "pending" ? (
+              <Typography
+                variant="caption"
+                textTransform="uppercase"
+                textAlign="center"
+                color="secondary.light"
+              >
+                Pending Approval
+              </Typography>
+            ) : (
+              <Button
+                onClick={handleEnroll}
+                variant="contained"
+                fullWidth
+                size="small"
+                sx={localStyles.button}
+              >
+                ENROLL
+              </Button>
+            )}
             <Stack direction="row" sx={localStyles.footer}>
               <Typography color="primary" fontWeight="bold">
                 {price || "N/A"}{" "}
