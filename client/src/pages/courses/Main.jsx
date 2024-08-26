@@ -24,16 +24,15 @@ const Main = () => {
         {enrolledCoursesList?.length > 0 ? (
           <CardGroupWrapper>
             {enrolledCoursesList.map((ec) => (
-              <Fragment key={ec?._id}>
-                <CourseCard
-                  title={ec?.course?.title}
-                  description={ec?.course?.description}
-                  progress={ec?.progress}
-                  isEnrolled={true}
-                  status={ec?.status}
-                  courseId={ec?.course?._id}
-                />
-              </Fragment>
+              <CourseCard
+                key={ec?.course?._id}
+                title={ec?.course?.title}
+                description={ec?.course?.description}
+                progress={ec?.progress}
+                isEnrolled={true}
+                status={ec?.status}
+                courseId={ec?.course?._id}
+              />
             ))}
           </CardGroupWrapper>
         ) : (
