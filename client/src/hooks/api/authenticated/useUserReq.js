@@ -19,6 +19,12 @@ const useUserReq = ({ isPublic, showAck }) => {
         url: `${url}/enrolledCourses`,
         method: "GET",
       }),
+    updateTopicTasks: async (data) =>
+      request({
+        url: `${url}/updateTopicTasks`,
+        method: "PATCH",
+        data,
+      }),
   };
 
   return req;
