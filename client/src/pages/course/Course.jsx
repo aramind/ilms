@@ -6,15 +6,13 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Checkbox,
   Divider,
   Stack,
 } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
 import ProgressIndicator from "../../components/card/ProgressIndicator";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+
 import PageHeader from "../../components/PageHeader";
 
 import VideoEmbed from "../../components/VideoEmbed";
@@ -22,6 +20,7 @@ import VideoEmbed from "../../components/VideoEmbed";
 import useCourseProvider from "../../hooks/useCourseProvider";
 import TaskAction from "./TaskAction";
 import Downloadables from "./Downloadables";
+import TaskCheckBox from "./TaskCheckBox";
 
 const Course = () => {
   const { enrolledCourses } = useCourseProvider();
@@ -145,19 +144,7 @@ const Course = () => {
                         link={task?.link}
                       />
                     </Stack>
-                    <Checkbox
-                      checked={course?.progress
-                        ?.flatMap((p) => p.completedTasks)
-                        ?.includes(task?._id)}
-                      icon={
-                        <CheckCircleOutlineIcon
-                          sx={localStyles.colorLightBlack}
-                        />
-                      }
-                      checkedIcon={
-                        <CheckCircleIcon sx={localStyles.colorMain} />
-                      }
-                    />
+                    <TaskCheckBox course={course} task={task} />
                   </Stack>
                 ))}
               </Stack>
@@ -205,12 +192,7 @@ const localStyles = {
     fontSize: "2rem",
     margin: 0,
   },
-  colorMain: {
-    color: (theme) => theme.palette.secondary.main,
-  },
-  colorLightBlack: {
-    color: (theme) => theme.palette.black.light,
-  },
+
   linkHover: {
     "&:hover": {
       color: "primary.special",
