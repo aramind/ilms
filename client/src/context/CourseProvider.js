@@ -53,7 +53,11 @@ const CourseProvider = ({ children }) => {
     );
     setCoursesList(coursesData?.data);
     setRecommendedCoursesList(
-      coursesData?.data?.filter((c) => !enrolledCoursesIds?.includes(c._id))
+      coursesData?.data
+        ?.filter((c) => !enrolledCoursesIds?.includes(c._id))
+        .map((c) => ({
+          course: c,
+        }))
     );
     setEnrolledCoursesList(
       enrolledCoursesData?.data?.enrolledCourses?.filter(
@@ -69,6 +73,8 @@ const CourseProvider = ({ children }) => {
 
   // console.log("COURSE CONTECT", contextValue);
 
+  console.log(enrolledCoursesList);
+  console.log(recommendedCoursesList);
   return (
     <CourseContext.Provider
       value={{

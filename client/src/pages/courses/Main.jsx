@@ -7,6 +7,8 @@ import useAuth from "../../hooks/useAuth.js";
 import WhiteTypography from "../../components/WhiteTypography.jsx";
 import useCourseProvider from "../../hooks/useCourseProvider.js";
 import CourseCard from "../../components/card/CourseCard.jsx";
+import EnrolledCoursesCards from "../common-components/EnrolledCoursesCards.jsx";
+import CoursesGroup from "../common-components/CoursesGroup.jsx";
 
 const Main = () => {
   const { auth } = useAuth();
@@ -19,29 +21,8 @@ const Main = () => {
         title="Courses"
         subtitle={`Hi ${auth?.firstName}! Good Luck with your studies!`}
       />
-
-      <CardGroupWithTitle title="Enrolled Courses">
-        {enrolledCoursesList?.length > 0 ? (
-          <CardGroupWrapper>
-            {enrolledCoursesList.map((ec) => (
-              <CourseCard
-                key={ec?.course?._id}
-                title={ec?.course?.title}
-                description={ec?.course?.description}
-                progress={ec?.progress}
-                isEnrolled={true}
-                status={ec?.status}
-                courseId={ec?.course?._id}
-              />
-            ))}
-          </CardGroupWrapper>
-        ) : (
-          <WhiteTypography>
-            You are not enrolled yet in any course
-          </WhiteTypography>
-        )}
-      </CardGroupWithTitle>
-      <CardGroupWithTitle title="Pending Courses">
+      <EnrolledCoursesCards enrolledCoursesList={enrolledCoursesList} />
+      {/* <CardGroupWithTitle title="Pending Courses">
         {pendingCoursesList?.length > 0 ? (
           <CardGroupWrapper>
             {pendingCoursesList.map((ec) => (
@@ -51,7 +32,6 @@ const Main = () => {
                   description={ec?.course?.description}
                   progress={ec?.progress}
                   status={ec?.status}
-                  isEnrolled={false}
                   courseId={ec?.course?._id}
                 />
               </Fragment>
@@ -62,8 +42,20 @@ const Main = () => {
             You are not enrolled yet in any course
           </WhiteTypography>
         )}
-      </CardGroupWithTitle>
-      <CardGroupWithTitle title="Recommended Courses">
+      </CardGroupWithTitle> */}
+      {pendingCoursesList?.length > 0 && (
+        <CoursesGroup
+          coursesList={pendingCoursesList}
+          title="Pending Courses"
+        />
+      )}
+      {recommendedCoursesList?.length > 0 && (
+        <CoursesGroup
+          coursesList={recommendedCoursesList}
+          title="Recommended Courses"
+        />
+      )}
+      {/* <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
           {recommendedCoursesList &&
             recommendedCoursesList?.map((course) => (
@@ -72,11 +64,10 @@ const Main = () => {
                 {...course}
                 courseId={course._id}
                 status={course?.status}
-                isEnrolled={false}
               />
             ))}
         </CardGroupWrapper>
-      </CardGroupWithTitle>
+      </CardGroupWithTitle> */}
     </Stack>
   );
 };
