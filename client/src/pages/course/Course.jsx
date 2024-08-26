@@ -59,8 +59,12 @@ const Course = () => {
   };
 
   const handleToggleTaskCompletion = (taskId, topicId, courseId) => {
-    alert("sending topic task update");
-    sendUpdateTopicTasks({ courseId, topicId, taskId });
+    let isConfirmed = window.confirm("Update task?");
+    if (isConfirmed) {
+      sendUpdateTopicTasks({ courseId, topicId, taskId });
+    } else {
+      return;
+    }
   };
   // console.log(course);
 
