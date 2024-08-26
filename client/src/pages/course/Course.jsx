@@ -30,6 +30,10 @@ const Course = () => {
   const [videoId, setVideoId] = useState("");
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
+  useEffect(() => {
+    setCourse(enrolledCourses?.filter((c) => c._id === courseId)?.[0]);
+  }, [courseId, enrolledCourses]);
+
   const handleAccordionChange = (event, isExpanded) => {
     setIsAccordionOpen(isExpanded);
     if (!isAccordionOpen) {
@@ -46,11 +50,21 @@ const Course = () => {
     setVideoId(link);
   };
 
-  useEffect(() => {
-    setCourse(enrolledCourses?.filter((c) => c._id === courseId)?.[0]);
-  }, [courseId, enrolledCourses]);
-
   console.log(course);
+
+  const getTopicProgress = (topic) => {
+    try {
+      const completedTasks =
+        course?.progress?.filter((p) => p.topic === topic?._id)?.[0]
+          ?.completedTasks?.length || 0;
+      const allTopicTasks = topic?.topicTasks?.length || 1;
+      const progress = Math.floor((completedTasks / allTopicTasks) * 100);
+      return progress;
+    } catch (error) {
+      console.error(error);
+      return 0;
+    }
+  };
   return (
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
@@ -62,7 +76,7 @@ const Course = () => {
           {course?.course?.topics?.map((topic, index) => (
             <Box width={1} key={index}>
               <ProgressIndicator
-                value={topic?.progress?.percentage || 0}
+                value={getTopicProgress(topic)}
                 height="24px"
               />
             </Box>

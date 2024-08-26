@@ -36,8 +36,7 @@ const UserSchema = new Schema({
       },
       progress: [
         {
-          topics: { type: Schema.Types.ObjectId, ref: "Topic" },
-          completedTopics: [{ type: Schema.Types.ObjectId, ref: "Topic" }],
+          topic: { type: Schema.Types.ObjectId, ref: "Topic" },
           completedTopicTasks: [
             { type: Schema.Types.ObjectId, ref: "TopicTask" },
           ],
