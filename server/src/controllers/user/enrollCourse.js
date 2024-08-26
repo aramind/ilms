@@ -14,9 +14,13 @@ const enrollCourse = async (req, res) => {
     const user = await User.findOneAndUpdate(
       {
         _id,
-        "enrolledCourses.courseId": { $ne: courseObjectId },
+        "enrolledCourses.course": { $ne: courseObjectId },
       },
-      { $push: { enrolledCourses: { courseId: courseObjectId } } },
+      {
+        $push: {
+          enrolledCourses: { course: courseObjectId, _id: courseObjectId },
+        },
+      },
       { new: true }
     );
 

@@ -24,6 +24,7 @@ export const useCourses = () => {
 
 const CourseProvider = ({ children }) => {
   const { auth } = useAuth();
+  const [contextValue, setContextValue] = useState(defaultContextValue);
   const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
   const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
 
@@ -49,19 +50,31 @@ const CourseProvider = ({ children }) => {
 
   // console.log(enrolledCourses);
   // Determine the value to pass to the context
-  const contextValue = {
-    courses: courses?.data || [],
-    isLoading,
+
+  useEffect(() => {
+    const value = {
+      courses: courses?.data || [],
+      isLoading,
+      isError,
+      enrolledCourses: enrolledCourses?.data?.enrolledCourses?.filter(
+        (c) => c.status === "enrolled"
+      ),
+      isLoadingEnrolledCoursesReq,
+      isErrorEnrolledCoursesReq,
+      pendingCourses: enrolledCourses?.data?.enrolledCourses?.filter(
+        (c) => c.status === "pending"
+      ),
+    };
+
+    setContextValue(value);
+  }, [
+    courses?.data,
+    enrolledCourses?.data?.enrolledCourses,
     isError,
-    enrolledCourses: enrolledCourses?.data?.enrolledCourses?.filter(
-      (c) => c.status === "enrolled"
-    ),
-    isLoadingEnrolledCoursesReq,
     isErrorEnrolledCoursesReq,
-    pendingCourses: enrolledCourses?.data?.enrolledCourses?.filter(
-      (c) => c.status === "pending"
-    ),
-  };
+    isLoading,
+    isLoadingEnrolledCoursesReq,
+  ]);
 
   // console.log("COURSE CONTECT", contextValue);
   return (

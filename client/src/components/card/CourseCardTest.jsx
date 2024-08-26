@@ -50,7 +50,7 @@ const CourseCardTest = ({
     sendEnrollCourse({ userId: auth?._id, courseId: courseId });
   };
 
-  console.log(courseId);
+  // console.log(courseId);
   return (
     <ButtonBase
       onClick={isEnrolled ? handleClick : null}
@@ -61,23 +61,10 @@ const CourseCardTest = ({
       }}
     >
       <Stack
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        px={2}
-        py={1}
+        //   onClick={() => alert("Clicked")}
         width={isLandscape ? { xs: "28vw", md: 220 } : { xs: "42vw", md: 220 }}
         height={isLandscape ? { xs: "30vw", md: 250 } : { xs: "42vw", md: 250 }}
-        borderRadius="1rem"
-        bgcolor={(theme) => theme.palette.black.dark}
-        //   onClick={() => alert("Clicked")}
-        sx={{
-          // Set cursor to pointer
-          "&:hover": {
-            //   backgroundColor: "#ffffff", // Optional: change background color on hover
-            outline: "2px solid",
-            outlineColor: (theme) => theme.palette.primary.darkest,
-          },
-        }}
+        sx={localStyles.mainStack}
       >
         <WhiteTypography variant="h6" color="primary">
           {title}
@@ -85,9 +72,7 @@ const CourseCardTest = ({
 
         <Divider
           sx={{
-            backgroundColor: (theme) => theme.palette.primary.main,
-            width: "100%",
-            my: 1,
+            ...localStyles.divider,
             display: isLandscape ? "flex" : { xs: "none", md: "flex" },
           }}
         />
@@ -100,53 +85,28 @@ const CourseCardTest = ({
         </Box>
         {isEnrolled ? (
           <>
-            <Box width={1} mt={2}>
+            {/* <Box width={1} mt={2}>
               <ProgressIndicator value={progress} />
-            </Box>
-            <Stack
-              mt={0.2}
-              direction="row"
-              justifyContent="space-between"
-              alignContent="flex-end"
-              width={1}
-            >
+            </Box> */}
+            <Stack sx={localStyles.stack2}>
               <WhiteTypography variant="subtitle2">Progress</WhiteTypography>
-              <WhiteTypography
-                fontSize="0.8rem"
-                fontWeight="bold"
-                mb={2}
-                sx={{ color: (theme) => theme.palette.primary.main }}
-              >
+              {/* <WhiteTypography sx={localStyles.typo1}>
                 {progress}%
-              </WhiteTypography>
+              </WhiteTypography> */}
             </Stack>
           </>
         ) : (
-          <Stack
-            mt={0.2}
-            pb={1}
-            // direction={{ xs: "column-reverse", md: "row" }}
-            // justifyContent="space-between"
-            justifyContent="flex-end"
-            // alignItems={{ xs: "flex-start", md: "flex-end" }}
-            width={1}
-            flex={1}
-          >
+          <Stack mt={0.2} pb={1} justifyContent="flex-end" width={1} flex={1}>
             <Button
               onClick={handleEnroll}
               variant="contained"
               fullWidth
               size="small"
-              sx={{
-                height: "1.8rem",
-                paddingY: 0, // Smaller padding in the y-direction
-                paddingX: 3, // Larger padding in the x-direction
-                minWidth: 80, // Minimum width of the button
-              }}
+              sx={localStyles.button}
             >
               ENROLL
             </Button>
-            <Stack direction="row" justifyContent="space-between" p="2px">
+            <Stack direction="row" sx={localStyles.footer}>
               <Typography color="primary" fontWeight="bold">
                 {price || "N/A"}{" "}
               </Typography>
@@ -157,15 +117,7 @@ const CourseCardTest = ({
                 }}
                 variant="text"
                 disableRipple
-                sx={{
-                  fontSize: "0.7rem",
-                  padding: 0,
-                  color: (theme) => theme.palette.white.dark,
-                  textTransform: "none",
-                  "&:hover": {
-                    color: "primary.light",
-                  },
-                }}
+                sx={localStyles.buttonBase}
               >
                 More Info...
               </ButtonBase>
@@ -178,3 +130,56 @@ const CourseCardTest = ({
 };
 
 export default CourseCardTest;
+
+const localStyles = {
+  mainStack: {
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+    px: 2,
+    py: 1,
+    borderRadius: "1rem",
+    bgcolor: (theme) => theme.palette.black.dark,
+    "&:hover": {
+      //   backgroundColor: "#ffffff", // Optional: change background color on hover
+      outline: "2px solid",
+      outlineColor: (theme) => theme.palette.primary.darkest,
+    },
+  },
+  divider: {
+    backgroundColor: (theme) => theme.palette.primary.main,
+    width: "100%",
+    my: 1,
+  },
+  stack2: {
+    mt: 0.2,
+    direction: "row",
+    justifyContent: "space-between",
+    alignContent: "flex-end",
+    width: 1,
+  },
+  footer: {
+    justifyContent: "space-between",
+    p: "2px",
+  },
+  typo1: {
+    fontSize: "0.8rem",
+    fontWeight: "bold",
+    mb: 2,
+    color: (theme) => theme.palette.primary.main,
+  },
+  button: {
+    height: "1.8rem",
+    paddingY: 0, // Smaller padding in the y-direction
+    paddingX: 3, // Larger padding in the x-direction
+    minWidth: 80, // Minimum width of the button
+  },
+  buttonBase: {
+    fontSize: "0.7rem",
+    padding: 0,
+    color: (theme) => theme.palette.white.dark,
+    textTransform: "none",
+    "&:hover": {
+      color: "primary.light",
+    },
+  },
+};
