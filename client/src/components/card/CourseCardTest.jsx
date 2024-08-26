@@ -41,13 +41,16 @@ const CourseCardTest = ({
     mutate: sendEnrollCourse,
     // isLoading,
     // isError,
-  } = useApiSend(enrollCourse, ["courses", "enrolledCourses"], (data) => {
-    console.log(data?.data);
-  });
+  } = useApiSend(enrollCourse, ["courses", "enrolledCourses"]);
 
   const handleEnroll = () => {
     // console.log("ENROLLING course:", courseId);
-    sendEnrollCourse({ userId: auth?._id, courseId: courseId });
+    let isConfirm = window.confirm(`Proceed enrolling ${title}?`);
+    if (isConfirm) {
+      sendEnrollCourse({ userId: auth?._id, courseId: courseId });
+    } else {
+      return;
+    }
   };
 
   // console.log(courseId);
