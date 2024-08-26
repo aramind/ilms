@@ -24,6 +24,7 @@ const CourseProvider = ({ children }) => {
   const [coursesList, setCoursesList] = useState([]);
   const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
   const [pendingCoursesList, setPendingCoursesList] = useState([]);
+  const [recommendedCoursesList, setRecommendedCoursesList] = useState([]);
   const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
   const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
   const {
@@ -50,7 +51,8 @@ const CourseProvider = ({ children }) => {
     const enrolledCoursesIds = enrolledCoursesData?.data?.enrolledCourses?.map(
       (ec) => ec?._id
     );
-    setCoursesList(
+    setCoursesList(coursesData?.data);
+    setRecommendedCoursesList(
       coursesData?.data?.filter((c) => !enrolledCoursesIds?.includes(c._id))
     );
     setEnrolledCoursesList(
@@ -69,7 +71,12 @@ const CourseProvider = ({ children }) => {
 
   return (
     <CourseContext.Provider
-      value={{ coursesList, enrolledCoursesList, pendingCoursesList }}
+      value={{
+        coursesList,
+        enrolledCoursesList,
+        pendingCoursesList,
+        recommendedCoursesList,
+      }}
     >
       {children}
     </CourseContext.Provider>

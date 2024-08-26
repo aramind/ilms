@@ -11,7 +11,7 @@ import useCourseProvider from "../../hooks/useCourseProvider.js";
 
 const Main = () => {
   const { auth } = useAuth();
-  const { coursesList, enrolledCoursesList, pendingCoursesList } =
+  const { enrolledCoursesList, pendingCoursesList, recommendedCoursesList } =
     useCourseProvider();
   // const [coursesList, setCoursesList] = useState([]);
   // const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
@@ -110,8 +110,8 @@ const Main = () => {
       </CardGroupWithTitle>
       <CardGroupWithTitle title="Recommended Courses">
         <CardGroupWrapper>
-          {coursesList &&
-            coursesList?.map((course) => (
+          {recommendedCoursesList &&
+            recommendedCoursesList?.map((course) => (
               <CourseCardTest
                 key={course._id}
                 {...course}
