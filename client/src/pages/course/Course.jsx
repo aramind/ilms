@@ -146,7 +146,9 @@ const Course = () => {
                       />
                     </Stack>
                     <Checkbox
-                      checked={j <= 2}
+                      checked={course?.progress
+                        ?.flatMap((p) => p.completedTasks)
+                        ?.includes(task?._id)}
                       icon={
                         <CheckCircleOutlineIcon
                           sx={localStyles.colorLightBlack}
