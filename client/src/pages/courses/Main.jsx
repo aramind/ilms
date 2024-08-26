@@ -13,10 +13,10 @@ import useUserReq from "../../hooks/api/authenticated/useUserReq.js";
 
 const Main = () => {
   const { auth } = useAuth();
-  // const enrolledCourses = getEnrolledCourses();
 
   const [coursesList, setCoursesList] = useState([]);
   const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
+  const [pendingCOursesList, setPendingCoursesList] = useState([]);
   const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
   const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
   const {
@@ -46,10 +46,13 @@ const Main = () => {
         (ec) => ec.status === "enrolled"
       )
     );
+    setPendingCoursesList(
+      enrolledCoursesData?.data?.enrolledCourses?.filter(
+        (ec) => ec.status === "pending"
+      )
+    );
   }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
 
-  // console.log(coursesList);
-  console.log(enrolledCoursesData?.data?.enrolledCourses);
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
@@ -61,6 +64,27 @@ const Main = () => {
         {enrolledCoursesList?.length > 0 ? (
           <CardGroupWrapper>
             {enrolledCoursesList.map((ec) => (
+              <Fragment key={ec?._id}>
+                <CourseCardTest
+                  title={ec?.course?.title}
+                  description={ec?.course?.description}
+                  progress={ec?.progress}
+                  isEnrolled={true}
+                  courseId={ec?.course?._id}
+                />
+              </Fragment>
+            ))}
+          </CardGroupWrapper>
+        ) : (
+          <WhiteTypography>
+            You are not enrolled yet in any course
+          </WhiteTypography>
+        )}
+      </CardGroupWithTitle>
+      <CardGroupWithTitle title="Pending Courses">
+        {pendingCOursesList?.length > 0 ? (
+          <CardGroupWrapper>
+            {pendingCOursesList.map((ec) => (
               <Fragment key={ec?._id}>
                 <CourseCardTest
                   title={ec?.course?.title}
