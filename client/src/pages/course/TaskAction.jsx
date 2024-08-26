@@ -3,8 +3,7 @@ import MenuBookTwoToneIcon from "@mui/icons-material/MenuBookTwoTone";
 import SmartDisplayTwoToneIcon from "@mui/icons-material/SmartDisplayTwoTone";
 import QuizTwoToneIcon from "@mui/icons-material/QuizTwoTone";
 import InsertDriveFileTwoToneIcon from "@mui/icons-material/InsertDriveFileTwoTone";
-import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { IconButton, Link } from "@mui/material";
 
 const TaskAction = ({ action, onClickHandler, link }) => {
   console.log(link);
@@ -18,25 +17,24 @@ const TaskAction = ({ action, onClickHandler, link }) => {
         );
       case "answer":
         return (
-          <a
+          <Link
             href="https://www.indiabix.com/digital-electronics/integrated-circuit-logic-families/discussion-1225"
             target="_blank"
             className="centered-content"
-            rel="noreferrer"
           >
             <QuizTwoToneIcon color="primary" sx={{ ml: 1 }} />
-          </a>
+          </Link>
         );
       case "read":
         return link ? (
-          <a
+          <Link
             href={link}
             target="_blank"
             className="centered-content"
             rel="noreferrer"
           >
             <MenuBookTwoToneIcon color="primary" sx={{ ml: 1 }} />
-          </a>
+          </Link>
         ) : null;
       default:
         return null;
