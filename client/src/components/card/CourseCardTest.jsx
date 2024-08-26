@@ -41,7 +41,7 @@ const CourseCardTest = ({
     mutate: sendEnrollCourse,
     // isLoading,
     // isError,
-  } = useApiSend(enrollCourse, ["courses"], (data) => {
+  } = useApiSend(enrollCourse, ["courses", "enrolledCourses"], (data) => {
     console.log(data?.data);
   });
 
