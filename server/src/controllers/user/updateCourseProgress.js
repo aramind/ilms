@@ -23,11 +23,11 @@ const updateCourseProgress = async (req, res) => {
 
     // check if the course already exists in the enrolledCourses
     const courseIndex = user.enrolledCourses?.findIndex((ec) =>
-      ec.course?.equals(courseId)
+      ec.equals(courseId)
     );
     if (courseIndex === -1) {
       user?.enrolledCourses.push({
-        course: courseId,
+        _id: courseId,
         status: constants?.ENROLLED_COURSE_STATUSES?.[1],
         progress: [{ topic: topicId, completedTopicTasks: [taskId] }],
       });
@@ -59,7 +59,13 @@ const updateCourseProgress = async (req, res) => {
       }
     }
 
+    console.log("BEEEEEEEEEEEEEEEEEEEEE");
+
+    console.log(user.enrolledCourses);
     await user.save();
+
+    console.log("AFFFFFFFFFTER");
+    console.log(user.enrolledCourses);
 
     return sendResponse.success(
       res,

@@ -33,11 +33,10 @@ const Course = () => {
 
   const { updateTopicTasks } = useUserReq({ isPublic: false, showAck: true });
 
-  const { mutate: sendUpdateTopicTasks } = useApiSend(
-    updateTopicTasks,
-    ["enrolledCourses", "courses"],
-    (data) => console.log(data?.data)
-  );
+  const { mutate: sendUpdateTopicTasks } = useApiSend(updateTopicTasks, [
+    "enrolledCourses",
+    "courses",
+  ]);
 
   useEffect(() => {
     setCourse(enrolledCourses?.filter((c) => c._id === courseId)?.[0]);
@@ -69,7 +68,7 @@ const Course = () => {
     try {
       const completedTasks =
         course?.progress?.filter((p) => p.topic === topic?._id)?.[0]
-          ?.completedTasks?.length || 0;
+          ?.completedTopicTasks?.length || 0;
       const allTopicTasks = topic?.topicTasks?.length || 1;
       const progress = Math.floor((completedTasks / allTopicTasks) * 100);
       return progress;
