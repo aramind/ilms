@@ -74,7 +74,11 @@ const Course = () => {
         course?.progress?.filter((p) => p.topic === topic?._id)?.[0]
           ?.completedTopicTasks?.length || 0;
       const allTopicTasks = topic?.topicTasks?.length || 1;
-      const progress = Math.floor((completedTasks / allTopicTasks) * 100);
+      const percentage = Math.floor((completedTasks / allTopicTasks) * 100);
+      const progress = {
+        percentage: percentage,
+        steps: `${completedTasks}/${allTopicTasks}`,
+      };
       return progress;
     } catch (error) {
       console.error(error);
@@ -92,7 +96,7 @@ const Course = () => {
           {course?.course?.topics?.map((topic, index) => (
             <Box width={1} key={index}>
               <ProgressIndicator
-                value={getTopicProgress(topic)}
+                value={getTopicProgress(topic)?.percentage}
                 height="24px"
               />
             </Box>
@@ -122,7 +126,7 @@ const Course = () => {
                       color: (theme) => theme.palette.primary.main,
                     }}
                   >
-                    {topic?.progress?.inSteps}
+                    {getTopicProgress(topic)?.steps}
                   </WhiteTypography>
                 </Stack>
               </Stack>
