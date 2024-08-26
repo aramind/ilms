@@ -25,7 +25,7 @@ import useUserReq from "../../hooks/api/authenticated/useUserReq";
 import useApiSend from "../../hooks/api/useApiSend";
 
 const Course = () => {
-  const { enrolledCourses } = useCourseProvider();
+  const { enrolledCoursesList } = useCourseProvider();
   const [course, setCourse] = useState();
   const { courseId } = useParams();
   const [videoId, setVideoId] = useState("");
@@ -39,8 +39,8 @@ const Course = () => {
   ]);
 
   useEffect(() => {
-    setCourse(enrolledCourses?.filter((c) => c._id === courseId)?.[0]);
-  }, [courseId, enrolledCourses]);
+    setCourse(enrolledCoursesList?.filter((c) => c._id === courseId)?.[0]);
+  }, [courseId, enrolledCoursesList]);
 
   const handleAccordionChange = (event, isExpanded) => {
     setIsAccordionOpen(isExpanded);
