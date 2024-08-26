@@ -21,22 +21,23 @@ const updateCourseProgress = async (req, res) => {
       return sendResponse.failed(res, "Unknown user", null, 404);
     }
 
-    // check if the course already exists in the enrolledCOurses
+    // check if the course already exists in the enrolledCourses
     const courseIndex = user.enrolledCourses.findIndex((ec) =>
       ec.course.equals(courseId)
     );
     if (courseIndex === -1) {
-      user.enrolledCourses.push({
+      user?.enrolledCourses.push({
         course: courseId,
         status: constants?.ENROLLED_COURSE_STATUSES?.[1],
         progress: [{ topic: topicId, completedTopicTasks: [taskId] }],
       });
     } else {
-      const progressIndex = user.enrolledCourses[
+      const progressIndex = user?.enrolledCourses[
         courseIndex
       ].progress.findIndex((p) => p.topic.equals(topicId));
+
       if (progressIndex === -1) {
-        user.enrolledCourses[courseIndex].progress.push({
+        user?.enrolledCourses[courseIndex].progress.push({
           topic: topicId,
           completedTopicTasks: [taskId],
         });
@@ -47,11 +48,11 @@ const updateCourseProgress = async (req, res) => {
           ].completedTopicTasks.indexOf(taskId);
 
         if (taskIndex === -1) {
-          user.enrolledCourses[courseIndex].progress[
+          user?.enrolledCourses[courseIndex].progress[
             progressIndex
           ].completedTopicTasks.push(taskId);
         } else {
-          user.enrolledCourses[courseIndex].progress[
+          user?.enrolledCourses[courseIndex].progress[
             progressIndex
           ].completedTopicTasks.splice(taskIndex, 1);
         }
