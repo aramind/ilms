@@ -73,8 +73,6 @@ const CourseProvider = ({ children }) => {
 
   // console.log("COURSE CONTECT", contextValue);
 
-  console.log(enrolledCoursesList);
-  console.log(recommendedCoursesList);
   return (
     <CourseContext.Provider
       value={{
