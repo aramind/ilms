@@ -2,23 +2,12 @@ import { useContext } from "react";
 import { CourseContext } from "../context/CourseProvider";
 
 const useCourseProvider = () => {
-  const {
-    courses,
-    enrolledCourses,
-    pendingCourses,
-    isLoading,
-    isError,
-    isLoadingEnrolledCoursesReq,
-    isErrorEnrolledCoursesReq,
-  } = useContext(CourseContext);
+  const { coursesList, enrolledCoursesList, pendingCoursesList } =
+    useContext(CourseContext);
   return {
-    courses,
-    enrolledCourses,
-    pendingCourses,
-    isLoading,
-    isError,
-    isLoadingEnrolledCoursesReq,
-    isErrorEnrolledCoursesReq,
+    coursesList,
+    enrolledCoursesList,
+    pendingCoursesList,
   };
 };
 

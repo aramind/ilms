@@ -5,11 +5,7 @@ import useUserReq from "../hooks/api/authenticated/useUserReq";
 import useAuth from "../hooks/useAuth";
 
 // Define a type for the context value if using TypeScript
-const defaultContextValue = {
-  courses: [],
-  isLoading: true,
-  isError: false,
-};
+const defaultContextValue = {};
 
 export const CourseContext = createContext(defaultContextValue);
 
@@ -24,14 +20,16 @@ export const useCourses = () => {
 
 const CourseProvider = ({ children }) => {
   const { auth } = useAuth();
-  const [contextValue, setContextValue] = useState(defaultContextValue);
+
+  const [coursesList, setCoursesList] = useState([]);
+  const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
+  const [pendingCoursesList, setPendingCoursesList] = useState([]);
   const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
   const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
-
   const {
-    data: courses,
-    isLoading,
-    isError,
+    data: coursesData,
+    // isLoading,
+    // isError,
   } = useApiGet("courses", () => getCourse({ params: "/trimmed" }), {
     refetchOnWindowFocus: true,
     retry: 3,
@@ -39,46 +37,40 @@ const CourseProvider = ({ children }) => {
   });
 
   const {
-    data: enrolledCourses,
-    isLoadingEnrolledCoursesReq,
-    isErrorEnrolledCoursesReq,
+    data: enrolledCoursesData,
+    // isLoadingEnrolledCoursesReq,
+    // isErrorEnrolledCoursesReq,
   } = useApiGet("enrolledCourses", getEnrolledCourses, {
     refetchOnWindowFocus: true,
     retry: 3,
     enabled: !!auth?._id,
   });
 
-  // console.log(enrolledCourses);
-  // Determine the value to pass to the context
-
   useEffect(() => {
-    const value = {
-      courses: courses?.data || [],
-      isLoading,
-      isError,
-      enrolledCourses: enrolledCourses?.data?.enrolledCourses?.filter(
-        (c) => c.status === "enrolled"
-      ),
-      isLoadingEnrolledCoursesReq,
-      isErrorEnrolledCoursesReq,
-      pendingCourses: enrolledCourses?.data?.enrolledCourses?.filter(
-        (c) => c.status === "pending"
-      ),
-    };
-
-    setContextValue(value);
-  }, [
-    courses?.data,
-    enrolledCourses?.data?.enrolledCourses,
-    isError,
-    isErrorEnrolledCoursesReq,
-    isLoading,
-    isLoadingEnrolledCoursesReq,
-  ]);
+    const enrolledCoursesIds = enrolledCoursesData?.data?.enrolledCourses?.map(
+      (ec) => ec?._id
+    );
+    setCoursesList(
+      coursesData?.data?.filter((c) => !enrolledCoursesIds?.includes(c._id))
+    );
+    setEnrolledCoursesList(
+      enrolledCoursesData?.data?.enrolledCourses?.filter(
+        (ec) => ec.status === "enrolled"
+      )
+    );
+    setPendingCoursesList(
+      enrolledCoursesData?.data?.enrolledCourses?.filter(
+        (ec) => ec.status === "pending"
+      )
+    );
+  }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
 
   // console.log("COURSE CONTECT", contextValue);
+
   return (
-    <CourseContext.Provider value={contextValue}>
+    <CourseContext.Provider
+      value={{ coursesList, enrolledCoursesList, pendingCoursesList }}
+    >
       {children}
     </CourseContext.Provider>
   );
