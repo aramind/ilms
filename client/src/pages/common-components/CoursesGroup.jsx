@@ -17,6 +17,7 @@ const CoursesGroup = ({ coursesList, title, textDisplay }) => {
               progress={cl?.progress}
               status={cl?.status}
               courseId={cl?.course?._id}
+              isEnrolled={cl?.status === "enrolled"}
             />
           ))}
         </CardGroupWrapper>
