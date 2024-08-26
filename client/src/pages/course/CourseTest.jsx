@@ -171,7 +171,7 @@ const CourseTest = () => {
                       <>
                         <TaskAction
                           action={task?.action}
-                          onClickHandler={handleClick}
+                          onClickHandler={() => handleClick(task?.link)}
                           link={task?.link}
                         />
                       </>
