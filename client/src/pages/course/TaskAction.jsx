@@ -7,6 +7,7 @@ import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const TaskAction = ({ action, onClickHandler, link }) => {
+  console.log(link);
   const renderTaskAction = () => {
     switch (action) {
       case "watch":
@@ -17,20 +18,26 @@ const TaskAction = ({ action, onClickHandler, link }) => {
         );
       case "answer":
         return (
-          <Link
+          <a
             href="https://www.indiabix.com/digital-electronics/integrated-circuit-logic-families/discussion-1225"
             target="_blank"
             className="centered-content"
+            rel="noreferrer"
           >
             <QuizTwoToneIcon color="primary" sx={{ ml: 1 }} />
-          </Link>
+          </a>
         );
       case "read":
-        return (
-          <Link href={link} target="_blank" className="centered-content">
+        return link ? (
+          <a
+            href={link}
+            target="_blank"
+            className="centered-content"
+            rel="noreferrer"
+          >
             <MenuBookTwoToneIcon color="primary" sx={{ ml: 1 }} />
-          </Link>
-        );
+          </a>
+        ) : null;
       default:
         return null;
     }
