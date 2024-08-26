@@ -1,13 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Stack } from "@mui/material";
-import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
-import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
+
 import PageHeader from "../../components/PageHeader";
 import useAuth from "../../hooks/useAuth.js";
-import WhiteTypography from "../../components/WhiteTypography.jsx";
+
 import useCourseProvider from "../../hooks/useCourseProvider.js";
-import CourseCard from "../../components/card/CourseCard.jsx";
-import EnrolledCoursesCards from "../common-components/EnrolledCoursesCards.jsx";
+
 import CoursesGroup from "../common-components/CoursesGroup.jsx";
 
 const Main = () => {
@@ -21,28 +19,11 @@ const Main = () => {
         title="Courses"
         subtitle={`Hi ${auth?.firstName}! Good Luck with your studies!`}
       />
-      <EnrolledCoursesCards enrolledCoursesList={enrolledCoursesList} />
-      {/* <CardGroupWithTitle title="Pending Courses">
-        {pendingCoursesList?.length > 0 ? (
-          <CardGroupWrapper>
-            {pendingCoursesList.map((ec) => (
-              <Fragment key={ec?._id}>
-                <CourseCard
-                  title={ec?.course?.title}
-                  description={ec?.course?.description}
-                  progress={ec?.progress}
-                  status={ec?.status}
-                  courseId={ec?.course?._id}
-                />
-              </Fragment>
-            ))}
-          </CardGroupWrapper>
-        ) : (
-          <WhiteTypography>
-            You are not enrolled yet in any course
-          </WhiteTypography>
-        )}
-      </CardGroupWithTitle> */}
+      <CoursesGroup
+        coursesList={enrolledCoursesList}
+        title="Enrolled Courses"
+        textDisplay="No enrolled courses"
+      />
       {pendingCoursesList?.length > 0 && (
         <CoursesGroup
           coursesList={pendingCoursesList}
@@ -55,19 +36,6 @@ const Main = () => {
           title="Recommended Courses"
         />
       )}
-      {/* <CardGroupWithTitle title="Recommended Courses">
-        <CardGroupWrapper>
-          {recommendedCoursesList &&
-            recommendedCoursesList?.map((course) => (
-              <CourseCard
-                key={course._id}
-                {...course}
-                courseId={course._id}
-                status={course?.status}
-              />
-            ))}
-        </CardGroupWrapper>
-      </CardGroupWithTitle> */}
     </Stack>
   );
 };

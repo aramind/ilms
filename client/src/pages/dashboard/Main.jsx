@@ -3,7 +3,7 @@ import React from "react";
 import PageHeader from "../../components/PageHeader";
 import useAuth from "../../hooks/useAuth.js";
 import useCourseProvider from "../../hooks/useCourseProvider.js";
-import EnrolledCoursesCards from "../common-components/EnrolledCoursesCards.jsx";
+import CoursesGroup from "../common-components/CoursesGroup.jsx";
 
 const Main = () => {
   const { auth } = useAuth();
@@ -15,7 +15,11 @@ const Main = () => {
         title="Dashboard"
         subtitle={`Hi ${auth?.firstName}! Good Luck with your studies!`}
       />
-      <EnrolledCoursesCards enrolledCoursesList={enrolledCoursesList} />
+      <CoursesGroup
+        coursesList={enrolledCoursesList}
+        title="Enrolled Courses"
+        textDisplay="No enrolled courses"
+      />
     </Stack>
   );
 };
