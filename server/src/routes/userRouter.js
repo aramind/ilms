@@ -12,7 +12,7 @@ router.patch(
   "/:userId/enrolledCourses/:courseId/enroll",
   userController.enrollCourse
 );
-router.patch("/updateEnrolledCourses", userController.updateCourseProgress);
+router.patch("/updateTopicTasks", userController.updateCourseProgress);
 router.get("/enrolledCourses", userController.getEnrolledCourses);
 
 module.exports = router;
