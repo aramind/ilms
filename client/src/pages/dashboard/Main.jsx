@@ -3,14 +3,13 @@ import React from "react";
 import CourseCard from "../../components/card/CourseCard";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
 import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
-import { getCourseProgress, getEnrolledCourses } from "../../configs/API";
-import { db } from "../../configs/db";
 import PageHeader from "../../components/PageHeader";
 import useAuth from "../../hooks/useAuth.js";
+import useCourseProvider from "../../hooks/useCourseProvider.js";
 
 const Main = () => {
   const { auth } = useAuth();
-  const enrolledCourses = getEnrolledCourses();
+  const { enrolledCoursesList } = useCourseProvider();
 
   return (
     <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
@@ -20,12 +19,15 @@ const Main = () => {
       />
       <CardGroupWithTitle title="My Courses">
         <CardGroupWrapper>
-          {enrolledCourses?.map((course) => (
+          {enrolledCoursesList?.map((ec) => (
             <CourseCard
-              key={course.id}
-              {...course}
-              courseId={course.id}
-              progress={getCourseProgress(course?.id, db?.users?.[0]?.id)}
+              key={ec?.course?._id}
+              title={ec?.course?.title}
+              description={ec?.course?.description}
+              progress={ec?.progress}
+              isEnrolled={true}
+              status={ec?.status}
+              courseId={ec?.course?._id}
             />
           ))}
         </CardGroupWrapper>
