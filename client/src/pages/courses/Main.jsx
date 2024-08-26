@@ -1,61 +1,17 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { Stack } from "@mui/material";
 import CardGroupWrapper from "../../wrappers/CardGroupWrapper";
 import CardGroupWithTitle from "../../wrappers/CardGroupWithTitle";
 import PageHeader from "../../components/PageHeader";
 import useAuth from "../../hooks/useAuth.js";
-import CourseCardTest from "../../components/card/CourseCardTest.jsx";
-
 import WhiteTypography from "../../components/WhiteTypography.jsx";
 import useCourseProvider from "../../hooks/useCourseProvider.js";
+import CourseCard from "../../components/card/CourseCard.jsx";
 
 const Main = () => {
   const { auth } = useAuth();
   const { enrolledCoursesList, pendingCoursesList, recommendedCoursesList } =
     useCourseProvider();
-  // const [coursesList, setCoursesList] = useState([]);
-  // const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
-  // const [pendingCOursesList, setPendingCoursesList] = useState([]);
-  // const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
-  // const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
-  // const { data: coursesData } = useApiGet(
-  //   "courses",
-  //   () => getCourse({ params: "/trimmed" }),
-  //   {
-  //     refetchOnWindowFocus: true,
-  //     retry: 3,
-  //     enabled: !!auth?._id,
-  //   }
-  // );
-
-  // const { data: enrolledCoursesData } = useApiGet(
-  //   "enrolledCourses",
-  //   getEnrolledCourses,
-  //   {
-  //     refetchOnWindowFocus: true,
-  //     retry: 3,
-  //     enabled: !!auth?._id,
-  //   }
-  // );
-
-  // useEffect(() => {
-  //   const enrolledCoursesIds = enrolledCoursesData?.data?.enrolledCourses?.map(
-  //     (ec) => ec?._id
-  //   );
-  //   setCoursesList(
-  //     coursesData?.data?.filter((c) => !enrolledCoursesIds.includes(c._id))
-  //   );
-  //   setEnrolledCoursesList(
-  //     enrolledCoursesData?.data?.enrolledCourses?.filter(
-  //       (ec) => ec.status === "enrolled"
-  //     )
-  //   );
-  //   setPendingCoursesList(
-  //     enrolledCoursesData?.data?.enrolledCourses?.filter(
-  //       (ec) => ec.status === "pending"
-  //     )
-  //   );
-  // }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
 
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
@@ -69,7 +25,7 @@ const Main = () => {
           <CardGroupWrapper>
             {enrolledCoursesList.map((ec) => (
               <Fragment key={ec?._id}>
-                <CourseCardTest
+                <CourseCard
                   title={ec?.course?.title}
                   description={ec?.course?.description}
                   progress={ec?.progress}
@@ -91,7 +47,7 @@ const Main = () => {
           <CardGroupWrapper>
             {pendingCoursesList.map((ec) => (
               <Fragment key={ec?._id}>
-                <CourseCardTest
+                <CourseCard
                   title={ec?.course?.title}
                   description={ec?.course?.description}
                   progress={ec?.progress}
@@ -112,7 +68,7 @@ const Main = () => {
         <CardGroupWrapper>
           {recommendedCoursesList &&
             recommendedCoursesList?.map((course) => (
-              <CourseCardTest
+              <CourseCard
                 key={course._id}
                 {...course}
                 courseId={course._id}
