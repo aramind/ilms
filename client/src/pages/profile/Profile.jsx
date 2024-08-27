@@ -5,16 +5,16 @@ import useAuth from "../../hooks/useAuth";
 
 const Profile = () => {
   const { auth } = useAuth();
-  console.log("ATUH", auth);
+
   return (
     <>
       <MainLayoutWrapper>
-        {auth &&
+        {/* {auth &&
           Object.entries(auth).map(([key, value], index) => (
             <WhiteTypography key={index}>
               {key} : {value}
             </WhiteTypography>
-          ))}
+          ))} */}
       </MainLayoutWrapper>
     </>
   );
