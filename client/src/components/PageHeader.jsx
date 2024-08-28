@@ -13,6 +13,7 @@ const PageHeader = ({ title, subtitle }) => {
       <WhiteTypography fontSize={{ xs: "1.3rem", md: "1.5rem" }}>
         {title}
       </WhiteTypography>
+
       <WhiteTypography>{subtitle}</WhiteTypography>
     </Stack>
   );

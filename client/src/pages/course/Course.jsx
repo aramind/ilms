@@ -8,6 +8,7 @@ import {
   Box,
   Divider,
   Stack,
+  Typography,
 } from "@mui/material";
 import WhiteTypography from "../../components/WhiteTypography";
 import ProgressIndicator from "../../components/card/ProgressIndicator";
@@ -25,11 +26,15 @@ import useUserReq from "../../hooks/api/authenticated/useUserReq";
 import useApiSend from "../../hooks/api/useApiSend";
 
 const Course = () => {
-  const { enrolledCoursesList } = useCourseProvider();
+  const { coursesList, enrolledCoursesList } = useCourseProvider();
   const [course, setCourse] = useState();
   const { courseId } = useParams();
   const [videoId, setVideoId] = useState("");
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [courseProgress, setCourseProgress] = useState({
+    percentage: 0,
+    steps: "N/A",
+  });
 
   const { updateTopicTasks } = useUserReq({ isPublic: false, showAck: true });
 
@@ -41,6 +46,21 @@ const Course = () => {
   useEffect(() => {
     setCourse(enrolledCoursesList?.filter((c) => c._id === courseId)?.[0]);
   }, [courseId, enrolledCoursesList]);
+
+  useEffect(() => {
+    const progress = enrolledCoursesList?.filter((c) => c._id === courseId)?.[0]
+      ?.progress;
+    const totalTasks =
+      coursesList
+        ?.filter((c) => c?._id === courseId)?.[0]
+        ?.topics?.flatMap((t) => t.topicTasks)?.length || 1;
+    const completedTasks =
+      progress?.flatMap((t) => t.completedTopicTasks)?.length || 0;
+    setCourseProgress({
+      steps: `${completedTasks}/${totalTasks}`,
+      percentage: Math.floor((completedTasks / totalTasks) * 100),
+    });
+  }, [courseId, coursesList, enrolledCoursesList]);
 
   const handleAccordionChange = (event, isExpanded) => {
     setIsAccordionOpen(isExpanded);
@@ -89,10 +109,11 @@ const Course = () => {
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
         <PageHeader title={`Courses/${course?.course?.title}`} />
+
         <Box className="centered-content" width={1}>
           {videoId && <VideoEmbed videoId={videoId} setVideoId={setVideoId} />}
         </Box>
-        <Stack direction="row" spacing={1} width={1}>
+        <Stack direction="row" spacing={1} width={1} alignItems="center">
           {course?.course?.topics?.map((topic, index) => (
             <Box width={1} key={index}>
               <ProgressIndicator
@@ -101,6 +122,17 @@ const Course = () => {
               />
             </Box>
           ))}
+          <Stack spacing="0px" alignItems="center">
+            <Typography variant="h5" color="secondary">
+              {courseProgress?.percentage}%
+            </Typography>
+            <WhiteTypography
+              variant="caption"
+              sx={{ textTransform: "uppercase" }}
+            >
+              progress
+            </WhiteTypography>
+          </Stack>
         </Stack>
         {course?.course?.topics?.map((topic, index) => (
           <Accordion
@@ -119,15 +151,15 @@ const Course = () => {
                     Lecture {index + 1} : {topic.title}
                   </WhiteTypography>
 
-                  <WhiteTypography
-                    variant="h5"
-                    fontWeight="bold"
+                  <Typography
+                    variant="h6"
+                    // fontWeight="bold"
                     sx={{
-                      color: (theme) => theme.palette.primary.main,
+                      color: (theme) => theme.palette.secondary.main,
                     }}
                   >
                     {getTopicProgress(topic)?.steps}
-                  </WhiteTypography>
+                  </Typography>
                 </Stack>
               </Stack>
             </AccordionSummary>
