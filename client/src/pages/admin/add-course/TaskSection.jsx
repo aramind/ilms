@@ -9,12 +9,12 @@ const TaskSection = ({ topicIndex }) => {
   const { control } = useFormContext();
 
   const {
-    fields: tasks,
+    fields: topicTasks,
     append: appendTask,
     remove: removeTask,
   } = useFieldArray({
     control,
-    name: `topics[${topicIndex}].tasks`,
+    name: `topics[${topicIndex}].topicTasks`,
   });
 
   return (
@@ -29,7 +29,7 @@ const TaskSection = ({ topicIndex }) => {
       >
         TASKS
       </Typography>
-      {tasks.map((task, taskIndex) => (
+      {topicTasks.map((task, taskIndex) => (
         <Stack spacing={1} pb={2} key={task.id}>
           <Stack direction="row" alignItems="center" spacing={2}>
             <Typography fontWeight="bold" color="primary" flex={1}>{`${
@@ -43,7 +43,7 @@ const TaskSection = ({ topicIndex }) => {
             >
               <ControlledRGroup
                 direction="row"
-                name={`topics[${topicIndex}].tasks[${taskIndex}].action`}
+                name={`topics[${topicIndex}].topicTasks[${taskIndex}].action`}
                 values={["read", "watch", "answer"]}
               />
               <Button
@@ -70,7 +70,7 @@ const TaskSection = ({ topicIndex }) => {
                 <ContLabelledTextField
                   key={index}
                   tfProps={{ variant: "standard" }}
-                  name={`topics[${topicIndex}].tasks[${taskIndex}].${item}`}
+                  name={`topics[${topicIndex}].topicTasks[${taskIndex}].${item}`}
                 />
               </Box>
             </Stack>

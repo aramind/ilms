@@ -20,7 +20,7 @@ const addCourse = async (req, res) => {
     }
 
     const savedTopics = data?.topics?.map((topicData) => {
-      const savedTasks = topicData?.tasks;
+      const savedTasks = topicData?.topicTasks;
 
       return {
         ...topicData,
