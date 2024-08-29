@@ -5,11 +5,12 @@ const getCourseByFields = async (req, res) => {
   console.log("in controller of getcoursesbyfields");
   try {
     const { fields, ...queryParams } = req.query;
-    const requestedFields = fields?.length > 0 ? fields.split(",") : "";
+    const requestedFields = fields?.length > 0 ? fields.split(",") : [];
 
     const credentials = req.credentials;
 
-    console.log(queryParams);
+    console.log("RQ", req.query);
+    console.log("QP", queryParams);
 
     const courses = await Course.find(queryParams, requestedFields.join(" "));
 
