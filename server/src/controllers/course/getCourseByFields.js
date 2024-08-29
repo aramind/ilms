@@ -4,12 +4,14 @@ const sendResponse = require("../../utils/sendResponse");
 const getCourseByFields = async (req, res) => {
   console.log("in controller of getcoursesbyfields");
   try {
-    const requestedFields = req.query.fields ? req.query.fields.split(",") : [];
+    const { fields, ...queryParams } = req.query;
+    const requestedFields = fields?.length > 0 ? fields.split(",") : "";
 
     const credentials = req.credentials;
-    console.log("CREDENTIALS", credentials);
 
-    const courses = await Course.find({}, requestedFields.join(" "));
+    console.log(queryParams);
+
+    const courses = await Course.find(queryParams, requestedFields.join(" "));
 
     if (!courses || courses.length === 0) {
       return sendResponse.failed(res, "No courses found", null, 404);
