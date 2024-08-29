@@ -11,7 +11,7 @@ const LoadingPage = ({ open, text }) => {
         "& .MuiDialog-paper": {
           width: "100%",
           height: "100%",
-          bgcolor: (theme) => theme.palette.black.darkest,
+          bgcolor: (theme) => theme.palette.black,
           opacity: "0.9",
           margin: 0,
           padding: 0,

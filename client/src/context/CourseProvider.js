@@ -3,6 +3,8 @@ import useApiGet from "../hooks/api/useApiGet";
 import useCourseReq from "../hooks/api/authenticated/useCourseReq";
 import useUserReq from "../hooks/api/authenticated/useUserReq";
 import useAuth from "../hooks/useAuth";
+import LoadingPage from "../pages/LoadingPage";
+import ErrorPage from "../pages/ErrorPage";
 
 // Define a type for the context value if using TypeScript
 const defaultContextValue = {};
@@ -29,8 +31,9 @@ const CourseProvider = ({ children }) => {
   const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
   const {
     data: coursesData,
-    // isLoading,
-    // isError,
+    isLoading: isLoadingInCoursesReq,
+    isError: isErrorInCoursesReq,
+    error: errorInCourseReq,
   } = useApiGet("courses", () => getCourse({ params: "/trimmed" }), {
     refetchOnWindowFocus: true,
     retry: 3,
@@ -39,8 +42,9 @@ const CourseProvider = ({ children }) => {
 
   const {
     data: enrolledCoursesData,
-    // isLoadingEnrolledCoursesReq,
-    // isErrorEnrolledCoursesReq,
+    isLoading: isLoadingInEnrolledCoursesReq,
+    isError: isErrorInEnrolledCoursesReq,
+    error: errorInEnrolledCourseReq,
   } = useApiGet("enrolledCourses", getEnrolledCourses, {
     refetchOnWindowFocus: true,
     retry: 3,
@@ -71,6 +75,15 @@ const CourseProvider = ({ children }) => {
     );
   }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
 
+  // / Combine loading and error states
+  const isLoading = isLoadingInCoursesReq || isLoadingInEnrolledCoursesReq;
+  const isError = isErrorInCoursesReq || isErrorInEnrolledCoursesReq;
+
+  const getErrorMessage = () => {
+    const error = errorInCourseReq || errorInEnrolledCourseReq;
+    return error?.message || "Request Error";
+  };
+
   // console.log("COURSE CONTECT", contextValue);
 
   return (
@@ -82,7 +95,14 @@ const CourseProvider = ({ children }) => {
         recommendedCoursesList,
       }}
     >
-      {children}
+      {isLoading ? (
+        <LoadingPage />
+      ) : isError ? (
+        <ErrorPage message={getErrorMessage()} />
+      ) : (
+        children
+      )}
+      {/* {children} */}
     </CourseContext.Provider>
   );
 };
