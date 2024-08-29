@@ -149,7 +149,7 @@ const dv = {
   ],
 };
 
-const AddCourse = () => {
+const AddCourse2 = () => {
   const { addCourse } = useCourseReq({ isPublic: false, showAck: true });
 
   const { mutate: sendAddCourseReq, isLoading } = useApiSend(
@@ -258,4 +258,4 @@ const AddCourse = () => {
   );
 };
 
-export default AddCourse;
+export default AddCourse2;

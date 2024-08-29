@@ -1,10 +1,10 @@
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import React, { useState } from "react";
-import AddCourse from "./AddCourse";
 import ManageCourse from "./ManageCourse";
 import AddAdmin from "./AddAdmin";
 import ManageAdmin from "./ManageAdmin";
 import ManageStudent from "./ManageStudent";
+import AddCourse from "./add-course/AddCourse";
 
 const subTabsList = {
   courses: [
