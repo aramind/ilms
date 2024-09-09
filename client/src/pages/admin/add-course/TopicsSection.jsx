@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -28,14 +28,14 @@ const TopicsSection = ({ control }) => {
     name: "topics",
   });
 
-  // useEffect(() => {
-  //   if (topics.length > 0) {
-  //     const lastTopic = topics[topics.length - 1];
-  //     if (lastTopic?.id) {
-  //       setExpanded((pv) => [...pv, lastTopic.id]);
-  //     }
-  //   }
-  // }, [topics]);
+  useEffect(() => {
+    if (topics.length > 0) {
+      const lastTopic = topics[topics.length - 1];
+      if (lastTopic?.id) {
+        setExpanded((pv) => [...pv, lastTopic.id]);
+      }
+    }
+  }, [topics]);
 
   const handleAccordionChange = (id) => {
     setExpanded((prev) =>
