@@ -1,5 +1,4 @@
 import React from "react";
-import useCourseProvider from "../../../hooks/useCourseProvider";
 import CourseForm from "../course-form/CourseForm";
 
 const EditCourse = ({ selectedCourse }) => {
