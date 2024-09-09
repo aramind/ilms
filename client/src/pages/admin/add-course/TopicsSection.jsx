@@ -7,11 +7,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { nanoid } from "nanoid";
 
 import TaskSection from "./TaskSection";
@@ -19,7 +18,6 @@ import { grey, red } from "@mui/material/colors";
 
 const TopicsSection = ({ control }) => {
   const [expanded, setExpanded] = useState([]);
-  const [isAdding, setIsAdding] = useState(true);
 
   const {
     fields: topics,
@@ -30,11 +28,14 @@ const TopicsSection = ({ control }) => {
     name: "topics",
   });
 
-  useEffect(() => {
-    if (isAdding) {
-      setExpanded((pv) => [...pv, topics[topics.length - 1].id]);
-    }
-  }, [topics, isAdding]);
+  // useEffect(() => {
+  //   if (topics.length > 0) {
+  //     const lastTopic = topics[topics.length - 1];
+  //     if (lastTopic?.id) {
+  //       setExpanded((pv) => [...pv, lastTopic.id]);
+  //     }
+  //   }
+  // }, [topics]);
 
   const handleAccordionChange = (id) => {
     setExpanded((prev) =>
@@ -44,15 +45,15 @@ const TopicsSection = ({ control }) => {
 
   const addNewTopic = () => {
     const newId = nanoid();
-    appendTopic({ id: newId });
+    appendTopic({ id: newId, topicTasks: [{}] });
     setExpanded((prev) => [...prev, newId]);
-    setIsAdding((pv) => true);
+    // setIsAdding((pv) => true);
   };
 
   const handleRemoveTopic = (topicId, topicIndex) => {
     setExpanded((prev) => prev.filter((item) => item !== topicId));
     removeTopic(topicIndex);
-    setIsAdding((pv) => false);
+    // setIsAdding((pv) => false);
   };
 
   return (

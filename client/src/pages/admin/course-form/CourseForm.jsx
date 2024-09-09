@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import useConfirmActionDialog from "../../../hooks/useConfirmActionDialog";
 import WhiteTypography from "../../../components/WhiteTypography";
@@ -17,7 +17,7 @@ const CourseForm = ({ sendFormCallback, isLoading, defaultValues }) => {
     formState: { errors },
   } = useForm({
     mode: "onTouched",
-    defaultValues,
+    defaultValues: defaultValues,
   });
 
   const formMethods = {
@@ -61,6 +61,11 @@ const CourseForm = ({ sendFormCallback, isLoading, defaultValues }) => {
       handleFormSubmit
     );
   };
+
+  useEffect(() => {
+    reset(defaultValues);
+  }, [defaultValues, reset]);
+
   return (
     <>
       <FormWrapper formMethods={formMethods}>
