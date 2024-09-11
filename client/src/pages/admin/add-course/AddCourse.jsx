@@ -2,6 +2,8 @@ import React from "react";
 import useCourseReq from "../../../hooks/api/authenticated/useCourseReq";
 import useApiSend from "../../../hooks/api/useApiSend";
 import CourseForm from "../course-form/CourseForm";
+import { Button, Stack } from "@mui/material";
+import FormWrapper from "../../../wrappers/FormWrapper";
 
 const defaultValues = {
   code: "",
@@ -37,6 +39,7 @@ const AddCourse = () => {
         sendFormCallback={sendAddCourseReq}
         isLoading={isLoading}
         defaultValues={defaultValues}
+        action="add"
       />
     </>
   );

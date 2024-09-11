@@ -8,6 +8,7 @@ const EditCourse = ({ selectedCourse }) => {
         // sendFormCallback={sendAddCourseReq}
         // isLoading={isLoading}
         defaultValues={selectedCourse}
+        action="edit"
       />
     </>
   );

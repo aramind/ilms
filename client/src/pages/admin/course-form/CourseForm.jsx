@@ -9,7 +9,7 @@ import TopicsSection from "../add-course/TopicsSection";
 import { DevTool } from "@hookform/devtools";
 import LoadingPage from "../../LoadingPage";
 
-const CourseForm = ({ sendFormCallback, isLoading, defaultValues }) => {
+const CourseForm = ({ sendFormCallback, isLoading, defaultValues, action }) => {
   const {
     control,
     reset,
@@ -77,14 +77,15 @@ const CourseForm = ({ sendFormCallback, isLoading, defaultValues }) => {
           <Box height="32px"></Box>
           <Stack direction="row" justifyContent="flex-end" px={1} spacing={1}>
             <Button variant="outlined" onClick={handleConfirmClear}>
-              Clear
+              {action === "edit" ? "Undo Changes" : "Clear"}
             </Button>
+
             <Button
               variant="contained"
               onClick={handleConfirmSubmit}
               sx={{ px: 5 }}
             >
-              Submit
+              {action === "edit" ? "Save" : "Submit"}
             </Button>
           </Stack>
         </form>
