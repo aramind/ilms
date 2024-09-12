@@ -6,7 +6,7 @@ const AutocompleteSelector = ({ value, setValue, options, label = "" }) => {
     <Autocomplete
       value={value}
       onChange={(e, newValue) => setValue(newValue)}
-      options={options || {}}
+      options={options}
       getOptionLabel={(option) => {
         if (option?.title || option?.acronym) {
           return `${option?.title || ""} (${option?.acronym || ""})`;
@@ -14,6 +14,7 @@ const AutocompleteSelector = ({ value, setValue, options, label = "" }) => {
           return "";
         }
       }}
+      // isOptionEqualToValue={(option, value) => option?._id === value?._id}
       renderInput={(params) => (
         <TextField
           {...params}

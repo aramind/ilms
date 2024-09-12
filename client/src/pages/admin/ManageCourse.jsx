@@ -3,13 +3,13 @@ import useCourseProvider from "../../hooks/useCourseProvider";
 import useAuth from "../../hooks/useAuth";
 import EditCourse from "./manage-course/EditCourse";
 import AutocompleteSelector from "../../components/AutocompleteSelector";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 const ManageCourse = () => {
   // const [selectedCourse, setSelectedCourse] = useState({});
   const { coursesList } = useCourseProvider();
   const { auth } = useAuth();
-  const [options, setOptions] = useState({});
-  const [selectedCourse, setSelectedCourse] = useState({});
+  const [options, setOptions] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(options[0] || null);
 
   useEffect(() => {
     // Only update if coursesList and auth are defined
@@ -24,19 +24,14 @@ const ManageCourse = () => {
   return (
     <>
       <Stack direction="row" width={1} mt={2} mb={3} alignItems="center">
-        <Box flex={1}>
+        <Box width={{ xs: "100%", md: "50%" }}>
           <AutocompleteSelector
             value={selectedCourse}
             setValue={setSelectedCourse}
-            options={options || {}}
+            options={options}
             label="Select Course"
           />
         </Box>
-        <Stack flex={1} gap={2} direction="row" justifyContent="flex-end">
-          <Button variant="contained">temp button</Button>
-          <Button variant="contained">temp button</Button>
-          <Button variant="contained">temp button</Button>
-        </Stack>
       </Stack>
 
       {selectedCourse && <EditCourse selectedCourse={selectedCourse} />}
