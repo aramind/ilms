@@ -1,6 +1,6 @@
-const update = async (model, id, data) => {
+const update = async (model, _id, data) => {
   return (updated = await model.findOneAndUpdate(
-    { id },
+    { _id },
     { $set: { ...data } },
     { new: true }
   ));
