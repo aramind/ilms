@@ -18,6 +18,12 @@ const useCourseReq = ({ isPublic, showAck }) => {
         url: `${url}${params}`,
         method: "GET",
       }),
+    updateCourse: async ({ courseId, data }) =>
+      request({
+        url: `${url}/${courseId}`,
+        method: "PATCH",
+        data,
+      }),
   };
 
   return req;
