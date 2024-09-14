@@ -4,7 +4,6 @@ const Course = require("../../models/Course");
 const addCourse = async (req, res) => {
   try {
     const data = req.body;
-    console.log(data);
 
     const existing = await Course.findOne({
       code: data?.code,
