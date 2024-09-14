@@ -3,8 +3,6 @@ const User = require("../../models/User");
 const sendResponse = require("../../utils/sendResponse");
 
 const updateCourseProgress = async (req, res) => {
-  console.log("in update course controller");
-
   try {
     const { courseId, topicId, taskId } = req.body;
 
@@ -59,13 +57,7 @@ const updateCourseProgress = async (req, res) => {
       }
     }
 
-    console.log("BEEEEEEEEEEEEEEEEEEEEE");
-
-    console.log(user.enrolledCourses);
     await user.save();
-
-    console.log("AFFFFFFFFFTER");
-    console.log(user.enrolledCourses);
 
     return sendResponse.success(
       res,

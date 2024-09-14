@@ -3,7 +3,6 @@ const User = require("../../models/User");
 const sendResponse = require("../../utils/sendResponse");
 
 const enrollCourse = async (req, res) => {
-  console.log("IN ENROLLED COURSES CONTROLLER");
   try {
     const { courseId } = req.params;
 
