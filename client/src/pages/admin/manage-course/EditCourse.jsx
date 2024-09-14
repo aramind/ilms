@@ -6,8 +6,20 @@ import TopicsSection from "../add-course/TopicsSection";
 import { useForm } from "react-hook-form";
 import useConfirmActionDialog from "../../../hooks/useConfirmActionDialog";
 import WhiteTypography from "../../../components/WhiteTypography";
+import useApiSend from "../../../hooks/api/useApiSend";
+import useCourseReq from "../../../hooks/api/authenticated/useCourseReq";
+import LoadingPage from "../../LoadingPage";
 
 const EditCourse = ({ selectedCourse }) => {
+  const { updateCourse } = useCourseReq({ isPublic: false, showAck: true });
+
+  const { mutate: sendUpdateCourseReq, isLoading } = useApiSend(
+    updateCourse,
+    ["courses"],
+    (data) => {
+      console.log(data?.data);
+    }
+  );
   const {
     control,
     reset,
@@ -33,7 +45,9 @@ const EditCourse = ({ selectedCourse }) => {
   };
 
   const onSubmit = async (data) => {
-    console.log(data);
+    console.log("SENDING UPDATE REQUEST", data);
+    const { _id, ...updatedData } = data;
+    sendUpdateCourseReq({ courseId: data?._id, data: updatedData });
   };
 
   const handleFormSubmit = () => {
@@ -85,7 +99,7 @@ const EditCourse = ({ selectedCourse }) => {
           </Stack>
         </form>
       </FormWrapper>
-      {/* <LoadingPage open={isLoading} text="Loading..." /> */}
+      <LoadingPage open={isLoading} text="Loading..." />
       {renderConfirmActionDialog()}
     </>
   );
