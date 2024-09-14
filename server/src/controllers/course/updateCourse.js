@@ -18,3 +18,5 @@ const updateCourse = async (req, res) => {
     return sendResponse.failed(res, "Error updating", error, 500);
   }
 };
+
+module.exports = updateCourse;

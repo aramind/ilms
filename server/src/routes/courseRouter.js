@@ -10,5 +10,6 @@ router.use(verifyRole(["super", "admin", "student"]));
 
 router.post("", courseController.addCourse);
 router.get("/trimmed", courseController.getCourseByFields);
+router.patch("/:_id", courseController.updateCourse);
 
 module.exports = router;
