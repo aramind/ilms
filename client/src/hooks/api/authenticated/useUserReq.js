@@ -25,6 +25,11 @@ const useUserReq = ({ isPublic, showAck }) => {
         method: "PATCH",
         data,
       }),
+    getUsers: async ({ params }) =>
+      request({
+        url: `${url}${params}`,
+        method: "GET",
+      }),
   };
 
   return req;
