@@ -9,7 +9,7 @@ const getUsersByFields = async (req, res) => {
     const users = await getByFields(
       User,
       queryParams,
-      requestedFields.join("")
+      requestedFields.join(" ")
     );
 
     if (!users || users.length === 0) {
