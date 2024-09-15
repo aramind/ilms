@@ -6,6 +6,8 @@ import useAuth from "../../hooks/useAuth";
 const Profile = () => {
   const { auth } = useAuth();
 
+  console.log(auth);
+
   return (
     <>
       <MainLayoutWrapper>
