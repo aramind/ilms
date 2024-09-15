@@ -1,6 +1,7 @@
 const express = require("express");
 const userController = require("../controllers/user/userController");
 const verifyJWT = require("../middlewares/auth/verifyJWT");
+const verifyRole = require("../middlewares/auth/verifyRole");
 
 const router = express.Router();
 // start of router
@@ -14,5 +15,8 @@ router.patch(
 );
 router.patch("/updateTopicTasks", userController.updateCourseProgress);
 router.get("/enrolledCourses", userController.getEnrolledCourses);
+
+router.use(verifyRole(["super", "admin"]));
+router.get("/", userController.getUsersByFields);
 
 module.exports = router;
