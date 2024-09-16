@@ -1,4 +1,6 @@
 import { createTheme } from "@mui/material";
+import { red } from "@mui/material/colors";
+import { light } from "@mui/material/styles/createPalette";
 
 const COLORS = {
   primary: {
@@ -29,6 +31,11 @@ const COLORS = {
     main: "#E0E0E0",
     light: "#F5F5F5",
   },
+  red: {
+    dark: red[900],
+    main: red[600],
+    light: red[200],
+  },
 };
 
 // theme
@@ -38,6 +45,7 @@ const greenTheme = createTheme({
     secondary: COLORS.secondary,
     black: COLORS.black,
     white: COLORS.white,
+    red: COLORS.red,
   },
   typography: {
     fontFamily: `"Nunito Sans", "Roboto", "Barlow Condensed", sans-serif`,

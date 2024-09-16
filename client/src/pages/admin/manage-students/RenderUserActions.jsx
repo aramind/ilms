@@ -1,8 +1,7 @@
 import { IconButton } from "@mui/material";
 import React from "react";
-import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
-import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
-import { red } from "@mui/material/colors";
+import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 
 const RenderUserActions = ({ row }) => {
   const handleEdit = () => {};
@@ -11,15 +10,16 @@ const RenderUserActions = ({ row }) => {
   return (
     <>
       <IconButton aria-label="edit" onClick={handleEdit} color="primary">
-        <EditTwoToneIcon />
+        <BorderColorRoundedIcon />
       </IconButton>
 
       <IconButton
         aria-label="delete"
         onClick={handleConfirmDelete}
         disabled={row?.STATUS === "deleted"}
+        sx={{ color: (theme) => theme.palette.red.dark }}
       >
-        <DeleteTwoToneIcon />
+        <DeleteRoundedIcon />
       </IconButton>
     </>
   );
