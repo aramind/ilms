@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import RenderUserActions from "./RenderUserActions";
 
 const setId = (user, index) => {
   return user?._id || index + 1;
@@ -19,11 +20,13 @@ const formatColHeaders = (col) => {
     ...c,
     flex: 1,
 
-    renderCell: (params) => (
-      <Box width={1} textAlign="start" pl={1}>
-        {params.value}
-      </Box>
-    ),
+    renderCell: c.renderCell
+      ? c.renderCell
+      : (params) => (
+          <Box width={1} textAlign="start" pl={1}>
+            {params.value}
+          </Box>
+        ),
     editable: false,
     renderHeader: () => (
       <Typography
@@ -83,7 +86,7 @@ const StudentsListTable = ({ data, filterOptions }) => {
           {
             field: "ACTIONS",
             headerName: "ACTIONS",
-            renderCell: (params) => <Typography>ADD</Typography>,
+            renderCell: (params) => <RenderUserActions row={params.row} />,
           },
           ...columns,
         ])}
