@@ -30,6 +30,12 @@ const useUserReq = ({ isPublic, showAck }) => {
         url: `${url}${params}`,
         method: "GET",
       }),
+    updateUser: async ({ _id, data }) =>
+      request({
+        url: `${url}/${_id}`,
+        method: "PATCH",
+        data,
+      }),
   };
 
   return req;
