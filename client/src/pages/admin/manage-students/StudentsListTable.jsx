@@ -45,6 +45,7 @@ const formatColHeaders = (col) => {
 };
 const StudentsListTable = ({ data, filterOptions }) => {
   const [rows, setRows] = useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const processedRows = useMemo(() => {
     if (!data) return [];
@@ -77,6 +78,11 @@ const StudentsListTable = ({ data, filterOptions }) => {
   useEffect(() => {
     setRows(processedRows);
   }, [processedRows]);
+
+  const handleSelectionModelChange = (newSelection) => {
+    setSelectedRows((pv) => newSelection);
+  };
+
   return (
     <>
       <Typography>Students</Typography>
@@ -101,6 +107,8 @@ const StudentsListTable = ({ data, filterOptions }) => {
         pageSizeOptions={[10, 20, 30, 40, 50]}
         disableRowSelectionOnClick
         checkboxSelection
+        rowSelectionModel={selectedRows}
+        onRowSelectionModelChange={handleSelectionModelChange}
       />
     </>
   );
