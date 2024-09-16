@@ -1,13 +1,45 @@
-import { IconButton } from "@mui/material";
+import { Box, IconButton, Stack } from "@mui/material";
 import React from "react";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { red, teal } from "@mui/material/colors";
+import useConfirmActionDialog from "../../../hooks/useConfirmActionDialog";
+import WhiteTypography from "../../../components/WhiteTypography";
 
+const prepareContent = (row) => {
+  const { id, ...userInfo } = row;
+  return (
+    <>
+      <WhiteTypography mb={2}>Delete this user?</WhiteTypography>
+      {userInfo &&
+        Object.entries(userInfo).map(([key, value]) => {
+          return (
+            <Stack direction="row" pl={2}>
+              <Box width="20%">
+                <WhiteTypography>{`${key.toUpperCase()} : `}</WhiteTypography>
+              </Box>
+              <WhiteTypography>{` ${value}`}</WhiteTypography>
+            </Stack>
+          );
+        })}
+    </>
+  );
+};
 const RenderUserActions = ({ row }) => {
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    alert("Editing..");
+  };
 
-  const handleConfirmDelete = () => {};
+  const { handleOpen: handleConfirm, renderConfirmActionDialog } =
+    useConfirmActionDialog();
+
+  const handleConfirmDelete = () => {
+    handleConfirm("Confirm Delete", prepareContent(row), () => {
+      console.log(row);
+      alert("Deleted");
+    });
+  };
+
   return (
     <>
       <IconButton
@@ -27,6 +59,7 @@ const RenderUserActions = ({ row }) => {
       >
         <DeleteRoundedIcon />
       </IconButton>
+      {renderConfirmActionDialog()}
     </>
   );
 };
