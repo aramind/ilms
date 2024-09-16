@@ -9,7 +9,6 @@ import StudentsListTable from "./manage-students/StudentsListTable";
 const ManageStudent = () => {
   const { auth } = useAuth();
 
-  console.log(auth);
   const { getUsers } = useUserReq({ isPublic: false, showAck: true });
 
   const {
@@ -38,7 +37,6 @@ const ManageStudent = () => {
     <ErrorPage message={`${error?.message}`} />;
   }
 
-  console.log(students?.data);
   return (
     <div>
       <StudentsListTable data={students?.data} />
