@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
@@ -14,6 +14,32 @@ const columns = [
   { field: "accessLevel", headerName: "access level" },
 ];
 
+const formatColHeaders = (col) => {
+  const formattedColumns = col.map((c) => ({
+    ...c,
+    flex: 1,
+
+    renderCell: (params) => (
+      <Box width={1} textAlign="start" pl={1}>
+        {params.value}
+      </Box>
+    ),
+    editable: false,
+    renderHeader: () => (
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          width: "100%",
+          color: (theme) => theme.palette.primary.main,
+        }}
+      >
+        {c.headerName.toUpperCase()}
+      </Typography>
+    ),
+  }));
+
+  return formattedColumns;
+};
 const StudentsListTable = ({ data, filterOptions }) => {
   const [rows, setRows] = useState([]);
 
@@ -51,7 +77,27 @@ const StudentsListTable = ({ data, filterOptions }) => {
   return (
     <>
       <Typography>Students</Typography>
-      <DataGrid editMode="row" columns={columns} rows={rows} />
+      <DataGrid
+        editMode="row"
+        columns={formatColHeaders([
+          {
+            field: "ACTIONS",
+            headerName: "ACTIONS",
+            renderCell: (params) => <Typography>ADD</Typography>,
+          },
+          ...columns,
+        ])}
+        rows={rows}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+            },
+          },
+        }}
+        pageSizeOptions={[10, 20, 30, 40, 50]}
+        disableRowSelectionOnClick
+      />
     </>
   );
 };
