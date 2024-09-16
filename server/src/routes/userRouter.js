@@ -18,5 +18,6 @@ router.get("/enrolledCourses", userController.getEnrolledCourses);
 
 router.use(verifyRole(["super", "admin"]));
 router.get("/", userController.getUsersByFields);
+router.patch("/:_id", userController.patchUser);
 
 module.exports = router;
