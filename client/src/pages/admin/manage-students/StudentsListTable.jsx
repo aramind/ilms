@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import RenderUserActions from "./RenderUserActions";
+import RenderStatus from "./RenderStatus";
 
 const setId = (user, index) => {
   return user?._id || index + 1;
@@ -11,7 +12,11 @@ const columns = [
   { field: "lastName", headerName: "last name" },
   { field: "firstName", headerName: "first name" },
   { field: "email", headerName: "email" },
-  { field: "status", headerName: "status" },
+  {
+    field: "status",
+    headerName: "status",
+    renderCell: (params) => <RenderStatus row={params.row} />,
+  },
   { field: "accessLevel", headerName: "access level" },
 ];
 
