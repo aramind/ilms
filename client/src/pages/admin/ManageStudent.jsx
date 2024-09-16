@@ -3,12 +3,10 @@ import useUserReq from "../../hooks/api/authenticated/useUserReq";
 import useApiGet from "../../hooks/api/useApiGet";
 import LoadingPage from "../LoadingPage";
 import ErrorPage from "../ErrorPage";
-import useAuth from "../../hooks/useAuth";
+
 import StudentsListTable from "./manage-students/StudentsListTable";
 
 const ManageStudent = () => {
-  const { auth } = useAuth();
-
   const { getUsers } = useUserReq({ isPublic: false, showAck: true });
 
   const {
