@@ -4,6 +4,7 @@ import useApiGet from "../../hooks/api/useApiGet";
 import LoadingPage from "../LoadingPage";
 import ErrorPage from "../ErrorPage";
 import useAuth from "../../hooks/useAuth";
+import StudentsListTable from "./manage-students/StudentsListTable";
 
 const ManageStudent = () => {
   const { auth } = useAuth();
@@ -25,7 +26,7 @@ const ManageStudent = () => {
     {
       refetchOnWindowFocus: true,
       retry: 3,
-      enabled: !!auth?.id,
+      // enabled: !!auth?.id,
     }
   );
 
@@ -38,7 +39,11 @@ const ManageStudent = () => {
   }
 
   console.log(students?.data);
-  return <div>STUDENTS TABLE</div>;
+  return (
+    <div>
+      <StudentsListTable data={students?.data} />
+    </div>
+  );
 };
 
 export default ManageStudent;
