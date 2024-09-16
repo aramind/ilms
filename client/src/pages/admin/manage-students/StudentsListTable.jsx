@@ -100,6 +100,7 @@ const StudentsListTable = ({ data, filterOptions }) => {
         }}
         pageSizeOptions={[10, 20, 30, 40, 50]}
         disableRowSelectionOnClick
+        checkboxSelection
       />
     </>
   );
