@@ -112,7 +112,12 @@ const StudentsListTable = ({
               field: "ACTIONS",
               headerName: "ACTIONS",
               width: 100,
-              renderCell: (params) => <RenderUserActions row={params.row} />,
+              renderCell: (params) => (
+                <RenderUserActions
+                  row={params.row}
+                  sendPatchUserReq={sendPatchUserReq}
+                />
+              ),
             },
             ...columns,
           ])}

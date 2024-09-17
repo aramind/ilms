@@ -14,7 +14,7 @@ const prepareContent = (row) => {
       {userInfo &&
         Object.entries(userInfo).map(([key, value]) => {
           return (
-            <Stack direction="row" pl={2}>
+            <Stack direction="row" pl={2} key={key}>
               <Box width="20%">
                 <WhiteTypography>{`${key.toUpperCase()} : `}</WhiteTypography>
               </Box>
@@ -25,7 +25,7 @@ const prepareContent = (row) => {
     </>
   );
 };
-const RenderUserActions = ({ row }) => {
+const RenderUserActions = ({ row, sendPatchUserReq }) => {
   const handleEdit = () => {
     alert("Editing..");
   };
@@ -34,10 +34,9 @@ const RenderUserActions = ({ row }) => {
     useConfirmActionDialog();
 
   const handleConfirmDelete = () => {
-    handleConfirm("Confirm Delete", prepareContent(row), () => {
-      console.log(row);
-      alert("Deleted");
-    });
+    handleConfirm("Confirm Delete", prepareContent(row), () =>
+      sendPatchUserReq({ _id: row?.id, data: { status: "deleted" } })
+    );
   };
 
   return (
