@@ -53,7 +53,12 @@ const formatColHeaders = (col) => {
   return formattedColumns;
 };
 
-const StudentsListTable = ({ data, filterOptions, sendPatchUserReq }) => {
+const StudentsListTable = ({
+  data,
+  title = "",
+  filterOptions,
+  sendPatchUserReq,
+}) => {
   const [rows, setRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
   const columns = createColumns(sendPatchUserReq);
@@ -95,8 +100,7 @@ const StudentsListTable = ({ data, filterOptions, sendPatchUserReq }) => {
 
   return (
     <Box width="100%" px={1}>
-      <Typography>Students</Typography>
-
+      <Typography>{title}</Typography>
       <DataGrid
         sx={{ width: "100%", overflowX: "auto" }}
         editMode="row"
