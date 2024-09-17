@@ -9,21 +9,21 @@ const setId = (user, index) => {
 };
 
 const columns = [
-  { field: "lastName", headerName: "last name" },
-  { field: "firstName", headerName: "first name" },
+  { field: "lastName", headerName: "last name", width: 150 },
+  { field: "firstName", headerName: "first name", width: 150 },
   { field: "email", headerName: "email" },
   {
     field: "status",
     headerName: "status",
     renderCell: (params) => <RenderStatus row={params.row} />,
   },
-  { field: "accessLevel", headerName: "access level" },
+  { field: "accessLevel", headerName: "access level", width: 150 },
 ];
 
 const formatColHeaders = (col) => {
   const formattedColumns = col.map((c) => ({
     ...c,
-    flex: 1,
+    flex: c.width ? 0 : 1,
 
     renderCell: c.renderCell
       ? c.renderCell
@@ -37,7 +37,7 @@ const formatColHeaders = (col) => {
       <Typography
         sx={{
           fontWeight: "bold",
-          width: "100%",
+
           color: (theme) => theme.palette.primary.main,
         }}
       >
@@ -89,14 +89,17 @@ const StudentsListTable = ({ data, filterOptions }) => {
   };
 
   return (
-    <>
+    <Box width="100%" px={1}>
       <Typography>Students</Typography>
+
       <DataGrid
+        sx={{ width: "100%", overflowX: "auto" }}
         editMode="row"
         columns={formatColHeaders([
           {
             field: "ACTIONS",
             headerName: "ACTIONS",
+            width: 100,
             renderCell: (params) => <RenderUserActions row={params.row} />,
           },
           ...columns,
@@ -115,7 +118,7 @@ const StudentsListTable = ({ data, filterOptions }) => {
         rowSelectionModel={selectedRows}
         onRowSelectionModelChange={handleSelectionModelChange}
       />
-    </>
+    </Box>
   );
 };
 
