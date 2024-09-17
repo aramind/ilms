@@ -97,36 +97,40 @@ const StudentsListTable = ({
   const handleSelectionModelChange = (newSelection) => {
     setSelectedRows((pv) => newSelection);
   };
-
   return (
-    <Box width="100%" px={1}>
-      <Typography>{title}</Typography>
-      <DataGrid
-        sx={{ width: "100%", overflowX: "auto" }}
-        editMode="row"
-        columns={formatColHeaders([
-          {
-            field: "ACTIONS",
-            headerName: "ACTIONS",
-            width: 100,
-            renderCell: (params) => <RenderUserActions row={params.row} />,
-          },
-          ...columns,
-        ])}
-        rows={rows}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
+    <Box width="100%" px={1} textAlign="center">
+      {rows?.length < 1 ? (
+        <Typography my={2} sx={{ color: (theme) => theme.palette.red.dark }}>
+          No students to show.
+        </Typography>
+      ) : (
+        <DataGrid
+          sx={{ width: "100%", overflowX: "auto" }}
+          editMode="row"
+          columns={formatColHeaders([
+            {
+              field: "ACTIONS",
+              headerName: "ACTIONS",
+              width: 100,
+              renderCell: (params) => <RenderUserActions row={params.row} />,
             },
-          },
-        }}
-        pageSizeOptions={[10, 20, 30, 40, 50]}
-        disableRowSelectionOnClick
-        checkboxSelection
-        rowSelectionModel={selectedRows}
-        onRowSelectionModelChange={handleSelectionModelChange}
-      />
+            ...columns,
+          ])}
+          rows={rows}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
+            },
+          }}
+          pageSizeOptions={[10, 20, 30, 40, 50]}
+          disableRowSelectionOnClick
+          checkboxSelection
+          rowSelectionModel={selectedRows}
+          onRowSelectionModelChange={handleSelectionModelChange}
+        />
+      )}
     </Box>
   );
 };
