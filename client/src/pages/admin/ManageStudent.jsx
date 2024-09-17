@@ -5,9 +5,14 @@ import LoadingPage from "../LoadingPage";
 import ErrorPage from "../ErrorPage";
 
 import StudentsListTable from "./manage-students/StudentsListTable";
+import useApiSend from "../../hooks/api/useApiSend";
 
 const ManageStudent = () => {
-  const { getUsers } = useUserReq({ isPublic: false, showAck: true });
+  // const [updateArguments, setUpdateArguments] = useState({});
+  const { getUsers, updateUser } = useUserReq({
+    isPublic: false,
+    showAck: true,
+  });
 
   const {
     data: students,
@@ -27,7 +32,15 @@ const ManageStudent = () => {
     }
   );
 
-  if (isLoading) {
+  const { mutate: sendPatchUserReq, isLoadingUpdateUser } = useApiSend(
+    (patchInfo) => updateUser(patchInfo),
+    ["users", "students"]
+    // (data) => {
+    //   console.log(data?.data);
+    // }
+  );
+
+  if (isLoading || isLoadingUpdateUser) {
     return <LoadingPage />;
   }
 
@@ -37,7 +50,10 @@ const ManageStudent = () => {
 
   return (
     <div>
-      <StudentsListTable data={students?.data} />
+      <StudentsListTable
+        data={students?.data}
+        sendPatchUserReq={sendPatchUserReq}
+      />
     </div>
   );
 };

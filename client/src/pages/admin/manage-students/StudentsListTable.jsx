@@ -8,17 +8,21 @@ const setId = (user, index) => {
   return user?._id || index + 1;
 };
 
-const columns = [
-  { field: "lastName", headerName: "last name", width: 150 },
-  { field: "firstName", headerName: "first name", width: 150 },
-  { field: "email", headerName: "email" },
-  {
-    field: "status",
-    headerName: "status",
-    renderCell: (params) => <RenderStatus row={params.row} />,
-  },
-  { field: "accessLevel", headerName: "access level", width: 150 },
-];
+const createColumns = (sendPatchUserReq) => {
+  return [
+    { field: "lastName", headerName: "last name", width: 150 },
+    { field: "firstName", headerName: "first name", width: 150 },
+    { field: "email", headerName: "email" },
+    {
+      field: "status",
+      headerName: "status",
+      renderCell: (params) => (
+        <RenderStatus row={params.row} sendPatchUserReq={sendPatchUserReq} />
+      ),
+    },
+    { field: "accessLevel", headerName: "access level", width: 150 },
+  ];
+};
 
 const formatColHeaders = (col) => {
   const formattedColumns = col.map((c) => ({
@@ -48,10 +52,11 @@ const formatColHeaders = (col) => {
 
   return formattedColumns;
 };
-const StudentsListTable = ({ data, filterOptions }) => {
+
+const StudentsListTable = ({ data, filterOptions, sendPatchUserReq }) => {
   const [rows, setRows] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
-
+  const columns = createColumns(sendPatchUserReq);
   const processedRows = useMemo(() => {
     if (!data) return [];
 
