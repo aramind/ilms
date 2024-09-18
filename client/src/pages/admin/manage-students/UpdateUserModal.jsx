@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import Draggable from "react-draggable";
 import FormWrapper from "../../../wrappers/FormWrapper";
 import { useForm } from "react-hook-form";
@@ -53,6 +53,8 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  console.log(row);
   return (
     <>
       <FormWrapper formMethods={formMethods}>
