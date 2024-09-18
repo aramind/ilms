@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import RenderUserActions from "./RenderUserActions";
 import RenderStatus from "./RenderStatus";
 
@@ -10,8 +10,8 @@ const setId = (user, index) => {
 
 const createColumns = (sendPatchUserReq) => {
   return [
-    { field: "lastName", headerName: "last name", width: 150 },
-    { field: "firstName", headerName: "first name", width: 150 },
+    { field: "lastName", headerName: "last name" },
+    { field: "firstName", headerName: "first name" },
     { field: "email", headerName: "email" },
     {
       field: "status",
@@ -20,15 +20,15 @@ const createColumns = (sendPatchUserReq) => {
         <RenderStatus row={params.row} sendPatchUserReq={sendPatchUserReq} />
       ),
     },
-    { field: "accessLevel", headerName: "access level", width: 150 },
+    { field: "accessLevel", headerName: "access level" },
   ];
 };
 
 const formatColHeaders = (col) => {
   const formattedColumns = col.map((c) => ({
     ...c,
-    flex: c.width ? 0 : 1,
-
+    flex: 1,
+    headerAlign: "center",
     renderCell: c.renderCell
       ? c.renderCell
       : (params) => (
@@ -134,6 +134,7 @@ const StudentsListTable = ({
           checkboxSelection
           rowSelectionModel={selectedRows}
           onRowSelectionModelChange={handleSelectionModelChange}
+          slots={{ toolbar: GridToolbar }}
         />
       )}
     </Box>
