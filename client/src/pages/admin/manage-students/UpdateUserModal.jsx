@@ -14,6 +14,10 @@ import FormWrapper from "../../../wrappers/FormWrapper";
 import { useForm } from "react-hook-form";
 import CloseTwoToneIcon from "@mui/icons-material/CloseTwoTone";
 import DialogActionButton from "../../../components/DialogActionButton";
+import useUserReq from "../../../hooks/api/authenticated/useUserReq";
+import useApiGet from "../../../hooks/api/useApiGet";
+import LoadingPage from "../../LoadingPage";
+import ErrorPage from "../../ErrorPage";
 
 const PaperComponent = forwardRef((props, ref) => {
   return (
@@ -32,6 +36,19 @@ const PaperComponent = forwardRef((props, ref) => {
 });
 
 const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
+  const { getUsers } = useUserReq({ isPublic: false, showAck: true });
+
+  const {
+    data: user,
+    isLoading,
+    isError,
+    error,
+  } = useApiGet("user", () => getUsers({ params: `?_id=${row?.id}` }), {
+    refetchOnWindowFocus: true,
+    retry: 3,
+    // enabled: !!auth?.id,
+  });
+
   const {
     handleSubmit,
     control,
@@ -54,7 +71,16 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
     console.log(data);
   };
 
-  console.log(row);
+  //   console.log(row);
+  if (isLoading) {
+    return <LoadingPage />;
+  }
+
+  if (isError) {
+    <ErrorPage message={`${error?.message}`} />;
+  }
+
+  console.log(user);
   return (
     <>
       <FormWrapper formMethods={formMethods}>
