@@ -30,7 +30,10 @@ const createColumns = (sendPatchUserReq) => {
       field: "status",
       headerName: "status",
       renderCell: (params) => (
-        <RenderStatus row={params.row} sendPatchUserReq={sendPatchUserReq} />
+        <CenteredBox>
+          {" "}
+          <RenderStatus row={params.row} sendPatchUserReq={sendPatchUserReq} />
+        </CenteredBox>
       ),
     },
     { field: "accessLevel", headerName: "access level" },
@@ -44,11 +47,7 @@ const formatColHeaders = (col) => {
     headerAlign: "center",
     renderCell: c.renderCell
       ? c.renderCell
-      : (params) => (
-          <Box width={1} textAlign="center" pl={1}>
-            {params.value}
-          </Box>
-        ),
+      : (params) => <CenteredBox> {params.value}</CenteredBox>,
     editable: false,
     renderHeader: () => (
       <Typography

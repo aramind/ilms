@@ -6,7 +6,7 @@ const RenderStatus = ({ row, sendPatchUserReq }) => {
 
   return (
     <Stack direction="row">
-      <FormControl sx={{ m: 1, minWidth: "100px" }} size="small">
+      <FormControl sx={{ m: 1, minWidth: "100px", width: "100%" }} size="small">
         <Select
           labelId="status-selector"
           id="status-selector"
