@@ -1,10 +1,11 @@
 import { Box, IconButton, Stack } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import BorderColorRoundedIcon from "@mui/icons-material/BorderColorRounded";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { red, teal } from "@mui/material/colors";
 import useConfirmActionDialog from "../../../hooks/useConfirmActionDialog";
 import WhiteTypography from "../../../components/WhiteTypography";
+import UpdateUserModal from "./UpdateUserModal";
 
 const prepareContent = (row) => {
   const { id, ...userInfo } = row;
@@ -26,8 +27,10 @@ const prepareContent = (row) => {
   );
 };
 const RenderUserActions = ({ row, sendPatchUserReq }) => {
+  const [openDialogUpdateUser, setOpenDialogUpdateUser] = useState(false);
   const handleEdit = () => {
-    alert("Editing..");
+    console.log(row);
+    setOpenDialogUpdateUser(true);
   };
 
   const { handleOpen: handleConfirm, renderConfirmActionDialog } =
@@ -58,6 +61,12 @@ const RenderUserActions = ({ row, sendPatchUserReq }) => {
       >
         <DeleteRoundedIcon />
       </IconButton>
+      <UpdateUserModal
+        open={openDialogUpdateUser}
+        setOpen={setOpenDialogUpdateUser}
+        title="Update User Information"
+        row={row}
+      />
       {renderConfirmActionDialog()}
     </>
   );
