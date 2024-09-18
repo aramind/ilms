@@ -8,6 +8,19 @@ const setId = (user, index) => {
   return user?._id || index + 1;
 };
 
+const CenteredBox = ({ children }) => {
+  return (
+    <Box
+      width={1}
+      textAlign="center"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+    >
+      {children}
+    </Box>
+  );
+};
 const createColumns = (sendPatchUserReq) => {
   return [
     { field: "lastName", headerName: "last name" },
@@ -32,7 +45,7 @@ const formatColHeaders = (col) => {
     renderCell: c.renderCell
       ? c.renderCell
       : (params) => (
-          <Box width={1} textAlign="start" pl={1}>
+          <Box width={1} textAlign="center" pl={1}>
             {params.value}
           </Box>
         ),
@@ -113,10 +126,12 @@ const StudentsListTable = ({
               headerName: "ACTIONS",
               width: 100,
               renderCell: (params) => (
-                <RenderUserActions
-                  row={params.row}
-                  sendPatchUserReq={sendPatchUserReq}
-                />
+                <CenteredBox>
+                  <RenderUserActions
+                    row={params.row}
+                    sendPatchUserReq={sendPatchUserReq}
+                  />
+                </CenteredBox>
               ),
             },
             ...columns,
