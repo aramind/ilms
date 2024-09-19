@@ -1,8 +1,9 @@
-import { FormControl, MenuItem } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
 
-const Select = ({
-  selectProps,
+const ReusableSelect = ({
+  labelId = "",
+  id = "",
   value,
   onChange,
   options = [],
@@ -11,7 +12,7 @@ const Select = ({
 }) => {
   return (
     <FormControl sx={{ m: 1, minWidth: "100px", width: "100%" }} size={size}>
-      <Select {...selectProps} value={value} onChange={onChange}>
+      <Select labelId={labelId} id={id} value={value} onChange={onChange}>
         {options?.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
@@ -22,4 +23,4 @@ const Select = ({
   );
 };
 
-export default Select;
+export default ReusableSelect;
