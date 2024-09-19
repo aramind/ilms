@@ -8,7 +8,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
+import { DevTool } from "@hookform/devtools";
 import Draggable from "react-draggable";
 import FormWrapper from "../../../wrappers/FormWrapper";
 import { useForm } from "react-hook-form";
@@ -18,6 +19,7 @@ import useUserReq from "../../../hooks/api/authenticated/useUserReq";
 import useApiGet from "../../../hooks/api/useApiGet";
 import LoadingPage from "../../LoadingPage";
 import ErrorPage from "../../ErrorPage";
+import UserInfo from "./UserInfo";
 
 const PaperComponent = forwardRef((props, ref) => {
   return (
@@ -36,10 +38,11 @@ const PaperComponent = forwardRef((props, ref) => {
 });
 
 const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
+  const [user, setUser] = useState({});
   const { getUsers } = useUserReq({ isPublic: false, showAck: true });
 
   const {
-    data: user,
+    data: userData,
     isLoading,
     isError,
     error,
@@ -54,7 +57,10 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
     control,
     reset,
     formState: { errors, isDirty },
-  } = useForm({ mode: "onTouched", defaultValues: row });
+  } = useForm({
+    mode: "onTouched",
+    defaultValues: {},
+  });
 
   const formMethods = { handleSubmit, control, errors };
 
@@ -64,12 +70,22 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
   };
 
   const handleReset = () => {
-    reset({ ...row });
+    reset(userData?.data);
   };
 
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    if (userData?.data?.[0]) {
+      setUser(userData?.data?.[0]);
+    }
+  }, [userData?.data]);
+
+  useEffect(() => {
+    reset(user);
+  }, [reset, user]);
 
   //   console.log(row);
   if (isLoading) {
@@ -80,7 +96,6 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
     <ErrorPage message={`${error?.message}`} />;
   }
 
-  console.log(user);
   return (
     <>
       <FormWrapper formMethods={formMethods}>
@@ -108,6 +123,7 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
             <form>
               <Stack spacing={1}>
                 <Typography>FORM HERE</Typography>
+                <UserInfo />
               </Stack>
             </form>
           </DialogContent>
@@ -125,6 +141,7 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
               }
             />
           </DialogActions>
+          <DevTool control={control} />
         </Dialog>
       </FormWrapper>
     </>
