@@ -96,6 +96,7 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
     <ErrorPage message={`${error?.message}`} />;
   }
 
+  console.log(user);
   return (
     <>
       <FormWrapper formMethods={formMethods}>

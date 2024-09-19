@@ -7,11 +7,11 @@ const ReusableSelect = ({
   value,
   onChange,
   options = [],
-  //   sx = { m: 1, minWidth: "100px", width: "100%" },
+  styleProps = { m: 1, minWidth: "100px", width: "100%" },
   size = "small",
 }) => {
   return (
-    <FormControl sx={{ m: 1, minWidth: "100px", width: "100%" }} size={size}>
+    <FormControl sx={styleProps} size={size}>
       <Select labelId={labelId} id={id} value={value} onChange={onChange}>
         {options?.map((option) => (
           <MenuItem key={option.value} value={option.value}>
