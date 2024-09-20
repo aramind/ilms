@@ -37,7 +37,13 @@ const PaperComponent = forwardRef((props, ref) => {
   );
 });
 
-const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
+const UpdateUserModal = ({
+  open,
+  setOpen,
+  title = "",
+  row,
+  sendPatchUserReq,
+}) => {
   const [user, setUser] = useState({});
   const { getUsers } = useUserReq({ isPublic: false, showAck: true });
 
@@ -74,7 +80,8 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    const { _id, ...updateData } = data;
+    sendPatchUserReq({ _id, data: updateData });
   };
 
   useEffect(() => {

@@ -66,6 +66,7 @@ const RenderUserActions = ({ row, sendPatchUserReq }) => {
         setOpen={setOpenDialogUpdateUser}
         title="Update User Information"
         row={row}
+        sendPatchUserReq={sendPatchUserReq}
       />
       {renderConfirmActionDialog()}
     </>
