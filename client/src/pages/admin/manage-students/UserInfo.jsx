@@ -14,15 +14,26 @@ import { Controller, useFormContext } from "react-hook-form";
 import LabelWrapper from "../../../wrappers/LabelWrapper";
 import ReusableSelect from "../../../components/ReusableSelect";
 import useCourseProvider from "../../../hooks/useCourseProvider";
-import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
-import PendingActionsRoundedIcon from "@mui/icons-material/PendingActionsRounded";
 
 const UserInfo = ({ enrolledCourses }) => {
   const { control } = useFormContext();
   const { coursesList } = useCourseProvider();
 
-  console.log(coursesList);
-  console.log(control);
+  const computeProgress = (course) => {
+    if (course?.status === "pending") return "N/A";
+    if (course?.status === "completed") return "100% completed";
+
+    const totalTasks =
+      coursesList
+        ?.filter((c) => c?._id === course?._id)?.[0]
+        .topics?.flatMap((t) => t.topicTasks)?.length || 1;
+    const completedTasks =
+      course?.progress?.flatMap((t) => t.completedTopicTasks)?.length || 0;
+    const percentage = `${Math.floor(
+      (completedTasks / totalTasks) * 100
+    )} %  completed`;
+    return percentage;
+  };
   return (
     <Stack spacing={1}>
       <Stack direction="row" spacing={1}>
@@ -100,10 +111,10 @@ const UserInfo = ({ enrolledCourses }) => {
       {enrolledCourses &&
         enrolledCourses.map((course, index) => (
           <Stack
-            width="32%"
+            width="50%"
             key={course._id}
             direction="row"
-            spacing={1}
+            spacing={3}
             alignItems="center"
           >
             <Stack direction="row" flex={2} spacing={1}>
@@ -132,6 +143,9 @@ const UserInfo = ({ enrolledCourses }) => {
                   />
                 )}
               />
+            </Box>
+            <Box flex={1}>
+              <Typography>{computeProgress(course)}</Typography>
             </Box>
           </Stack>
         ))}
