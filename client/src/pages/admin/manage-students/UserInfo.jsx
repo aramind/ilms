@@ -1,13 +1,28 @@
-import { Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import ControlledLabelledTextField from "../../../components/controlled/ContLabelledTextField";
 import { Controller, useFormContext } from "react-hook-form";
 import LabelWrapper from "../../../wrappers/LabelWrapper";
 import ReusableSelect from "../../../components/ReusableSelect";
+import useCourseProvider from "../../../hooks/useCourseProvider";
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
+import PendingActionsRoundedIcon from "@mui/icons-material/PendingActionsRounded";
 
-const UserInfo = () => {
+const UserInfo = ({ enrolledCourses }) => {
   const { control } = useFormContext();
+  const { coursesList } = useCourseProvider();
 
+  console.log(coursesList);
+  console.log(control);
   return (
     <Stack spacing={1}>
       <Stack direction="row" spacing={1}>
@@ -81,9 +96,45 @@ const UserInfo = () => {
           )}
         />
       </Stack>
-      <Typography>Enrolled Courses</Typography>
-
-      {/* <ControlledLabelledTextField label="email" name="email" /> */}
+      <Typography>Courses</Typography>
+      {enrolledCourses &&
+        enrolledCourses.map((course, index) => (
+          <Stack
+            width="32%"
+            key={course._id}
+            direction="row"
+            spacing={1}
+            alignItems="center"
+          >
+            <Stack direction="row" flex={2} spacing={1}>
+              <Typography>{index + 1}.)</Typography>
+              <Typography>
+                {coursesList.find((c) => c._id === course.course)?.title ||
+                  "Unknown Course"}
+              </Typography>
+            </Stack>
+            <Box flex={1}>
+              <Controller
+                control={control}
+                name={`enrolledCourses[${index}].status`} // Update status for each course
+                render={({ field }) => (
+                  <ReusableSelect
+                    labelId={`status-select-${index}`}
+                    id={`status-select-${index}`}
+                    value={field.value}
+                    onChange={field.onChange}
+                    options={[
+                      { label: "pending", value: "pending" },
+                      { label: "enrolled", value: "enrolled" },
+                      { label: "completed", value: "completed" },
+                      { label: "dropped", value: "dropped" },
+                    ]}
+                  />
+                )}
+              />
+            </Box>
+          </Stack>
+        ))}
     </Stack>
   );
 };

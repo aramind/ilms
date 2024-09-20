@@ -97,6 +97,7 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
   }
 
   console.log(user);
+
   return (
     <>
       <FormWrapper formMethods={formMethods}>
@@ -107,6 +108,8 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
           aria-labelledby="draggable-dialog-title"
           maxWidth="lg"
           fullWidth
+          minHeight
+          fullScreen
         >
           <DialogTitle>
             <Stack
@@ -124,7 +127,7 @@ const UpdateUserModal = ({ open, setOpen, title = "", row }) => {
             <form>
               <Stack spacing={1}>
                 <Typography>FORM HERE</Typography>
-                <UserInfo />
+                <UserInfo enrolledCourses={user?.enrolledCourses} />
               </Stack>
             </form>
           </DialogContent>
