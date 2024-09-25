@@ -12,10 +12,20 @@ import ControlledLabelledTextField from "../../components/controlled/ContLabelle
 import WhiteTypography from "../../components/WhiteTypography";
 import DialogActionButton from "../../components/DialogActionButton";
 
+const LabelValue = ({ label, value }) => (
+  <Stack direction="row" spacing={2}>
+    <Box width="50px">
+      <Typography sx={{ ...localStyles.label }}>{label}</Typography>
+    </Box>
+    <Typography>:</Typography>
+    <Typography>{value}</Typography>
+  </Stack>
+);
+
 const Profile = () => {
   const { auth } = useAuth();
 
-  console.log(auth);
+  // console.log(auth);
 
   const {
     handleSubmit,
@@ -32,7 +42,12 @@ const Profile = () => {
   const handleReset = () => {
     reset(auth);
   };
-  console.log(auth);
+  // console.log(auth);
+
+  const { firstName, lastName, enrolledCourses, ...readOnlyUserInfos } =
+    auth?.userInfo;
+
+  // console.log(readOnlyUserInfos);
   return (
     <>
       <MainLayoutWrapper>
@@ -41,7 +56,9 @@ const Profile = () => {
           width="100%"
           p={2}
         >
-          <Typography sx={localStyles.title}>my profile</Typography>
+          <Typography sx={{ ...localStyles.title, ...localStyles.label }}>
+            my profile
+          </Typography>
           <FormWrapper formMethods={formMethods}>
             <form>
               <Stack direction="row" spacing={2}>
@@ -56,7 +73,13 @@ const Profile = () => {
               </Stack>
             </form>
           </FormWrapper>
+          <Stack spacing={1} my={2}>
+            {Object.entries(readOnlyUserInfos)?.map(([key, value]) => {
+              return <LabelValue key={key} label={key} value={value} />;
+            })}
+          </Stack>
           <br />
+
           <DialogActions>
             <DialogActionButton
               label="reset"
@@ -80,9 +103,12 @@ export default Profile;
 
 const localStyles = {
   title: {
+    marginBottom: 2,
     color: (theme) => theme.palette.primary.dark,
     fontWeight: "bold",
+  },
+
+  label: {
     textTransform: "uppercase",
-    marginBottom: 2,
   },
 };

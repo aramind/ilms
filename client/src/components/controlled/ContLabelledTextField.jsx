@@ -9,7 +9,6 @@ const ContLabelledTextField = ({
   multiline = false,
   customDefaultValue,
   tfProps,
-
   flex,
 }) => {
   const { control, errors } = useFormContext();
