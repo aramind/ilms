@@ -55,11 +55,21 @@ const signin = async (req, res) => {
       // "enrolledCourses",
     ]);
 
+    const userInfo = _.pick(user, [
+      "firstName",
+      "lastName",
+      "email",
+      "enrolledCourses",
+      "role",
+      "status",
+    ]);
+
     return sendResponse.success(
       res,
       "Log in successful",
       {
         ...returnedUserInfo,
+        userInfo: userInfo,
         token: accessToken,
         role: getRoles.list[user.role],
       },

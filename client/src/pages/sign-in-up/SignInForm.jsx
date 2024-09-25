@@ -31,7 +31,7 @@ const SignInForm = () => {
     signin,
     ["user"],
     (data) => {
-      // console.log(data?.data);
+      console.log(data?.data);
       setAuth((pv) => data?.data);
       data?.success && navigate("/dashboard");
     }
