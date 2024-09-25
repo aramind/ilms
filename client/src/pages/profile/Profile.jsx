@@ -47,7 +47,6 @@ const Profile = () => {
   const { firstName, lastName, enrolledCourses, ...readOnlyUserInfos } =
     auth?.userInfo;
 
-  // console.log(readOnlyUserInfos);
   return (
     <>
       <MainLayoutWrapper>
@@ -78,7 +77,6 @@ const Profile = () => {
               return <LabelValue key={key} label={key} value={value} />;
             })}
           </Stack>
-          <br />
 
           <DialogActions>
             <DialogActionButton
