@@ -28,7 +28,10 @@ const CourseProvider = ({ children }) => {
   const [pendingCoursesList, setPendingCoursesList] = useState([]);
   const [recommendedCoursesList, setRecommendedCoursesList] = useState([]);
   const { getCourse } = useCourseReq({ isPublic: false, showAck: false });
-  const { getEnrolledCourses } = useUserReq({ isPublic: false, showAck: true });
+  const { getEnrolledCourses } = useUserReq({
+    isPublic: false,
+    showAck: false,
+  });
   const {
     data: coursesData,
     isLoading: isLoadingInCoursesReq,
