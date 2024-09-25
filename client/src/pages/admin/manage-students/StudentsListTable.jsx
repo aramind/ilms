@@ -109,6 +109,7 @@ const StudentsListTable = ({
   const handleSelectionModelChange = (newSelection) => {
     setSelectedRows((pv) => newSelection);
   };
+
   return (
     <Box width="100%" px={1} textAlign="center">
       {rows?.length < 1 ? (

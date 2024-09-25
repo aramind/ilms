@@ -18,7 +18,7 @@ const TaskAction = ({ action, onClickHandler, link }) => {
       case "answer":
         return (
           <a
-            href="https://www.indiabix.com/digital-electronics/integrated-circuit-logic-families/discussion-1225"
+            href={link}
             target="_blank"
             className="centered-content"
             rel="noreferrer"

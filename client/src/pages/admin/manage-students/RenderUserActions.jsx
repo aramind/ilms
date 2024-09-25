@@ -29,7 +29,6 @@ const prepareContent = (row) => {
 const RenderUserActions = ({ row, sendPatchUserReq }) => {
   const [openDialogUpdateUser, setOpenDialogUpdateUser] = useState(false);
   const handleEdit = () => {
-    console.log(row);
     setOpenDialogUpdateUser(true);
   };
 
@@ -61,13 +60,15 @@ const RenderUserActions = ({ row, sendPatchUserReq }) => {
       >
         <DeleteRoundedIcon />
       </IconButton>
-      <UpdateUserModal
-        open={openDialogUpdateUser}
-        setOpen={setOpenDialogUpdateUser}
-        title="Update User Information"
-        row={row}
-        sendPatchUserReq={sendPatchUserReq}
-      />
+      {openDialogUpdateUser && (
+        <UpdateUserModal
+          open={openDialogUpdateUser}
+          setOpen={setOpenDialogUpdateUser}
+          title="Update User Information"
+          userId={row?.id}
+          sendPatchUserReq={sendPatchUserReq}
+        />
+      )}
       {renderConfirmActionDialog()}
     </>
   );

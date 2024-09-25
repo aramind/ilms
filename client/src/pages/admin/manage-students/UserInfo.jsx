@@ -1,13 +1,4 @@
-import {
-  Box,
-  Chip,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import ControlledLabelledTextField from "../../../components/controlled/ContLabelledTextField";
 import { Controller, useFormContext } from "react-hook-form";
@@ -34,6 +25,7 @@ const UserInfo = ({ enrolledCourses }) => {
     )} %  completed`;
     return percentage;
   };
+
   return (
     <Stack spacing={1}>
       <Stack direction="row" spacing={1}>

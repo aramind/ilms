@@ -41,7 +41,7 @@ const UpdateUserModal = ({
   open,
   setOpen,
   title = "",
-  row,
+  userId,
   sendPatchUserReq,
 }) => {
   const [user, setUser] = useState({});
@@ -52,10 +52,9 @@ const UpdateUserModal = ({
     isLoading,
     isError,
     error,
-  } = useApiGet("user", () => getUsers({ params: `?_id=${row?.id}` }), {
+  } = useApiGet(["user"], () => getUsers({ params: `?_id=${userId}` }), {
     refetchOnWindowFocus: true,
     retry: 3,
-    // enabled: !!auth?.id,
   });
 
   const {
@@ -65,7 +64,7 @@ const UpdateUserModal = ({
     formState: { errors, isDirty },
   } = useForm({
     mode: "onTouched",
-    defaultValues: {},
+    defaultValues: user,
   });
 
   const formMethods = { handleSubmit, control, errors };
@@ -76,7 +75,7 @@ const UpdateUserModal = ({
   };
 
   const handleReset = () => {
-    reset(userData?.data);
+    reset(user);
   };
 
   const onSubmit = (data) => {
@@ -86,15 +85,12 @@ const UpdateUserModal = ({
 
   useEffect(() => {
     if (userData?.data?.[0]) {
-      setUser(userData?.data?.[0]);
+      const user = userData?.data?.[0];
+      setUser((pv) => user);
+      reset(user);
     }
-  }, [userData?.data]);
+  }, [reset, userData?.data]);
 
-  useEffect(() => {
-    reset(user);
-  }, [reset, user]);
-
-  //   console.log(row);
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -102,8 +98,6 @@ const UpdateUserModal = ({
   if (isError) {
     <ErrorPage message={`${error?.message}`} />;
   }
-
-  console.log(user);
 
   return (
     <>
@@ -147,9 +141,7 @@ const UpdateUserModal = ({
             <DialogActionButton
               label="save"
               onClickHandler={() => handleSubmit(onSubmit)()}
-              disabled={
-                !row?.id || !isDirty || Object.keys(errors).length !== 0
-              }
+              disabled={!userId || !isDirty || Object.keys(errors).length !== 0}
             />
           </DialogActions>
           <DevTool control={control} />
