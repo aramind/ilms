@@ -5,6 +5,7 @@ import {
   Divider,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ProgressIndicator from "./ProgressIndicator";
@@ -25,7 +26,8 @@ const CourseCard = ({
   status,
   price,
 }) => {
-  const isLandscape = useIsLandsCape();
+  const isLandscape = useMediaQuery("(orientation:landscape)");
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const { auth } = useAuth();
 
@@ -82,6 +84,7 @@ const CourseCard = ({
       }}
     >
       <Stack
+        className="outlined"
         width={isLandscape ? { xs: "28vw", md: 220 } : { xs: "42vw", md: 220 }}
         height={isLandscape ? { xs: "30vw", md: 250 } : { xs: "42vw", md: 250 }}
         sx={localStyles.mainStack}
