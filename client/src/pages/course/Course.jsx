@@ -70,13 +70,17 @@ const Course = () => {
     }
   };
 
-  const handleClick = (link) => {
+  const handleClick = (link, action) => {
     // Scroll to the top of the page
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    setVideoId(link);
+    if (action === "watch") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setVideoId(link);
+    } else {
+      window.open(link, "_blank");
+    }
   };
 
   const handleToggleTaskCompletion = (taskId, topicId, courseId) => {
@@ -186,7 +190,7 @@ const Course = () => {
                       // spacing={1}
                       alignItems="center"
                       color={(theme) => theme.palette.white.main}
-                      onClick={() => handleClick(task?.link)}
+                      onClick={() => handleClick(task?.link, task?.action)}
                       sx={{ ...localStyles.linkHover, cursor: "pointer" }}
                     >
                       <Box ml={1}>
