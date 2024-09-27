@@ -19,6 +19,7 @@ import useCourseProvider from "../../hooks/useCourseProvider";
 
 const CourseCard = ({
   title,
+  acronym,
   description,
   progress,
   isEnrolled,
@@ -90,7 +91,7 @@ const CourseCard = ({
         sx={localStyles.mainStack}
       >
         <WhiteTypography variant="h6" color="primary">
-          {title}
+          {title?.length > 30 ? `${title.substring(0, 30)}...` : title}
         </WhiteTypography>
 
         <Divider

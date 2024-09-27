@@ -13,6 +13,7 @@ const CoursesGroup = ({ coursesList, title, textDisplay }) => {
             <CourseCard
               key={cl?.course?._id}
               title={cl?.course?.title}
+              acronym={cl?.course?.acronym}
               description={cl?.course?.description}
               progress={cl?.progress}
               status={cl?.status}
