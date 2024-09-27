@@ -44,6 +44,7 @@ const Profile = () => {
   };
   // console.log(auth);
 
+  console.log(auth);
   const { firstName, lastName, enrolledCourses, ...readOnlyUserInfos } =
     auth?.userInfo;
 

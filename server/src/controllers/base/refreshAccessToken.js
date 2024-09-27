@@ -26,6 +26,14 @@ const refreshAccessToken = async (req, res) => {
     }
 
     const returnedUserInfo = _.pick(user, ["firstName", "lastName", "_id"]);
+    const userInfo = _.pick(user, [
+      "firstName",
+      "lastName",
+      "email",
+      "enrolledCourses",
+      "role",
+      "status",
+    ]);
 
     console.log(returnedUserInfo);
     jwt.verify(
@@ -43,6 +51,7 @@ const refreshAccessToken = async (req, res) => {
             "Token refreshed",
             {
               ...returnedUserInfo,
+              userInfo: userInfo,
               token: generateAccessToken(user),
               role: getRoles.list[user.role],
             },
