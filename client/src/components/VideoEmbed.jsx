@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Stack } from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import useIsLandsCape from "../hooks/useIsLandsCape";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { red } from "@mui/material/colors";
@@ -64,7 +64,7 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
           allowFullScreen
           title="Video Player"
         ></iframe>
-        <Box width={1} textAlign="center">
+        {/* <Box width={1} textAlign="center">
           <a
             href={`https://drive.google.com/file/d/${videoId}/view?usp=sharing`}
             target="_blank"
@@ -74,7 +74,32 @@ const VideoEmbed = ({ videoId, setVideoId }) => {
               Player failed to play the video? Click here to open in a new tab.
             </WhiteTypography>
           </a>
-        </Box>
+        </Box> */}
+        <Stack
+          direction="row"
+          spacing={1}
+          width="100%"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography sx={{ color: (theme) => theme.palette.secondary.main }}>
+            Video not playing? 😕
+          </Typography>
+          <Button
+            variant="outlined"
+            onClick={() =>
+              window.open(
+                `https://drive.google.com/file/d/${videoId}/view?usp=sharing`,
+                "_blank"
+              )
+            }
+            sx={{
+              textTransform: "none",
+            }}
+          >
+            Open in a new tab ↗️
+          </Button>
+        </Stack>
       </Stack>
     </Stack>
   );
