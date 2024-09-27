@@ -3,7 +3,13 @@ import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import FormWrapper from "../../wrappers/FormWrapper";
-import { Box, DialogActions, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  DialogActions,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import ControlledLabelledTextField from "../../components/controlled/ContLabelledTextField";
 import DialogActionButton from "../../components/DialogActionButton";
 
@@ -19,6 +25,7 @@ const LabelValue = ({ label, value }) => (
 
 const Profile = () => {
   const { auth } = useAuth();
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   // console.log(auth);
 
@@ -48,13 +55,14 @@ const Profile = () => {
           sx={{ bgcolor: (theme) => theme.palette.white.main }}
           width="100%"
           p={2}
+          height={isMobile ? "100%" : "auto"}
         >
           <Typography sx={{ ...localStyles.title, ...localStyles.label }}>
             my profile
           </Typography>
           <FormWrapper formMethods={formMethods}>
             <form>
-              <Stack direction="row" spacing={2}>
+              <Stack direction={isMobile ? "column" : "row"} spacing={2}>
                 <ControlledLabelledTextField
                   label="first name"
                   name="firstName"
