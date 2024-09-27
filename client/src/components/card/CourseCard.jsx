@@ -85,7 +85,6 @@ const CourseCard = ({
       }}
     >
       <Stack
-        className="outlined"
         width={isLandscape ? { xs: "28vw", md: 220 } : { xs: "42vw", md: 220 }}
         height={isLandscape ? { xs: "30vw", md: 250 } : { xs: "42vw", md: 250 }}
         sx={localStyles.mainStack}
@@ -107,6 +106,7 @@ const CourseCard = ({
         >
           <WhiteTypography variant="subtitle2">{description}</WhiteTypography>
         </Box>
+        {isMobile && <Box flex={1}></Box>}
         {status === "enrolled" ? (
           <>
             <Box width={1} mt={2}>
