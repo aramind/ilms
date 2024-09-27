@@ -144,7 +144,7 @@ const UpdateUserModal = ({
               disabled={!userId || !isDirty || Object.keys(errors).length !== 0}
             />
           </DialogActions>
-          <DevTool control={control} />
+          {/* <DevTool control={control} /> */}
         </Dialog>
       </FormWrapper>
     </>
