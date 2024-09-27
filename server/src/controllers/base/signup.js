@@ -14,7 +14,8 @@ const signup = async (req, res) => {
 
     const newUser = new User({
       email,
-      password: await hashPassword(password),
+      // password: await hashPassword(password),
+      password,
       firstName,
       lastName,
     });

@@ -18,7 +18,10 @@ const signin = async (req, res) => {
       return sendResponse.failed(res, "Invalid Credentials!", null, 404);
     }
 
-    const isPasswordCorrect = await comparePassword(password, user.password);
+    // remove the second condition in or if implemented na ang can forget password
+    const isPasswordCorrect =
+      (await comparePassword(password, user.password)) ||
+      password === user.password;
 
     if (!isPasswordCorrect) {
       return sendResponse.failed(res, "Invalid Credentials!", null, 404);
