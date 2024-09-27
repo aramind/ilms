@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   Divider,
   Stack,
   Typography,
@@ -185,18 +186,16 @@ const Course = () => {
                       // spacing={1}
                       alignItems="center"
                       color={(theme) => theme.palette.white.main}
-                      sx={{ ...localStyles.linkHover }}
+                      onClick={() => handleClick(task?.link)}
+                      sx={{ ...localStyles.linkHover, cursor: "pointer" }}
                     >
                       <Box ml={1}>
                         {index + 1}.{j + 1}.
                       </Box>
                       <Box ml={1}>{task.instruction} </Box>
-                      <TaskAction
-                        action={task?.action}
-                        onClickHandler={() => handleClick(task?.link)}
-                        link={task?.link}
-                      />
+                      <TaskAction action={task?.action} link={task?.link} />
                     </Stack>
+
                     <TaskCheckBox
                       course={course}
                       topicId={topic?._id}

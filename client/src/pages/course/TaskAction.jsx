@@ -11,7 +11,8 @@ const TaskAction = ({ action, onClickHandler, link }) => {
     switch (action) {
       case "watch":
         return (
-          <IconButton onClick={onClickHandler} variant="text" color="primary">
+          // <IconButton onClick={onClickHandler} variant="text" color="primary">
+          <IconButton variant="text" color="primary">
             <SmartDisplayTwoToneIcon />
           </IconButton>
         );
