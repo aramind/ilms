@@ -15,9 +15,21 @@ const TopicTaskSchema = new Schema({
   link: {
     type: String,
   },
+  status: {
+    type: String,
+    required: true,
+    default: constants?.TASKS_STATUSES[0] || "n/a",
+    enum: { values: constants?.TASKS_STATUSES },
+  },
 });
 
 const TopicSchema = new Schema({
+  status: {
+    type: String,
+    required: true,
+    default: constants?.TOPICS_STATUSES[0] || "n/a",
+    enum: { values: constants?.TOPICS_STATUSES },
+  },
   title: { type: String, required: true },
   description: { type: String },
   image: { type: String },
