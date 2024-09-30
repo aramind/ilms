@@ -12,6 +12,7 @@ const constants = {
   ENROLLED_COURSE_STATUSES: JSON.parse(process.env.ENROLLED_COURSE_STATUSES),
   TOPICS_STATUSES: JSON.parse(process.env.TOPICS_STATUSES),
   TASKS_STATUSES: JSON.parse(process.env.TASKS_STATUSES),
+  COURSE_STATUSES: JSON.parse(process.env.COURSE_STATUSES),
 };
 
 module.exports = constants;
