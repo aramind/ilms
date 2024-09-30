@@ -30,10 +30,11 @@ const MetaInfoSection = () => {
                   onChange={field.onChange}
                   styleProps={{ minWidth: "100px" }}
                   options={[
-                    { label: "pending", value: "pending" },
-                    { label: "active", value: "active" },
-                    { label: "suspended", value: "suspended" },
+                    { label: "hidden", value: "hidden" },
+                    { label: "live", value: "live" },
+                    { label: "locked", value: "locked" },
                     { label: "deleted", value: "deleted" },
+                    { label: "archived", value: "archived" },
                   ]}
                 />
               </Stack>
