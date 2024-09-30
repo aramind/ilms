@@ -13,6 +13,7 @@ import LoadingPage from "../../LoadingPage";
 const EditCourse = ({ selectedCourse }) => {
   const { updateCourse } = useCourseReq({ isPublic: false, showAck: true });
 
+  console.log(selectedCourse);
   const { mutate: sendUpdateCourseReq, isLoading } = useApiSend(
     updateCourse,
     ["courses"],
