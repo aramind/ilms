@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   Box,
   Button,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
@@ -12,6 +13,9 @@ import { useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { nanoid } from "nanoid";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 
 import TaskSection from "./TaskSection";
 import { grey, red } from "@mui/material/colors";
@@ -56,6 +60,7 @@ const TopicsSection = ({ control }) => {
     // setIsAdding((pv) => false);
   };
 
+  console.log(topics);
   return (
     <>
       <Typography>TOPICS</Typography>
@@ -73,17 +78,35 @@ const TopicsSection = ({ control }) => {
               id={`panel${topicIndex}-header`}
               sx={localStyles.accordionSummary}
             >
-              <Stack direction="row" spacing={2} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                width={1}
+                pr={2}
+              >
                 <Typography color={(theme) => theme.palette.black.main}>
-                  Lecture {topicIndex + 1}
+                  Lecture {topicIndex + 1} :
                 </Typography>
-                <Button
+                <Typography color="primary" fontWeight="bold">
+                  {topic?.title}
+                </Typography>
+                <Box flex={1} width="100%"></Box>
+
+                <IconButton
+                  sx={{ color: (theme) => theme.palette.red.dark }}
+                  onClick={() => handleRemoveTopic(topic?.id, topicIndex)}
+                >
+                  {/* <ClearRoundedIcon fontSize="small" /> */}
+                  <DeleteTwoToneIcon fontSize="small" />
+                </IconButton>
+                {/* <Button
                   variant="outlined"
                   onClick={() => handleRemoveTopic(topic?.id, topicIndex)}
                   sx={localStyles.removeBtn}
                 >
                   Remove
-                </Button>
+                </Button> */}
               </Stack>
             </AccordionSummary>
             <AccordionDetails>
