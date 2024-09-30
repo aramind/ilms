@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import MainLayoutWrapper from "../../wrappers/MainLayoutWrapper";
 import { useParams } from "react-router-dom";
 import {
@@ -110,6 +110,10 @@ const Course = () => {
       return 0;
     }
   };
+
+  console.log(
+    course?.course?.topics?.filter((topic) => topic?.status === "live")
+  );
   return (
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
@@ -119,14 +123,16 @@ const Course = () => {
           {videoId && <VideoEmbed videoId={videoId} setVideoId={setVideoId} />}
         </Box>
         <Stack direction="row" spacing={1} width={1} alignItems="center">
-          {course?.course?.topics?.map((topic, index) => (
-            <Box width={1} key={index}>
-              <ProgressIndicator
-                value={getTopicProgress(topic)?.percentage}
-                height="24px"
-              />
-            </Box>
-          ))}
+          {course?.course?.topics
+            ?.filter((topic) => topic?.status === "live")
+            .map((topic, index) => (
+              <Box width={1} key={index}>
+                <ProgressIndicator
+                  value={getTopicProgress(topic)?.percentage}
+                  height="24px"
+                />
+              </Box>
+            ))}
           <Stack spacing="0px" alignItems="center">
             <Typography variant="h5" color="secondary">
               {courseProgress?.percentage}%
@@ -139,92 +145,101 @@ const Course = () => {
             </WhiteTypography>
           </Stack>
         </Stack>
-        {course?.course?.topics?.map((topic, index) => (
-          <Accordion
-            key={index}
-            sx={localStyles.accordion}
-            onChange={handleAccordionChange}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon sx={localStyles.expandIcon} />}
-              aria-controls={`panel${index}-content`}
-              id={`panel${index}-header`}
-            >
-              <Stack width={1} pr={2}>
-                <Stack width={1} direction="row" justifyContent="space-between">
-                  <WhiteTypography variant="h6">
-                    Lecture {index + 1} : {topic.title}
-                  </WhiteTypography>
-
-                  <Typography
-                    variant="h6"
-                    // fontWeight="bold"
-                    sx={{
-                      color: (theme) => theme.palette.secondary.main,
-                    }}
-                  >
-                    {getTopicProgress(topic)?.steps}
-                  </Typography>
-                </Stack>
-              </Stack>
-            </AccordionSummary>
-            <AccordionDetails sx={localStyles.accordionDetails}>
-              <Box width={1} mt={1}>
-                <ProgressIndicator
-                  value={getTopicProgress(topic)?.percentage || 0}
-                  height="4px"
-                />
-              </Box>
-              <Stack width={1}>
-                {topic?.topicTasks?.map((task, j) => (
-                  <Stack
-                    key={j}
-                    width={1}
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
+        {course?.course?.topics?.map(
+          (topic, index) =>
+            topic?.status === "live" && (
+              <Accordion
+                key={index}
+                sx={localStyles.accordion}
+                onChange={handleAccordionChange}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon sx={localStyles.expandIcon} />}
+                  aria-controls={`panel${index}-content`}
+                  id={`panel${index}-header`}
+                >
+                  <Stack width={1} pr={2}>
                     <Stack
+                      width={1}
                       direction="row"
-                      flex={1}
-                      // spacing={1}
-                      alignItems="center"
-                      color={(theme) => theme.palette.white.main}
-                      onClick={() => handleClick(task?.link, task?.action)}
-                      sx={{ ...localStyles.linkHover, cursor: "pointer" }}
+                      justifyContent="space-between"
                     >
-                      <Box ml={1}>
-                        {index + 1}.{j + 1}.
-                      </Box>
-                      <Box ml={1}>{task.instruction} </Box>
-                      <TaskAction action={task?.action} link={task?.link} />
+                      <WhiteTypography variant="h6">
+                        Lecture {index + 1} : {topic.title}
+                      </WhiteTypography>
+
+                      <Typography
+                        variant="h6"
+                        // fontWeight="bold"
+                        sx={{
+                          color: (theme) => theme.palette.secondary.main,
+                        }}
+                      >
+                        {getTopicProgress(topic)?.steps}
+                      </Typography>
                     </Stack>
-
-                    <TaskCheckBox
-                      course={course}
-                      topicId={topic?._id}
-                      taskId={task?._id}
-                      handleToggleTaskCompletion={handleToggleTaskCompletion}
-                    />
                   </Stack>
-                ))}
-              </Stack>
+                </AccordionSummary>
+                <AccordionDetails sx={localStyles.accordionDetails}>
+                  <Box width={1} mt={1}>
+                    <ProgressIndicator
+                      value={getTopicProgress(topic)?.percentage || 0}
+                      height="4px"
+                    />
+                  </Box>
+                  <Stack width={1}>
+                    {topic?.topicTasks?.map((task, j) => (
+                      <Stack
+                        key={j}
+                        width={1}
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        <Stack
+                          direction="row"
+                          flex={1}
+                          // spacing={1}
+                          alignItems="center"
+                          color={(theme) => theme.palette.white.main}
+                          onClick={() => handleClick(task?.link, task?.action)}
+                          sx={{ ...localStyles.linkHover, cursor: "pointer" }}
+                        >
+                          <Box ml={1}>
+                            {index + 1}.{j + 1}.
+                          </Box>
+                          <Box ml={1}>{task.instruction} </Box>
+                          <TaskAction action={task?.action} link={task?.link} />
+                        </Stack>
 
-              {topic?.files?.length > 0 && (
-                <>
-                  <Divider
-                    sx={{
-                      backgroundColor: (theme) => theme.palette.black.main,
-                      width: "100%",
-                      height: 1,
-                    }}
-                  />
-                  <Downloadables files={topic?.files} />
-                </>
-              )}
-            </AccordionDetails>
-          </Accordion>
-        ))}
+                        <TaskCheckBox
+                          course={course}
+                          topicId={topic?._id}
+                          taskId={task?._id}
+                          handleToggleTaskCompletion={
+                            handleToggleTaskCompletion
+                          }
+                        />
+                      </Stack>
+                    ))}
+                  </Stack>
+
+                  {topic?.files?.length > 0 && (
+                    <>
+                      <Divider
+                        sx={{
+                          backgroundColor: (theme) => theme.palette.black.main,
+                          width: "100%",
+                          height: 1,
+                        }}
+                      />
+                      <Downloadables files={topic?.files} />
+                    </>
+                  )}
+                </AccordionDetails>
+              </Accordion>
+            )
+        )}
       </Stack>
     </MainLayoutWrapper>
   );
