@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useFieldArray } from "react-hook-form";
+import { Controller, useFieldArray } from "react-hook-form";
 import LectureMetaInfo from "./LectureMetaInfo";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { nanoid } from "nanoid";
@@ -19,8 +19,10 @@ import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 
 import TaskSection from "./TaskSection";
 import { grey, red } from "@mui/material/colors";
+import LabelWrapper from "../../../wrappers/LabelWrapper";
+import ReusableSelect from "../../../components/ReusableSelect";
 
-const TopicsSection = ({ control }) => {
+const TopicsSection = ({ control, handleFormSubmit }) => {
   const [expanded, setExpanded] = useState([]);
 
   const {
@@ -100,6 +102,29 @@ const TopicsSection = ({ control }) => {
                   {/* <ClearRoundedIcon fontSize="small" /> */}
                   <DeleteTwoToneIcon fontSize="small" />
                 </IconButton>
+
+                <Controller
+                  control={control}
+                  name={`topics[${topicIndex}].status`}
+                  render={({ field }) => (
+                    <ReusableSelect
+                      labelId="topic-status-select"
+                      id="topic-status-select"
+                      value={field.value}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        handleFormSubmit();
+                      }}
+                      styleProps={{ minWidth: "100px" }}
+                      options={[
+                        { label: "hidden", value: "hidden" },
+                        { label: "live", value: "live" },
+                        { label: "locked", value: "locked" },
+                      ]}
+                    />
+                  )}
+                />
+
                 {/* <Button
                   variant="outlined"
                   onClick={() => handleRemoveTopic(topic?.id, topicIndex)}

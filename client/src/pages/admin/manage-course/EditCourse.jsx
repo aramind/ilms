@@ -82,7 +82,10 @@ const EditCourse = ({ selectedCourse }) => {
         <form noValidate>
           <Stack gap={2} px={1}>
             <MetaInfoSection />
-            <TopicsSection control={control} />
+            <TopicsSection
+              control={control}
+              handleFormSubmit={handleFormSubmit}
+            />
           </Stack>
           <Box height="32px"></Box>
           <Stack direction="row" justifyContent="flex-end" px={1} spacing={1}>
