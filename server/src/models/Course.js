@@ -68,6 +68,12 @@ const CourseSchema = new Schema({
   description: {
     type: String,
   },
+  status: {
+    type: String,
+    required: true,
+    default: constants?.COURSE_STATUSES[0],
+    enum: { values: constants?.COURSE_STATUSES },
+  },
   image: {
     type: String,
   },
