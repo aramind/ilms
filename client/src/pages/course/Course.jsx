@@ -51,15 +51,36 @@ const Course = () => {
   useEffect(() => {
     const progress = enrolledCoursesList?.filter((c) => c._id === courseId)?.[0]
       ?.progress;
-    const totalTasks =
-      coursesList
-        ?.filter((c) => c?._id === courseId)?.[0]
-        ?.topics?.flatMap((t) => t.topicTasks)?.length || 1;
-    const completedTasks =
-      progress?.flatMap((t) => t.completedTopicTasks)?.length || 0;
+    // console.log(progress);
+    const liveTopics = coursesList
+      ?.filter((c) => c?._id === courseId)?.[0]
+      ?.topics?.filter((topic) => topic.status === "live");
+    // console.log(liveTopics);
+    const liveTasks = liveTopics
+      ?.flatMap((topic) => topic.topicTasks)
+      ?.filter((task) => task.status === "live")
+      .map((lt) => lt._id);
+
+    const completedTasksOnProgress = progress?.flatMap(
+      (t) => t.completedTopicTasks
+    );
+    // console.log(completedTasksOnProgress);
+
+    const totalLiveTasks = liveTasks?.length || 0;
+    const completedLiveTasks = completedTasksOnProgress?.filter((t) =>
+      liveTasks?.includes(t)
+    );
+
+    const totalCompletedLiveTasks = completedLiveTasks?.length || 0;
+    // const totalTasks =
+    //   coursesList
+    //     ?.filter((c) => c?._id === courseId)?.[0]
+    //     ?.topics?.flatMap((t) => t.topicTasks)?.length || 1;
+    // const completedTasks =
+    //   progress?.flatMap((t) => t.completedTopicTasks)?.length || 0;
     setCourseProgress({
-      steps: `${completedTasks}/${totalTasks}`,
-      percentage: Math.floor((completedTasks / totalTasks) * 100),
+      steps: `${totalCompletedLiveTasks}/${totalLiveTasks}`,
+      percentage: Math.floor((totalCompletedLiveTasks / totalLiveTasks) * 100),
     });
   }, [courseId, coursesList, enrolledCoursesList]);
 
@@ -93,16 +114,48 @@ const Course = () => {
   };
   // console.log(course);
 
+  // const getTopicProgress = (topic) => {
+  //   try {
+  //     const completedTasks =
+  //       course?.progress?.filter((p) => p.topic === topic?._id)?.[0]
+  //         ?.completedTopicTasks?.length || 0;
+  //     const allTopicTasks =
+  //       topic?.topicTasks?.filter((task) => task === "live").length || 0;
+  //     const percentage = Math.floor((completedTasks / allTopicTasks) * 100);
+  //     const progress = {
+  //       percentage: percentage,
+  //       steps: `${completedTasks}/${allTopicTasks}`,
+  //     };
+  //     return progress;
+  //   } catch (error) {
+  //     console.error(error);
+  //     return 0;
+  //   }
+  // };
+
   const getTopicProgress = (topic) => {
     try {
-      const completedTasks =
-        course?.progress?.filter((p) => p.topic === topic?._id)?.[0]
-          ?.completedTopicTasks?.length || 0;
-      const allTopicTasks = topic?.topicTasks?.length || 1;
-      const percentage = Math.floor((completedTasks / allTopicTasks) * 100);
+      const completedTopicTasksOnProgress = course?.progress?.filter(
+        (p) => p.topic === topic?._id
+      )?.[0]?.completedTopicTasks;
+
+      const allLiveTopicTasks = topic?.topicTasks
+        ?.filter((tt) => tt.status === "live")
+        ?.map((tt) => tt?._id);
+
+      const numberOfCompleted =
+        allLiveTopicTasks?.filter((tt) =>
+          completedTopicTasksOnProgress.includes(tt)
+        )?.length || 0;
+
+      const totalLiveTopicTasks = allLiveTopicTasks?.length || 0;
+
+      const percentage = Math.floor(
+        (numberOfCompleted / totalLiveTopicTasks) * 100
+      );
       const progress = {
         percentage: percentage,
-        steps: `${completedTasks}/${allTopicTasks}`,
+        steps: `${numberOfCompleted}/${totalLiveTopicTasks}`,
       };
       return progress;
     } catch (error) {
@@ -111,9 +164,9 @@ const Course = () => {
     }
   };
 
-  console.log(
-    course?.course?.topics?.filter((topic) => topic?.status === "live")
-  );
+  // console.log(
+  //   course?.course?.topics?.filter((topic) => topic?.status === "live")
+  // );
   return (
     <MainLayoutWrapper>
       <Stack spacing={2} alignItems={{ xs: "center", md: "flex-start" }}>
@@ -188,40 +241,50 @@ const Course = () => {
                     />
                   </Box>
                   <Stack width={1}>
-                    {topic?.topicTasks?.map((task, j) => (
-                      <Stack
-                        key={j}
-                        width={1}
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
+                    {topic?.topicTasks
+                      ?.filter((task) => task?.status === "live")
+                      ?.map((task, j) => (
                         <Stack
+                          key={j}
+                          width={1}
                           direction="row"
-                          flex={1}
-                          // spacing={1}
+                          justifyContent="space-between"
                           alignItems="center"
-                          color={(theme) => theme.palette.white.main}
-                          onClick={() => handleClick(task?.link, task?.action)}
-                          sx={{ ...localStyles.linkHover, cursor: "pointer" }}
                         >
-                          <Box ml={1}>
-                            {index + 1}.{j + 1}.
-                          </Box>
-                          <Box ml={1}>{task.instruction} </Box>
-                          <TaskAction action={task?.action} link={task?.link} />
-                        </Stack>
+                          <Stack
+                            direction="row"
+                            flex={1}
+                            // spacing={1}
+                            alignItems="center"
+                            color={(theme) => theme.palette.white.main}
+                            onClick={() =>
+                              handleClick(task?.link, task?.action)
+                            }
+                            sx={{
+                              ...localStyles.linkHover,
+                              cursor: "pointer",
+                            }}
+                          >
+                            <Box ml={1}>
+                              {index + 1}.{j + 1}.
+                            </Box>
+                            <Box ml={1}>{task.instruction} </Box>
+                            <TaskAction
+                              action={task?.action}
+                              link={task?.link}
+                            />
+                          </Stack>
 
-                        <TaskCheckBox
-                          course={course}
-                          topicId={topic?._id}
-                          taskId={task?._id}
-                          handleToggleTaskCompletion={
-                            handleToggleTaskCompletion
-                          }
-                        />
-                      </Stack>
-                    ))}
+                          <TaskCheckBox
+                            course={course}
+                            topicId={topic?._id}
+                            taskId={task?._id}
+                            handleToggleTaskCompletion={
+                              handleToggleTaskCompletion
+                            }
+                          />
+                        </Stack>
+                      ))}
                   </Stack>
 
                   {topic?.files?.length > 0 && (
