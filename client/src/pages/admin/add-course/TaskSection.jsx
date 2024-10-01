@@ -2,10 +2,8 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import ControlledRGroup from "../../../components/controlled/ControlledRGroup";
 import ContLabelledTextField from "../../../components/controlled/ContLabelledTextField";
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { grey, red } from "@mui/material/colors";
-import ReusableSelect from "../../../components/ReusableSelect";
-import DeleteIconButton from "../../../components/customizedButtons/DeleteIconButton";
 
 const TaskSection = ({ topicIndex }) => {
   const { control } = useFormContext();
