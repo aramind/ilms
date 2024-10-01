@@ -2,8 +2,10 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import ControlledRGroup from "../../../components/controlled/ControlledRGroup";
 import ContLabelledTextField from "../../../components/controlled/ContLabelledTextField";
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { grey, red } from "@mui/material/colors";
+import ReusableSelect from "../../../components/ReusableSelect";
+import DeleteIconButton from "../../../components/customizedButtons/DeleteIconButton";
 
 const TaskSection = ({ topicIndex }) => {
   const { control } = useFormContext();
@@ -40,12 +42,14 @@ const TaskSection = ({ topicIndex }) => {
               alignItems="center"
               flex={5}
               justifyContent="space-between"
+              gap={1}
             >
               <ControlledRGroup
                 direction="row"
                 name={`topics[${topicIndex}].topicTasks[${taskIndex}].action`}
                 values={["read", "watch", "answer"]}
               />
+              <Box flex={1} />
               <Button
                 variant="outlined"
                 sx={localStyles.removeBtn}
@@ -54,6 +58,25 @@ const TaskSection = ({ topicIndex }) => {
                 Remove
               </Button>
             </Stack>
+          </Stack>
+          <Stack direction="row" alignContent="center" gap={2}>
+            <Typography
+              textTransform="uppercase"
+              variant="caption"
+              // fontWeight="bold"
+              flex={1}
+              color={(theme) => theme.palette.black.main}
+              my="auto"
+            >
+              STATUS :
+            </Typography>
+            <Box flex={5}>
+              <ControlledRGroup
+                direction="row"
+                name={`topics[${topicIndex}].topicTasks[${taskIndex}].status`}
+                values={["hidden", "live", "locked"]}
+              />
+            </Box>
           </Stack>
           {["instruction", "link"].map((item, index) => (
             <Stack direction="row" alignItems="center" spacing={2} key={index}>
