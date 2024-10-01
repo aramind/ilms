@@ -21,6 +21,7 @@ import TaskSection from "./TaskSection";
 import { grey, red } from "@mui/material/colors";
 import LabelWrapper from "../../../wrappers/LabelWrapper";
 import ReusableSelect from "../../../components/ReusableSelect";
+import DeleteIconButton from "../../../components/customizedButtons/DeleteIconButton";
 
 const TopicsSection = ({ control, handleFormSubmit }) => {
   const [expanded, setExpanded] = useState([]);
@@ -62,7 +63,7 @@ const TopicsSection = ({ control, handleFormSubmit }) => {
     // setIsAdding((pv) => false);
   };
 
-  console.log(topics);
+  // console.log(topics);
   return (
     <>
       <Typography>TOPICS</Typography>
@@ -94,14 +95,10 @@ const TopicsSection = ({ control, handleFormSubmit }) => {
                   {topic?.title}
                 </Typography>
                 <Box flex={1} width="100%"></Box>
-
-                <IconButton
-                  sx={{ color: (theme) => theme.palette.red.dark }}
+                <DeleteIconButton
                   onClick={() => handleRemoveTopic(topic?.id, topicIndex)}
-                >
-                  {/* <ClearRoundedIcon fontSize="small" /> */}
-                  <DeleteTwoToneIcon fontSize="small" />
-                </IconButton>
+                  // size="small"
+                />
 
                 <Controller
                   control={control}
