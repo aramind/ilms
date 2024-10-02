@@ -2,7 +2,7 @@ import { CircularProgress, Dialog, DialogContent, Stack } from "@mui/material";
 import React from "react";
 import WhiteTypography from "../components/WhiteTypography";
 
-const LoadingPage = ({ open, text }) => {
+const LoadingPage = ({ open = true, text }) => {
   return (
     <Dialog
       open={open}
