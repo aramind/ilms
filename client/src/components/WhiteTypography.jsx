@@ -1,8 +1,9 @@
 import { Typography } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import React from "react";
 
 const WhiteTypography = ({ ...props }) => {
-  return <Typography color={(theme) => theme.palette.white.dark} {...props} />;
+  return <Typography sx={{ color: grey[300] }} {...props} />;
 };
 
 export default WhiteTypography;
