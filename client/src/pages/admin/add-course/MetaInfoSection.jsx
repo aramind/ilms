@@ -26,7 +26,7 @@ const MetaInfoSection = () => {
                 <ReusableSelect
                   labelId="status-select"
                   id="status-select"
-                  value={field.value}
+                  value={field.value || "hidden"}
                   onChange={field.onChange}
                   styleProps={{ minWidth: "100px" }}
                   options={[

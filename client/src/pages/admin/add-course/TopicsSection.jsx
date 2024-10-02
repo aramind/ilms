@@ -107,7 +107,7 @@ const TopicsSection = ({ control, handleFormSubmit }) => {
                     <ReusableSelect
                       labelId="topic-status-select"
                       id="topic-status-select"
-                      value={field.value}
+                      value={field.value || "hidden"}
                       onChange={(e) => {
                         field.onChange(e);
                         handleFormSubmit();
