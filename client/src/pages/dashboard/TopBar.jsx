@@ -1,10 +1,18 @@
-import { Button, IconButton, Stack, Tooltip } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useRootReq from "../../hooks/api/public/useRootReq";
 import useApiSend from "../../hooks/api/useApiSend";
+import SearchBar from "../../components/SearchBar";
 
 const TopBar = () => {
   const navigate = useNavigate();
@@ -21,10 +29,6 @@ const TopBar = () => {
     (err) => console.error(err)
   );
 
-  const handleRefresh = () => {
-    alert("REFRESHING...");
-    sendRefreshRequest();
-  };
   return (
     <Stack
       justifyContent="space-between"
@@ -33,7 +37,10 @@ const TopBar = () => {
       alignItems="center"
     >
       {/* <Typography>Search</Typography> */}
-      <Button onClick={handleRefresh}>REFRESH</Button>
+      <Box flex={1}>
+        <SearchBar />
+      </Box>
+      <Box flex={1.5} />
       <Stack direction="row" justifyContent="flex-end" alignItems="center">
         {(auth?.role === "1991" || auth?.role === "2013") && (
           <Button
@@ -68,7 +75,6 @@ const TopBar = () => {
               //   color: (theme) => theme.palette.black.lightest,
               // },
             }}
-            aria-label="add an alarm"
             // size="large"
           >
             <ExitToAppTwoToneIcon
