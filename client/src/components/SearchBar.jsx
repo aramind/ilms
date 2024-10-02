@@ -3,6 +3,16 @@ import React from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
 const SearchBar = () => {
+  const onClickHandler = () => {
+    const donateConfirmed = window.confirm(
+      `Sorry, 😞 feature not yet implemented. \nDev run out of motivation.💸💸💸\nHelp motivate by donating some funds. 🙏🏻🙏🏻🙏🏻\nClick here to Donate😊`
+    );
+
+    if (donateConfirmed) {
+      window.open("https://www.linkedin.com/in/robin-mon-miranda/", "_blank");
+    }
+  };
+
   return (
     <Stack spacing={1} direction="row" width="100%" alignItems="center">
       <TextField
@@ -12,7 +22,7 @@ const SearchBar = () => {
         size="small"
         sx={localStyles.tf}
       />
-      <IconButton sx={localStyles.btn}>
+      <IconButton sx={localStyles.btn} onClick={onClickHandler}>
         <SearchRoundedIcon />
       </IconButton>
     </Stack>
