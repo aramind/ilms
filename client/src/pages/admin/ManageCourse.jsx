@@ -12,11 +12,7 @@ const ManageCourse = () => {
   const [selectedCourse, setSelectedCourse] = useState(options[0] || null);
 
   useEffect(() => {
-    // Only update if coursesList and auth are defined
     if (coursesList && auth?._id) {
-      // const selected =
-      //   coursesList.find((course) => course.creator === auth._id) || {};
-      // setSelectedCourse(selected);
       setOptions((pv) => coursesList);
     }
   }, [auth?._id, coursesList, setOptions]);
