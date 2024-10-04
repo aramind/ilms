@@ -24,6 +24,7 @@ const CourseProvider = ({ children }) => {
   const { auth } = useAuth();
 
   const [coursesList, setCoursesList] = useState([]);
+  const [allCoursesList, setAllCoursesList] = useState([]);
   const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
   const [pendingCoursesList, setPendingCoursesList] = useState([]);
   const [recommendedCoursesList, setRecommendedCoursesList] = useState([]);
@@ -48,6 +49,17 @@ const CourseProvider = ({ children }) => {
   );
 
   const {
+    data: allCoursesData,
+    isLoading: isLoadingInAllCoursesReq,
+    isError: isErrorInAllCoursesReq,
+    error: errorInAllCoursesReq,
+  } = useApiGet("courses", () => getCourse({ params: `/trimmed` }), {
+    refetchOnWindowFocus: true,
+    retry: 3,
+    enabled: !!auth?._id,
+  });
+
+  const {
     data: enrolledCoursesData,
     isLoading: isLoadingInEnrolledCoursesReq,
     isError: isErrorInEnrolledCoursesReq,
@@ -65,6 +77,7 @@ const CourseProvider = ({ children }) => {
     const enrolledCoursesIds = filteredActiveEnrolledCourses?.map(
       (ec) => ec?._id
     );
+    setAllCoursesList(allCoursesData?.data);
     setCoursesList(coursesData?.data);
     setRecommendedCoursesList(
       coursesData?.data
@@ -79,14 +92,25 @@ const CourseProvider = ({ children }) => {
     setPendingCoursesList(
       filteredActiveEnrolledCourses?.filter((ec) => ec.status === "pending")
     );
-  }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
+  }, [
+    allCoursesData?.data,
+    coursesData?.data,
+    enrolledCoursesData?.data?.enrolledCourses,
+  ]);
 
   // / Combine loading and error states
-  const isLoading = isLoadingInCoursesReq || isLoadingInEnrolledCoursesReq;
-  const isError = isErrorInCoursesReq || isErrorInEnrolledCoursesReq;
+  const isLoading =
+    isLoadingInCoursesReq ||
+    isLoadingInEnrolledCoursesReq ||
+    isLoadingInAllCoursesReq;
+  const isError =
+    isErrorInCoursesReq ||
+    isErrorInEnrolledCoursesReq ||
+    isErrorInAllCoursesReq;
 
   const getErrorMessage = () => {
-    const error = errorInCourseReq || errorInEnrolledCourseReq;
+    const error =
+      errorInCourseReq || errorInEnrolledCourseReq || errorInAllCoursesReq;
     return error?.message || "Request Error";
   };
 
@@ -95,6 +119,7 @@ const CourseProvider = ({ children }) => {
   return (
     <CourseContext.Provider
       value={{
+        allCoursesList,
         coursesList,
         enrolledCoursesList,
         pendingCoursesList,
