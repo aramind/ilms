@@ -5,6 +5,8 @@ import CourseCard from "../../components/card/CourseCard";
 import WhiteTypography from "../../components/WhiteTypography";
 
 const CoursesGroup = ({ coursesList, title, textDisplay }) => {
+  console.log(coursesList);
+
   return (
     <CardGroupWithTitle title={title}>
       {coursesList?.length > 0 ? (

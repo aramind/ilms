@@ -37,11 +37,15 @@ const CourseProvider = ({ children }) => {
     isLoading: isLoadingInCoursesReq,
     isError: isErrorInCoursesReq,
     error: errorInCourseReq,
-  } = useApiGet("courses", () => getCourse({ params: "/trimmed" }), {
-    refetchOnWindowFocus: true,
-    retry: 3,
-    enabled: !!auth?._id,
-  });
+  } = useApiGet(
+    "courses",
+    () => getCourse({ params: `/trimmed?status="active"` }),
+    {
+      refetchOnWindowFocus: true,
+      retry: 3,
+      enabled: !!auth?._id,
+    }
+  );
 
   const {
     data: enrolledCoursesData,
@@ -55,7 +59,10 @@ const CourseProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const enrolledCoursesIds = enrolledCoursesData?.data?.enrolledCourses?.map(
+    const filteredActiveEnrolledCourses =
+      enrolledCoursesData?.data?.enrolledCourses?.filter((ec) => ec.course);
+
+    const enrolledCoursesIds = filteredActiveEnrolledCourses?.map(
       (ec) => ec?._id
     );
     setCoursesList(coursesData?.data);
@@ -67,14 +74,10 @@ const CourseProvider = ({ children }) => {
         }))
     );
     setEnrolledCoursesList(
-      enrolledCoursesData?.data?.enrolledCourses?.filter(
-        (ec) => ec.status === "enrolled"
-      )
+      filteredActiveEnrolledCourses?.filter((ec) => ec.status === "enrolled")
     );
     setPendingCoursesList(
-      enrolledCoursesData?.data?.enrolledCourses?.filter(
-        (ec) => ec.status === "pending"
-      )
+      filteredActiveEnrolledCourses?.filter((ec) => ec.status === "pending")
     );
   }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
 
