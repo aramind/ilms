@@ -39,8 +39,8 @@ const CourseProvider = ({ children }) => {
     isError: isErrorInCoursesReq,
     error: errorInCourseReq,
   } = useApiGet(
-    "courses",
-    () => getCourse({ params: `/trimmed?status="active"` }),
+    "active-courses",
+    () => getCourse({ params: `/trimmed?status=active` }),
     {
       refetchOnWindowFocus: true,
       retry: 3,
@@ -71,6 +71,7 @@ const CourseProvider = ({ children }) => {
   });
 
   useEffect(() => {
+    console.log("ALL COURSES", allCoursesData);
     const filteredActiveEnrolledCourses =
       enrolledCoursesData?.data?.enrolledCourses?.filter((ec) => ec.course);
 
