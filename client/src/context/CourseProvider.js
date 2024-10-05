@@ -39,8 +39,8 @@ const CourseProvider = ({ children }) => {
     isError: isErrorInCoursesReq,
     error: errorInCourseReq,
   } = useApiGet(
-    "active-courses",
-    () => getCourse({ params: `/trimmed?status=active` }),
+    "live-courses",
+    () => getCourse({ params: `/trimmed?status=live` }),
     {
       refetchOnWindowFocus: true,
       retry: 3,
