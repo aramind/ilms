@@ -3,7 +3,6 @@ import { grey } from "@mui/material/colors";
 import React from "react";
 
 const WhiteTypography = ({ children, ...props }) => {
-  console.log(props);
   return (
     <Typography color={grey[300]} {...props}>
       {children}

@@ -6,16 +6,17 @@ import AutocompleteSelector from "../../components/AutocompleteSelector";
 import { Box, Stack } from "@mui/material";
 const ManageCourse = () => {
   // const [selectedCourse, setSelectedCourse] = useState({});
-  const { coursesList } = useCourseProvider();
+  const { allCoursesList } = useCourseProvider();
   const { auth } = useAuth();
   const [options, setOptions] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(options[0] || null);
 
+  console.log(allCoursesList);
   useEffect(() => {
-    if (coursesList && auth?._id) {
-      setOptions((pv) => coursesList);
+    if (allCoursesList && auth?._id) {
+      setOptions((pv) => allCoursesList);
     }
-  }, [auth?._id, coursesList, setOptions]);
+  }, [auth?._id, allCoursesList, setOptions]);
 
   return (
     <>

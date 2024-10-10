@@ -24,6 +24,7 @@ const CourseProvider = ({ children }) => {
   const { auth } = useAuth();
 
   const [coursesList, setCoursesList] = useState([]);
+  const [allCoursesList, setAllCoursesList] = useState([]);
   const [enrolledCoursesList, setEnrolledCoursesList] = useState([]);
   const [pendingCoursesList, setPendingCoursesList] = useState([]);
   const [recommendedCoursesList, setRecommendedCoursesList] = useState([]);
@@ -37,7 +38,22 @@ const CourseProvider = ({ children }) => {
     isLoading: isLoadingInCoursesReq,
     isError: isErrorInCoursesReq,
     error: errorInCourseReq,
-  } = useApiGet("courses", () => getCourse({ params: "/trimmed" }), {
+  } = useApiGet(
+    "live-courses",
+    () => getCourse({ params: `/trimmed?status=live` }),
+    {
+      refetchOnWindowFocus: true,
+      retry: 3,
+      enabled: !!auth?._id,
+    }
+  );
+
+  const {
+    data: allCoursesData,
+    isLoading: isLoadingInAllCoursesReq,
+    isError: isErrorInAllCoursesReq,
+    error: errorInAllCoursesReq,
+  } = useApiGet("courses", () => getCourse({ params: `/trimmed` }), {
     refetchOnWindowFocus: true,
     retry: 3,
     enabled: !!auth?._id,
@@ -55,9 +71,14 @@ const CourseProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const enrolledCoursesIds = enrolledCoursesData?.data?.enrolledCourses?.map(
+    console.log("ALL COURSES", allCoursesData);
+    const filteredActiveEnrolledCourses =
+      enrolledCoursesData?.data?.enrolledCourses?.filter((ec) => ec.course);
+
+    const enrolledCoursesIds = filteredActiveEnrolledCourses?.map(
       (ec) => ec?._id
     );
+    setAllCoursesList(allCoursesData?.data);
     setCoursesList(coursesData?.data);
     setRecommendedCoursesList(
       coursesData?.data
@@ -67,23 +88,30 @@ const CourseProvider = ({ children }) => {
         }))
     );
     setEnrolledCoursesList(
-      enrolledCoursesData?.data?.enrolledCourses?.filter(
-        (ec) => ec.status === "enrolled"
-      )
+      filteredActiveEnrolledCourses?.filter((ec) => ec.status === "enrolled")
     );
     setPendingCoursesList(
-      enrolledCoursesData?.data?.enrolledCourses?.filter(
-        (ec) => ec.status === "pending"
-      )
+      filteredActiveEnrolledCourses?.filter((ec) => ec.status === "pending")
     );
-  }, [coursesData?.data, enrolledCoursesData?.data?.enrolledCourses]);
+  }, [
+    allCoursesData?.data,
+    coursesData?.data,
+    enrolledCoursesData?.data?.enrolledCourses,
+  ]);
 
   // / Combine loading and error states
-  const isLoading = isLoadingInCoursesReq || isLoadingInEnrolledCoursesReq;
-  const isError = isErrorInCoursesReq || isErrorInEnrolledCoursesReq;
+  const isLoading =
+    isLoadingInCoursesReq ||
+    isLoadingInEnrolledCoursesReq ||
+    isLoadingInAllCoursesReq;
+  const isError =
+    isErrorInCoursesReq ||
+    isErrorInEnrolledCoursesReq ||
+    isErrorInAllCoursesReq;
 
   const getErrorMessage = () => {
-    const error = errorInCourseReq || errorInEnrolledCourseReq;
+    const error =
+      errorInCourseReq || errorInEnrolledCourseReq || errorInAllCoursesReq;
     return error?.message || "Request Error";
   };
 
@@ -92,6 +120,7 @@ const CourseProvider = ({ children }) => {
   return (
     <CourseContext.Provider
       value={{
+        allCoursesList,
         coursesList,
         enrolledCoursesList,
         pendingCoursesList,

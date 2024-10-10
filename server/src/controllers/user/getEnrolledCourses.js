@@ -8,6 +8,7 @@ const getEnrolledCourses = async (req, res) => {
     const enrolledCourses = await User.findById(credentials?._id)
       .populate({
         path: "enrolledCourses.course",
+        match: { "enrolledCourses.status": "active" }, // Filters for active status
       })
       .select("enrolledCourses -_id");
 
