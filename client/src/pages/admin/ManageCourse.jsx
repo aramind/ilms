@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import EditCourse from "./manage-course/EditCourse";
 import AutocompleteSelector from "../../components/AutocompleteSelector";
 import { Box, Stack } from "@mui/material";
+import ListOfStudents from "./manage-course/ListOfStudents";
 const ManageCourse = () => {
   // const [selectedCourse, setSelectedCourse] = useState({});
   const { allCoursesList } = useCourseProvider();
@@ -31,7 +32,18 @@ const ManageCourse = () => {
         </Box>
       </Stack>
 
-      {selectedCourse && <EditCourse selectedCourse={selectedCourse} />}
+      {selectedCourse && (
+        <>
+          <Box
+            borderRadius={1}
+            p={2}
+            sx={{ bgcolor: (theme) => theme.palette.white.light }}
+          >
+            <EditCourse selectedCourse={selectedCourse} />
+          </Box>
+          <ListOfStudents />
+        </>
+      )}
     </>
   );
 };

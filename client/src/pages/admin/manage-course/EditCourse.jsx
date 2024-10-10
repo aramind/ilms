@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import FormWrapper from "../../../wrappers/FormWrapper";
-import { Box, Button, Stack } from "@mui/material";
+import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import MetaInfoSection from "../add-course/MetaInfoSection";
 import TopicsSection from "../add-course/TopicsSection";
 import { useForm } from "react-hook-form";
@@ -103,6 +103,7 @@ const EditCourse = ({ selectedCourse }) => {
           </Stack>
         </form>
       </FormWrapper>
+
       <LoadingPage open={isLoading} text="Loading..." />
       {renderConfirmActionDialog()}
     </>

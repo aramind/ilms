@@ -158,8 +158,8 @@ const localStyles = {
   accordion: {
     width: "100%",
     outline: "1px solid",
-    outlineColor: (theme) => theme.palette.white.darkest,
-    bgcolor: (theme) => theme.palette.white.main,
+    outlineColor: (theme) => theme.palette.white.dark,
+    bgcolor: (theme) => theme.palette.white.light,
 
     // "&:before": {
     //   display: "none",
@@ -179,7 +179,7 @@ const localStyles = {
     },
   },
   accordionSummary: {
-    bgcolor: (theme) => theme.palette.white.dark,
+    bgcolor: (theme) => theme.palette.white.light,
   },
   expandIcon: {
     color: (theme) => theme.palette.primary.main,
