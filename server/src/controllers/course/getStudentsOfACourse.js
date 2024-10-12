@@ -3,6 +3,7 @@ const getByFields = require("../../services/getByFields");
 const sendResponse = require("../../utils/sendResponse");
 
 const getStudentsOfACourse = async (req, res) => {
+  console.log("IN GETSTUDENTS OF A COURSE CONTROLLER");
   try {
     const { courseId } = req.params;
     const { fields } = req.query;

@@ -1,4 +1,9 @@
-const getByFields = async (model, queryParams, requestedFields) => {
+const getByFields = async (
+  model,
+  queryParams,
+  requestedFields,
+  populateOptions
+) => {
   return (documents = await model.find(
     queryParams,
     requestedFields,

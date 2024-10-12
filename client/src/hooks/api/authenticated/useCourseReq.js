@@ -26,7 +26,7 @@ const useCourseReq = ({ isPublic, showAck }) => {
       }),
     getStudents: async ({ courseId, params }) =>
       request({
-        url: `${url}/${courseId}/students/${params}`,
+        url: `${url}/${courseId}/students${params}`,
         method: "GET",
       }),
   };
