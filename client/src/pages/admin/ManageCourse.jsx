@@ -51,7 +51,7 @@ const ManageCourse = () => {
           </WhiteBoxWrapper>
           <br />
           <WhiteBoxWrapper>
-            <ListOfStudents />
+            <ListOfStudents selectedCourse={selectedCourse} />
           </WhiteBoxWrapper>
         </>
       )}
