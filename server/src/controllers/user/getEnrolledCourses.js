@@ -5,7 +5,6 @@ const returnNoEnrolledCourses = (res) => {
   return sendResponse.failed(res, "No enrolled courses on records", null, 404);
 };
 const getEnrolledCourses = async (req, res) => {
-  console.log("IN getenrolledcoursescontroller");
   try {
     const credentials = req.credentials;
 
@@ -22,26 +21,6 @@ const getEnrolledCourses = async (req, res) => {
     if (!allEnrolledCourses) {
       returnNoEnrolledCourses(res);
     }
-    // if (!activeEnrolledCourses) {
-    //   returnNoEnrolledCourses(res);
-    // }
-
-    // const populatedActiveEnrolledCourses = await User.populate(
-    //   activeEnrolledCourses,
-    //   {
-    //     path: "course",
-    //   }
-    // );
-
-    // if (!populatedActiveEnrolledCourses) {
-    //   returnNoEnrolledCourses(res);
-    // }
-    // const enrolledCourses = await User.findById(credentials?._id)
-    //   .populate({
-    //     path: "enrolledCourses.course",
-    //     match: { "enrolledCourses.status": "active" }, // Filters for active status
-    //   })
-    //   .select("enrolledCourses -_id");
 
     return sendResponse.success(
       res,
