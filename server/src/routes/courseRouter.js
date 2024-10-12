@@ -13,6 +13,6 @@ router.get("/trimmed", courseController.getCourseByFields);
 router.patch("/:_id", courseController.updateCourse);
 
 router.use(verifyRole(["super", "admin"]));
-router.get("/:courseId/students");
+router.get("/:courseId/students", courseController.getStudentsOfACourse);
 
 module.exports = router;
