@@ -6,10 +6,13 @@ const verifyJWT = require("../middlewares/auth/verifyJWT");
 
 console.log("IN COURSE ROUTER");
 router.use(verifyJWT);
-router.use(verifyRole(["super", "admin", "student"]));
 
+router.use(verifyRole(["super", "admin", "student"]));
 router.post("", courseController.addCourse);
 router.get("/trimmed", courseController.getCourseByFields);
 router.patch("/:_id", courseController.updateCourse);
+
+router.use(verifyRole(["super", "admin"]));
+router.get("/:courseId/students", courseController.getStudentsOfACourse);
 
 module.exports = router;
