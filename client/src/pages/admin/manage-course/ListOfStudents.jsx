@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AutocompleteSelector from "../../../components/AutocompleteSelector";
 import useApiGet from "../../../hooks/api/useApiGet";
@@ -44,28 +44,51 @@ const ListOfStudents = ({ selectedCourse }) => {
     <Box>
       <Typography>LIST OF STUDENTS</Typography>
       <Box width={{ xs: "100%", md: "50%" }}>
-        <AutocompleteSelector
+        {/* <AutocompleteSelector
           value={studentsStatusOptions[0]}
           // setValue={setSelectedCourse}
           options={studentsStatusOptions}
           label="Select Course"
-        />
-        <Typography>{selectedCourse?.title} students</Typography>
-        {students &&
-          students.map((student, index) => (
-            <Typography key={index}>
-              {student?.email} -- {student?.firstName + " " + student?.lastName}{" "}
-              -- {student?.status} --{" "}
+        /> */}
+        {/* <Typography>{selectedCourse?.title} students</Typography> */}
+        <br />
+      </Box>
+      <Stack direction="row" width="100%" mb={0.5}>
+        <Typography sx={localStyles.header} mr={3}>
+          #
+        </Typography>
+        <Typography sx={localStyles.header} flex={1}>
+          STUDENT
+        </Typography>
+        <Typography sx={localStyles.header} flex={1}>
+          ENROLLMENT STATUS
+        </Typography>
+      </Stack>
+      {students &&
+        students.map((student, index) => (
+          <Stack key={index} direction="row" width="100%" mb={0.5}>
+            <Typography mr={3}>{index + 1}.</Typography>
+            <Typography flex={1}>
+              {student?.firstName + " " + student?.lastName}
+            </Typography>
+            <Typography flex={1}>
               {
                 student?.enrolledCourses?.find(
                   (ec) => ec.course === selectedCourse?._id
                 )?.status
               }
             </Typography>
-          ))}
-      </Box>
+          </Stack>
+        ))}
     </Box>
   );
 };
 
 export default ListOfStudents;
+
+const localStyles = {
+  header: {
+    color: (theme) => theme.palette.primary.main,
+    fontWeight: "bold",
+  },
+};
