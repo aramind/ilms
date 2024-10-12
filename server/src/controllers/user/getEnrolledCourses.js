@@ -14,18 +14,14 @@ const getEnrolledCourses = async (req, res) => {
       .populate({
         path: "enrolledCourses.course",
       })
-      .select("enrolledCourses -_id");
+      .select("enrolledCourses -_id")
+      .lean();
 
-    console.log(allEnrolledCourses);
+    console.log(allEnrolledCourses.enrolledCourses);
 
     if (!allEnrolledCourses) {
       returnNoEnrolledCourses(res);
     }
-
-    // const activeEnrolledCourses = allEnrolledCourses.filter(
-    //   (course) => course.status === "active"
-    // );
-
     // if (!activeEnrolledCourses) {
     //   returnNoEnrolledCourses(res);
     // }

@@ -75,7 +75,9 @@ const CourseProvider = ({ children }) => {
   console.log(enrolledCoursesData);
   useEffect(() => {
     const filteredActiveEnrolledCourses =
-      enrolledCoursesData?.data?.enrolledCourses?.filter((ec) => ec.course);
+      enrolledCoursesData?.data?.enrolledCourses?.filter(
+        (ec) => ec.course?.status === "live"
+      );
 
     const enrolledCoursesIds = filteredActiveEnrolledCourses?.map(
       (ec) => ec?._id

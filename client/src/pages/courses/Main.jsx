@@ -13,8 +13,6 @@ const Main = () => {
   const { enrolledCoursesList, pendingCoursesList, recommendedCoursesList } =
     useCourseProvider();
 
-  console.log(auth);
-  console.log("PC", pendingCoursesList);
   return (
     <Stack alignItems={{ xs: "center", md: "flex-start" }}>
       <PageHeader
