@@ -36,3 +36,5 @@ const getStudentsOfACourse = async (req, res) => {
     return sendResponse.failed(res, "Error retrieving students", error, 500);
   }
 };
+
+module.exports = getStudentsOfACourse;
