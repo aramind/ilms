@@ -9,9 +9,8 @@ import ErrorPage from "../../ErrorPage";
 
 const studentsStatusOptions = ["all", "enrolled", "pending", "suspended"];
 const ListOfStudents = ({ selectedCourse }) => {
-  const [students, setStudents] = useState([]);
+  // const [students, setStudents] = useState([]);
   const { auth } = useAuth();
-  console.log(selectedCourse?._id);
   const { getStudents } = useCourseReq({ isPublic: false, showAck: false });
 
   const {
@@ -19,27 +18,28 @@ const ListOfStudents = ({ selectedCourse }) => {
     isLoading,
     isError,
     error,
+    refetch,
   } = useApiGet(
     "students",
     () =>
       getStudents({
         courseId: selectedCourse?._id,
-        params: `?fields=_id,email,firstName,lastName,status`,
+        params: `?fields=_id,email,firstName,lastName,status, enrolledCourses`,
       }),
     {
-      refetchOnWindowFocus: true,
       retry: 3,
-      enabled: !!auth?._id,
+      enabled: !!auth?._id && !!selectedCourse?._id,
     }
   );
 
   useEffect(() => {
-    setStudents((prev) => studentsData?.data);
-  }, [studentsData]);
+    refetch();
+  }, [refetch, selectedCourse]);
 
   if (isLoading) return <LoadingPage />;
   if (isError) return <ErrorPage message={error?.message || "Request Error"} />;
 
+  const students = studentsData?.data;
   return (
     <Box>
       <Typography>LIST OF STUDENTS</Typography>
@@ -53,7 +53,15 @@ const ListOfStudents = ({ selectedCourse }) => {
         <Typography>{selectedCourse?.title} students</Typography>
         {students &&
           students.map((student, index) => (
-            <Typography key={index}>{student?.email}</Typography>
+            <Typography key={index}>
+              {student?.email} -- {student?.firstName + " " + student?.lastName}{" "}
+              -- {student?.status} --{" "}
+              {
+                student?.enrolledCourses?.find(
+                  (ec) => ec.course === selectedCourse?._id
+                )?.status
+              }
+            </Typography>
           ))}
       </Box>
     </Box>
