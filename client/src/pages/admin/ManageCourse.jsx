@@ -4,6 +4,19 @@ import useAuth from "../../hooks/useAuth";
 import EditCourse from "./manage-course/EditCourse";
 import AutocompleteSelector from "../../components/AutocompleteSelector";
 import { Box, Stack } from "@mui/material";
+import ListOfStudents from "./manage-course/ListOfStudents";
+
+const WhiteBoxWrapper = ({ children }) => {
+  return (
+    <Box
+      borderRadius={1}
+      p={2}
+      sx={{ bgcolor: (theme) => theme.palette.white.light }}
+    >
+      {children}
+    </Box>
+  );
+};
 const ManageCourse = () => {
   // const [selectedCourse, setSelectedCourse] = useState({});
   const { allCoursesList } = useCourseProvider();
@@ -11,7 +24,7 @@ const ManageCourse = () => {
   const [options, setOptions] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(options[0] || null);
 
-  console.log(allCoursesList);
+  // console.log(allCoursesList);
   useEffect(() => {
     if (allCoursesList && auth?._id) {
       setOptions((pv) => allCoursesList);
@@ -31,7 +44,17 @@ const ManageCourse = () => {
         </Box>
       </Stack>
 
-      {selectedCourse && <EditCourse selectedCourse={selectedCourse} />}
+      {selectedCourse && (
+        <>
+          <WhiteBoxWrapper>
+            <EditCourse selectedCourse={selectedCourse} />
+          </WhiteBoxWrapper>
+          <br />
+          <WhiteBoxWrapper>
+            <ListOfStudents />
+          </WhiteBoxWrapper>
+        </>
+      )}
     </>
   );
 };

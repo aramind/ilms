@@ -70,10 +70,14 @@ const CourseProvider = ({ children }) => {
     enabled: !!auth?._id,
   });
 
+  console.log(allCoursesData);
+  console.log(coursesData);
+  console.log(enrolledCoursesData);
   useEffect(() => {
-    console.log("ALL COURSES", allCoursesData);
     const filteredActiveEnrolledCourses =
-      enrolledCoursesData?.data?.enrolledCourses?.filter((ec) => ec.course);
+      enrolledCoursesData?.data?.enrolledCourses?.filter(
+        (ec) => ec.course?.status === "live"
+      );
 
     const enrolledCoursesIds = filteredActiveEnrolledCourses?.map(
       (ec) => ec?._id

@@ -6,12 +6,12 @@ const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 
 const refreshAccessToken = async (req, res) => {
-  console.log("IN REFRESH ACC TOKEN CONTROLLER");
+  // console.log("IN REFRESH ACC TOKEN CONTROLLER");
 
   try {
     const refreshToken = req.cookies?.jwt;
 
-    console.log("REFRESH TOKEN", refreshAccessToken);
+    // console.log("REFRESH TOKEN", refreshAccessToken);
 
     if (!refreshToken) {
       return sendResponse.failed(res, "Unauthorized", null, 401);
@@ -35,7 +35,7 @@ const refreshAccessToken = async (req, res) => {
       "status",
     ]);
 
-    console.log(returnedUserInfo);
+    // console.log(returnedUserInfo);
     jwt.verify(
       refreshToken,
       process.env.AUTH_REFRESH_TOKEN_SECRET,
