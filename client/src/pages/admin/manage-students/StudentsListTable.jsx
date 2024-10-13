@@ -3,24 +3,25 @@ import React, { useEffect, useMemo, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import RenderUserActions from "./RenderUserActions";
 import RenderStatus from "./RenderStatus";
+import CenteredBox from "../../../components/CenteredBox";
 
 const setId = (user, index) => {
   return user?._id || index + 1;
 };
 
-const CenteredBox = ({ children }) => {
-  return (
-    <Box
-      width={1}
-      textAlign="center"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
-      {children}
-    </Box>
-  );
-};
+// const CenteredBox = ({ children }) => {
+//   return (
+//     <Box
+//       width={1}
+//       textAlign="center"
+//       display="flex"
+//       justifyContent="center"
+//       alignItems="center"
+//     >
+//       {children}
+//     </Box>
+//   );
+// };
 const createColumns = (sendPatchUserReq) => {
   return [
     { field: "lastName", headerName: "last name" },
