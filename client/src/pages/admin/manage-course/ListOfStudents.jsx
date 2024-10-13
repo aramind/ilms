@@ -6,6 +6,7 @@ import useCourseReq from "../../../hooks/api/authenticated/useCourseReq";
 import useAuth from "../../../hooks/useAuth";
 import LoadingPage from "../../LoadingPage";
 import ErrorPage from "../../ErrorPage";
+import EnrolledStudentsTable from "./EnrolledStudentsTable";
 
 const studentsStatusOptions = [
   "all",
@@ -47,7 +48,6 @@ const ListOfStudents = ({ selectedCourse }) => {
   if (isLoading) return <LoadingPage />;
   if (isError) return <ErrorPage message={error?.message || "Request Error"} />;
 
-  const students = studentsData?.data;
   const formattedStudentsData = studentsData?.data?.map((student) => {
     const { enrolledCourses, ...data } = student;
     const formattedStudent = {
@@ -58,8 +58,6 @@ const ListOfStudents = ({ selectedCourse }) => {
     };
     return formattedStudent;
   });
-  console.log(students);
-  console.log(formattedStudentsData);
 
   return (
     <Box>
@@ -80,7 +78,7 @@ const ListOfStudents = ({ selectedCourse }) => {
         {/* <Typography>{selectedCourse?.title} students</Typography> */}
         <br />
       </Stack>
-      <Stack direction="row" width="100%" mb={0.5}>
+      {/* <Stack direction="row" width="100%" mb={0.5}>
         <Typography sx={localStyles.header} mr={3}>
           #
         </Typography>
@@ -90,8 +88,8 @@ const ListOfStudents = ({ selectedCourse }) => {
         <Typography sx={localStyles.header} flex={1}>
           ENROLLMENT STATUS
         </Typography>
-      </Stack>
-      {students &&
+      </Stack> */}
+      {/* {students &&
         students.map((student, index) => (
           <Stack key={index} direction="row" width="100%" mb={0.5}>
             <Typography mr={3}>{index + 1}.</Typography>
@@ -106,7 +104,11 @@ const ListOfStudents = ({ selectedCourse }) => {
               }
             </Typography>
           </Stack>
-        ))}
+        ))} */}
+      <EnrolledStudentsTable
+        data={formattedStudentsData}
+        filterOptions={category}
+      />
     </Box>
   );
 };
