@@ -6,10 +6,19 @@ import useCourseReq from "../../../hooks/api/authenticated/useCourseReq";
 import useAuth from "../../../hooks/useAuth";
 import LoadingPage from "../../LoadingPage";
 import ErrorPage from "../../ErrorPage";
+import EnrolledStudentsTable from "./EnrolledStudentsTable";
 
-const studentsStatusOptions = ["all", "enrolled", "pending", "suspended"];
+const studentsStatusOptions = [
+  "all",
+  "pending",
+  "enrolled",
+  "deleted",
+  "archived",
+  "suspended",
+];
 const ListOfStudents = ({ selectedCourse }) => {
   // const [students, setStudents] = useState([]);
+  const [category, setCategory] = useState("all");
   const { auth } = useAuth();
   const { getStudents } = useCourseReq({ isPublic: false, showAck: false });
 
@@ -39,21 +48,37 @@ const ListOfStudents = ({ selectedCourse }) => {
   if (isLoading) return <LoadingPage />;
   if (isError) return <ErrorPage message={error?.message || "Request Error"} />;
 
-  const students = studentsData?.data;
+  const formattedStudentsData = studentsData?.data?.map((student) => {
+    const { enrolledCourses, ...data } = student;
+    const formattedStudent = {
+      ...data,
+      enrollmentStatus: student.enrolledCourses?.filter(
+        (course) => course._id === selectedCourse?._id
+      )?.[0]?.status,
+    };
+    return formattedStudent;
+  });
+
   return (
     <Box>
       <Typography>LIST OF STUDENTS</Typography>
-      <Box width={{ xs: "100%", md: "50%" }}>
-        {/* <AutocompleteSelector
-          value={studentsStatusOptions[0]}
-          // setValue={setSelectedCourse}
-          options={studentsStatusOptions}
-          label="Select Course"
-        /> */}
+      <Stack direction="row" spacing={2} alignItems="center" my={2}>
+        <Typography height="100%">Selecting</Typography>
+        <Box flex={0.2}>
+          {
+            <AutocompleteSelector
+              value={category}
+              setValue={setCategory}
+              options={studentsStatusOptions}
+              label="Select Course"
+            />
+          }
+        </Box>
+        <Typography height="100%">students</Typography>
         {/* <Typography>{selectedCourse?.title} students</Typography> */}
         <br />
-      </Box>
-      <Stack direction="row" width="100%" mb={0.5}>
+      </Stack>
+      {/* <Stack direction="row" width="100%" mb={0.5}>
         <Typography sx={localStyles.header} mr={3}>
           #
         </Typography>
@@ -63,8 +88,8 @@ const ListOfStudents = ({ selectedCourse }) => {
         <Typography sx={localStyles.header} flex={1}>
           ENROLLMENT STATUS
         </Typography>
-      </Stack>
-      {students &&
+      </Stack> */}
+      {/* {students &&
         students.map((student, index) => (
           <Stack key={index} direction="row" width="100%" mb={0.5}>
             <Typography mr={3}>{index + 1}.</Typography>
@@ -79,7 +104,11 @@ const ListOfStudents = ({ selectedCourse }) => {
               }
             </Typography>
           </Stack>
-        ))}
+        ))} */}
+      <EnrolledStudentsTable
+        data={formattedStudentsData}
+        filterOptions={category}
+      />
     </Box>
   );
 };
