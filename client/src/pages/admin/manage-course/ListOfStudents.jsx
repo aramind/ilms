@@ -51,18 +51,22 @@ const ListOfStudents = ({ selectedCourse }) => {
   return (
     <Box>
       <Typography>LIST OF STUDENTS</Typography>
-      <Box width={{ xs: "100%", md: "50%" }}>
-        {
-          <AutocompleteSelector
-            value={category}
-            setValue={setCategory}
-            options={studentsStatusOptions}
-            label="Select Course"
-          />
-        }
+      <Stack direction="row" spacing={2} alignItems="center" my={2}>
+        <Typography height="100%">Selecting</Typography>
+        <Box flex={0.2}>
+          {
+            <AutocompleteSelector
+              value={category}
+              setValue={setCategory}
+              options={studentsStatusOptions}
+              label="Select Course"
+            />
+          }
+        </Box>
+        <Typography height="100%">students</Typography>
         {/* <Typography>{selectedCourse?.title} students</Typography> */}
         <br />
-      </Box>
+      </Stack>
       <Stack direction="row" width="100%" mb={0.5}>
         <Typography sx={localStyles.header} mr={3}>
           #
