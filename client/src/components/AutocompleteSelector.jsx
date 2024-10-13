@@ -11,7 +11,7 @@ const AutocompleteSelector = ({ value, setValue, options, label = "" }) => {
         if (option?.title || option?.acronym) {
           return `${option?.title || ""} (${option?.acronym || ""})`;
         } else {
-          return "";
+          return option;
         }
       }}
       // isOptionEqualToValue={(option, value) => option?._id === value?._id}

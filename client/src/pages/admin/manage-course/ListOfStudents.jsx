@@ -7,9 +7,17 @@ import useAuth from "../../../hooks/useAuth";
 import LoadingPage from "../../LoadingPage";
 import ErrorPage from "../../ErrorPage";
 
-const studentsStatusOptions = ["all", "enrolled", "pending", "suspended"];
+const studentsStatusOptions = [
+  "all",
+  "pending",
+  "enrolled",
+  "deleted",
+  "archived",
+  "suspended",
+];
 const ListOfStudents = ({ selectedCourse }) => {
   // const [students, setStudents] = useState([]);
+  const [category, setCategory] = useState("all");
   const { auth } = useAuth();
   const { getStudents } = useCourseReq({ isPublic: false, showAck: false });
 
@@ -44,12 +52,14 @@ const ListOfStudents = ({ selectedCourse }) => {
     <Box>
       <Typography>LIST OF STUDENTS</Typography>
       <Box width={{ xs: "100%", md: "50%" }}>
-        {/* <AutocompleteSelector
-          value={studentsStatusOptions[0]}
-          // setValue={setSelectedCourse}
-          options={studentsStatusOptions}
-          label="Select Course"
-        /> */}
+        {
+          <AutocompleteSelector
+            value={category}
+            setValue={setCategory}
+            options={studentsStatusOptions}
+            label="Select Course"
+          />
+        }
         {/* <Typography>{selectedCourse?.title} students</Typography> */}
         <br />
       </Box>
