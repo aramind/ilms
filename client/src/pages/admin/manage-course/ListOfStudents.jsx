@@ -48,6 +48,19 @@ const ListOfStudents = ({ selectedCourse }) => {
   if (isError) return <ErrorPage message={error?.message || "Request Error"} />;
 
   const students = studentsData?.data;
+  const formattedStudentsData = studentsData?.data?.map((student) => {
+    const { enrolledCourses, ...data } = student;
+    const formattedStudent = {
+      ...data,
+      enrollmentStatus: student.enrolledCourses?.filter(
+        (course) => course._id === selectedCourse?._id
+      )?.[0]?.status,
+    };
+    return formattedStudent;
+  });
+  console.log(students);
+  console.log(formattedStudentsData);
+
   return (
     <Box>
       <Typography>LIST OF STUDENTS</Typography>
