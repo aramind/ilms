@@ -64,8 +64,9 @@ const ManageCourse = () => {
 
   return (
     <>
-      <Stack direction="row" width={1} mt={2} mb={3} alignItems="center">
-        <Box width={{ xs: "100%", md: "50%" }}>
+      <br />
+      <WhiteBoxWrapper>
+        <Box width="100%">
           <AutocompleteSelector
             value={selectedCourse}
             setValue={setSelectedCourse}
@@ -73,8 +74,8 @@ const ManageCourse = () => {
             label="Select Course"
           />
         </Box>
-      </Stack>
-
+      </WhiteBoxWrapper>
+      <br />
       {selectedCourse && (
         <>
           <WhiteBoxWrapper>
