@@ -3,7 +3,7 @@ import useCourseProvider from "../../hooks/useCourseProvider";
 import useAuth from "../../hooks/useAuth";
 import EditCourse from "./manage-course/EditCourse";
 import AutocompleteSelector from "../../components/AutocompleteSelector";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Switch, Typography } from "@mui/material";
 import ListOfStudents from "./manage-course/ListOfStudents";
 
 const WhiteBoxWrapper = ({ children }) => {
@@ -17,6 +17,37 @@ const WhiteBoxWrapper = ({ children }) => {
     </Box>
   );
 };
+
+const DynamicSection = ({ sectionName, title, children }) => {
+  const [visibleSections, setVisibleSections] = useState([
+    "meta",
+    "topics",
+    "students",
+  ]);
+
+  const isVisible = visibleSections.includes(sectionName);
+
+  const handleChange = () => {
+    setVisibleSections(
+      (prev) =>
+        prev.includes(sectionName)
+          ? prev.filter((e) => e !== sectionName) // Remove sectionName if it's visible
+          : [...prev, sectionName] // Add sectionName if it's not visible
+    );
+  };
+
+  return (
+    <>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography>{title.toUpperCase()}</Typography>
+
+        <Switch checked={isVisible} onChange={handleChange} />
+      </Stack>
+      {isVisible && <Box mt={2}>{children}</Box>}
+    </>
+  );
+};
+
 const ManageCourse = () => {
   // const [selectedCourse, setSelectedCourse] = useState({});
   const { allCoursesList } = useCourseProvider();
@@ -47,11 +78,15 @@ const ManageCourse = () => {
       {selectedCourse && (
         <>
           <WhiteBoxWrapper>
-            <EditCourse selectedCourse={selectedCourse} />
+            <DynamicSection sectionName="meta" title="course details">
+              <EditCourse selectedCourse={selectedCourse} />
+            </DynamicSection>
           </WhiteBoxWrapper>
           <br />
           <WhiteBoxWrapper>
-            <ListOfStudents selectedCourse={selectedCourse} />
+            <DynamicSection sectionName="students" title="students">
+              <ListOfStudents selectedCourse={selectedCourse} />
+            </DynamicSection>
           </WhiteBoxWrapper>
         </>
       )}

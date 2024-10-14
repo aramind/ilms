@@ -61,7 +61,6 @@ const ListOfStudents = ({ selectedCourse }) => {
 
   return (
     <Box>
-      <Typography>LIST OF STUDENTS</Typography>
       <Stack direction="row" spacing={2} alignItems="center" my={2}>
         <Typography height="100%">Selecting</Typography>
         <Box flex={0.2}>
