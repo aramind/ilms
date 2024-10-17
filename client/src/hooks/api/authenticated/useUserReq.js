@@ -36,6 +36,12 @@ const useUserReq = ({ isPublic, showAck }) => {
         method: "PATCH",
         data,
       }),
+    updateEnrolledCourse: async ({ userId, courseId, field, data }) =>
+      request({
+        url: `${url}/${userId}/enrolledCourses/${courseId}/update/${field}`,
+        method: "PATCH",
+        data,
+      }),
   };
 
   return req;
