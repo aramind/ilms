@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ReusableSelect from "../../../components/ReusableSelect";
 
 const RenderEnrollmentStatus = ({ row, handleUpdateEnrollmentStatus }) => {
@@ -7,19 +7,21 @@ const RenderEnrollmentStatus = ({ row, handleUpdateEnrollmentStatus }) => {
     row?.enrollmentStatus
   );
 
-  console.log(enrollmentStatus);
+  const handleChange = useCallback(
+    (e) => {
+      const newStatus = e.target.value;
+      setEnrollmentStatus(e.target.value);
+      alert("changing status");
 
-  const handleChange = (e) => {
-    const newStatus = e.target.value;
-    setEnrollmentStatus(e.target.value);
-    alert("changing status");
+      handleUpdateEnrollmentStatus({
+        userId: row?._id,
+        field: "status",
+        data: { data: newStatus },
+      });
+    },
+    [handleUpdateEnrollmentStatus, row?._id]
+  );
 
-    handleUpdateEnrollmentStatus({
-      userId: row?._id,
-      field: "status",
-      data: { data: newStatus },
-    });
-  };
   return (
     <Stack direction="row">
       <ReusableSelect
