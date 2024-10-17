@@ -57,7 +57,7 @@ const ManageCourse = () => {
   const { auth } = useAuth();
   const [options, setOptions] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(options[0] || null);
-  const { updateUser } = useUserReq({
+  const { updateEnrolledCourse } = useUserReq({
     isPublic: false,
     showAck: true,
   });
@@ -68,17 +68,22 @@ const ManageCourse = () => {
     }
   }, [auth?._id, allCoursesList, setOptions]);
 
-  const { mutate: sendPatchUserReq, isLoadingUpdateUser } = useApiSend(
-    (patchInfo) => updateUser(patchInfo),
+  const { mutate: sendUpdateEnrolledCourse, isLoadingUpdateUser } = useApiSend(
+    (updateInfo) => updateEnrolledCourse(updateInfo),
     ["users", "students"]
     // (data) => {
     //   console.log(data?.data);
     // }
   );
   // updating student
-  const handleUpdateEnrollmentStatus = (data) => {
+  const handleUpdateEnrollmentStatus = ({ userId, field, data }) => {
     console.log("updating enrollment status", data);
-    sendPatchUserReq(data);
+    sendUpdateEnrolledCourse({
+      userId,
+      courseId: selectedCourse?._id,
+      field,
+      data,
+    });
   };
 
   if (isLoadingUpdateUser) {

@@ -12,8 +12,9 @@ const RenderEnrollmentStatus = ({ row, handleUpdateEnrollmentStatus }) => {
     alert("changing status");
     const { _id, enrollmentStatus } = row;
     handleUpdateEnrollmentStatus({
-      studentId: _id,
-      newEnrollmentStatus: enrollmentStatus,
+      userId: _id,
+      field: "status",
+      data: enrollmentStatus,
     });
   };
   return (
