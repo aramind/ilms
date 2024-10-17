@@ -7,14 +7,17 @@ const RenderEnrollmentStatus = ({ row, handleUpdateEnrollmentStatus }) => {
     row?.enrollmentStatus
   );
 
+  console.log(enrollmentStatus);
+
   const handleChange = (e) => {
+    const newStatus = e.target.value;
     setEnrollmentStatus(e.target.value);
     alert("changing status");
-    const { _id, enrollmentStatus } = row;
+
     handleUpdateEnrollmentStatus({
-      userId: _id,
+      userId: row?._id,
       field: "status",
-      data: enrollmentStatus,
+      data: { data: newStatus },
     });
   };
   return (

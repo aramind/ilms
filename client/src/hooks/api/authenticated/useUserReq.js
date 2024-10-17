@@ -38,7 +38,7 @@ const useUserReq = ({ isPublic, showAck }) => {
       }),
     updateEnrolledCourse: async ({ userId, courseId, field, data }) =>
       request({
-        url: `${url}/${userId}/enrolled-courses/${courseId}/update/${field}`,
+        url: `${url}/${userId}/enrolledCourses/${courseId}/update/${field}`,
         method: "PATCH",
         data,
       }),

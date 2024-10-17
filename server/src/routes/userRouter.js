@@ -9,7 +9,10 @@ const router = express.Router();
 router.use(verifyJWT);
 console.log("User Router");
 
-router.patch("/:userId/enrolledCourses/:courseId/update/:field");
+router.patch(
+  "/:userId/enrolledCourses/:courseId/update/:field",
+  userController.updateEnrolledCourse
+);
 router.patch(
   "/:userId/enrolledCourses/:courseId/enroll",
   userController.enrollCourse

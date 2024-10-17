@@ -77,6 +77,9 @@ const ManageCourse = () => {
   );
   // updating student
   const handleUpdateEnrollmentStatus = ({ userId, field, data }) => {
+    console.log("updating enrollment status", userId);
+    console.log("updating enrollment status", selectedCourse?._id);
+    console.log("updating enrollment status", field);
     console.log("updating enrollment status", data);
     sendUpdateEnrolledCourse({
       userId,
