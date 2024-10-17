@@ -4,6 +4,7 @@ const getUsersByFields = require("./getUsersByFields");
 const patchUser = require("./patchUser");
 
 const updateCourseProgress = require("./updateCourseProgress");
+const updateEnrolledCourse = require("./updateEnrolledCourse");
 
 const userController = {
   enrollCourse,
@@ -11,6 +12,7 @@ const userController = {
   updateCourseProgress,
   getUsersByFields,
   patchUser,
+  updateEnrolledCourse,
 };
 
 module.exports = userController;
