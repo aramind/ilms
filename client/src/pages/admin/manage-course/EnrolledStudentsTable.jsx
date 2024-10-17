@@ -9,7 +9,7 @@ const setId = (user, index) => {
   return user?._id || index + 1;
 };
 
-const createColumns = (sendPatchUserReq) => {
+const createColumns = (handleUpdateEnrollmentStatus, sendPatchUserReq) => {
   return [
     { field: "lastName", headerName: "last name" },
     { field: "firstName", headerName: "first name" },
@@ -19,7 +19,10 @@ const createColumns = (sendPatchUserReq) => {
       renderCell: (params) => (
         <CenteredBox>
           {" "}
-          <RenderEnrollmentStatus row={params.row} />
+          <RenderEnrollmentStatus
+            row={params.row}
+            handleUpdateEnrollmentStatus={handleUpdateEnrollmentStatus}
+          />
         </CenteredBox>
       ),
     },
@@ -68,9 +71,10 @@ const EnrolledStudentsTable = ({
   title = "",
   filterOptions,
   sendPatchUserReq,
+  handleUpdateEnrollmentStatus,
 }) => {
   const [rows, setRows] = useState([]);
-  const columns = createColumns(sendPatchUserReq);
+  const columns = createColumns(handleUpdateEnrollmentStatus, sendPatchUserReq);
 
   const processedRows = useMemo(() => {
     const students = data;

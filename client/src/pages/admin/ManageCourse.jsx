@@ -5,6 +5,9 @@ import EditCourse from "./manage-course/EditCourse";
 import AutocompleteSelector from "../../components/AutocompleteSelector";
 import { Box, Stack, Switch, Typography } from "@mui/material";
 import ListOfStudents from "./manage-course/ListOfStudents";
+import useUserReq from "../../hooks/api/authenticated/useUserReq";
+import useApiSend from "../../hooks/api/useApiSend";
+import LoadingPage from "../LoadingPage";
 
 const WhiteBoxWrapper = ({ children }) => {
   return (
@@ -54,7 +57,10 @@ const ManageCourse = () => {
   const { auth } = useAuth();
   const [options, setOptions] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(options[0] || null);
-
+  const { updateUser } = useUserReq({
+    isPublic: false,
+    showAck: true,
+  });
   // console.log(allCoursesList);
   useEffect(() => {
     if (allCoursesList && auth?._id) {
@@ -62,6 +68,24 @@ const ManageCourse = () => {
     }
   }, [auth?._id, allCoursesList, setOptions]);
 
+  const { mutate: sendPatchUserReq, isLoadingUpdateUser } = useApiSend(
+    (patchInfo) => updateUser(patchInfo),
+    ["users", "students"]
+    // (data) => {
+    //   console.log(data?.data);
+    // }
+  );
+  // updating student
+  const handleUpdateEnrollmentStatus = (data) => {
+    console.log("updating enrollment status", data);
+    sendPatchUserReq(data);
+  };
+
+  if (isLoadingUpdateUser) {
+    return <LoadingPage />;
+  }
+
+  console.log(selectedCourse?._id);
   return (
     <>
       <br />
@@ -76,6 +100,7 @@ const ManageCourse = () => {
         </Box>
       </WhiteBoxWrapper>
       <br />
+
       {selectedCourse && (
         <>
           <WhiteBoxWrapper>
@@ -86,7 +111,10 @@ const ManageCourse = () => {
           <br />
           <WhiteBoxWrapper>
             <DynamicSection sectionName="students" title="students">
-              <ListOfStudents selectedCourse={selectedCourse} />
+              <ListOfStudents
+                selectedCourse={selectedCourse}
+                handleUpdateEnrollmentStatus={handleUpdateEnrollmentStatus}
+              />
             </DynamicSection>
           </WhiteBoxWrapper>
         </>

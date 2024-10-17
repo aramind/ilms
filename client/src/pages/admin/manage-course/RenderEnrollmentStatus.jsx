@@ -2,14 +2,19 @@ import { Stack } from "@mui/material";
 import React, { useState } from "react";
 import ReusableSelect from "../../../components/ReusableSelect";
 
-const RenderEnrollmentStatus = ({ row }) => {
+const RenderEnrollmentStatus = ({ row, handleUpdateEnrollmentStatus }) => {
   const [enrollmentStatus, setEnrollmentStatus] = useState(
     row?.enrollmentStatus
   );
 
   const handleChange = (e) => {
     setEnrollmentStatus(e.target.value);
-    alert(`changing status to ${enrollmentStatus}`);
+    alert("changing status");
+    const { _id, enrollmentStatus } = row;
+    handleUpdateEnrollmentStatus({
+      studentId: _id,
+      newEnrollmentStatus: enrollmentStatus,
+    });
   };
   return (
     <Stack direction="row">

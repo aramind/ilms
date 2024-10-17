@@ -16,7 +16,7 @@ const studentsStatusOptions = [
   "archived",
   "suspended",
 ];
-const ListOfStudents = ({ selectedCourse }) => {
+const ListOfStudents = ({ selectedCourse, handleUpdateEnrollmentStatus }) => {
   // const [students, setStudents] = useState([]);
   const [category, setCategory] = useState("all");
   const { auth } = useAuth();
@@ -74,39 +74,13 @@ const ListOfStudents = ({ selectedCourse }) => {
           }
         </Box>
         <Typography height="100%">students</Typography>
-        {/* <Typography>{selectedCourse?.title} students</Typography> */}
         <br />
       </Stack>
-      {/* <Stack direction="row" width="100%" mb={0.5}>
-        <Typography sx={localStyles.header} mr={3}>
-          #
-        </Typography>
-        <Typography sx={localStyles.header} flex={1}>
-          STUDENT
-        </Typography>
-        <Typography sx={localStyles.header} flex={1}>
-          ENROLLMENT STATUS
-        </Typography>
-      </Stack> */}
-      {/* {students &&
-        students.map((student, index) => (
-          <Stack key={index} direction="row" width="100%" mb={0.5}>
-            <Typography mr={3}>{index + 1}.</Typography>
-            <Typography flex={1}>
-              {student?.firstName + " " + student?.lastName}
-            </Typography>
-            <Typography flex={1}>
-              {
-                student?.enrolledCourses?.find(
-                  (ec) => ec.course === selectedCourse?._id
-                )?.status
-              }
-            </Typography>
-          </Stack>
-        ))} */}
+
       <EnrolledStudentsTable
         data={formattedStudentsData}
         filterOptions={category}
+        handleUpdateEnrollmentStatus={handleUpdateEnrollmentStatus}
       />
     </Box>
   );
