@@ -62,7 +62,6 @@ const ListOfStudents = ({ selectedCourse, handleUpdateEnrollmentStatus }) => {
     return formattedStudent;
   });
 
-  console.log(formattedStudentsData);
   return (
     <Box>
       <Stack direction="row" spacing={2} alignItems="center" my={2}>
