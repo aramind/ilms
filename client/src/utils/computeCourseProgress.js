@@ -8,9 +8,10 @@ export const computeCourseProgress = (course, student) => {
     ?.filter((c) => c._id === course?._id)?.[0]
     ?.progress?.flatMap((c) => c.completedTopicTasks);
 
-  const progress = Math.round(
+  const computedProgress = Math.round(
     (completedTasks?.length / liveTopicTasks?.length) * 100
   );
 
+  const progress = computedProgress || "0";
   return progress;
 };
