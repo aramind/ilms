@@ -22,11 +22,7 @@ const WhiteBoxWrapper = ({ children }) => {
 };
 
 const DynamicSection = ({ sectionName, title, children }) => {
-  const [visibleSections, setVisibleSections] = useState([
-    "meta",
-    "topics",
-    "students",
-  ]);
+  const [visibleSections, setVisibleSections] = useState([]);
 
   const isVisible = visibleSections.includes(sectionName);
 
