@@ -26,6 +26,16 @@ const createColumns = (handleUpdateEnrollmentStatus, sendPatchUserReq) => {
         </CenteredBox>
       ),
     },
+    {
+      field: "progress",
+      headerName: "progress (%)",
+      renderCell: (params) => (
+        <CenteredBox>
+          {" "}
+          <Typography row={params.row.progress || ""} />
+        </CenteredBox>
+      ),
+    },
     { field: "email", headerName: "email" },
     {
       field: "status",
@@ -37,6 +47,7 @@ const createColumns = (handleUpdateEnrollmentStatus, sendPatchUserReq) => {
         </CenteredBox>
       ),
     },
+
     // { field: "accessLevel", headerName: "access level" },
   ];
 };
