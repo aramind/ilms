@@ -7,6 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 import LoadingPage from "../../LoadingPage";
 import ErrorPage from "../../ErrorPage";
 import EnrolledStudentsTable from "./EnrolledStudentsTable";
+import { computeCourseProgress } from "../../../utils/computeCourseProgress";
 
 const studentsStatusOptions = [
   "all",
@@ -55,10 +56,13 @@ const ListOfStudents = ({ selectedCourse, handleUpdateEnrollmentStatus }) => {
       enrollmentStatus: student.enrolledCourses?.filter(
         (course) => course._id === selectedCourse?._id
       )?.[0]?.status,
+      progress: computeCourseProgress(selectedCourse, student),
     };
+
     return formattedStudent;
   });
 
+  console.log(studentsData);
   return (
     <Box>
       <Stack direction="row" spacing={2} alignItems="center" my={2}>
