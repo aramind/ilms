@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import CenteredBox from "../../../components/CenteredBox";
 import RenderStatus from "../manage-students/RenderStatus";
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import RenderEnrollmentStatus from "./RenderEnrollmentStatus";
 
@@ -26,6 +26,15 @@ const createColumns = (handleUpdateEnrollmentStatus, sendPatchUserReq) => {
         </CenteredBox>
       ),
     },
+    {
+      field: "progress",
+      headerName: "progress (%)",
+      renderCell: (params) => (
+        <Typography height={1} textAlign="center" alignContent="center">
+          {params.row.progress}
+        </Typography>
+      ),
+    },
     { field: "email", headerName: "email" },
     {
       field: "status",
@@ -37,6 +46,7 @@ const createColumns = (handleUpdateEnrollmentStatus, sendPatchUserReq) => {
         </CenteredBox>
       ),
     },
+
     // { field: "accessLevel", headerName: "access level" },
   ];
 };
