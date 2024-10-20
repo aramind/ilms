@@ -4,9 +4,13 @@ export const computeCourseProgress = (course, student) => {
     ?.flatMap((lt) => lt.topicTasks)
     ?.map((ltt) => ltt._id);
 
+  if (liveTopicTasks?.length < 1) return "0";
+
   const completedTasks = student?.enrolledCourses
     ?.filter((c) => c._id === course?._id)?.[0]
     ?.progress?.flatMap((c) => c.completedTopicTasks);
+
+  if (completedTasks?.length < 1) return "0";
 
   const computedProgress = Math.round(
     (completedTasks?.length / liveTopicTasks?.length) * 100
