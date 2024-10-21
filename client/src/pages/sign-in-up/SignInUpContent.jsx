@@ -4,6 +4,7 @@ import SignUpForm from "./SignUpForm";
 import RMSolutions from "../../components/RMSolutions";
 import SignInForm from "./SignInForm";
 import { NavLink } from "react-router-dom";
+import Sponsors from "./Sponsors";
 
 const SignInUpContent = ({ isSignUp }) => {
   return (
@@ -30,7 +31,7 @@ const SignInUpContent = ({ isSignUp }) => {
         </>
       </Stack>
       <Typography
-        mt={{ xs: 2, md: 8 }}
+        mt={{ xs: 2, md: 5 }}
         className="uppercase"
         sx={{ fontFamily: "Poppins" }}
       >
@@ -45,6 +46,7 @@ const SignInUpContent = ({ isSignUp }) => {
       </Typography>
       {isSignUp ? <SignUpForm /> : <SignInForm />}
       {/* <SignUpForm /> */}
+      <Sponsors />
       <Box sx={{ flexGrow: 1 }}></Box>
 
       <RMSolutions />
