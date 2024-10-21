@@ -8,13 +8,13 @@ import AddCourse from "./add-course/AddCourse";
 
 const subTabsList = {
   courses: [
-    { text: "add course", component: <AddCourse /> },
     { text: "manage courses", component: <ManageCourse /> },
+    { text: "add course", component: <AddCourse /> },
   ],
   users: [
+    { text: "manage students", component: <ManageStudent /> },
     { text: "add admin", component: <AddAdmin /> },
     { text: "manage admin", component: <ManageAdmin /> },
-    { text: "manage students", component: <ManageStudent /> },
   ],
 };
 const InsideTab = ({ subTabs }) => {
