@@ -1,4 +1,14 @@
 const constants = {
+  sponsors: [
+    { name: "PUP", logo: "pup.png" },
+    { name: "ECESS", logo: "ecess.png" },
+    { name: "IECEP", logo: "iecep.png" },
+    { name: "Intellects", logo: "intellects.jpg" },
+    { name: "PERCDC Learnhub", logo: "perc.png" },
+    { name: "SM", logo: "sm.png" },
+    { name: "Alexan", logo: "alexan.png" },
+    { name: "Uplift", logo: "uplift.png" },
+  ],
   signUpInImages: [
     "boy_studying_2.jpeg",
     "boy_studying_3.jpeg",

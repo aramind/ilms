@@ -2,18 +2,13 @@ import React, { useEffect, useState } from "react";
 import constants from "../../configs/constants";
 import { Box, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SignInUpContent from "./SignInUpContent";
-import useAuth from "../../hooks/useAuth";
-import useRefreshToken from "../../hooks/useRefreshToken";
-
 const images = constants?.signUpInImages;
 
 const SignUpInMain = () => {
   const theme = useTheme();
-  const { auth } = useAuth();
-  const refresh = useRefreshToken();
-  const navigate = useNavigate();
+
   const [currentImage, setCurrentImage] = useState(images[0]);
   const [fadeClass, setFadeClass] = useState("fade-in");
 

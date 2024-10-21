@@ -146,7 +146,7 @@ const SignUpForm = () => {
               fullWidth
               variant="contained"
               //   disabled={!isDirty || !isValid || !agree}
-              sx={{ marginTop: "2rem", padding: "0.7rem" }}
+              sx={{ marginTop: "1rem", padding: "0.7rem" }}
             >
               Sign Up
             </Button>
