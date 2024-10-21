@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import constants from "../../configs/constants";
 
@@ -21,18 +21,23 @@ const Sponsors = () => {
       >
         {sponsors?.map((sponsor) => (
           //   <Typography key={sponsor}>{sponsor?.name}</Typography>
-          <Box
+          <Tooltip
             key={sponsor?.name}
-            component="img"
-            src={`/assets/sponsor-logos/${sponsor?.logo}`}
-            alt={sponsor?.name}
-            borderRadius="50%"
-            sx={{
-              width: "1.8rem",
-              height: "auto",
-              objectFit: "cover",
-            }}
-          ></Box>
+            title={sponsor?.name}
+            placement="top-end"
+          >
+            <Box
+              component="img"
+              src={`/assets/sponsor-logos/${sponsor?.logo}`}
+              alt={sponsor?.name}
+              borderRadius="50%"
+              sx={{
+                width: "1.8rem",
+                height: "auto",
+                objectFit: "cover",
+              }}
+            />
+          </Tooltip>
         ))}
       </Stack>
     </Stack>
