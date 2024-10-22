@@ -11,7 +11,7 @@ const SignInUpContent = ({ isSignUp }) => {
     <Stack
       width="100%"
       px={{ xs: 2, md: 6 }}
-      pt={{ xs: 2, md: 4 }}
+      pt={{ xs: 1, md: 4 }}
       pb={{ xs: 1, md: 2 }}
       // height="100%"
       justifyContent="flex-start"
@@ -38,7 +38,7 @@ const SignInUpContent = ({ isSignUp }) => {
         {isSignUp ? "register now" : "start your journey"}
       </Typography>
       <Typography
-        mb={4}
+        mb={{ xs: 2, md: 4 }}
         variant="h4"
         sx={{ fontFamily: "Poppins", fontWeight: "bold" }}
       >
@@ -47,7 +47,7 @@ const SignInUpContent = ({ isSignUp }) => {
       {isSignUp ? <SignUpForm /> : <SignInForm />}
       {/* <SignUpForm /> */}
       <Sponsors />
-      <Box sx={{ flexGrow: 1 }}></Box>
+      <Box sx={{ flexGrow: 1, my: 0.5 }}></Box>
 
       <RMSolutions />
     </Stack>

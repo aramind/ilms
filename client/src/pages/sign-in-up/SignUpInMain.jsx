@@ -46,7 +46,7 @@ const SignUpInMain = () => {
           alt="hero-image"
           sx={{
             width: "100%",
-            height: "100%",
+            height: { xs: "30vh", md: "100%" },
             objectFit: "cover",
             opacity: fadeClass === "fade-in" ? 1 : 0,
             transition: `opacity 2s ease-in-out`,
