@@ -1,16 +1,29 @@
 import { IconButton, Stack } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sponsors from "./Sponsors";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const SponsorsBox = () => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+  const handleCloseSponsorBox = () => {
+    setVisible(false);
+  };
+
+  if (!visible) {
+    return;
+  }
+
   return (
     <Stack
       direction="row"
       pt={0.5}
       pb={1}
       pl={1}
-      width="200px"
+      width="250px"
       alignItems="flex-start"
       justifyContent="space-between"
       sx={{
@@ -20,11 +33,15 @@ const SponsorsBox = () => {
         bottom: "1rem",
         right: "1rem",
         bgcolor: (theme) => theme.palette.white.light,
-        opacity: "0.5",
+        opacity: "0.2",
+        "&:hover": {
+          transition: "all 0.3s ease-in-out", // Smooth transition
+          opacity: "0.9",
+        },
       }}
     >
       <Sponsors />
-      <IconButton size="small">
+      <IconButton size="small" onClick={handleCloseSponsorBox}>
         {" "}
         <CloseRoundedIcon fontSize="small" />
       </IconButton>
