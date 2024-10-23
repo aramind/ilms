@@ -46,7 +46,9 @@ const SignInUpContent = ({ isSignUp }) => {
       </Typography>
       {isSignUp ? <SignUpForm /> : <SignInForm />}
       {/* <SignUpForm /> */}
-      <Sponsors />
+      <Box mt="1rem">
+        <Sponsors />
+      </Box>
       <Box sx={{ flexGrow: 1, my: 0.5 }}></Box>
 
       <RMSolutions />
