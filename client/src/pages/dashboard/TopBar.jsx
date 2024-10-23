@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  TextField,
-  Tooltip,
-} from "@mui/material";
+import { Box, Button, IconButton, Stack, Tooltip } from "@mui/material";
 import ExitToAppTwoToneIcon from "@mui/icons-material/ExitToAppTwoTone";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +53,6 @@ const TopBar = () => {
             Admin Page
           </Button>
         )}
-
         <Tooltip title="Sign out" placement="left-end">
           <IconButton
             onClick={() => {

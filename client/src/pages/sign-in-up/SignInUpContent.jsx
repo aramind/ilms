@@ -4,7 +4,7 @@ import SignUpForm from "./SignUpForm";
 import RMSolutions from "../../components/RMSolutions";
 import SignInForm from "./SignInForm";
 import { NavLink } from "react-router-dom";
-import Sponsors from "./Sponsors";
+import Sponsors from "../../components/Sponsors";
 
 const SignInUpContent = ({ isSignUp }) => {
   return (

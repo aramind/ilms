@@ -1,11 +1,16 @@
 import { Box, Stack, Tooltip, Typography } from "@mui/material";
 import React from "react";
-import constants from "../../configs/constants";
+import constants from "../configs/constants";
 
-const Sponsors = () => {
+const Sponsors = ({ width = "100%" }) => {
   const sponsors = constants.sponsors;
   return (
-    <Stack mt={1.5} spacing={1}>
+    <Stack
+      mt={1.5}
+      spacing={1}
+      width={width}
+      sx={{ bgcolor: (theme) => theme.palette.white.light }}
+    >
       <Typography
         variant="caption"
         sx={{ fontStyle: "italic", letterSpacing: "1px" }}
