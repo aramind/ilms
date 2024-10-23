@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <div>
       <Outlet />
-      <SponsorsBox />
+      {/* <SponsorsBox /> */}
     </div>
   );
 };
