@@ -6,10 +6,11 @@ const Sponsors = ({ width = "100%" }) => {
   const sponsors = constants.sponsors;
   return (
     <Stack
-      mt={1.5}
+      //   mt={1.5}
       spacing={1}
       width={width}
-      sx={{ bgcolor: (theme) => theme.palette.white.light }}
+      sx={{ bgcolor: "transparent" }}
+      height="100%"
     >
       <Typography
         variant="caption"
