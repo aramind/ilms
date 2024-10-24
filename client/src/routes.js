@@ -11,6 +11,8 @@ import PersistLoginComponent from "./components/PersistLoginComponent";
 import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/landing/LandingPage";
 import NotFound from "./pages/fallback/NotFound";
+import Sponsors from "./components/Sponsors";
+import Main from "./pages/sponsors/Main";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +60,10 @@ const router = createBrowserRouter([
               {
                 path: "/store",
                 element: <UnavailablePage />,
+              },
+              {
+                path: "/sponsors",
+                element: <Main />,
               },
             ],
           },
