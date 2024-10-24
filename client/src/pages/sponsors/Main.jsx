@@ -24,7 +24,7 @@ const Main = () => {
             gap={2}
             flexWrap="wrap"
             width={1}
-            justifyContent="center"
+            justifyContent={{ xs: "space-evenly", md: "center" }}
           >
             {sponsors?.map((sponsor) => (
               //   <Typography key={sponsor}>{sponsor?.name}</Typography>
@@ -40,7 +40,7 @@ const Main = () => {
                   alt={sponsor?.name}
                   borderRadius="50%"
                   sx={{
-                    width: { xs: "3rem", md: "10rem" },
+                    width: { xs: "7rem", md: "10rem" },
                     height: "auto",
                     objectFit: "cover",
                   }}
