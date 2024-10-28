@@ -218,7 +218,7 @@ const Course = () => {
                       justifyContent="space-between"
                     >
                       <WhiteTypography variant="h6">
-                        Lecture {index + 1} : {topic.title}
+                        Lecture {index} : {topic.title}
                       </WhiteTypography>
 
                       <Typography
