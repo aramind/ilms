@@ -3,6 +3,7 @@ const allowedOrigins = [
   "http://localhost:5000",
   "https://ilms-djk6.onrender.com",
   "https://ilms-6l0w.onrender.com",
+  "https://robin-mon-miranda-dev-portfolio.netlify.app/",
 
   //   "https://quebee-admin.onrender.com",
 ];
