@@ -8,7 +8,7 @@ const DevMessageSchema = new Schema({
   subject: String,
   message: String,
   createdAt: { type: Date, default: Date.now },
-  version: { Type: String, default: "v0" },
+  version: { type: String, default: "v0" },
 });
 
 module.exports = mongoose.model("DevMessage", DevMessageSchema);
