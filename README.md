@@ -31,6 +31,8 @@ Progress is individually saved, allowing both teachers and students to monitor s
 
 ---
 
+![Screenshot3](client/public/assets/readme-images/s3.png)
+
 ## 🌐 Live Demo
 
 👉 [Try iLMS here](https://ilms-6l0w.onrender.com/)
