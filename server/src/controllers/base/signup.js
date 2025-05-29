@@ -24,7 +24,8 @@ const signup = async (req, res) => {
 
     sendResponse.success(
       res,
-      `Hello ${firstName}, ${lastName}! Thank you for signing up. \nYou will be notified via email for the result of your approval.`,
+      // `Hello ${firstName}, ${lastName}! Thank you for signing up. \nYou will be notified via email for the result of your approval.`,
+      `Hello ${firstName}, ${lastName}! Thank you for signing up. \nYou can now use your account!`,
       createdUser,
       201
     );
