@@ -38,8 +38,9 @@ const AfterSignup = ({ open, setOpen, onClick }) => {
         <DialogContent>
           <DialogContentText>
             <Typography variant="h6" color="secondary">
-              Sign up successful. Please wait for the confirmation via the
-              provided email. Thank you!
+{/*               Sign up successful. Please wait for the confirmation via the
+              provided email. Thank you! */}
+              Sign up successful. You can use your account now.
             </Typography>
           </DialogContentText>
         </DialogContent>
